@@ -25,20 +25,28 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-    className="group relative aspect-[1.12/1] sm:aspect-[4/5] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-soft border border-brand-100/50 shadow-sm hover:shadow-xl transition-all duration-500"
+    className="group relative min-h-[320px] sm:min-h-[360px] md:min-h-[400px] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-soft border border-brand-100/50 shadow-sm hover:shadow-xl transition-all duration-500"
   >
-    <BrandedVisual variant={category.visual} title={category.title} />
-    <div className="absolute inset-0 bg-gradient-to-t from-ink/82 via-ink/26 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
-    <div className="absolute inset-0 p-5 sm:p-8 flex flex-col justify-end">
-      <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-accent group-hover:border-accent transition-all duration-500">
-        <category.icon className="w-5 h-5 text-white" />
+    <BrandedVisual variant={category.visual} title="" compact />
+    <div className="absolute inset-0 bg-gradient-to-t from-ink/94 via-ink/55 to-ink/18 opacity-90 group-hover:opacity-95 transition-opacity duration-500" />
+    <div className="absolute inset-0 p-5 sm:p-8 flex flex-col">
+      <div>
+        <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-accent group-hover:border-accent transition-all duration-500">
+          <category.icon className="w-5 h-5 text-white" />
+        </div>
+        <h3 className="text-[1.9rem] sm:text-2xl md:text-[2rem] font-semibold text-white mb-3 tracking-tight leading-[0.96] max-w-[9ch]">
+          {category.title}
+        </h3>
+        <p className="text-white/72 text-sm leading-relaxed max-w-[24ch] opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">
+          {category.description}
+        </p>
       </div>
-      <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2 tracking-tight">{category.title}</h3>
-      <p className="text-white/72 text-sm leading-relaxed mb-4 sm:mb-6 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-500">{category.description}</p>
-      <Link to="/services" className="inline-flex items-center text-white text-[10px] font-bold uppercase tracking-widest hover:text-accent transition-colors">
-        View Details
-        <ArrowRight className="ml-2 w-3 h-3" />
-      </Link>
+      <div className="mt-auto pt-6">
+        <Link to="/services" className="inline-flex items-center text-white text-[10px] font-bold uppercase tracking-widest hover:text-accent transition-colors">
+          View Details
+          <ArrowRight className="ml-2 w-3 h-3" />
+        </Link>
+      </div>
     </div>
   </motion.div>
 );
