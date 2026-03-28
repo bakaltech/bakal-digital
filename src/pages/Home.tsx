@@ -48,40 +48,24 @@ const CategoryVisual: React.FC<{ visual: CategoryCardProps['category']['visual']
   return (
     <div className="absolute inset-0 overflow-hidden">
       <div className={`absolute inset-0 bg-gradient-to-br ${style.glow}`} />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:34px_34px] opacity-35" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:34px_34px] opacity-22" />
+      <div className="absolute inset-x-0 top-0 h-[58%] bg-gradient-to-b from-white/14 via-white/7 to-transparent" />
+      <div className="absolute -top-16 left-10 w-40 h-40 rounded-full bg-white/12 blur-3xl" />
       <div className={`absolute top-6 right-6 w-16 h-16 rounded-[1.4rem] bg-gradient-to-br ${style.orb} flex items-center justify-center shadow-[0_18px_34px_rgba(0,0,0,0.18)]`}>
         <Icon className="w-7 h-7 text-white" />
       </div>
-      <div className="absolute top-14 left-6 w-14 h-14 rounded-[1.2rem] border border-white/16 bg-white/6 backdrop-blur-sm flex items-center justify-center">
-        <Icon className="w-6 h-6 text-white/90" />
+      <div className="absolute top-14 left-6 w-14 h-14 rounded-[1.2rem] border border-white/16 bg-white/6 backdrop-blur-sm flex items-center justify-center opacity-70">
+        <Icon className="w-6 h-6 text-white/75" />
       </div>
-      <div className="absolute left-6 right-6 top-[32%] rounded-[1.6rem] border border-white/12 bg-white/[0.06] backdrop-blur-md p-5 shadow-[0_20px_40px_rgba(0,0,0,0.18)]">
-        <div className="flex gap-3 mb-5">
-          <div className="w-3 h-3 rounded-full bg-white/55" />
-          <div className="w-3 h-3 rounded-full bg-white/30" />
-          <div className="w-3 h-3 rounded-full bg-white/18" />
-        </div>
-        <div className="space-y-3">
-          <div className="h-3 rounded-full bg-white/75 w-[62%]" />
-          <div className="h-3 rounded-full bg-white/24 w-full" />
-          <div className="h-3 rounded-full bg-white/18 w-[78%]" />
-        </div>
+      <div className="absolute left-6 right-6 top-[40%] h-px bg-white/12" />
+      <div className="absolute left-6 right-6 bottom-20 flex items-end gap-3 opacity-45">
+        <div className="h-12 flex-1 rounded-t-[1.2rem] bg-white/10" />
+        <div className="h-20 flex-1 rounded-t-[1.2rem] bg-white/12" />
+        <div className="h-28 flex-1 rounded-t-[1.2rem] bg-white/16" />
+        <div className="h-16 flex-1 rounded-t-[1.2rem] bg-white/10" />
       </div>
-      <div className="absolute left-6 right-6 bottom-16 grid grid-cols-3 gap-3">
-        {[0, 1, 2].map((item) => (
-          <div key={item} className="rounded-[1.35rem] border border-white/10 bg-black/10 p-4">
-            <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-white/45 mb-3">0{item + 1}</div>
-            <div className="h-3 rounded-full bg-white/16 mb-2 w-[80%]" />
-            <div className="h-3 rounded-full bg-white/10 w-[60%]" />
-          </div>
-        ))}
-      </div>
-      <div className="absolute left-6 right-6 bottom-6 rounded-[1.4rem] border border-white/10 bg-white/[0.04] p-4">
-        <div className="flex items-center justify-between mb-3">
-          <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-white/45">Momentum</div>
-          <div className="text-sm font-medium text-white/72">Live system</div>
-        </div>
-        <div className="h-3 rounded-full bg-white/10 overflow-hidden">
+      <div className="absolute left-6 right-6 bottom-8">
+        <div className="h-2 rounded-full bg-white/10 overflow-hidden">
           <div className={`h-full rounded-full ${style.line} w-[72%]`} />
         </div>
       </div>
@@ -98,7 +82,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
     className="group relative min-h-[320px] sm:min-h-[360px] md:min-h-[400px] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-soft border border-brand-100/50 shadow-sm hover:shadow-xl transition-all duration-500"
   >
     <CategoryVisual visual={category.visual} icon={category.icon} />
-    <div className="absolute inset-0 bg-gradient-to-t from-ink/94 via-ink/55 to-ink/18 opacity-90 group-hover:opacity-95 transition-opacity duration-500" />
+    <div className="absolute inset-0 bg-gradient-to-t from-ink/92 via-ink/42 to-white/10 opacity-95 group-hover:opacity-100 transition-opacity duration-500" />
     <div className="absolute inset-0 p-5 sm:p-8 flex flex-col">
       <div>
         <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-accent group-hover:border-accent transition-all duration-500">
