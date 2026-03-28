@@ -11,10 +11,12 @@ type FormState = {
   email: string;
   company: string;
   message: string;
+  website: string;
 };
 
 export default function Contact() {
-  const [formData, setFormData] = useState<FormState>({ name: '', email: '', company: '', message: '' });
+  const [formData, setFormData] = useState<FormState>({ name: '', email: '', company: '', message: '', website: '' });
+  const [formStartedAt] = useState(() => Date.now());
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -28,18 +30,20 @@ export default function Contact() {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, source: 'contact-page', interests: [] }),
+        body: JSON.stringify({ ...formData, source: 'contact-page', interests: [], startedAt: formStartedAt }),
       });
 
+      const data = (await response.json()) as { error?: string };
+
       if (!response.ok) {
-        throw new Error(`Contact request failed with status ${response.status}`);
+        throw new Error(data.error || `Contact request failed with status ${response.status}`);
       }
 
       setIsSuccess(true);
-      setFormData({ name: '', email: '', company: '', message: '' });
+      setFormData({ name: '', email: '', company: '', message: '', website: '' });
     } catch (submissionError) {
       console.error('Contact form error:', submissionError);
-      setError('Your message could not be sent right now. Please try again or use the guided brief.');
+      setError(submissionError instanceof Error ? submissionError.message : 'Your message could not be sent right now. Please try again or use the guided brief.');
     } finally {
       setIsSubmitting(false);
     }
@@ -99,6 +103,11 @@ export default function Contact() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="hidden" aria-hidden="true">
+                    <label htmlFor="website">Website</label>
+                    <input id="website" name="website" tabIndex={-1} autoComplete="off" value={formData.website} onChange={handleChange} />
+                  </div>
+
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-semibold text-ink mb-2">Name</label>

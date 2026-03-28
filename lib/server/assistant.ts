@@ -1,4 +1,4 @@
-﻿export type ChatMessage = {
+export type ChatMessage = {
   role: "user" | "model";
   text: string;
 };
@@ -19,6 +19,11 @@ export type ChatResponse = {
   leadFormArgs: LeadFormArgs | null;
 };
 
+type SubmissionGuard = {
+  website?: string;
+  startedAt?: number;
+};
+
 export type ContactPayload = {
   name: string;
   email: string;
@@ -26,6 +31,8 @@ export type ContactPayload = {
   message: string;
   source: string;
   interests: string[];
+  website?: string;
+  startedAt?: number;
 };
 
 export class HttpError extends Error {
@@ -76,6 +83,12 @@ const flowSteps: FlowStep[] = [
   },
 ];
 
+const MIN_FORM_COMPLETION_MS = 1500;
+const MAX_FORM_AGE_MS = 1000 * 60 * 60 * 24;
+const RATE_LIMIT_WINDOW_MS = 1000 * 60 * 10;
+const RATE_LIMIT_MAX_REQUESTS = 6;
+const requestBuckets = new Map<string, number[]>();
+
 function isChatMessage(value: unknown): value is ChatMessage {
   if (typeof value !== "object" || value === null) {
     return false;
@@ -105,6 +118,45 @@ function buildSummary(values: Record<string, string>) {
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function getSubmissionGuard(payload: Record<string, unknown>): SubmissionGuard {
+  return {
+    website: typeof payload.website === "string" ? payload.website.trim() : "",
+    startedAt: typeof payload.startedAt === "number" ? payload.startedAt : undefined,
+  };
+}
+
+function validateSubmissionGuard(guard: SubmissionGuard) {
+  if (guard.website) {
+    throw new HttpError(400, "Submission blocked.");
+  }
+
+  if (typeof guard.startedAt !== "number" || Number.isNaN(guard.startedAt)) {
+    throw new HttpError(400, "Submission timing is invalid.");
+  }
+
+  const elapsed = Date.now() - guard.startedAt;
+
+  if (elapsed < MIN_FORM_COMPLETION_MS) {
+    throw new HttpError(429, "Please take a moment and try again.");
+  }
+
+  if (elapsed > MAX_FORM_AGE_MS) {
+    throw new HttpError(400, "This form expired. Please try again.");
+  }
+}
+
+export function enforceRateLimit(key: string) {
+  const now = Date.now();
+  const recent = (requestBuckets.get(key) || []).filter((timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS);
+
+  if (recent.length >= RATE_LIMIT_MAX_REQUESTS) {
+    throw new HttpError(429, "Too many requests. Please wait a few minutes and try again.");
+  }
+
+  recent.push(now);
+  requestBuckets.set(key, recent);
 }
 
 export function isLeadFormArgs(value: unknown): value is LeadFormArgs {
@@ -189,6 +241,9 @@ export function getLeadPayload(body: unknown) {
 
   const email = typeof payload.email === "string" ? payload.email.trim() : "";
   const details = payload.details;
+  const guard = getSubmissionGuard(payload);
+
+  validateSubmissionGuard(guard);
 
   if (!email || !isValidEmail(email)) {
     throw new HttpError(400, "A valid email is required.");
@@ -198,7 +253,7 @@ export function getLeadPayload(body: unknown) {
     throw new HttpError(400, "Lead details are incomplete.");
   }
 
-  return { email, details };
+  return { email, details, guard };
 }
 
 export function getContactPayload(body: unknown): ContactPayload {
@@ -214,6 +269,9 @@ export function getContactPayload(body: unknown): ContactPayload {
   const interests = Array.isArray(payload.interests)
     ? payload.interests.filter((item): item is string => typeof item === "string" && item.trim().length > 0)
     : [];
+  const guard = getSubmissionGuard(payload);
+
+  validateSubmissionGuard(guard);
 
   if (!name) {
     throw new HttpError(400, "A name is required.");
@@ -227,6 +285,10 @@ export function getContactPayload(body: unknown): ContactPayload {
     throw new HttpError(400, "A project message is required.");
   }
 
+  if (message.length < 20) {
+    throw new HttpError(400, "Please share a bit more detail so we can help properly.");
+  }
+
   return {
     name,
     email,
@@ -234,6 +296,8 @@ export function getContactPayload(body: unknown): ContactPayload {
     message,
     source,
     interests,
+    website: guard.website,
+    startedAt: guard.startedAt,
   };
 }
 

@@ -12,9 +12,10 @@ const needs = [
 export default function LeadsGrid() {
   const [selected, setSelected] = React.useState<string[]>([]);
   const [step, setStep] = React.useState<'needs' | 'contact' | 'success'>('needs');
+  const [formStartedAt] = React.useState(() => Date.now());
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [error, setError] = React.useState('');
-  const [formData, setFormData] = React.useState({ name: '', email: '', message: '' });
+  const [formData, setFormData] = React.useState({ name: '', email: '', message: '', website: '' });
 
   const toggleNeed = (id: string) => {
     setSelected((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]));
@@ -33,18 +34,20 @@ export default function LeadsGrid() {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...formData, company: '', source: 'hero-intake', interests: selected }),
+        body: JSON.stringify({ ...formData, company: '', source: 'hero-intake', interests: selected, startedAt: formStartedAt }),
       });
 
+      const data = (await response.json()) as { error?: string };
+
       if (!response.ok) {
-        throw new Error(`Hero intake failed with status ${response.status}`);
+        throw new Error(data.error || `Hero intake failed with status ${response.status}`);
       }
 
       setStep('success');
-      setFormData({ name: '', email: '', message: '' });
+      setFormData({ name: '', email: '', message: '', website: '' });
     } catch (submissionError) {
       console.error('Hero form error:', submissionError);
-      setError('We could not send this right now. Please try again in a moment.');
+      setError(submissionError instanceof Error ? submissionError.message : 'We could not send this right now. Please try again in a moment.');
     } finally {
       setIsSubmitting(false);
     }
@@ -102,6 +105,10 @@ export default function LeadsGrid() {
               <p className="text-sm text-brand-400 leading-relaxed">Selected focus: {selected.map((id) => needs.find((need) => need.id === id)?.title).join(', ')}</p>
             </div>
             <div className="space-y-3">
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="hero-website">Website</label>
+                <input id="hero-website" value={formData.website} onChange={(e) => setFormData((prev) => ({ ...prev, website: e.target.value }))} tabIndex={-1} autoComplete="off" />
+              </div>
               <input value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} type="text" placeholder="Full name" className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm" />
               <input value={formData.email} onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))} type="email" placeholder="Business email" className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm" />
               <textarea value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} placeholder="Describe the business, the system or experience you need, and what outcome matters most." rows={4} className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm resize-none" />

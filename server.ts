@@ -1,7 +1,8 @@
-﻿import express from "express";
+import express from "express";
 import { createServer as createViteServer } from "vite";
 import path from "path";
 import {
+  enforceRateLimit,
   generateChatResponse,
   getChatPayload,
   getContactPayload,
@@ -10,6 +11,19 @@ import {
   submitContact,
   submitLead,
 } from "./lib/server/assistant";
+
+function getClientIp(req: express.Request) {
+  const forwardedFor = req.headers["x-forwarded-for"];
+  if (typeof forwardedFor === "string") {
+    return forwardedFor.split(",")[0]?.trim() || req.ip || "unknown";
+  }
+
+  if (Array.isArray(forwardedFor) && forwardedFor[0]) {
+    return forwardedFor[0];
+  }
+
+  return req.ip || "unknown";
+}
 
 async function startServer() {
   const app = express();
@@ -34,6 +48,7 @@ async function startServer() {
 
   app.post("/api/leads", async (req, res) => {
     try {
+      enforceRateLimit(`lead:${getClientIp(req)}`);
       const { email, details } = getLeadPayload(req.body);
       await submitLead({
         email,
@@ -54,6 +69,7 @@ async function startServer() {
 
   app.post("/api/contact", async (req, res) => {
     try {
+      enforceRateLimit(`contact:${getClientIp(req)}`);
       const contact = getContactPayload(req.body);
       await submitContact({
         ...contact,

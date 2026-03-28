@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Loader2, Maximize2, MessageSquare, Minimize2, Send, Sparkles, X } from 'lucide-react';
 
@@ -16,8 +16,10 @@ export default function AIAgent() {
   const [isLoading, setIsLoading] = useState(false);
   const [quickReplies, setQuickReplies] = useState<string[]>(['Website', 'Branding', 'AI automation']);
   const [leadFormArgs, setLeadFormArgs] = useState<LeadFormArgs | null>(null);
+  const [leadFormStartedAt, setLeadFormStartedAt] = useState<number | null>(null);
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
   const [emailInput, setEmailInput] = useState('');
+  const [websiteInput, setWebsiteInput] = useState('');
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -59,6 +61,7 @@ export default function AIAgent() {
 
       if (data.leadFormArgs) {
         setLeadFormArgs(data.leadFormArgs);
+        setLeadFormStartedAt(Date.now());
         setQuickReplies([]);
       } else {
         setQuickReplies(data.quickReplies || []);
@@ -75,7 +78,7 @@ export default function AIAgent() {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!emailInput || !leadFormArgs) return;
+    if (!emailInput || !leadFormArgs || !leadFormStartedAt) return;
 
     setFormStatus('submitting');
 
@@ -83,10 +86,12 @@ export default function AIAgent() {
       const response = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: emailInput, details: leadFormArgs }),
+        body: JSON.stringify({ email: emailInput, details: leadFormArgs, website: websiteInput, startedAt: leadFormStartedAt }),
       });
 
-      if (!response.ok) throw new Error(`Lead submission failed with status ${response.status}`);
+      const data = (await response.json()) as { error?: string };
+
+      if (!response.ok) throw new Error(data.error || `Lead submission failed with status ${response.status}`);
 
       setFormStatus('success');
       setMessages((prev) => [
@@ -95,15 +100,19 @@ export default function AIAgent() {
         { role: 'model', text: 'Perfect! I have securely sent your project brief and email to our team. One of our experts will reach out shortly with your tailored plan and next steps.' },
       ]);
       setLeadFormArgs(null);
+      setLeadFormStartedAt(null);
+      setWebsiteInput('');
     } catch (error) {
       console.error('Lead submit error:', error);
       setFormStatus('error');
       setMessages((prev) => [
         ...prev,
         { role: 'user', text: `Email provided: ${emailInput}` },
-        { role: 'model', text: 'I collected your information, but the secure submission failed. Please try again in a moment.' },
+        { role: 'model', text: error instanceof Error ? error.message : 'I collected your information, but the secure submission failed. Please try again in a moment.' },
       ]);
       setLeadFormArgs(null);
+      setLeadFormStartedAt(null);
+      setWebsiteInput('');
     }
   };
 
@@ -179,6 +188,10 @@ export default function AIAgent() {
                   <div className="p-4 sm:p-6 border-t border-brand-100/50 bg-white/50 shrink-0">
                     {leadFormArgs ? (
                       <form onSubmit={handleFormSubmit} className="space-y-4">
+                        <div className="hidden" aria-hidden="true">
+                          <label htmlFor="lead-website">Website</label>
+                          <input id="lead-website" type="text" tabIndex={-1} autoComplete="off" value={websiteInput} onChange={(e) => setWebsiteInput(e.target.value)} />
+                        </div>
                         <div className="space-y-2">
                           <label htmlFor="email" className="text-xs font-semibold uppercase tracking-wider text-brand-400">Your Best Email</label>
                           <input id="email" type="email" required value={emailInput} onChange={(e) => setEmailInput(e.target.value)} placeholder="hello@example.com" className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl bg-white border border-brand-100/50 focus:outline-none focus:border-accent transition-colors text-ink text-sm shadow-sm" />
