@@ -1,9 +1,10 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
-import { ArrowLeft, CheckCircle2, ArrowRight, ChevronDown } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ChevronDown } from 'lucide-react';
 import { projects } from '../data/projects';
 import { AnalyticsChart, IoTChart } from '../components/ChartDemo';
+import BrandedVisual from '../components/BrandedVisual';
 
 export default function CaseStudy() {
   const { id } = useParams<{ id: string }>();
@@ -52,7 +53,7 @@ export default function CaseStudy() {
 
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}>
-              <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-soft text-accent text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-6 border border-brand-100/50">Concept Study · {project.category}</div>
+              <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-soft text-accent text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-6 border border-brand-100/50">Concept Study � {project.category}</div>
               <h1 className="text-4xl md:text-7xl font-semibold text-ink leading-[1.08] mb-6 tracking-tight">{project.title}</h1>
               <p className="text-lg md:text-2xl text-brand-400 leading-relaxed mb-10">{project.description}</p>
               <div className="flex flex-wrap gap-3">
@@ -63,7 +64,7 @@ export default function CaseStudy() {
             </motion.div>
 
             <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.15 }} className="relative rounded-[3rem] overflow-hidden shadow-2xl aspect-[4/3] border border-brand-100/50">
-              <img src={project.image} alt={project.title} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+              <BrandedVisual variant={project.id as 'nexus-ai' | 'lumina-saas' | 'velocity-ecommerce' | 'orbit-automation'} title={project.title} className="rounded-[3rem]" />
             </motion.div>
           </div>
         </div>
@@ -138,7 +139,7 @@ export default function CaseStudy() {
         <div className="max-w-4xl mx-auto">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-400 mb-6">Next Step</p>
           <Link to="/contact" className="group inline-block">
-            <h2 className="text-4xl md:text-7xl font-semibold text-white mb-10 tracking-tight leading-[1.04] group-hover:text-accent transition-colors">Need this level of direction for your own site?</h2>
+            <h2 className="text-4xl md:text-7xl font-semibold text-white mb-10 tracking-tight leading-[1.04] group-hover:text-accent transition-colors">Need this level of direction for your own product or system?</h2>
             <div className="inline-flex items-center justify-center w-18 h-18 rounded-full border border-brand-400 text-white group-hover:bg-white group-hover:text-ink transition-all duration-500 px-6 py-4">
               <ArrowRight className="w-7 h-7" />
             </div>

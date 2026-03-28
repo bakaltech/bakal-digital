@@ -6,13 +6,14 @@ import TechMarquee from '../components/TechMarquee';
 import { projects } from '../data/projects';
 import InteractiveHero from '../components/InteractiveHero';
 import StudioDemo from '../components/StudioDemo';
+import BrandedVisual from '../components/BrandedVisual';
 
 interface CategoryCardProps {
   category: {
     title: string;
     description: string;
     icon: React.ElementType;
-    image: string;
+    visual: 'ai' | 'platform' | 'commerce' | 'data';
   };
   idx: number;
 }
@@ -25,8 +26,8 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
     transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
     className="group relative aspect-[4/5] rounded-[2rem] overflow-hidden bg-soft border border-brand-100/50 shadow-sm hover:shadow-xl transition-all duration-500"
   >
-    <img src={category.image} alt={category.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" referrerPolicy="no-referrer" />
-    <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent opacity-60 group-hover:opacity-70 transition-opacity duration-500" />
+    <BrandedVisual variant={category.visual} title={category.title} />
+    <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent opacity-75 group-hover:opacity-85 transition-opacity duration-500" />
     <div className="absolute inset-0 p-8 flex flex-col justify-end">
       <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center mb-6 group-hover:bg-accent group-hover:border-accent transition-all duration-500">
         <category.icon className="w-5 h-5 text-white" />
@@ -45,7 +46,7 @@ const ProjectCard: React.FC<{ project: (typeof projects)[number]; idx: number }>
   <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 1, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }} className="group relative flex flex-col">
     <Link to={`/portfolio/${project.id}`} className="block">
       <div className="relative aspect-[16/10] overflow-hidden rounded-[2.5rem] bg-soft mb-8 shadow-sm group-hover:shadow-2xl transition-all duration-700">
-        <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" referrerPolicy="no-referrer" />
+        <BrandedVisual variant={project.id as 'nexus-ai' | 'lumina-saas' | 'velocity-ecommerce' | 'orbit-automation'} title={project.title} className="rounded-[2.5rem]" />
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors duration-300" />
       </div>
       <div className="flex justify-between items-start px-2">
@@ -65,10 +66,10 @@ const ProjectCard: React.FC<{ project: (typeof projects)[number]; idx: number }>
 export default function Home() {
   const featuredProjects = projects.slice(0, 2);
   const categories = [
-    { title: 'AI Products', description: 'Assistants, workflows, and product features that make AI practical inside the business.', icon: Cpu, image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800' },
-    { title: 'Custom Platforms', description: 'Tailored web platforms, portals, and operational tools built around your exact process.', icon: Globe, image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800' },
-    { title: 'Commerce Systems', description: 'Storefronts and conversion flows designed to sell cleanly and scale without friction.', icon: ShoppingBag, image: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800' },
-    { title: 'Automation & Data', description: 'Connected workflows, reporting, and internal systems that reduce manual work and surface insight.', icon: Database, image: 'https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=800' },
+    { title: 'AI Products', description: 'Assistants, workflows, and product features that make AI practical inside the business.', icon: Cpu, visual: 'ai' as const },
+    { title: 'Custom Platforms', description: 'Tailored web platforms, portals, and operational tools built around your exact process.', icon: Globe, visual: 'platform' as const },
+    { title: 'Commerce Systems', description: 'Storefronts and conversion flows designed to sell cleanly and scale without friction.', icon: ShoppingBag, visual: 'commerce' as const },
+    { title: 'Automation & Data', description: 'Connected workflows, reporting, and internal systems that reduce manual work and surface insight.', icon: Database, visual: 'data' as const },
   ];
 
   return (
@@ -150,7 +151,7 @@ export default function Home() {
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="relative aspect-[4/5] md:aspect-square rounded-[3rem] overflow-hidden shadow-2xl group">
-              <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&q=80&w=1600" alt="Studio philosophy" className="w-full h-full object-cover transition-transform duration-[2000ms] group-hover:scale-110" referrerPolicy="no-referrer" />
+              <BrandedVisual variant="studio" title="Systems create momentum" className="rounded-[3rem]" />
               <div className="absolute inset-0 bg-ink/10 group-hover:bg-ink/0 transition-colors duration-700" />
               <div className="absolute top-12 right-12 w-32 h-32 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center p-6 text-center">
                 <p className="text-[10px] font-bold text-white uppercase tracking-widest leading-tight">Systems Create Momentum</p>

@@ -1,8 +1,9 @@
-﻿import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Search } from 'lucide-react';
 import { projects } from '../data/projects';
+import BrandedVisual from '../components/BrandedVisual';
 
 export default function Portfolio() {
   const [filter, setFilter] = useState('All');
@@ -52,8 +53,8 @@ export default function Portfolio() {
               <motion.div key={project.id} layout initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.6, delay: idx * 0.05 }} className="group flex flex-col">
                 <Link to={`/portfolio/${project.id}`} className="block">
                   <div className="relative aspect-[16/10] overflow-hidden rounded-[2.5rem] bg-soft mb-8 shadow-sm group-hover:shadow-2xl transition-all duration-700 group-hover:-translate-y-2">
-                    <img src={project.image} alt={project.title} className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" referrerPolicy="no-referrer" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-ink/45 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                    <BrandedVisual variant={project.id as 'nexus-ai' | 'lumina-saas' | 'velocity-ecommerce' | 'orbit-automation'} title={project.title} className="rounded-[2.5rem]" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-ink/15 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
                   <div className="flex justify-between items-start px-2">
                     <div className="max-w-[82%]">

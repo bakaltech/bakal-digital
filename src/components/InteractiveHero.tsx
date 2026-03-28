@@ -1,49 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import { motion, useSpring, useTransform, useMotionValue } from 'motion/react';
 import LeadsGrid from './LeadsGrid';
+import BrandedVisual from './BrandedVisual';
 
-const galleryImages = [
-  'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1551288049-bbbda536339a?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1522542550221-31fd19255a7a?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1551033406-611cf9a28f67?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1523206489230-c012c64b2b48?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1551434678-d270f9a4891b?auto=format&fit=crop&q=80&w=800',
-  'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&q=80&w=800',
-];
-
-type GalleryItemProps = {
-  src: string;
-  index: number;
-};
-
-const GalleryItem: React.FC<GalleryItemProps> = ({ src, index }) => {
-  return (
-    <motion.div
-      whileHover={{ y: -5, zIndex: 10 }}
-      className="relative flex-shrink-0 w-32 h-20 sm:w-48 sm:h-32 md:w-64 md:h-44 rounded-2xl overflow-hidden shadow-md border border-white/10 group cursor-pointer transition-shadow duration-300 hover:shadow-xl"
-    >
-      <img
-        src={src}
-        alt={`Project ${index + 1}`}
-        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-        referrerPolicy="no-referrer"
-      />
-      <div className="absolute inset-0 bg-ink/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3 sm:p-4">
-        <p className="text-white text-[10px] font-bold uppercase tracking-widest">Project {index + 1}</p>
-      </div>
-    </motion.div>
-  );
-};
+const galleryVariants = ['ai', 'platform', 'commerce', 'data', 'studio'] as const;
 
 export default function InteractiveHero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -66,46 +26,48 @@ export default function InteractiveHero() {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
-  const layer1X = useTransform(smoothX, [-0.5, 0.5], [50, -50]);
-  const layer2X = useTransform(smoothX, [-0.5, 0.5], [-50, 50]);
-  const layer3Y = useTransform(smoothY, [-0.5, 0.5], [50, -50]);
-  const layer4Y = useTransform(smoothY, [-0.5, 0.5], [-50, 50]);
+  const layer1X = useTransform(smoothX, [-0.5, 0.5], [40, -40]);
+  const layer2X = useTransform(smoothX, [-0.5, 0.5], [-40, 40]);
+  const layer3Y = useTransform(smoothY, [-0.5, 0.5], [40, -40]);
+  const layer4Y = useTransform(smoothY, [-0.5, 0.5], [-40, 40]);
 
   return (
     <section ref={containerRef} className="relative h-screen min-h-[860px] w-full overflow-hidden bg-paper flex items-center justify-center">
-      <div className="absolute inset-0 z-0 opacity-40 pointer-events-none scale-110 rotate-[-10deg]">
-        <motion.div style={{ x: layer1X }} className="absolute top-[-10%] left-[-20%] flex gap-8 whitespace-nowrap">
-          {[...galleryImages, ...galleryImages].map((src, i) => (
-            <GalleryItem key={`l1-${i}`} src={src} index={i} />
+      <div className="absolute inset-0 z-0 opacity-45 pointer-events-none scale-110 rotate-[-7deg]">
+        <motion.div style={{ x: layer1X }} className="absolute top-[-4%] left-[-16%] flex gap-8 whitespace-nowrap">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={`l1-${i}`} className="h-28 w-48 sm:h-36 sm:w-60 md:h-40 md:w-72 shrink-0 rounded-[1.75rem] overflow-hidden shadow-2xl">
+              <BrandedVisual variant={galleryVariants[i % galleryVariants.length]} compact title="" />
+            </div>
           ))}
         </motion.div>
 
-        <motion.div style={{ x: layer2X }} className="absolute top-[25%] right-[-20%] flex gap-8 whitespace-nowrap">
-          {[...galleryImages, ...galleryImages].reverse().map((src, i) => (
-            <GalleryItem key={`l2-${i}`} src={src} index={i} />
+        <motion.div style={{ x: layer2X }} className="absolute top-[26%] right-[-20%] flex gap-8 whitespace-nowrap">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <div key={`l2-${i}`} className="h-28 w-48 sm:h-36 sm:w-60 md:h-40 md:w-72 shrink-0 rounded-[1.75rem] overflow-hidden shadow-2xl">
+              <BrandedVisual variant={galleryVariants[(i + 2) % galleryVariants.length]} compact title="" />
+            </div>
           ))}
         </motion.div>
 
-        <motion.div style={{ y: layer3Y }} className="absolute left-[10%] top-[-50%] flex flex-col gap-8">
-          {[...galleryImages, ...galleryImages].map((src, i) => (
-            <GalleryItem key={`l3-${i}`} src={src} index={i} />
+        <motion.div style={{ y: layer3Y }} className="absolute left-[8%] top-[-40%] flex flex-col gap-8">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={`l3-${i}`} className="h-28 w-48 sm:h-36 sm:w-60 md:h-40 md:w-72 shrink-0 rounded-[1.75rem] overflow-hidden shadow-2xl">
+              <BrandedVisual variant={galleryVariants[(i + 1) % galleryVariants.length]} compact title="" />
+            </div>
           ))}
         </motion.div>
 
-        <motion.div style={{ y: layer4Y }} className="absolute right-[10%] top-[-50%] flex flex-col gap-8">
-          {[...galleryImages, ...galleryImages].reverse().map((src, i) => (
-            <GalleryItem key={`l4-${i}`} src={src} index={i} />
-          ))}
-        </motion.div>
-
-        <motion.div style={{ x: layer1X, y: layer4Y }} className="absolute top-[60%] left-[-10%] flex gap-8 whitespace-nowrap opacity-40 blur-[2px]">
-          {[...galleryImages, ...galleryImages].map((src, i) => (
-            <GalleryItem key={`l5-${i}`} src={src} index={i} />
+        <motion.div style={{ y: layer4Y }} className="absolute right-[8%] top-[-40%] flex flex-col gap-8">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <div key={`l4-${i}`} className="h-28 w-48 sm:h-36 sm:w-60 md:h-40 md:w-72 shrink-0 rounded-[1.75rem] overflow-hidden shadow-2xl">
+              <BrandedVisual variant={galleryVariants[(i + 3) % galleryVariants.length]} compact title="" />
+            </div>
           ))}
         </motion.div>
       </div>
 
-      <div className="absolute inset-0 z-[5] bg-gradient-to-b from-paper/20 via-paper/60 to-paper/20 backdrop-blur-[2px]" />
+      <div className="absolute inset-0 z-[5] bg-gradient-to-b from-paper/30 via-paper/68 to-paper/28 backdrop-blur-[3px]" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex flex-col items-center py-20">
         <motion.div
@@ -140,11 +102,7 @@ export default function InteractiveHero() {
         </motion.div>
       </div>
 
-      <motion.div
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-      >
+      <motion.div animate={{ y: [0, 10, 0] }} transition={{ duration: 2, repeat: Infinity }} className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
         <div className="w-[1px] h-12 bg-gradient-to-b from-accent to-transparent" />
         <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-brand-400">Scroll</span>
       </motion.div>

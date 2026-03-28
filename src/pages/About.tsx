@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Compass, Layers3, ShieldCheck, Workflow } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import BrandedVisual from '../components/BrandedVisual';
 
 export default function About() {
   const principles = [
@@ -45,7 +46,7 @@ export default function About() {
 
       <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-28">
         <div className="rounded-[3rem] overflow-hidden shadow-2xl border border-brand-100/40 aspect-[21/9]">
-          <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1600&auto=format&fit=crop&q=80" alt="Bakal Digital studio direction" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+          <BrandedVisual variant="studio" title="Operational clarity, premium execution" className="rounded-[3rem]" />
         </div>
       </section>
 
