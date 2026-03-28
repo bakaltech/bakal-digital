@@ -24,16 +24,16 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-    className="group relative aspect-[1.18/1] sm:aspect-[4/5] rounded-[1.75rem] sm:rounded-[2rem] overflow-hidden bg-soft border border-brand-100/50 shadow-sm hover:shadow-xl transition-all duration-500"
+    className="group relative aspect-[1.12/1] sm:aspect-[4/5] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-soft border border-brand-100/50 shadow-sm hover:shadow-xl transition-all duration-500"
   >
     <BrandedVisual variant={category.visual} title={category.title} />
-    <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent opacity-75 group-hover:opacity-85 transition-opacity duration-500" />
+    <div className="absolute inset-0 bg-gradient-to-t from-ink/82 via-ink/26 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
     <div className="absolute inset-0 p-5 sm:p-8 flex flex-col justify-end">
       <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-accent group-hover:border-accent transition-all duration-500">
         <category.icon className="w-5 h-5 text-white" />
       </div>
       <h3 className="text-xl sm:text-2xl font-semibold text-white mb-2 tracking-tight">{category.title}</h3>
-      <p className="text-white/70 text-sm leading-relaxed mb-4 sm:mb-6 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-500">{category.description}</p>
+      <p className="text-white/72 text-sm leading-relaxed mb-4 sm:mb-6 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-500">{category.description}</p>
       <Link to="/services" className="inline-flex items-center text-white text-[10px] font-bold uppercase tracking-widest hover:text-accent transition-colors">
         View Details
         <ArrowRight className="ml-2 w-3 h-3" />
@@ -76,14 +76,14 @@ export default function Home() {
     <div className="bg-paper overflow-hidden">
       <InteractiveHero />
 
-      <section className="py-16 sm:py-20 md:py-32 bg-paper">
+      <section className="py-14 sm:py-20 md:py-32 bg-paper">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="max-w-4xl mb-12 sm:mb-14 md:mb-24">
+          <div className="max-w-4xl mb-10 sm:mb-14 md:mb-24">
             <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">What We Build</p>
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink leading-tight tracking-tight mb-6 sm:mb-8">
+            <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-semibold text-ink leading-tight tracking-tight mb-5 sm:mb-8">
               Digital products, systems, and experiences designed to move the business forward.
             </h2>
-            <p className="text-lg sm:text-xl text-brand-400 leading-relaxed max-w-3xl">
+            <p className="text-base sm:text-xl text-brand-400 leading-relaxed max-w-3xl">
               We help companies launch sharper digital products, modernize customer-facing platforms, automate operational work, and create cleaner paths from interest to action.
             </p>
           </div>
@@ -97,12 +97,12 @@ export default function Home() {
 
       <TechMarquee />
 
-      <section className="py-16 sm:py-20 md:py-32">
+      <section className="py-14 sm:py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 sm:mb-16 md:mb-24 gap-6 sm:gap-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 sm:mb-16 md:mb-24 gap-5 sm:gap-8">
             <div className="max-w-4xl">
-              <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-4 md:mb-6">Selected Concepts</p>
-              <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">
+              <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 md:mb-6">Selected Concepts</p>
+              <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">
                 A look at the kinds of products, systems, and journeys we can shape.
               </h2>
             </div>
@@ -111,7 +111,7 @@ export default function Home() {
               <ChevronRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-          <div className="grid md:grid-cols-2 gap-x-12 gap-y-14 sm:gap-y-16 md:gap-y-24">
+          <div className="grid md:grid-cols-2 gap-x-12 gap-y-12 sm:gap-y-16 md:gap-y-24">
             {featuredProjects.map((project, idx) => (
               <ProjectCard key={project.id} project={project} idx={idx} />
             ))}
@@ -121,14 +121,14 @@ export default function Home() {
 
       <StudioDemo />
 
-      <section className="py-16 sm:py-20 md:py-32 bg-paper">
+      <section className="py-14 sm:py-20 md:py-32 bg-paper">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-[1.05fr_1.2fr] gap-8 sm:gap-12 md:gap-16 items-start">
           <div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-4 sm:mb-6">Trust Signals</p>
-            <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight mb-6 sm:mb-8">
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 sm:mb-6">Trust Signals</p>
+            <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight mb-5 sm:mb-8">
               Proof where we have it. Clarity where we do not.
             </h2>
-            <p className="text-lg sm:text-xl text-brand-400 leading-relaxed max-w-2xl">
+            <p className="text-base sm:text-xl text-brand-400 leading-relaxed max-w-2xl">
               We do not inflate results or invent client stories. When a project is public, we can show it. When it is confidential or still taking shape, we show the thinking, structure, and delivery standard behind the work instead.
             </p>
           </div>
@@ -139,7 +139,7 @@ export default function Home() {
               { title: 'References available when appropriate', text: 'For qualified opportunities, deeper project context and additional examples can be shared directly.' },
               { title: 'Focused delivery model', text: 'Strategy, UX, design, frontend, backend, and automation are shaped as one system instead of siloed handoffs.' },
             ].map((item, idx) => (
-              <motion.div key={item.title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: idx * 0.08 }} className="rounded-[1.75rem] sm:rounded-[2rem] border border-brand-100/50 bg-soft p-5 sm:p-7">
+              <motion.div key={item.title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: idx * 0.08 }} className="rounded-[1.5rem] sm:rounded-[2rem] border border-brand-100/50 bg-soft p-5 sm:p-7">
                 <div className="w-11 h-11 rounded-2xl bg-white border border-brand-100/50 flex items-center justify-center text-accent mb-4">
                   <CheckCircle2 className="w-5 h-5" />
                 </div>
@@ -151,16 +151,16 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 md:py-32 bg-soft relative overflow-hidden">
+      <section className="py-14 sm:py-20 md:py-32 bg-soft relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-accent/5 to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative">
           <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 md:gap-20 items-center">
             <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}>
-              <p className="text-sm font-bold uppercase tracking-[0.3em] text-accent mb-6 sm:mb-8">How We Think</p>
-              <h2 className="text-3xl sm:text-4xl md:text-7xl font-semibold text-ink leading-[1.05] tracking-tight mb-6 sm:mb-10 serif italic">
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-6 sm:mb-8">How We Think</p>
+              <h2 className="text-[2rem] sm:text-4xl md:text-7xl font-semibold text-ink leading-[1.05] tracking-tight mb-6 sm:mb-10 serif italic">
                 Good digital work is not just visible. It is operational.
               </h2>
-              <p className="text-lg sm:text-xl md:text-2xl text-brand-400 leading-relaxed font-normal mb-8 sm:mb-12 max-w-xl">
+              <p className="text-base sm:text-xl md:text-2xl text-brand-400 leading-relaxed font-normal mb-8 sm:mb-12 max-w-xl">
                 We care about the page design, but we care just as much about the workflow behind it. The strongest sites help people decide, convert, onboard, and continue cleanly.
               </p>
               <div className="grid sm:grid-cols-2 gap-5 sm:gap-8">
@@ -183,17 +183,17 @@ export default function Home() {
             <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }} className="relative aspect-[5/4] md:aspect-square rounded-[2rem] sm:rounded-[3rem] overflow-hidden shadow-2xl group">
               <BrandedVisual variant="studio" title="Systems create momentum" className="rounded-[2rem] sm:rounded-[3rem]" />
               <div className="absolute inset-0 bg-ink/10 group-hover:bg-ink/0 transition-colors duration-700" />
-              <div className="absolute top-6 right-6 sm:top-12 sm:right-12 w-24 h-24 sm:w-32 sm:h-32 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center p-4 sm:p-6 text-center">
-                <p className="text-[9px] sm:text-[10px] font-bold text-white uppercase tracking-widest leading-tight">Systems Create Momentum</p>
+              <div className="absolute top-5 right-5 sm:top-12 sm:right-12 w-20 h-20 sm:w-32 sm:h-32 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center p-4 sm:p-6 text-center">
+                <p className="text-[8px] sm:text-[10px] font-bold text-white uppercase tracking-widest leading-tight">Systems Create Momentum</p>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 md:py-32 relative">
+      <section className="py-14 sm:py-20 md:py-32 relative">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-10 sm:gap-12 md:gap-24">
+          <div className="grid md:grid-cols-3 gap-10 sm:gap-12 md:gap-20">
             {[
               { icon: Workflow, title: 'Smarter Operations', desc: 'We design the flows behind the interface so intake, handoff, reporting, and internal execution feel cleaner.' },
               { icon: Globe, title: 'Stronger Digital Products', desc: 'From public websites to client-facing platforms, we build experiences that explain the offer and support growth.' },
@@ -212,10 +212,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 md:py-32 bg-ink relative overflow-hidden text-center md:text-left">
+      <section className="py-14 sm:py-20 md:py-32 bg-ink relative overflow-hidden text-center md:text-left">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl">
-            <h2 className="text-3xl sm:text-5xl md:text-8xl font-semibold text-white leading-[1.05] md:leading-[1.05] tracking-tight mb-6 sm:mb-10 md:mb-12">
+            <h2 className="text-[2rem] sm:text-5xl md:text-8xl font-semibold text-white leading-[1.05] tracking-tight mb-6 sm:mb-10 md:mb-12">
               Ready to turn the idea into a product, platform, or system that actually works?
             </h2>
             <p className="text-base sm:text-lg md:text-2xl text-brand-400 mb-8 sm:mb-12 md:mb-16 max-w-2xl font-normal leading-relaxed mx-auto md:mx-0">

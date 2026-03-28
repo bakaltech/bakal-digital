@@ -83,10 +83,10 @@ const Navbar = () => {
   }, [location.pathname]);
 
   return (
-    <nav className={`fixed inset-x-0 top-0 z-[70] transition-all duration-500 ${isScrolled ? 'bg-paper/88 backdrop-blur-xl border-b border-brand-100/40 py-4 shadow-[0_12px_30px_rgba(17,19,21,0.04)]' : 'bg-transparent py-7'}`}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-6">
-          <Link to="/" className="flex items-center gap-3 group">
+    <nav className={`fixed inset-x-0 top-0 z-[70] transition-all duration-500 ${isScrolled ? 'bg-paper/92 backdrop-blur-xl border-b border-brand-100/40 py-3 md:py-4 shadow-[0_12px_30px_rgba(17,19,21,0.04)]' : 'bg-transparent py-4 md:py-7'}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={`flex items-center justify-between gap-4 rounded-[1.5rem] md:rounded-none px-3 py-2 md:p-0 transition-all duration-500 ${isScrolled ? 'bg-white/78 md:bg-transparent border border-brand-100/40 md:border-0 shadow-[0_10px_24px_rgba(17,19,21,0.04)] md:shadow-none' : 'bg-white/66 md:bg-transparent border border-white/50 md:border-0 backdrop-blur md:backdrop-blur-none'}`}>
+          <Link to="/" className="flex items-center gap-3 group min-w-0">
             <BrandMark />
           </Link>
 
@@ -110,32 +110,39 @@ const Navbar = () => {
           </div>
 
           <button type="button" className="md:hidden p-2 rounded-xl text-ink hover:bg-soft transition-colors" aria-label="Toggle menu" onClick={() => setIsOpen((value) => !value)}>
-            {isOpen ? <X size={26} /> : <Menu size={26} />}
+            {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </div>
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div initial={{ opacity: 0, y: -24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -24 }} className="md:hidden bg-paper border-t border-brand-100/30">
-            <div className="px-6 py-8 flex flex-col gap-6">
-              {primaryLinks.map((link, index) => (
-                <Link key={link.path} to={link.path} className="flex items-center gap-4 text-2xl font-semibold text-ink hover:text-accent transition-colors">
-                  <span className="text-xs text-accent uppercase tracking-[0.3em]">0{index + 1}</span>
-                  {link.name}
-                </Link>
-              ))}
+          <>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="md:hidden fixed inset-0 top-[72px] bg-paper/70 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
+            <motion.div initial={{ opacity: 0, y: -24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -24 }} className="md:hidden relative mx-4 mt-3 rounded-[2rem] border border-brand-100/40 bg-paper shadow-[0_25px_80px_rgba(17,19,21,0.08)] overflow-hidden">
+              <div className="px-5 py-6 flex flex-col gap-5">
+                <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-accent">Navigate</p>
+                {primaryLinks.map((link, index) => (
+                  <Link key={link.path} to={link.path} className="flex items-center justify-between gap-4 text-xl font-semibold text-ink hover:text-accent transition-colors">
+                    <div className="flex items-center gap-4">
+                      <span className="text-[11px] text-accent uppercase tracking-[0.3em]">0{index + 1}</span>
+                      {link.name}
+                    </div>
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                ))}
 
-              <div className="grid gap-3 pt-4 border-t border-brand-100/40">
-                <button type="button" onClick={() => { setIsOpen(false); openChat(); }} className="w-full px-6 py-4 rounded-2xl border border-brand-100 bg-white text-ink font-semibold">
-                  Open Quick Brief
-                </button>
-                <Link to="/contact" className="w-full px-6 py-4 rounded-2xl bg-ink text-white font-semibold text-center">
-                  Start a Project
-                </Link>
+                <div className="grid gap-3 pt-5 border-t border-brand-100/40">
+                  <button type="button" onClick={() => { setIsOpen(false); openChat(); }} className="w-full px-6 py-4 rounded-2xl border border-brand-100 bg-white text-ink font-semibold">
+                    Open Quick Brief
+                  </button>
+                  <Link to="/contact" className="w-full px-6 py-4 rounded-2xl bg-ink text-white font-semibold text-center">
+                    Start a Project
+                  </Link>
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>
@@ -144,13 +151,13 @@ const Navbar = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-paper border-t border-brand-100/20 pt-24 pb-12 relative overflow-hidden">
+    <footer className="bg-paper border-t border-brand-100/20 pt-20 md:pt-24 pb-12 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[32rem] h-[32rem] bg-accent/5 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none" />
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-[1.45fr_0.8fr_1fr] gap-12">
+        <div className="grid lg:grid-cols-[1.45fr_0.8fr_1fr] gap-10 md:gap-12">
           <div>
             <div className="inline-flex items-center gap-3 mb-5"><BrandMark /></div>
-            <p className="text-brand-400 text-lg leading-relaxed max-w-xl">
+            <p className="text-brand-400 text-base md:text-lg leading-relaxed max-w-xl">
               Bakal Digital is a remote-first studio for businesses that need stronger digital products, cleaner automation, sharper platforms, and more credible customer-facing experiences.
             </p>
           </div>
@@ -162,7 +169,7 @@ const Footer = () => {
               <Link to="/terms" className="text-brand-400 hover:text-ink transition-colors">Terms of Service</Link>
             </div>
           </div>
-          <div className="rounded-[2rem] bg-soft border border-brand-100/50 p-8 shadow-[0_20px_50px_rgba(17,19,21,0.05)]">
+          <div className="rounded-[2rem] bg-soft border border-brand-100/50 p-6 md:p-8 shadow-[0_20px_50px_rgba(17,19,21,0.05)]">
             <p className="text-sm font-bold uppercase tracking-[0.25em] text-accent mb-4">Start Here</p>
             <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">Need a stronger product or system?</h3>
             <p className="text-brand-400 leading-relaxed mb-6">Use the guided brief for a fast project triage, or send a direct inquiry with your goals, timeline, and current challenges.</p>
@@ -178,7 +185,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="mt-14 pt-6 border-t border-brand-100/20 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-brand-400">
+        <div className="mt-12 md:mt-14 pt-6 border-t border-brand-100/20 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-brand-400 text-center md:text-left">
           <p>© {new Date().getFullYear()} Bakal Digital. All rights reserved.</p>
           <p className="uppercase tracking-[0.25em] text-[11px]">Remote-first studio · AI, platforms, automation, and premium execution</p>
         </div>
@@ -240,7 +247,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen flex flex-col font-sans bg-paper">
       <SeoManager />
       <Navbar />
-      <main className="flex-1 pt-20">{children}</main>
+      <main className="flex-1 pt-[78px] md:pt-20">{children}</main>
       <Footer />
       <CookieConsent />
     </div>
