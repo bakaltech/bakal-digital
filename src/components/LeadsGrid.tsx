@@ -1,119 +1,104 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Layout, Palette, ShoppingBag, Cpu, ArrowRight, CheckCircle2, X } from 'lucide-react';
+﻿import React, { useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import { ArrowRight, CheckCircle2, Cpu, Layout, Palette, ShoppingBag, X } from 'lucide-react';
 
 const needs = [
-  { id: 'web', title: 'Web Architecture', icon: Layout, color: 'bg-accent' },
-  { id: 'brand', title: 'Elite Branding', icon: Palette, color: 'bg-brand-200' },
-  { id: 'shop', title: 'Headless Commerce', icon: ShoppingBag, color: 'bg-ink' },
-  { id: 'ai', title: 'AI Automation', icon: Cpu, color: 'bg-brand-300' },
+  { id: 'web', title: 'Website refresh', icon: Layout },
+  { id: 'brand', title: 'Brand clarity', icon: Palette },
+  { id: 'shop', title: 'Commerce setup', icon: ShoppingBag },
+  { id: 'ai', title: 'Automation', icon: Cpu },
 ];
 
 export default function LeadsGrid() {
   const [selected, setSelected] = useState<string[]>([]);
-  const [step, setStep] = useState<'needs' | 'contact'>('needs');
+  const [step, setStep] = useState<'needs' | 'contact' | 'success'>('needs');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   const toggleNeed = (id: string) => {
-    setSelected(prev => 
-      prev.includes(id) ? prev.filter(i => i !== id) : [...prev, id]
-    );
+    setSelected((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]));
+  };
+
+  const handleSubmit = async () => {
+    if (!formData.name || !formData.email || !formData.message) {
+      setError('Please complete all fields before sending.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, company: '', source: 'hero-intake', interests: selected }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Hero intake failed with status ${response.status}`);
+      }
+
+      setStep('success');
+      setFormData({ name: '', email: '', message: '' });
+    } catch (submissionError) {
+      console.error('Hero form error:', submissionError);
+      setError('We could not send this right now. Please try again in a moment.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
     <div className="w-full mx-auto mt-8">
       <AnimatePresence mode="wait">
-        {step === 'needs' ? (
-          <motion.div
-            key="needs-step"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="space-y-6"
-          >
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
+        {step === 'needs' && (
+          <motion.div key="needs-step" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="space-y-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {needs.map((need) => {
                 const isSelected = selected.includes(need.id);
                 return (
-                  <button
-                    key={need.id}
-                    onClick={() => toggleNeed(need.id)}
-                    className={`relative p-3 sm:p-4 rounded-2xl border transition-all duration-500 flex flex-col items-center gap-2 sm:gap-3 group hover:-translate-y-1 ${
-                      isSelected 
-                        ? 'bg-ink border-ink text-white shadow-xl' 
-                        : 'bg-soft border-brand-100/50 text-brand-400 hover:border-accent hover:bg-white'
-                    }`}
-                  >
-                    <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center transition-colors duration-500 ${
-                      isSelected ? 'bg-accent text-white' : 'bg-white text-brand-300 group-hover:text-accent'
-                    }`}>
-                      <need.icon className="w-4 h-4 sm:w-5 sm:h-5" />
-                    </div>
-                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-center leading-tight">{need.title}</span>
-                    {isSelected && (
-                      <motion.div
-                        layoutId="check"
-                        className="absolute top-1 right-1 sm:top-2 sm:right-2 text-accent"
-                      >
-                        <CheckCircle2 className="w-3 h-3 sm:w-4 sm:h-4" />
-                      </motion.div>
-                    )}
+                  <button key={need.id} onClick={() => toggleNeed(need.id)} className={`relative p-4 rounded-2xl border transition-all duration-300 flex flex-col items-center gap-3 ${isSelected ? 'bg-ink border-ink text-white shadow-xl' : 'bg-soft border-brand-100/50 text-brand-400 hover:border-accent hover:bg-white'}`}>
+                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isSelected ? 'bg-accent text-white' : 'bg-white text-brand-400'}`}><need.icon className="w-5 h-5" /></div>
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-center leading-tight">{need.title}</span>
+                    {isSelected && <div className="absolute top-2 right-2 text-accent"><CheckCircle2 className="w-4 h-4" /></div>}
                   </button>
                 );
               })}
             </div>
-
             <div className="flex justify-center">
-              <button
-                disabled={selected.length === 0}
-                onClick={() => setStep('contact')}
-                className="group relative inline-flex items-center justify-center px-8 py-4 text-sm font-bold rounded-full text-white bg-ink transition-all shadow-lg hover:shadow-xl hover:bg-accent disabled:opacity-50 disabled:hover:bg-ink active:scale-[0.98]"
-              >
-                <span className="flex items-center">
-                  Next Step <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </span>
+              <button disabled={selected.length === 0} onClick={() => setStep('contact')} className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold rounded-full text-white bg-ink transition-all shadow-lg hover:bg-accent disabled:opacity-50">
+                Continue
+                <ArrowRight className="ml-2 h-5 w-5" />
               </button>
             </div>
           </motion.div>
-        ) : (
-          <motion.div
-            key="contact-step"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="glass p-6 rounded-3xl border border-white/20 shadow-2xl relative"
-          >
-            <button 
-              onClick={() => setStep('needs')}
-              className="absolute top-4 right-4 p-2 hover:bg-soft rounded-full transition-colors text-brand-400"
-            >
-              <X className="w-4 h-4" />
-            </button>
-            
-            <div className="text-center mb-6">
-              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-2">Final Step</p>
-              <h3 className="text-2xl font-semibold text-ink tracking-tight">Architect your vision.</h3>
-            </div>
+        )}
 
-            <div className="space-y-3">
-              <input 
-                type="text" 
-                placeholder="Full Name"
-                className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent transition-colors text-ink text-sm font-medium"
-              />
-              <input 
-                type="email" 
-                placeholder="Business Email"
-                className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent transition-colors text-ink text-sm font-medium"
-              />
-              <textarea 
-                placeholder="Tell us about your project..."
-                rows={3}
-                className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent transition-colors text-ink text-sm font-medium resize-none"
-              />
-              <button className="w-full py-3 sm:py-4 rounded-xl bg-ink text-white font-bold text-sm hover:bg-accent transition-all shadow-xl active:scale-[0.99]">
-                Submit Project Request
-              </button>
+        {step === 'contact' && (
+          <motion.div key="contact-step" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="glass p-6 rounded-3xl border border-white/20 shadow-2xl relative text-left">
+            <button onClick={() => setStep('needs')} className="absolute top-4 right-4 p-2 hover:bg-soft rounded-full transition-colors text-brand-400"><X className="w-4 h-4" /></button>
+            <div className="mb-5">
+              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-2">Quick Intake</p>
+              <h3 className="text-2xl font-semibold text-ink tracking-tight mb-2">Tell us where you want help.</h3>
+              <p className="text-sm text-brand-400 leading-relaxed">Selected focus: {selected.map((id) => needs.find((need) => need.id === id)?.title).join(', ')}</p>
             </div>
+            <div className="space-y-3">
+              <input value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} type="text" placeholder="Full name" className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm" />
+              <input value={formData.email} onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))} type="email" placeholder="Business email" className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm" />
+              <textarea value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} placeholder="What do you need the website or system to do next?" rows={4} className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm resize-none" />
+              {error && <p className="text-sm text-red-600">{error}</p>}
+              <button type="button" onClick={() => void handleSubmit()} disabled={isSubmitting} className="w-full py-4 rounded-xl bg-ink text-white font-bold text-sm hover:bg-accent transition-colors disabled:opacity-70">{isSubmitting ? 'Sending...' : 'Submit Project Request'}</button>
+            </div>
+          </motion.div>
+        )}
+
+        {step === 'success' && (
+          <motion.div key="success-step" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="glass p-8 rounded-3xl border border-white/20 shadow-2xl text-center">
+            <div className="w-16 h-16 rounded-full bg-white border border-brand-100/50 flex items-center justify-center mx-auto mb-5"><CheckCircle2 className="w-8 h-8 text-accent" /></div>
+            <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">Request received</h3>
+            <p className="text-brand-400 leading-relaxed">Your shortlist and message have been captured. This is enough to start the next conversation.</p>
           </motion.div>
         )}
       </AnimatePresence>

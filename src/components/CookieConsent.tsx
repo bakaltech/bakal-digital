@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { X, ShieldCheck } from 'lucide-react';
+﻿import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import { ShieldCheck, X } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const CookieConsent = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -8,9 +9,7 @@ const CookieConsent = () => {
   useEffect(() => {
     const consent = localStorage.getItem('cookie-consent');
     if (!consent) {
-      const timer = setTimeout(() => {
-        setIsVisible(true);
-      }, 2000); // Show after 2 seconds for better UX
+      const timer = setTimeout(() => setIsVisible(true), 1600);
       return () => clearTimeout(timer);
     }
   }, []);
@@ -23,60 +22,25 @@ const CookieConsent = () => {
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.div
-          initial={{ y: 100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 100, opacity: 0 }}
-          className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:w-[400px] z-[60]"
-        >
-          <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 p-6 overflow-hidden relative">
-            {/* Background Accent */}
-            <div className="absolute -top-12 -right-12 w-24 h-24 bg-brand-50 rounded-full blur-2xl opacity-50" />
-            
+        <motion.div initial={{ y: 80, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 80, opacity: 0 }} className="fixed bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:w-[400px] z-[60]">
+          <div className="bg-white rounded-2xl shadow-2xl border border-brand-100/50 p-6 overflow-hidden relative">
+            <div className="absolute -top-12 -right-12 w-24 h-24 bg-accent/10 rounded-full blur-2xl opacity-70" />
             <div className="relative">
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-10 h-10 bg-brand-50 rounded-xl flex items-center justify-center flex-shrink-0 border border-brand-100">
-                  <ShieldCheck className="text-brand-600" size={20} />
-                </div>
+                <div className="w-10 h-10 bg-soft rounded-xl flex items-center justify-center flex-shrink-0 border border-brand-100/50 text-accent"><ShieldCheck size={20} /></div>
                 <div>
-                  <h3 className="font-display font-bold text-slate-900 italic text-lg leading-tight">
-                    Privacy Matters
-                  </h3>
-                  <p className="text-[10px] font-mono uppercase tracking-widest text-brand-600 mt-1">
-                    Cookie Policy
-                  </p>
+                  <h3 className="font-semibold text-ink text-lg leading-tight">Privacy matters</h3>
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-brand-400 mt-1">Cookie preferences</p>
                 </div>
-                <button 
-                  onClick={() => setIsVisible(false)}
-                  className="ml-auto text-slate-400 hover:text-slate-600 transition-colors"
-                >
-                  <X size={18} />
-                </button>
+                <button type="button" onClick={() => setIsVisible(false)} className="ml-auto text-brand-400 hover:text-ink transition-colors"><X size={18} /></button>
               </div>
-
-              <p className="text-sm text-slate-600 leading-relaxed mb-6 font-light">
-                We use cookies to enhance your experience, analyze site traffic, and serve personalized content. By clicking "Accept", you agree to our use of cookies.
-              </p>
-
+              <p className="text-sm text-brand-400 leading-relaxed mb-6">We use basic cookies to improve site experience and understand engagement. You can accept or decline optional tracking cookies.</p>
               <div className="flex gap-3">
-                <button
-                  onClick={() => handleConsent('accepted')}
-                  className="flex-1 bg-brand-600 text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-brand-700 transition-all shadow-md shadow-brand-600/20 active:scale-95"
-                >
-                  Accept All
-                </button>
-                <button
-                  onClick={() => handleConsent('declined')}
-                  className="flex-1 bg-slate-50 text-slate-600 px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-slate-100 transition-all border border-slate-200 active:scale-95"
-                >
-                  Decline
-                </button>
+                <button onClick={() => handleConsent('accepted')} className="flex-1 bg-ink text-white px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-accent transition-colors">Accept</button>
+                <button onClick={() => handleConsent('declined')} className="flex-1 bg-soft text-ink px-4 py-2.5 rounded-xl text-sm font-medium hover:bg-brand-100 transition-colors border border-brand-100/50">Decline</button>
               </div>
-              
               <div className="mt-4 text-center">
-                <a href="#" className="text-[10px] text-slate-400 hover:text-brand-600 transition-colors underline underline-offset-2">
-                  Read our full Cookie Policy
-                </a>
+                <Link to="/privacy" className="text-[11px] text-brand-400 hover:text-accent transition-colors underline underline-offset-2">Read the privacy policy</Link>
               </div>
             </div>
           </div>

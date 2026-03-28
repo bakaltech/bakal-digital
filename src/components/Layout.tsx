@@ -1,172 +1,106 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Send, ArrowRight } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { ArrowRight, Menu, MessageSquare, X } from 'lucide-react';
+import { AnimatePresence, motion } from 'motion/react';
 import CookieConsent from './CookieConsent';
+
+const primaryLinks = [
+  { name: 'Work', path: '/portfolio' },
+  { name: 'Services', path: '/services' },
+  { name: 'About', path: '/about' },
+  { name: 'Contact', path: '/contact' },
+];
+
+const openChat = () => {
+  window.dispatchEvent(new CustomEvent('open-chat'));
+};
+
+const BrandMark = () => (
+  <>
+    <div className="w-9 h-9 bg-ink rounded-xl flex items-center justify-center transition-transform group-hover:rotate-6">
+      <span className="text-white font-bold text-lg">B</span>
+    </div>
+    <span className="font-bold text-xl tracking-tight text-ink transition-colors group-hover:text-accent">
+      Bakal <span className="text-brand-400 font-medium">Digital</span>
+    </span>
+  </>
+);
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setIsScrolled(currentScrollY > 20);
-      
-      if (currentScrollY > lastScrollY && currentScrollY > 100 && !isOpen) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-      setLastScrollY(currentScrollY);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY, isOpen]);
+    const onScroll = () => setIsScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
+    document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => {
-      document.body.style.overflow = 'unset';
+      document.body.style.overflow = '';
     };
   }, [isOpen]);
 
-  const links = [
-    { name: 'Work', path: '/portfolio' },
-    { name: 'Services', path: '/services' },
-    { name: 'About', path: '/about' },
-  ];
+  useEffect(() => {
+    setIsOpen(false);
+  }, [location.pathname]);
 
   return (
-    <nav
-      className={`fixed w-full z-[70] transition-all duration-700 ${
-        isVisible ? 'translate-y-0' : '-translate-y-full'
-      } ${
-        isScrolled ? 'py-4 bg-paper/80 backdrop-blur-xl border-b border-brand-100/20' : 'py-8 bg-transparent'
-      }`}
-    >
+    <nav className={`fixed inset-x-0 top-0 z-[70] transition-all duration-500 ${isScrolled ? 'bg-paper/88 backdrop-blur-xl border-b border-brand-100/40 py-4' : 'bg-transparent py-7'}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="flex justify-between items-center h-12">
-          <div className="flex items-center">
-            <Link to="/" className="flex-shrink-0 flex items-center gap-2 md:gap-3 group">
-              <div className="w-8 h-8 md:w-9 md:h-9 bg-ink rounded-xl flex items-center justify-center group-hover:rotate-12 transition-transform">
-                <span className="text-white font-bold text-lg md:text-xl">B</span>
-              </div>
-              <span className="font-bold text-lg md:text-xl tracking-tighter text-ink group-hover:text-accent transition-colors hidden sm:block">
-                Bakàl <span className="text-brand-300 font-medium">Digital</span>
-              </span>
-            </Link>
-          </div>
-          <div className="hidden md:flex items-center space-x-12">
-            {links.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={`text-sm font-bold uppercase tracking-widest transition-all hover:text-accent ${
-                  location.pathname === link.path
-                    ? 'text-accent'
-                    : 'text-ink'
-                }`}
-              >
+        <div className="flex items-center justify-between gap-6">
+          <Link to="/" className="flex items-center gap-3 group">
+            <BrandMark />
+          </Link>
+
+          <div className="hidden md:flex items-center gap-10">
+            {primaryLinks.map((link) => (
+              <Link key={link.path} to={link.path} className={`text-sm font-bold uppercase tracking-widest transition-colors ${location.pathname === link.path ? 'text-accent' : 'text-ink hover:text-accent'}`}>
                 {link.name}
               </Link>
             ))}
-            <Link
-              to="/contact"
-              className="group relative bg-ink text-white px-8 py-3 rounded-full text-sm font-bold overflow-hidden transition-all shadow-lg hover:shadow-accent/20"
-            >
-              <span className="relative z-10">Start a Project</span>
-              <div className="absolute inset-0 bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16, 1, 0.3, 1]" />
+          </div>
+
+          <div className="hidden md:flex items-center gap-3">
+            <button type="button" onClick={openChat} className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-brand-100 bg-white text-ink text-sm font-semibold hover:border-accent hover:text-accent transition-colors">
+              <MessageSquare className="w-4 h-4" />
+              Quick Brief
+            </button>
+            <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-ink text-white text-sm font-semibold hover:bg-accent transition-colors shadow-lg">
+              Start a Project
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-          <div className="flex items-center md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-ink p-2 hover:bg-soft rounded-xl transition-colors z-[90]"
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
-          </div>
+
+          <button type="button" className="md:hidden p-2 rounded-xl text-ink hover:bg-soft transition-colors" aria-label="Toggle menu" onClick={() => setIsOpen((value) => !value)}>
+            {isOpen ? <X size={26} /> : <Menu size={26} />}
+          </button>
         </div>
       </div>
 
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-[110] bg-paper md:hidden flex flex-col overflow-hidden"
-          >
-            {/* Mobile Header */}
-            <div className="flex justify-between items-center p-6 border-b border-brand-100/10 flex-shrink-0">
-              <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-3">
-                <div className="w-8 h-8 md:w-10 md:h-10 bg-ink rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-lg md:text-xl">B</span>
-                </div>
-                <span className="font-bold text-lg md:text-xl tracking-tighter text-ink">
-                  Bakàl <span className="text-brand-300 font-medium">Digital</span>
-                </span>
-              </Link>
-              {/* Close button is handled by the main toggle button which is z-indexed above this overlay */}
-              <div className="w-8 h-8 md:w-10 md:h-10" /> 
-            </div>
-            
-            {/* Mobile Links */}
-            <div className="flex-1 flex flex-col justify-center px-6 md:px-8 space-y-4 md:space-y-6 overflow-y-auto py-8 md:py-12">
-              {links.map((link, idx) => (
-                <motion.div
-                  key={link.name}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + idx * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <Link
-                    to={link.path}
-                    onClick={() => setIsOpen(false)}
-                    className="group flex items-baseline gap-3 md:gap-4"
-                  >
-                    <span className="text-[10px] md:text-xs font-bold text-accent opacity-40 group-hover:opacity-100 transition-opacity tracking-widest">0{idx + 1}</span>
-                    <span className="text-2xl md:text-[clamp(2.5rem,10vw,4rem)] font-bold text-ink tracking-tight hover:text-accent transition-colors leading-none">
-                      {link.name}
-                    </span>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-
-        <div className="pt-12 md:pt-16 border-t border-brand-100/20 bg-soft/30 flex-shrink-0 pb-safe">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              >
-                <Link
-                  to="/contact"
-                  onClick={() => setIsOpen(false)}
-                  className="group relative block w-full bg-ink text-white text-center py-4 md:py-5 rounded-2xl text-base md:text-lg font-bold overflow-hidden transition-all shadow-xl active:scale-[0.98] mb-6 md:mb-8"
-                >
-                  <span className="relative z-10">Start a Project</span>
-                  <div className="absolute inset-0 bg-accent translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-[0.16, 1, 0.3, 1]" />
+          <motion.div initial={{ opacity: 0, y: -24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -24 }} className="md:hidden bg-paper border-t border-brand-100/30">
+            <div className="px-6 py-8 flex flex-col gap-6">
+              {primaryLinks.map((link, index) => (
+                <Link key={link.path} to={link.path} className="flex items-center gap-4 text-2xl font-semibold text-ink hover:text-accent transition-colors">
+                  <span className="text-xs text-accent uppercase tracking-[0.3em]">0{index + 1}</span>
+                  {link.name}
                 </Link>
-                <div className="flex justify-between items-center px-2">
-                  <div className="flex gap-4 md:gap-6">
-                    {['TW', 'LI', 'IG'].map(s => (
-                      <a key={s} href="#" className="text-[10px] font-bold uppercase tracking-[0.4em] text-brand-400 hover:text-accent transition-colors">{s}</a>
-                    ))}
-                  </div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-300">Bakàl © 2024</p>
-                </div>
-              </motion.div>
+              ))}
+
+              <div className="grid gap-3 pt-4 border-t border-brand-100/40">
+                <button type="button" onClick={() => { setIsOpen(false); openChat(); }} className="w-full px-6 py-4 rounded-2xl border border-brand-100 bg-white text-ink font-semibold">
+                  Open Quick Brief
+                </button>
+                <Link to="/contact" className="w-full px-6 py-4 rounded-2xl bg-ink text-white font-semibold text-center">
+                  Start a Project
+                </Link>
+              </div>
             </div>
           </motion.div>
         )}
@@ -176,73 +110,42 @@ const Navbar = () => {
 };
 
 const Footer = () => {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
   return (
-    <footer className="bg-paper border-t border-brand-100/10 pt-32 pb-16 relative overflow-hidden">
-      {/* Decorative background element */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-200/5 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none" />
-      
+    <footer className="bg-paper border-t border-brand-100/20 pt-24 pb-12 relative overflow-hidden">
+      <div className="absolute top-0 right-0 w-[32rem] h-[32rem] bg-accent/5 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none" />
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div className="pt-16 border-t border-brand-100/20">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10 items-start">
-            <div className="space-y-3">
-              <div className="inline-flex items-center gap-2">
-                <div className="w-10 h-10 bg-ink rounded-xl flex items-center justify-center text-white text-lg font-bold">B</div>
-                <span className="text-lg font-bold tracking-tight text-ink">Bakàl Digital</span>
-              </div>
-              <p className="text-sm text-brand-400 max-w-sm leading-relaxed">
-                We build future-ready web and AI experiences for brands that want to lead with strategy, creativity, and measurable impact.
-              </p>
-              <div className="flex gap-3">
-                {['TW', 'LI', 'IG'].map((s) => (
-                  <a key={s} href="#" className="text-sm font-bold text-brand-400 hover:text-accent transition-colors">{s}</a>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-base font-bold text-ink mb-4">Quick links</h3>
-              <ul className="space-y-2">
-                {['Work', 'Services', 'About', 'Contact', 'Portfolio'].map((item) => (
-                  <li key={item}>
-                    <a
-                      href={item === 'Work' ? '/portfolio' : `/${item.toLowerCase()}`}
-                      className="text-sm text-brand-400 hover:text-ink transition-colors"
-                    >
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <h3 className="text-base font-bold text-ink mb-4">Stay in touch</h3>
-              <p className="text-sm text-brand-400 mb-3">Join our mailing list for insights and launch updates.</p>
-              <form className="flex flex-col sm:flex-row gap-2" onSubmit={(e) => e.preventDefault()}>
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="w-full px-4 py-3 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent transition-colors text-ink"
-                />
-                <button className="w-full sm:w-auto px-5 py-3 rounded-xl bg-ink text-white font-semibold hover:bg-accent transition-all">Subscribe</button>
-              </form>
+        <div className="grid lg:grid-cols-[1.4fr_0.8fr_1fr] gap-12">
+          <div>
+            <div className="inline-flex items-center gap-3 mb-5"><BrandMark /></div>
+            <p className="text-brand-400 text-lg leading-relaxed max-w-xl">Bakal Digital is a remote-first studio for founders and growing brands that need sharper positioning, better-performing websites, and cleaner digital systems.</p>
+          </div>
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-accent mb-5">Navigate</p>
+            <div className="grid gap-3">
+              {primaryLinks.map((link) => (<Link key={link.path} to={link.path} className="text-brand-400 hover:text-ink transition-colors">{link.name}</Link>))}
+              <Link to="/privacy" className="text-brand-400 hover:text-ink transition-colors">Privacy Policy</Link>
+              <Link to="/terms" className="text-brand-400 hover:text-ink transition-colors">Terms of Service</Link>
             </div>
           </div>
-
-          <div className="mt-12 pt-6 border-t border-brand-100/20 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-            <p className="text-sm text-brand-400">
-              © {new Date().getFullYear()} Bakàl Digital. All rights reserved.
-            </p>
-            <div className="flex flex-wrap justify-center items-center gap-4 text-sm">
-              <a href="#" className="text-brand-400 hover:text-ink transition-colors">Privacy Policy</a>
-              <a href="#" className="text-brand-400 hover:text-ink transition-colors">Terms of Service</a>
-              <span className="text-brand-300 text-xs uppercase tracking-widest">Designed for high-growth brands</span>
+          <div className="rounded-[2rem] bg-soft border border-brand-100/50 p-8">
+            <p className="text-sm font-bold uppercase tracking-[0.25em] text-accent mb-4">Start Here</p>
+            <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">Need a better digital presence?</h3>
+            <p className="text-brand-400 leading-relaxed mb-6">Use the guided brief for a fast start, or send a project inquiry with your timeline, goals, and current website status.</p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button type="button" onClick={openChat} className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white border border-brand-100 text-ink font-semibold hover:border-accent hover:text-accent transition-colors">
+                <MessageSquare className="w-4 h-4" />
+                Guided Brief
+              </button>
+              <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-ink text-white font-semibold hover:bg-accent transition-colors">
+                Contact Us
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </div>
           </div>
+        </div>
+        <div className="mt-14 pt-6 border-t border-brand-100/20 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-brand-400">
+          <p>© {new Date().getFullYear()} Bakal Digital. All rights reserved.</p>
+          <p className="uppercase tracking-[0.25em] text-[11px]">Remote-first studio · Built for clarity, speed, and trust</p>
         </div>
       </div>
     </footer>
@@ -251,11 +154,9 @@ const Footer = () => {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col font-sans">
+    <div className="min-h-screen flex flex-col font-sans bg-paper">
       <Navbar />
-      <main className="flex-1 pt-20">
-        {children}
-      </main>
+      <main className="flex-1 pt-20">{children}</main>
       <Footer />
       <CookieConsent />
     </div>

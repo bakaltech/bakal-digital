@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+﻿import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'motion/react';
 import { ArrowRight, Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -148,7 +148,7 @@ export default function InteractiveHero() {
 
           <h1 className="text-[clamp(2.5rem,8vw,5rem)] font-bold text-ink leading-[1.05] tracking-tight mb-8">
             Your vision starts <br />
-            <span className="text-brand-300 italic serif">with Bakàl.</span>
+            <span className="text-brand-300 italic serif">with Bakal.</span>
           </h1>
           
           <p className="text-[clamp(1rem,2vw,1.25rem)] text-brand-400 font-normal leading-relaxed mb-8 max-w-xl mx-auto">
@@ -177,3 +177,6 @@ export default function InteractiveHero() {
     </section>
   );
 }
+
+
+

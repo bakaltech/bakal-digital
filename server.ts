@@ -1,11 +1,13 @@
 ﻿import express from "express";
-import path from "path";
 import { createServer as createViteServer } from "vite";
+import path from "path";
 import {
   generateChatResponse,
   getChatPayload,
+  getContactPayload,
   getLeadPayload,
   HttpError,
+  submitContact,
   submitLead,
 } from "./lib/server/assistant";
 
@@ -50,11 +52,38 @@ async function startServer() {
     }
   });
 
-  const vite = await createViteServer({
-    server: { middlewareMode: true },
-    appType: "spa",
+  app.post("/api/contact", async (req, res) => {
+    try {
+      const contact = getContactPayload(req.body);
+      await submitContact({
+        ...contact,
+        webhookUrl: process.env.GOOGLE_SHEETS_WEBHOOK_URL,
+      });
+
+      return res.status(200).json({ ok: true });
+    } catch (error) {
+      if (error instanceof HttpError) {
+        return res.status(error.status).json({ error: error.message });
+      }
+
+      console.error("Contact API error:", error);
+      return res.status(500).json({ error: "Failed to submit your message." });
+    }
   });
-  app.use(vite.middlewares);
+
+  if (process.env.NODE_ENV !== "production") {
+    const vite = await createViteServer({
+      server: { middlewareMode: true },
+      appType: "spa",
+    });
+    app.use(vite.middlewares);
+  } else {
+    const distPath = path.join(process.cwd(), "dist");
+    app.use(express.static(distPath));
+    app.get("*", (_req, res) => {
+      res.sendFile(path.join(distPath, "index.html"));
+    });
+  }
 
   app.listen(port, "0.0.0.0", () => {
     console.log(`Server running on http://localhost:${port}`);

@@ -19,6 +19,15 @@ export type ChatResponse = {
   leadFormArgs: LeadFormArgs | null;
 };
 
+export type ContactPayload = {
+  name: string;
+  email: string;
+  company?: string;
+  message: string;
+  source: string;
+  interests: string[];
+};
+
 export class HttpError extends Error {
   status: number;
 
@@ -67,6 +76,18 @@ const flowSteps: FlowStep[] = [
   },
 ];
 
+function isChatMessage(value: unknown): value is ChatMessage {
+  if (typeof value !== "object" || value === null) {
+    return false;
+  }
+
+  const candidate = value as Record<string, unknown>;
+  return (
+    (candidate.role === "user" || candidate.role === "model") &&
+    typeof candidate.text === "string"
+  );
+}
+
 function getUserMessages(messages: ChatMessage[]) {
   return messages.filter((message) => message.role === "user");
 }
@@ -80,6 +101,10 @@ function buildSummary(values: Record<string, string>) {
     `Budget: ${values.budget}`,
     `Timeline: ${values.timeline}`,
   ].join(" | ");
+}
+
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 export function isLeadFormArgs(value: unknown): value is LeadFormArgs {
@@ -105,17 +130,7 @@ export function getChatPayload(body: unknown) {
     : {};
 
   const messages = Array.isArray(payload.messages)
-    ? payload.messages.filter((message): message is ChatMessage => {
-        if (typeof message !== "object" || message === null) {
-          return false;
-        }
-
-        const candidate = message as Record<string, unknown>;
-        return (
-          (candidate.role === "user" || candidate.role === "model") &&
-          typeof candidate.text === "string"
-        );
-      })
+    ? payload.messages.filter(isChatMessage)
     : [];
   const messageText = typeof payload.message === "string" ? payload.message.trim() : "";
 
@@ -130,7 +145,10 @@ export async function generateChatResponse(params: {
   messages: ChatMessage[];
   messageText: string;
 }): Promise<ChatResponse> {
-  const userMessages = [...getUserMessages(params.messages), { role: "user", text: params.messageText }];
+  const userMessages = [
+    ...getUserMessages(params.messages),
+    { role: "user" as const, text: params.messageText },
+  ];
   const answers = userMessages.map((message) => message.text.trim());
   const currentStepIndex = answers.length - 1;
 
@@ -164,10 +182,6 @@ export async function generateChatResponse(params: {
   };
 }
 
-function isValidEmail(email: string) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-}
-
 export function getLeadPayload(body: unknown) {
   const payload = typeof body === "object" && body !== null
     ? (body as Record<string, unknown>)
@@ -187,24 +201,80 @@ export function getLeadPayload(body: unknown) {
   return { email, details };
 }
 
-export async function submitLead(params: {
-  email: string;
-  details: LeadFormArgs;
-  webhookUrl: string | undefined;
-}) {
-  if (!params.webhookUrl) {
+export function getContactPayload(body: unknown): ContactPayload {
+  const payload = typeof body === "object" && body !== null
+    ? (body as Record<string, unknown>)
+    : {};
+
+  const name = typeof payload.name === "string" ? payload.name.trim() : "";
+  const email = typeof payload.email === "string" ? payload.email.trim() : "";
+  const company = typeof payload.company === "string" ? payload.company.trim() : "";
+  const message = typeof payload.message === "string" ? payload.message.trim() : "";
+  const source = typeof payload.source === "string" ? payload.source.trim() : "website";
+  const interests = Array.isArray(payload.interests)
+    ? payload.interests.filter((item): item is string => typeof item === "string" && item.trim().length > 0)
+    : [];
+
+  if (!name) {
+    throw new HttpError(400, "A name is required.");
+  }
+
+  if (!email || !isValidEmail(email)) {
+    throw new HttpError(400, "A valid email is required.");
+  }
+
+  if (!message) {
+    throw new HttpError(400, "A project message is required.");
+  }
+
+  return {
+    name,
+    email,
+    company: company || undefined,
+    message,
+    source,
+    interests,
+  };
+}
+
+async function postToWebhook(webhookUrl: string | undefined, payload: Record<string, unknown>) {
+  if (!webhookUrl) {
     throw new HttpError(500, "Lead webhook is not configured.");
   }
 
-  const webhookResponse = await fetch(params.webhookUrl, {
+  const webhookResponse = await fetch(webhookUrl, {
     method: "POST",
     headers: {
       "Content-Type": "text/plain;charset=utf-8",
     },
-    body: JSON.stringify({ ...params.details, email: params.email }),
+    body: JSON.stringify(payload),
   });
 
   if (!webhookResponse.ok) {
     throw new HttpError(500, `Lead webhook responded with status ${webhookResponse.status}`);
   }
+}
+
+export async function submitLead(params: {
+  email: string;
+  details: LeadFormArgs;
+  webhookUrl: string | undefined;
+}) {
+  await postToWebhook(params.webhookUrl, {
+    type: "chat-intake",
+    email: params.email,
+    ...params.details,
+  });
+}
+
+export async function submitContact(params: ContactPayload & { webhookUrl: string | undefined }) {
+  await postToWebhook(params.webhookUrl, {
+    type: "contact-request",
+    name: params.name,
+    email: params.email,
+    company: params.company || "",
+    message: params.message,
+    source: params.source,
+    interests: params.interests,
+  });
 }

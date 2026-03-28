@@ -1,4 +1,4 @@
-export interface Project {
+﻿export interface Project {
   id: string;
   title: string;
   category: string;
@@ -16,74 +16,74 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 'nexus-ai',
-    title: 'Nexus AI',
+    title: 'Nexus AI Ops',
     category: 'AI Systems',
-    description: 'An enterprise-grade intelligence platform designed to automate complex decision-making workflows for Fortune 500 companies.',
-    liveUrl: '#',
+    description: 'A concept direction for service teams that need AI-assisted intake, triage, and internal knowledge retrieval without losing brand control.',
+    liveUrl: '',
     thumbnail: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800',
     image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1600',
-    techStack: ['Python', 'PyTorch', 'React', 'AWS SageMaker'],
-    challenge: 'Large enterprises struggled with fragmented data silos and slow manual processing of complex regulatory documents, leading to significant operational bottlenecks.',
-    solution: 'We architected a custom LLM-powered engine that ingest, classifies, and extracts actionable insights from millions of documents with 99.8% accuracy.',
-    results: 'Reduced document processing time by 94% and saved an estimated $12M in annual operational costs for our primary launch partner.',
+    techStack: ['OpenAI', 'Next.js', 'PostgreSQL', 'Automation'],
+    challenge: 'Growing teams often want faster response times and better internal visibility, but their existing intake process lives across forms, inboxes, and fragmented docs.',
+    solution: 'We mapped a branded intake layer, a lightweight operations dashboard, and a retrieval workflow that keeps the human team in control while reducing repetitive work.',
+    results: 'The outcome is a clearer service funnel, faster first-response handling, and a stronger foundation for future automation.',
     features: [
-      { title: 'Neural Extraction', description: 'Sub-second extraction of complex data points from unstructured text.' },
-      { title: 'Strategic Insights', description: 'Automated trend analysis and predictive modeling for executive teams.' },
-      { title: 'Enterprise Security', description: 'SOC2 compliant infrastructure with end-to-end encryption.' }
+      { title: 'Structured Intake', description: 'Collects better-fit project briefs without overwhelming prospects.' },
+      { title: 'Knowledge Routing', description: 'Surfaces the right internal context for faster decision-making.' },
+      { title: 'Operator Review', description: 'Keeps final approval and outreach firmly with the team.' }
     ]
   },
   {
     id: 'lumina-saas',
-    title: 'Lumina',
+    title: 'Lumina Client Portal',
     category: 'SaaS',
-    description: 'A high-performance collaborative workspace for global creative teams, focusing on sub-second latency and seamless real-time interaction.',
-    liveUrl: '#',
+    description: 'A premium portal concept for studios and consultants that want a more polished way to manage projects, approvals, and reporting.',
+    liveUrl: '',
     thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800',
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1600',
-    techStack: ['Next.js', 'WebSockets', 'Redis', 'PostgreSQL'],
-    challenge: 'Existing collaboration tools suffered from high latency and poor synchronization when handling large-scale creative assets across distributed teams.',
-    solution: 'We built a custom CRDT-based synchronization engine and a globally distributed edge network to ensure near-zero latency for users worldwide.',
-    results: 'Achieved a 4.9/5 user satisfaction rating and successfully scaled to 500k+ active users within the first six months of launch.',
+    techStack: ['React', 'Realtime Sync', 'PostgreSQL', 'Stripe'],
+    challenge: 'Many service businesses outgrow email and spreadsheets long before they have the time to invest in a polished client experience.',
+    solution: 'We explored a portal experience built around approvals, milestones, reporting visibility, and premium communication touchpoints.',
+    results: 'This direction helps position the business as more organized, more premium, and easier to work with from day one.',
     features: [
-      { title: 'Real-time Sync', description: 'Conflict-free replicated data types for seamless multi-user editing.' },
-      { title: 'Edge Delivery', description: 'Global CDN integration for lightning-fast asset loading.' },
-      { title: 'Advanced Analytics', description: 'Deep-dive metrics on team productivity and project velocity.' }
+      { title: 'Shared Timelines', description: 'Keeps both sides aligned on scope, milestones, and next actions.' },
+      { title: 'Approval Flows', description: 'Reduces project drift with clean decision checkpoints.' },
+      { title: 'Reporting Layer', description: 'Packages progress and outcomes into a client-friendly interface.' }
     ]
   },
   {
     id: 'velocity-ecommerce',
-    title: 'Velocity',
+    title: 'Velocity Commerce',
     category: 'E-commerce',
-    description: 'A headless e-commerce engine built for extreme speed and conversion, powering the next generation of luxury retail brands.',
-    liveUrl: '#',
+    description: 'A high-performance storefront concept for premium brands that need faster pages, clearer storytelling, and fewer conversion leaks.',
+    liveUrl: '',
     thumbnail: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=800',
     image: 'https://images.unsplash.com/photo-1557821552-17105176677c?auto=format&fit=crop&q=80&w=1600',
-    techStack: ['Shopify Hydrogen', 'React', 'GraphQL', 'Vercel'],
-    challenge: 'Traditional e-commerce platforms were too slow for high-end luxury brands, leading to high bounce rates and lost revenue during peak traffic events.',
-    solution: 'We implemented a headless architecture using Shopify Hydrogen and Vercel, focusing on extreme performance and a bespoke, cinematic user experience.',
-    results: 'Increased average order value by 35% and improved mobile conversion rates by 210% compared to the previous platform.',
+    techStack: ['Shopify', 'Headless Frontend', 'Analytics', 'Performance'],
+    challenge: 'Luxury and niche commerce brands often have strong products but lose trust through slow pages, generic templates, and a weak mobile experience.',
+    solution: 'We outlined a headless commerce direction focused on editorial presentation, mobile speed, and a more confident path to purchase.',
+    results: 'The result is a sharper brand impression, better merchandising control, and a storefront that is designed to convert without feeling generic.',
     features: [
-      { title: 'Headless Engine', description: 'Decoupled frontend for total creative freedom and maximum speed.' },
-      { title: 'Cinematic UX', description: 'High-fidelity animations and transitions that mirror luxury brand values.' },
-      { title: 'Smart Checkout', description: 'One-tap checkout optimized for mobile and high-value transactions.' }
+      { title: 'Editorial Product Pages', description: 'Combines storytelling and selling without clutter.' },
+      { title: 'Mobile-first Checkout', description: 'Removes friction where most drop-off happens.' },
+      { title: 'Performance Budgeting', description: 'Keeps the experience fast as content and campaigns grow.' }
     ]
   },
   {
     id: 'orbit-automation',
-    title: 'Orbit',
+    title: 'Orbit Ops',
     category: 'Automation',
-    description: 'A strategic automation suite for logistics providers, integrating IoT data with predictive maintenance algorithms.',
-    liveUrl: '#',
+    description: 'An operations dashboard concept for teams that want visibility across workflows, automations, and delivery health in one place.',
+    liveUrl: '',
     thumbnail: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800',
     image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=1600',
-    techStack: ['Node.js', 'MQTT', 'InfluxDB', 'Grafana'],
-    challenge: 'Logistics companies faced massive downtime due to unpredictable equipment failure and lack of real-time visibility into their global supply chain.',
-    solution: 'We developed an IoT-driven monitoring system that uses machine learning to predict equipment failure before it occurs, allowing for proactive maintenance.',
-    results: 'Reduced equipment downtime by 42% and extended the lifespan of critical assets by an average of 3 years.',
+    techStack: ['Node.js', 'Webhook Integrations', 'Dashboards', 'Automation'],
+    challenge: 'Operational teams often automate in pieces, but lack a clean command view for failures, exceptions, and overall delivery health.',
+    solution: 'We designed a single-pane operations layer that makes automation health visible, easier to debug, and easier to improve over time.',
+    results: 'That creates a stronger operational rhythm, fewer surprises, and a better foundation for scaling service delivery.',
     features: [
-      { title: 'IoT Integration', description: 'Real-time data ingestion from thousands of sensors worldwide.' },
-      { title: 'Predictive Ops', description: 'ML models that anticipate failures and optimize maintenance schedules.' },
-      { title: 'Global Dashboard', description: 'Unified command center for real-time supply chain visibility.' }
+      { title: 'Workflow Visibility', description: 'Shows what is running, blocked, or failing in real time.' },
+      { title: 'Exception Handling', description: 'Turns edge cases into manageable queues instead of hidden problems.' },
+      { title: 'Performance Signals', description: 'Tracks throughput, delays, and operational bottlenecks.' }
     ]
   }
 ];

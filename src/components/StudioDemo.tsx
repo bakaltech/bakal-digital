@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Zap, Layout, Shield, Cpu, ArrowRight, CheckCircle2 } from 'lucide-react';
 
@@ -107,7 +107,7 @@ export default function StudioDemo() {
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.3em] text-accent mb-8">Interactive Demo</p>
             <h2 className="text-4xl md:text-7xl font-semibold text-ink leading-[1.05] tracking-tight mb-10">
-              Experience the <br /> <span className="serif italic text-brand-300">Bakàl Standard.</span>
+              Experience the <br /> <span className="serif italic text-brand-300">Bakal Standard.</span>
             </h2>
             <p className="text-xl text-brand-400 leading-relaxed font-normal mb-12 max-w-xl">
               Toggle between a standard digital build and our elite architectural standard to see how we redefine both design and functionality.
@@ -128,7 +128,7 @@ export default function StudioDemo() {
                   mode === 'elite' ? 'bg-ink text-white shadow-lg' : 'text-brand-400 hover:text-ink'
                 }`}
               >
-                Bakàl Elite
+                Bakal Elite
               </button>
             </div>
 
@@ -204,3 +204,6 @@ export default function StudioDemo() {
     </section>
   );
 }
+
+
+
