@@ -1,7 +1,5 @@
-ï»¿import React, { useRef, useState, useEffect } from 'react';
-import { motion, useScroll, useTransform, useSpring, useMotionValue } from 'motion/react';
-import { ArrowRight, Mail } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React, { useRef, useEffect } from 'react';
+import { motion, useSpring, useTransform, useMotionValue } from 'motion/react';
 import LeadsGrid from './LeadsGrid';
 
 const galleryImages = [
@@ -23,14 +21,12 @@ const galleryImages = [
   'https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&q=80&w=800',
 ];
 
-interface GalleryItemProps {
-  key?: React.Key;
+type GalleryItemProps = {
   src: string;
   index: number;
-  layer: number;
-}
+};
 
-const GalleryItem = ({ src, index, layer }: GalleryItemProps) => {
+const GalleryItem: React.FC<GalleryItemProps> = ({ src, index }) => {
   return (
     <motion.div
       whileHover={{ y: -5, zIndex: 10 }}
@@ -38,7 +34,7 @@ const GalleryItem = ({ src, index, layer }: GalleryItemProps) => {
     >
       <img
         src={src}
-        alt={`Project ${index}`}
+        alt={`Project ${index + 1}`}
         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         referrerPolicy="no-referrer"
       />
@@ -62,111 +58,89 @@ export default function InteractiveHero() {
     const handleMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
-      mouseX.set((clientX / innerWidth) - 0.5);
-      mouseY.set((clientY / innerHeight) - 0.5);
+      mouseX.set(clientX / innerWidth - 0.5);
+      mouseY.set(clientY / innerHeight - 0.5);
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [mouseX, mouseY]);
 
-  // Layer transforms
   const layer1X = useTransform(smoothX, [-0.5, 0.5], [50, -50]);
   const layer2X = useTransform(smoothX, [-0.5, 0.5], [-50, 50]);
   const layer3Y = useTransform(smoothY, [-0.5, 0.5], [50, -50]);
   const layer4Y = useTransform(smoothY, [-0.5, 0.5], [-50, 50]);
 
   return (
-    <section ref={containerRef} className="relative h-screen min-h-[800px] w-full overflow-hidden bg-paper flex items-center justify-center">
-      {/* Background Multi-layer Gallery */}
+    <section ref={containerRef} className="relative h-screen min-h-[860px] w-full overflow-hidden bg-paper flex items-center justify-center">
       <div className="absolute inset-0 z-0 opacity-40 pointer-events-none scale-110 rotate-[-10deg]">
-        {/* Layer 1: Horizontal Left */}
-        <motion.div 
-          style={{ x: layer1X }}
-          className="absolute top-[-10%] left-[-20%] flex gap-8 whitespace-nowrap"
-        >
+        <motion.div style={{ x: layer1X }} className="absolute top-[-10%] left-[-20%] flex gap-8 whitespace-nowrap">
           {[...galleryImages, ...galleryImages].map((src, i) => (
-            <GalleryItem key={`l1-${i}`} src={src} index={i} layer={1} />
+            <GalleryItem key={`l1-${i}`} src={src} index={i} />
           ))}
         </motion.div>
 
-        {/* Layer 2: Horizontal Right */}
-        <motion.div 
-          style={{ x: layer2X }}
-          className="absolute top-[25%] right-[-20%] flex gap-8 whitespace-nowrap"
-        >
+        <motion.div style={{ x: layer2X }} className="absolute top-[25%] right-[-20%] flex gap-8 whitespace-nowrap">
           {[...galleryImages, ...galleryImages].reverse().map((src, i) => (
-            <GalleryItem key={`l2-${i}`} src={src} index={i} layer={2} />
+            <GalleryItem key={`l2-${i}`} src={src} index={i} />
           ))}
         </motion.div>
 
-        {/* Layer 3: Vertical Up */}
-        <motion.div 
-          style={{ y: layer3Y }}
-          className="absolute left-[10%] top-[-50%] flex flex-col gap-8"
-        >
+        <motion.div style={{ y: layer3Y }} className="absolute left-[10%] top-[-50%] flex flex-col gap-8">
           {[...galleryImages, ...galleryImages].map((src, i) => (
-            <GalleryItem key={`l3-${i}`} src={src} index={i} layer={3} />
+            <GalleryItem key={`l3-${i}`} src={src} index={i} />
           ))}
         </motion.div>
 
-        {/* Layer 4: Vertical Down */}
-        <motion.div 
-          style={{ y: layer4Y }}
-          className="absolute right-[10%] top-[-50%] flex flex-col gap-8"
-        >
+        <motion.div style={{ y: layer4Y }} className="absolute right-[10%] top-[-50%] flex flex-col gap-8">
           {[...galleryImages, ...galleryImages].reverse().map((src, i) => (
-            <GalleryItem key={`l4-${i}`} src={src} index={i} layer={4} />
+            <GalleryItem key={`l4-${i}`} src={src} index={i} />
           ))}
         </motion.div>
 
-        {/* Layer 5: Diagonal / Extra Density */}
-        <motion.div 
-          style={{ x: layer1X, y: layer4Y }}
-          className="absolute top-[60%] left-[-10%] flex gap-8 whitespace-nowrap opacity-40 blur-[2px]"
-        >
+        <motion.div style={{ x: layer1X, y: layer4Y }} className="absolute top-[60%] left-[-10%] flex gap-8 whitespace-nowrap opacity-40 blur-[2px]">
           {[...galleryImages, ...galleryImages].map((src, i) => (
-            <GalleryItem key={`l5-${i}`} src={src} index={i} layer={5} />
+            <GalleryItem key={`l5-${i}`} src={src} index={i} />
           ))}
         </motion.div>
       </div>
 
-      {/* Readability Overlay */}
       <div className="absolute inset-0 z-[5] bg-gradient-to-b from-paper/20 via-paper/60 to-paper/20 backdrop-blur-[2px]" />
 
-      {/* Content Overlay Card */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 w-full flex flex-col items-center py-20">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="glass p-8 md:p-12 rounded-[3rem] shadow-2xl max-w-3xl w-full text-center relative overflow-hidden"
+          className="glass p-8 md:p-12 rounded-[3rem] shadow-2xl max-w-4xl w-full text-center relative overflow-hidden"
         >
-          {/* Subtle Glow */}
           <div className="absolute -top-24 -left-24 w-64 h-64 bg-accent/10 blur-[100px] rounded-full" />
           <div className="absolute -bottom-24 -right-24 w-64 h-64 bg-brand-200/10 blur-[100px] rounded-full" />
 
-          <h1 className="text-[clamp(2.5rem,8vw,5rem)] font-bold text-ink leading-[1.05] tracking-tight mb-8">
-            Your vision starts <br />
-            <span className="text-brand-300 italic serif">with Bakal.</span>
-          </h1>
-          
-          <p className="text-[clamp(1rem,2vw,1.25rem)] text-brand-400 font-normal leading-relaxed mb-8 max-w-xl mx-auto">
-            We architect high-performance digital systems and elite brand experiences that drive growth and innovation.
+          <p className="text-[10px] sm:text-xs text-brand-400 font-bold tracking-[0.35em] uppercase opacity-80 mb-6">
+            AI Products • Custom Platforms • Automation • Data Systems
           </p>
 
-          <div className="w-full max-w-lg mx-auto">
+          <h1 className="text-[clamp(2.6rem,8vw,5.4rem)] font-bold text-ink leading-[1.02] tracking-tight mb-8">
+            We build the digital systems <br />
+            <span className="text-brand-300 italic serif">modern businesses grow on.</span>
+          </h1>
+
+          <p className="text-[clamp(1rem,2vw,1.25rem)] text-brand-400 font-normal leading-relaxed mb-8 max-w-2xl mx-auto">
+            Bakal Digital designs AI-powered products, custom web platforms, automation workflows, and premium online experiences that help ambitious companies operate better and look sharper.
+          </p>
+
+          <div className="w-full max-w-2xl mx-auto">
             <LeadsGrid />
           </div>
 
           <p className="mt-8 text-[10px] sm:text-xs text-brand-400 font-bold tracking-[0.3em] uppercase opacity-60">
-            Partner with us to build your next elite digital product.
+            Strategy, product thinking, design, development, and launch support in one focused studio.
           </p>
         </motion.div>
       </div>
 
-      {/* Scroll Indicator */}
-      <motion.div 
+      <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
         className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
@@ -177,6 +151,3 @@ export default function InteractiveHero() {
     </section>
   );
 }
-
-
-

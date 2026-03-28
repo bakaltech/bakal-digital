@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, Compass, Layers3, ShieldCheck, Workflow } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -8,22 +8,22 @@ export default function About() {
     {
       icon: Compass,
       title: 'Clarity before complexity',
-      description: 'We simplify the offer, the navigation, and the user journey before adding more surface area or features.',
+      description: 'We define the real business problem first so the product, platform, or automation solves something meaningful instead of adding noise.',
     },
     {
       icon: Layers3,
-      title: 'Strategy inside the design',
-      description: 'Visual polish matters, but the structure underneath it is what actually improves trust and conversion.',
+      title: 'Product thinking inside the design',
+      description: 'The interface matters, but so do the flows, integrations, prompts, handoffs, and decisions underneath it.',
     },
     {
       icon: Workflow,
       title: 'Systems that scale with you',
-      description: 'We think beyond the launch and design for future updates, integrations, and cleaner internal workflows.',
+      description: 'We think beyond launch and build for future expansion, cleaner operations, and stronger internal workflows.',
     },
     {
       icon: ShieldCheck,
       title: 'Honest, durable execution',
-      description: 'No fake momentum, no inflated claims, and no fragile shortcuts that make the site harder to maintain later.',
+      description: 'No inflated claims, no fragile shortcuts, and no bloated process that slows down good work.',
     },
   ];
 
@@ -33,8 +33,12 @@ export default function About() {
         <div className="max-w-4xl">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">About</p>
-            <h1 className="text-5xl md:text-7xl font-semibold text-ink leading-[1.04] tracking-tight mb-8">A small studio built to make digital brands feel sharper, calmer, and more credible.</h1>
-            <p className="text-xl md:text-2xl text-brand-400 leading-relaxed max-w-3xl">Bakal Digital is designed around one core idea: many businesses do not need a massive agency, they need a focused partner who can improve the structure, message, and feel of the website in a way customers instantly trust.</p>
+            <h1 className="text-5xl md:text-7xl font-semibold text-ink leading-[1.04] tracking-tight mb-8">
+              A digital product studio focused on AI, platforms, automation, and premium execution.
+            </h1>
+            <p className="text-xl md:text-2xl text-brand-400 leading-relaxed max-w-3xl">
+              Bakal Digital helps businesses turn ideas, service offers, and operational friction into better digital systems. Sometimes that is a polished public website. Sometimes it is an AI assistant, a custom workflow, a commerce engine, or a client-facing platform.
+            </p>
           </motion.div>
         </div>
       </section>
@@ -49,16 +53,22 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-start">
           <div>
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">How We Work</p>
-            <h2 className="text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight mb-8">Less agency theatre. More focused execution.</h2>
-            <p className="text-lg md:text-xl text-brand-400 leading-relaxed mb-6">The process is intentionally lean. We identify what is creating friction, prioritize the changes that improve confidence and conversion, and make sure the site can keep evolving after launch.</p>
-            <p className="text-lg md:text-xl text-brand-400 leading-relaxed">That can mean repositioning the homepage, tightening service messaging, building a cleaner intake flow, or improving the visual system so the business looks more established than it did before.</p>
+            <h2 className="text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight mb-8">
+              Lean enough to move quickly. Deep enough to build something real.
+            </h2>
+            <p className="text-lg md:text-xl text-brand-400 leading-relaxed mb-6">
+              We are not trying to create agency theatre. The goal is to understand the problem, shape the right system, and deliver an experience that feels sharp, usable, and commercially useful.
+            </p>
+            <p className="text-lg md:text-xl text-brand-400 leading-relaxed">
+              That may involve repositioning the brand, simplifying the user journey, wiring up automations, designing an AI-assisted flow, or building a platform that supports the next stage of growth.
+            </p>
           </div>
           <div className="grid gap-6">
             {[
-              'Audit what feels unfinished, unclear, or untrustworthy.',
-              'Refocus the structure around clearer user decisions.',
-              'Polish the interface so it feels intentional, not templated.',
-              'Build the supporting systems that make the site useful, not just attractive.',
+              'Audit the message, workflow, and friction points across the current experience.',
+              'Identify where AI, automation, or product design can create real leverage.',
+              'Design the structure so users can understand, act, and move forward with confidence.',
+              'Build the system so it stays useful after launch instead of becoming another fragile layer.',
             ].map((point) => (
               <div key={point} className="rounded-[2rem] bg-paper border border-brand-100/50 p-7">
                 <p className="text-lg text-ink leading-relaxed">{point}</p>
@@ -72,7 +82,7 @@ export default function About() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="mb-14 max-w-3xl">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Principles</p>
-            <h2 className="text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">What makes the work feel premium.</h2>
+            <h2 className="text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">How we keep the work sharp.</h2>
           </div>
           <div className="grid md:grid-cols-2 gap-8 lg:gap-10">
             {principles.map((principle) => (
@@ -89,7 +99,9 @@ export default function About() {
       <section className="py-24 bg-ink text-center px-6">
         <div className="max-w-4xl mx-auto">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-400 mb-6">Next Step</p>
-          <h2 className="text-4xl md:text-7xl font-semibold text-white tracking-tight leading-[1.06] mb-8">If the website feels close but not fully there, that is exactly where we can help.</h2>
+          <h2 className="text-4xl md:text-7xl font-semibold text-white tracking-tight leading-[1.06] mb-8">
+            If the business needs a stronger digital system, this is exactly the kind of work we are built for.
+          </h2>
           <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-ink font-semibold hover:bg-accent hover:text-white transition-colors">
             Start a Project
             <ArrowRight className="w-5 h-5" />

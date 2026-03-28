@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, CheckCircle2, Clock3, MessageSquare, Send, Sparkles } from 'lucide-react';
 
@@ -56,17 +56,21 @@ export default function Contact() {
         <div className="max-w-4xl mb-20">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Contact</p>
-            <h1 className="text-5xl md:text-7xl font-semibold text-ink leading-[1.04] tracking-tight mb-8">Let’s turn the prototype into a website people trust.</h1>
-            <p className="text-xl md:text-2xl text-brand-400 leading-relaxed max-w-3xl">Share what you are building, what feels unfinished, and where you want the site to land. We will use that to shape the right next step.</p>
+            <h1 className="text-5xl md:text-7xl font-semibold text-ink leading-[1.04] tracking-tight mb-8">
+              Tell us what you want to build, automate, or improve next.
+            </h1>
+            <p className="text-xl md:text-2xl text-brand-400 leading-relaxed max-w-3xl">
+              Share the business context, the friction point, and the outcome you are aiming for. We can help shape the right next move across AI products, websites, platforms, automation, commerce, or internal systems.
+            </p>
           </motion.div>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           <motion.div className="lg:col-span-5 space-y-8" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.1 }}>
             {[
-              { icon: Clock3, title: 'Fast project triage', text: 'Best for founders and small teams who want a clear next step without a long agency discovery cycle.' },
-              { icon: Sparkles, title: 'Premium-first direction', text: 'We focus on credibility, performance, and conversion so the site feels stronger before you add more complexity.' },
-              { icon: MessageSquare, title: 'Two ways to start', text: 'Use the form for a direct message, or use the guided brief if you want help structuring the project scope first.' },
+              { icon: Clock3, title: 'Fast project triage', text: 'Best for founders and growing teams who want a clear recommendation without a heavy agency process.' },
+              { icon: Sparkles, title: 'Strategic and premium', text: 'We care about the experience, but also the system behind it: workflows, structure, messaging, and execution.' },
+              { icon: MessageSquare, title: 'Two ways to start', text: 'Use the form for a direct message, or open the guided brief if you want help structuring the scope first.' },
             ].map((item) => (
               <div key={item.title} className="rounded-[2rem] bg-soft border border-brand-100/50 p-8">
                 <div className="w-12 h-12 rounded-2xl bg-white border border-brand-100/50 flex items-center justify-center text-accent mb-5"><item.icon className="w-5 h-5" /></div>
@@ -113,7 +117,7 @@ export default function Contact() {
 
                   <div>
                     <label htmlFor="message" className="block text-sm font-semibold text-ink mb-2">Project details</label>
-                    <textarea id="message" name="message" rows={6} value={formData.message} onChange={handleChange} required placeholder="Tell us what the business does, what feels unfinished in the current site, and what outcome you want next." className="w-full px-5 py-4 rounded-2xl bg-white border border-brand-100/50 text-ink placeholder:text-brand-400 focus:outline-none focus:border-accent resize-none" />
+                    <textarea id="message" name="message" rows={6} value={formData.message} onChange={handleChange} required placeholder="Tell us what the business does, what you want to launch or improve, and what outcome matters most." className="w-full px-5 py-4 rounded-2xl bg-white border border-brand-100/50 text-ink placeholder:text-brand-400 focus:outline-none focus:border-accent resize-none" />
                   </div>
 
                   {error && <p className="text-sm text-red-600">{error}</p>}
