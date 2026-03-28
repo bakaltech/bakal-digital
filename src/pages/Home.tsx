@@ -7,6 +7,7 @@ import { projects } from '../data/projects';
 import InteractiveHero from '../components/InteractiveHero';
 import StudioDemo from '../components/StudioDemo';
 import BrandedVisual from '../components/BrandedVisual';
+import ServicesPreview from '../components/ServicesPreview';
 
 interface CategoryCardProps {
   category: {
@@ -94,6 +95,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ServicesPreview />
 
       <TechMarquee />
 
