@@ -21,22 +21,22 @@ interface CategoryCardProps {
 
 const categoryVisualStyles: Record<CategoryCardProps['category']['visual'], { glow: string; orb: string; line: string }> = {
   ai: {
-    glow: 'from-sky-500/18 via-blue-500/10 to-transparent',
+    glow: 'from-sky-500/12 via-blue-500/6 to-transparent',
     orb: 'from-sky-400 to-blue-600',
     line: 'bg-sky-400/70',
   },
   platform: {
-    glow: 'from-cyan-500/18 via-blue-500/10 to-transparent',
+    glow: 'from-cyan-500/12 via-blue-500/6 to-transparent',
     orb: 'from-cyan-400 to-sky-500',
     line: 'bg-cyan-400/70',
   },
   commerce: {
-    glow: 'from-amber-400/18 via-orange-500/10 to-transparent',
+    glow: 'from-amber-400/12 via-orange-500/6 to-transparent',
     orb: 'from-amber-300 to-orange-500',
     line: 'bg-amber-400/75',
   },
   data: {
-    glow: 'from-emerald-400/18 via-teal-500/10 to-transparent',
+    glow: 'from-emerald-400/12 via-teal-500/6 to-transparent',
     orb: 'from-emerald-300 to-teal-500',
     line: 'bg-emerald-400/75',
   },
@@ -48,24 +48,12 @@ const CategoryVisual: React.FC<{ visual: CategoryCardProps['category']['visual']
   return (
     <div className="absolute inset-0 overflow-hidden">
       <div className={`absolute inset-0 bg-gradient-to-br ${style.glow}`} />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:34px_34px] opacity-22" />
-      <div className="absolute inset-x-0 top-0 h-[58%] bg-gradient-to-b from-white/14 via-white/7 to-transparent" />
-      <div className="absolute -top-16 left-10 w-40 h-40 rounded-full bg-white/12 blur-3xl" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:34px_34px] opacity-18" />
+      <div className="absolute inset-x-0 top-0 h-[52%] bg-gradient-to-b from-white/10 via-white/4 to-transparent" />
       <div className={`absolute top-6 right-6 w-16 h-16 rounded-[1.4rem] bg-gradient-to-br ${style.orb} flex items-center justify-center shadow-[0_18px_34px_rgba(0,0,0,0.18)]`}>
         <Icon className="w-7 h-7 text-white" />
       </div>
-      <div className="absolute left-6 right-6 top-[40%] h-px bg-white/12" />
-      <div className="absolute left-6 right-6 bottom-20 flex items-end gap-3 opacity-45">
-        <div className="h-12 flex-1 rounded-t-[1.2rem] bg-white/10" />
-        <div className="h-20 flex-1 rounded-t-[1.2rem] bg-white/12" />
-        <div className="h-28 flex-1 rounded-t-[1.2rem] bg-white/16" />
-        <div className="h-16 flex-1 rounded-t-[1.2rem] bg-white/10" />
-      </div>
-      <div className="absolute left-6 right-6 bottom-8">
-        <div className="h-2 rounded-full bg-white/10 overflow-hidden">
-          <div className={`h-full rounded-full ${style.line} w-[72%]`} />
-        </div>
-      </div>
+      <div className="absolute inset-x-6 bottom-6 h-px bg-white/10" />
     </div>
   );
 };
@@ -93,14 +81,9 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
         </p>
       </div>
       <div className="mt-auto pt-6">
-        <Link to="/services" className="inline-flex flex-col items-start gap-2 text-white hover:text-white transition-colors">
-          <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest">
-            View Details
-            <ArrowRight className="ml-2 w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
-          </span>
-          <span className="h-[3px] w-24 rounded-full bg-white/16 overflow-hidden">
-            <span className={`block h-full rounded-full ${categoryVisualStyles[category.visual].line} w-10 transition-all duration-500 group-hover:w-full`} />
-          </span>
+        <Link to="/services" className="inline-flex items-center text-white text-[10px] font-bold uppercase tracking-widest hover:text-white transition-colors">
+          View Details
+          <ArrowRight className="ml-2 w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
         </Link>
       </div>
     </div>
