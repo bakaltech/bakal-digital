@@ -19,6 +19,76 @@ interface CategoryCardProps {
   idx: number;
 }
 
+const categoryVisualStyles: Record<CategoryCardProps['category']['visual'], { glow: string; orb: string; line: string }> = {
+  ai: {
+    glow: 'from-sky-500/18 via-blue-500/10 to-transparent',
+    orb: 'from-sky-400 to-blue-600',
+    line: 'bg-sky-400/70',
+  },
+  platform: {
+    glow: 'from-cyan-500/18 via-blue-500/10 to-transparent',
+    orb: 'from-cyan-400 to-sky-500',
+    line: 'bg-cyan-400/70',
+  },
+  commerce: {
+    glow: 'from-amber-400/18 via-orange-500/10 to-transparent',
+    orb: 'from-amber-300 to-orange-500',
+    line: 'bg-amber-400/75',
+  },
+  data: {
+    glow: 'from-emerald-400/18 via-teal-500/10 to-transparent',
+    orb: 'from-emerald-300 to-teal-500',
+    line: 'bg-emerald-400/75',
+  },
+};
+
+const CategoryVisual: React.FC<{ visual: CategoryCardProps['category']['visual']; icon: React.ElementType }> = ({ visual, icon: Icon }) => {
+  const style = categoryVisualStyles[visual];
+
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      <div className={`absolute inset-0 bg-gradient-to-br ${style.glow}`} />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:34px_34px] opacity-35" />
+      <div className={`absolute top-6 right-6 w-16 h-16 rounded-[1.4rem] bg-gradient-to-br ${style.orb} flex items-center justify-center shadow-[0_18px_34px_rgba(0,0,0,0.18)]`}>
+        <Icon className="w-7 h-7 text-white" />
+      </div>
+      <div className="absolute top-14 left-6 w-14 h-14 rounded-[1.2rem] border border-white/16 bg-white/6 backdrop-blur-sm flex items-center justify-center">
+        <Icon className="w-6 h-6 text-white/90" />
+      </div>
+      <div className="absolute left-6 right-6 top-[32%] rounded-[1.6rem] border border-white/12 bg-white/[0.06] backdrop-blur-md p-5 shadow-[0_20px_40px_rgba(0,0,0,0.18)]">
+        <div className="flex gap-3 mb-5">
+          <div className="w-3 h-3 rounded-full bg-white/55" />
+          <div className="w-3 h-3 rounded-full bg-white/30" />
+          <div className="w-3 h-3 rounded-full bg-white/18" />
+        </div>
+        <div className="space-y-3">
+          <div className="h-3 rounded-full bg-white/75 w-[62%]" />
+          <div className="h-3 rounded-full bg-white/24 w-full" />
+          <div className="h-3 rounded-full bg-white/18 w-[78%]" />
+        </div>
+      </div>
+      <div className="absolute left-6 right-6 bottom-16 grid grid-cols-3 gap-3">
+        {[0, 1, 2].map((item) => (
+          <div key={item} className="rounded-[1.35rem] border border-white/10 bg-black/10 p-4">
+            <div className="text-[10px] font-bold uppercase tracking-[0.24em] text-white/45 mb-3">0{item + 1}</div>
+            <div className="h-3 rounded-full bg-white/16 mb-2 w-[80%]" />
+            <div className="h-3 rounded-full bg-white/10 w-[60%]" />
+          </div>
+        ))}
+      </div>
+      <div className="absolute left-6 right-6 bottom-6 rounded-[1.4rem] border border-white/10 bg-white/[0.04] p-4">
+        <div className="flex items-center justify-between mb-3">
+          <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-white/45">Momentum</div>
+          <div className="text-sm font-medium text-white/72">Live system</div>
+        </div>
+        <div className="h-3 rounded-full bg-white/10 overflow-hidden">
+          <div className={`h-full rounded-full ${style.line} w-[72%]`} />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -27,7 +97,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
     transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
     className="group relative min-h-[320px] sm:min-h-[360px] md:min-h-[400px] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-soft border border-brand-100/50 shadow-sm hover:shadow-xl transition-all duration-500"
   >
-    <BrandedVisual variant={category.visual} title="" compact />
+    <CategoryVisual visual={category.visual} icon={category.icon} />
     <div className="absolute inset-0 bg-gradient-to-t from-ink/94 via-ink/55 to-ink/18 opacity-90 group-hover:opacity-95 transition-opacity duration-500" />
     <div className="absolute inset-0 p-5 sm:p-8 flex flex-col">
       <div>
@@ -37,7 +107,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
         <h3 className="text-[1.9rem] sm:text-2xl md:text-[2rem] font-semibold text-white mb-3 tracking-tight leading-[0.96] max-w-[9ch]">
           {category.title}
         </h3>
-        <p className="text-white/72 text-sm leading-relaxed max-w-[24ch] opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-500">
+        <p className="text-white/72 text-sm leading-relaxed max-w-[24ch]">
           {category.description}
         </p>
       </div>
