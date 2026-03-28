@@ -4,6 +4,7 @@ import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight, CheckCircle2, MessageSquare } from 'lucide-react';
 import { services } from '../data/services';
 import BrandedVisual from '../components/BrandedVisual';
+import ServiceShowcase from '../components/ServiceShowcase';
 
 const openChat = (serviceTitle: string) => {
   window.dispatchEvent(
@@ -103,6 +104,8 @@ export default function ServiceDetail() {
           </div>
         </section>
 
+        <ServiceShowcase service={service} />
+
         <section className="py-12 sm:py-16 border-t border-brand-100/30">
           <div className="max-w-3xl mb-10 sm:mb-12">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Engagement shape</p>
@@ -121,8 +124,8 @@ export default function ServiceDetail() {
 
         <section className="py-12 sm:py-16 border-t border-brand-100/30">
           <div className="max-w-3xl mb-10 sm:mb-12">
-            <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">What is included</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">A focused scope built around outcomes, not filler.</h2>
+            <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Capabilities In Scope</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">The kinds of components we can shape inside this engagement.</h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {service.features.map((feature, index) => (
@@ -130,6 +133,21 @@ export default function ServiceDetail() {
                 <div className={`w-11 h-11 rounded-2xl bg-white/80 border border-white/70 flex items-center justify-center font-semibold mb-5 ${service.theme.accent}`}>0{index + 1}</div>
                 <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">{feature}</h3>
                 <p className="text-brand-400 leading-relaxed">This capability is adapted to the business context, current constraints, and the next stage of growth.</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="py-12 sm:py-16 border-t border-brand-100/30">
+          <div className="max-w-3xl mb-10 sm:mb-12">
+            <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Value Layer</p>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">What this should improve for the business, not just the interface.</h2>
+          </div>
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-6">
+            {service.benefits.map((benefit, index) => (
+              <div key={benefit} className="rounded-[1.75rem] border border-brand-100/50 bg-white p-6 sm:p-7 shadow-sm">
+                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-4">0{index + 1}</p>
+                <p className="text-base text-brand-400 leading-relaxed">{benefit}</p>
               </div>
             ))}
           </div>
