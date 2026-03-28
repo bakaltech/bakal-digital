@@ -8,7 +8,7 @@ const DemoCard = ({ mode }: { mode: 'standard' | 'elite' }) => {
   return (
     <motion.div
       layout
-      className={`relative w-full aspect-[16/10] rounded-[2.5rem] overflow-hidden transition-all duration-700 ${
+      className={`relative w-full aspect-[4/3] md:aspect-[16/10] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden transition-all duration-700 ${
         isElite
           ? 'bg-ink shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] border border-white/10'
           : 'bg-white shadow-xl border border-brand-100'
@@ -28,22 +28,22 @@ const DemoCard = ({ mode }: { mode: 'standard' | 'elite' }) => {
         )}
       </AnimatePresence>
 
-      <div className="relative z-10 p-8 md:p-12 h-full flex flex-col justify-between">
-        <div className="flex justify-between items-start">
+      <div className="relative z-10 p-5 sm:p-8 md:p-12 h-full flex flex-col justify-between">
+        <div className="flex justify-between items-start gap-4">
           <motion.div layout>
-            <p className={`text-[10px] font-bold uppercase tracking-[0.3em] mb-4 ${isElite ? 'text-accent' : 'text-brand-400'}`}>
+            <p className={`text-[10px] font-bold uppercase tracking-[0.26em] sm:tracking-[0.3em] mb-3 sm:mb-4 ${isElite ? 'text-accent' : 'text-brand-400'}`}>
               System Status
             </p>
-            <h3 className={`text-3xl md:text-4xl font-semibold tracking-tight ${isElite ? 'text-white' : 'text-ink'}`}>
+            <h3 className={`text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight ${isElite ? 'text-white' : 'text-ink'}`}>
               {isElite ? 'Bakal Standard' : 'Generic Delivery'}
             </h3>
           </motion.div>
-          <motion.div layout className={`w-12 h-12 rounded-2xl flex items-center justify-center ${isElite ? 'bg-accent text-white' : 'bg-brand-100 text-brand-400'}`}>
-            {isElite ? <Zap className="w-6 h-6" /> : <Cpu className="w-6 h-6" />}
+          <motion.div layout className={`w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center ${isElite ? 'bg-accent text-white' : 'bg-brand-100 text-brand-400'}`}>
+            {isElite ? <Zap className="w-5 h-5 sm:w-6 sm:h-6" /> : <Cpu className="w-5 h-5 sm:w-6 sm:h-6" />}
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-4 sm:gap-6">
           {[
             { label: 'Messaging', elite: 'Clear', standard: 'Crowded' },
             { label: 'System Design', elite: 'Integrated', standard: 'Fragmented' },
@@ -54,7 +54,7 @@ const DemoCard = ({ mode }: { mode: 'standard' | 'elite' }) => {
               <p className={`text-[10px] font-bold uppercase tracking-widest ${isElite ? 'text-white/40' : 'text-brand-300'}`}>
                 {stat.label}
               </p>
-              <motion.p key={`${mode}-${stat.label}`} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className={`text-xl font-semibold ${isElite ? 'text-white' : 'text-ink'}`}>
+              <motion.p key={`${mode}-${stat.label}`} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} className={`text-lg sm:text-xl font-semibold ${isElite ? 'text-white' : 'text-ink'}`}>
                 {isElite ? stat.elite : stat.standard}
               </motion.p>
             </div>
@@ -73,28 +73,28 @@ export default function StudioDemo() {
   const [mode, setMode] = useState<'standard' | 'elite'>('elite');
 
   return (
-    <section className="py-24 md:py-48 bg-paper">
+    <section className="py-16 sm:py-20 md:py-32 bg-paper">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 md:gap-32 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 md:gap-20 items-center">
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.3em] text-accent mb-8">Interactive Demo</p>
-            <h2 className="text-4xl md:text-7xl font-semibold text-ink leading-[1.05] tracking-tight mb-10">
+            <p className="text-sm font-bold uppercase tracking-[0.3em] text-accent mb-6 sm:mb-8">Interactive Demo</p>
+            <h2 className="text-3xl sm:text-4xl md:text-7xl font-semibold text-ink leading-[1.05] tracking-tight mb-6 sm:mb-10">
               Experience the <br /> <span className="serif italic text-brand-300">Bakal Standard.</span>
             </h2>
-            <p className="text-xl text-brand-400 leading-relaxed font-normal mb-12 max-w-xl">
+            <p className="text-lg sm:text-xl text-brand-400 leading-relaxed font-normal mb-8 sm:mb-12 max-w-xl">
               Toggle between a generic build and our preferred delivery standard to see how structure, trust, and system quality reshape the experience.
             </p>
 
-            <div className="flex p-1.5 bg-soft rounded-full border border-brand-100/50 w-fit mb-12">
-              <button onClick={() => setMode('standard')} className={`px-8 py-3 rounded-full text-sm font-bold transition-all ${mode === 'standard' ? 'bg-white text-ink shadow-md' : 'text-brand-400 hover:text-ink'}`}>
+            <div className="flex p-1.5 bg-soft rounded-full border border-brand-100/50 w-fit mb-8 sm:mb-12">
+              <button onClick={() => setMode('standard')} className={`px-5 sm:px-8 py-3 rounded-full text-sm font-bold transition-all ${mode === 'standard' ? 'bg-white text-ink shadow-md' : 'text-brand-400 hover:text-ink'}`}>
                 Generic
               </button>
-              <button onClick={() => setMode('elite')} className={`px-8 py-3 rounded-full text-sm font-bold transition-all ${mode === 'elite' ? 'bg-ink text-white shadow-lg' : 'text-brand-400 hover:text-ink'}`}>
+              <button onClick={() => setMode('elite')} className={`px-5 sm:px-8 py-3 rounded-full text-sm font-bold transition-all ${mode === 'elite' ? 'bg-ink text-white shadow-lg' : 'text-brand-400 hover:text-ink'}`}>
                 Bakal Standard
               </button>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {[
                 'Sharper structure and narrative flow',
                 'Cleaner operational handoffs',
@@ -105,19 +105,19 @@ export default function StudioDemo() {
                   <div className={`w-6 h-6 rounded-full flex items-center justify-center ${mode === 'elite' ? 'bg-accent/10 text-accent' : 'bg-brand-100 text-brand-300'}`}>
                     <Shield className="w-4 h-4" />
                   </div>
-                  <span className={`text-lg font-medium ${mode === 'elite' ? 'text-ink' : 'text-brand-400'}`}>{feature}</span>
+                  <span className={`text-base sm:text-lg font-medium ${mode === 'elite' ? 'text-ink' : 'text-brand-400'}`}>{feature}</span>
                 </motion.div>
               ))}
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative max-w-xl lg:max-w-none mx-auto w-full">
             <DemoCard mode={mode} />
 
             <AnimatePresence>
               {mode === 'elite' && (
                 <>
-                  <motion.div initial={{ opacity: 0, scale: 0.5, x: 20 }} animate={{ opacity: 1, scale: 1, x: 0 }} exit={{ opacity: 0, scale: 0.5, x: 20 }} className="absolute -top-8 -right-8 glass p-6 rounded-3xl shadow-2xl border border-white/20 z-20">
+                  <motion.div initial={{ opacity: 0, scale: 0.5, x: 20 }} animate={{ opacity: 1, scale: 1, x: 0 }} exit={{ opacity: 0, scale: 0.5, x: 20 }} className="hidden md:block absolute -top-8 -right-8 glass p-6 rounded-3xl shadow-2xl border border-white/20 z-20">
                     <div className="flex items-center gap-4">
                       <div className="w-10 h-10 rounded-xl bg-accent/20 flex items-center justify-center text-accent">
                         <Zap className="w-6 h-6" />
@@ -129,7 +129,7 @@ export default function StudioDemo() {
                     </div>
                   </motion.div>
 
-                  <motion.div initial={{ opacity: 0, scale: 0.5, x: -20 }} animate={{ opacity: 1, scale: 1, x: 0 }} exit={{ opacity: 0, scale: 0.5, x: -20 }} className="absolute -bottom-8 -left-8 glass p-6 rounded-3xl shadow-2xl border border-white/20 z-20">
+                  <motion.div initial={{ opacity: 0, scale: 0.5, x: -20 }} animate={{ opacity: 1, scale: 1, x: 0 }} exit={{ opacity: 0, scale: 0.5, x: -20 }} className="hidden md:block absolute -bottom-8 -left-8 glass p-6 rounded-3xl shadow-2xl border border-white/20 z-20">
                     <div className="flex items-center gap-4">
                       <div className="w-10 h-10 rounded-xl bg-brand-200/20 flex items-center justify-center text-brand-300">
                         <Shield className="w-6 h-6" />

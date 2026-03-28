@@ -1,8 +1,9 @@
-﻿import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight, CheckCircle2, MessageSquare } from 'lucide-react';
 import { services } from '../data/services';
+import BrandedVisual from '../components/BrandedVisual';
 
 const openChat = (serviceTitle: string) => {
   window.dispatchEvent(
@@ -34,21 +35,24 @@ export default function ServiceDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-paper pt-36 pb-24">
+    <div className="min-h-screen bg-paper pt-32 sm:pt-36 pb-20 sm:pb-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <Link to="/services" className="inline-flex items-center gap-2 text-brand-400 hover:text-ink transition-colors mb-10">
+        <Link to="/services" className="inline-flex items-center gap-2 text-brand-400 hover:text-ink transition-colors mb-8 sm:mb-10">
           <ArrowLeft className="w-4 h-4" />
           Back to services
         </Link>
 
-        <div className="grid lg:grid-cols-2 gap-14 items-start mb-20">
+        <div className="grid lg:grid-cols-2 gap-10 sm:gap-14 items-start mb-16 sm:mb-20">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}>
-            <div className="w-16 h-16 rounded-3xl bg-soft border border-brand-100/50 flex items-center justify-center mb-8 text-ink">
+            <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-[0.22em] ${service.theme.chip} mb-6`}>
+              {service.theme.label}
+            </div>
+            <div className={`w-16 h-16 rounded-3xl bg-gradient-to-br ${service.theme.soft} border ${service.theme.ring} flex items-center justify-center mb-8 ${service.theme.accent}`}>
               {service.icon}
             </div>
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Service Detail</p>
-            <h1 className="text-5xl md:text-6xl font-semibold text-ink tracking-tight leading-[1.05] mb-6">{service.title}</h1>
-            <p className="text-xl text-brand-400 leading-relaxed mb-8">{service.longDescription}</p>
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-ink tracking-tight leading-[1.05] mb-6">{service.title}</h1>
+            <p className="text-lg sm:text-xl text-brand-400 leading-relaxed mb-8">{service.longDescription}</p>
 
             <div className="flex flex-col sm:flex-row gap-3">
               <button type="button" onClick={() => openChat(service.title)} className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-ink text-white font-semibold hover:bg-accent transition-colors">
@@ -62,28 +66,33 @@ export default function ServiceDetail() {
             </div>
           </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="rounded-[2.5rem] bg-soft border border-brand-100/50 p-8 md:p-10">
-            <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Best for</p>
-            <div className="grid gap-4">
-              {service.benefits.map((benefit) => (
-                <div key={benefit} className="flex items-start gap-3 rounded-2xl bg-white border border-brand-100/40 p-5">
-                  <CheckCircle2 className="w-5 h-5 text-accent mt-0.5" />
-                  <p className="text-brand-400 leading-relaxed">{benefit}</p>
-                </div>
-              ))}
+          <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="space-y-6">
+            <div className="rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden shadow-2xl border border-brand-100/50 aspect-[4/3] md:aspect-[16/11]">
+              <BrandedVisual variant={service.theme.visual} title={service.title} className="rounded-[2rem] sm:rounded-[2.5rem]" />
+            </div>
+            <div className={`rounded-[2rem] sm:rounded-[2.5rem] bg-gradient-to-br ${service.theme.soft} border ${service.theme.ring} p-6 sm:p-8 md:p-10`}>
+              <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Best for</p>
+              <div className="grid gap-4">
+                {service.benefits.map((benefit) => (
+                  <div key={benefit} className="flex items-start gap-3 rounded-2xl bg-white/80 border border-white/70 p-5">
+                    <CheckCircle2 className={`w-5 h-5 mt-0.5 ${service.theme.accent}`} />
+                    <p className="text-brand-400 leading-relaxed">{benefit}</p>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>
 
-        <section className="py-16 border-t border-brand-100/30">
-          <div className="max-w-3xl mb-12">
+        <section className="py-12 sm:py-16 border-t border-brand-100/30">
+          <div className="max-w-3xl mb-10 sm:mb-12">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">What is included</p>
-            <h2 className="text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">A focused scope built around outcomes, not filler.</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">A focused scope built around outcomes, not filler.</h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {service.features.map((feature, index) => (
-              <div key={feature} className="rounded-[2rem] bg-soft border border-brand-100/50 p-7">
-                <div className="w-11 h-11 rounded-2xl bg-white border border-brand-100/50 flex items-center justify-center text-ink font-semibold mb-5">0{index + 1}</div>
+              <div key={feature} className={`rounded-[1.75rem] bg-gradient-to-br ${service.theme.soft} border ${service.theme.ring} p-6 sm:p-7`}>
+                <div className={`w-11 h-11 rounded-2xl bg-white/80 border border-white/70 flex items-center justify-center font-semibold mb-5 ${service.theme.accent}`}>0{index + 1}</div>
                 <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">{feature}</h3>
                 <p className="text-brand-400 leading-relaxed">This capability is adapted to the business context, current constraints, and the next stage of growth.</p>
               </div>
@@ -91,14 +100,14 @@ export default function ServiceDetail() {
           </div>
         </section>
 
-        <section className="py-16 border-t border-brand-100/30">
-          <div className="max-w-3xl mb-10">
+        <section className="py-12 sm:py-16 border-t border-brand-100/30">
+          <div className="max-w-3xl mb-8 sm:mb-10">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Technology Stack</p>
-            <h2 className="text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">Tools chosen for maintainability and speed.</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">Tools chosen for maintainability and speed.</h2>
           </div>
           <div className="flex flex-wrap gap-3">
             {service.technologies.map((tech) => (
-              <span key={tech} className="px-5 py-3 rounded-full bg-soft border border-brand-100/50 text-ink font-medium">
+              <span key={tech} className={`px-5 py-3 rounded-full bg-gradient-to-br ${service.theme.soft} border ${service.theme.ring} text-ink font-medium`}>
                 {tech}
               </span>
             ))}
