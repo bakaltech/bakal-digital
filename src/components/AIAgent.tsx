@@ -37,15 +37,15 @@ export default function AIAgent() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'model',
-      text: "Hey! I'm the Bakal AI strategist. I'm here to help figure out exactly what you need so our expert team can plan it. What are you working on right now?",
+      text: "Hey! I'm the Bakal project guide. I'll ask a few quick questions so our team can send you the right plan. What type of project are you looking for?",
     },
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [quickReplies, setQuickReplies] = useState<string[]>([
-    'Start something new',
-    'Improve existing',
-    'Just exploring',
+    'Website',
+    'Branding',
+    'AI automation',
   ]);
   const [leadFormArgs, setLeadFormArgs] = useState<LeadFormArgs | null>(null);
   const [formStatus, setFormStatus] = useState<
@@ -98,7 +98,7 @@ export default function AIAgent() {
 
       setMessages((prev) => [...prev, { role: 'model', text: modelText }]);
     } catch (error) {
-      console.error('AI Error:', error);
+      console.error('Chat Error:', error);
       setMessages((prev) => [
         ...prev,
         {
@@ -139,7 +139,7 @@ export default function AIAgent() {
         { role: 'user', text: `Email provided: ${emailInput}` },
         {
           role: 'model',
-          text: "Perfect! I have securely sent your project brief and email to our strategy team's system. One of our experts will reach out shortly with your tailored plan and next steps. Talk soon!",
+          text: "Perfect! I have securely sent your project brief and email to our team. One of our experts will reach out shortly with your tailored plan and next steps.",
         },
       ]);
       setLeadFormArgs(null);
@@ -195,10 +195,10 @@ export default function AIAgent() {
                   </div>
                   <div>
                     <p className="text-xs font-bold uppercase tracking-widest text-accent">
-                      Bakal AI
+                      Bakal Guide
                     </p>
                     <p className="text-sm font-medium opacity-70 hidden sm:block">
-                      Senior Strategist
+                      Project Intake
                     </p>
                   </div>
                 </div>
@@ -315,7 +315,7 @@ export default function AIAgent() {
                               void handleSend();
                             }
                           }}
-                          placeholder="Ask anything..."
+                          placeholder="Type your answer..."
                           className="w-full pl-4 pr-12 sm:pl-6 sm:pr-14 py-3 sm:py-4 rounded-2xl bg-white border border-brand-100/50 focus:outline-none focus:border-accent transition-colors text-ink text-sm sm:text-sm shadow-sm"
                         />
                         <button

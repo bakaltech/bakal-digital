@@ -17,12 +17,7 @@ export default async function handler(request: Request): Promise<Response> {
   try {
     const payload = await request.json();
     const { messages, messageText } = getChatPayload(payload);
-    const response = await generateChatResponse({
-      apiKey: process.env.GEMINI_API_KEY,
-      messages,
-      messageText,
-    });
-
+    const response = await generateChatResponse({ messages, messageText });
     return json(response);
   } catch (error) {
     if (error instanceof HttpError) {

@@ -18,12 +18,7 @@ async function startServer() {
   app.post("/api/chat", async (req, res) => {
     try {
       const { messages, messageText } = getChatPayload(req.body);
-      const response = await generateChatResponse({
-        apiKey: process.env.GEMINI_API_KEY,
-        messages,
-        messageText,
-      });
-
+      const response = await generateChatResponse({ messages, messageText });
       return res.json(response);
     } catch (error) {
       if (error instanceof HttpError) {

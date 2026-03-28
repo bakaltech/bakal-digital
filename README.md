@@ -1,6 +1,6 @@
 ﻿# Bakal Digital
 
-Bakal Digital is a React + Vite portfolio site with a server-side AI assistant and secure lead capture.
+Bakal Digital is a React + Vite portfolio site with a scripted lead-qualification chatbot and secure lead capture.
 
 ## Local development
 
@@ -13,7 +13,6 @@ Setup:
 3. Start the local app with `npm run dev`
 
 Required environment variables:
-- `GEMINI_API_KEY`
 - `GOOGLE_SHEETS_WEBHOOK_URL`
 - `PORT` for local development only
 
@@ -25,12 +24,11 @@ This project is set up for Vercel:
 - Secrets must be added in Vercel Project Settings > Environment Variables
 
 Vercel environment variables:
-- `GEMINI_API_KEY`
 - `GOOGLE_SHEETS_WEBHOOK_URL`
 
 ## Security
 
 - No API keys are exposed to the browser
-- The AI request runs server-side
+- The chatbot uses a scripted server-side flow
 - Lead submissions are posted server-side
 - `.env.local` is ignored by git
