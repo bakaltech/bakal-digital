@@ -1,20 +1,36 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+﻿# Bakal Digital
 
-# Run and deploy your AI Studio app
+Bakal Digital is a React + Vite portfolio site with a server-side AI assistant and secure lead capture.
 
-This contains everything you need to run your app locally.
+## Local development
 
-View your app in AI Studio: https://ai.studio/apps/44cc4c84-739e-4da0-a411-d9d44b0a6db9
+Prerequisites:
+- Node.js 20+
 
-## Run Locally
+Setup:
+1. Install dependencies with `npm install`
+2. Fill in `.env.local`
+3. Start the local app with `npm run dev`
 
-**Prerequisites:**  Node.js
+Required environment variables:
+- `GEMINI_API_KEY`
+- `GOOGLE_SHEETS_WEBHOOK_URL`
+- `PORT` for local development only
 
+## Deployment
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+This project is set up for Vercel:
+- Frontend is built with Vite
+- API routes live in `api/chat.ts` and `api/leads.ts`
+- Secrets must be added in Vercel Project Settings > Environment Variables
+
+Vercel environment variables:
+- `GEMINI_API_KEY`
+- `GOOGLE_SHEETS_WEBHOOK_URL`
+
+## Security
+
+- No API keys are exposed to the browser
+- The AI request runs server-side
+- Lead submissions are posted server-side
+- `.env.local` is ignored by git
