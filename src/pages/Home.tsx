@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, Cpu, Database, Globe, Shield, ChevronRight, ShoppingBag, Workflow } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Cpu, Database, Globe, Shield, ChevronRight, ShoppingBag, Workflow } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TechMarquee from '../components/TechMarquee';
 import { projects } from '../data/projects';
@@ -120,6 +120,36 @@ export default function Home() {
       </section>
 
       <StudioDemo />
+
+      <section className="py-24 md:py-40 bg-paper">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-[1.05fr_1.2fr] gap-12 md:gap-16 items-start">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Trust Signals</p>
+            <h2 className="text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight mb-8">
+              Proof where we have it. Clarity where we do not.
+            </h2>
+            <p className="text-xl text-brand-400 leading-relaxed max-w-2xl">
+              We do not inflate results or invent client stories. When a project is public, we can show it. When it is confidential or still taking shape, we show the thinking, structure, and delivery standard behind the work instead.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              { title: 'Concept studies, clearly labeled', text: 'Portfolio pieces are marked as concept directions so expectations stay honest.' },
+              { title: 'Real inquiry handling', text: 'Lead forms, guided brief, and contact requests all route through secure working flows.' },
+              { title: 'References available when appropriate', text: 'For qualified opportunities, deeper project context and additional examples can be shared directly.' },
+              { title: 'Focused delivery model', text: 'Strategy, UX, design, frontend, backend, and automation are shaped as one system instead of siloed handoffs.' },
+            ].map((item, idx) => (
+              <motion.div key={item.title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: idx * 0.08 }} className="rounded-[2rem] border border-brand-100/50 bg-soft p-7">
+                <div className="w-11 h-11 rounded-2xl bg-white border border-brand-100/50 flex items-center justify-center text-accent mb-4">
+                  <CheckCircle2 className="w-5 h-5" />
+                </div>
+                <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">{item.title}</h3>
+                <p className="text-brand-400 leading-relaxed">{item.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
       <section className="py-24 md:py-48 bg-soft relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-accent/5 to-transparent pointer-events-none" />

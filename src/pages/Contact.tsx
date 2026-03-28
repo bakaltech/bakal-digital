@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, CheckCircle2, Clock3, MessageSquare, Send, Sparkles } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Clock3, MessageSquare, Send, ShieldCheck, Sparkles } from 'lucide-react';
 
 const openChat = () => {
   window.dispatchEvent(new CustomEvent('open-chat'));
@@ -82,6 +82,15 @@ export default function Contact() {
                 <p className="text-brand-400 leading-relaxed">{item.text}</p>
               </div>
             ))}
+
+            <div className="rounded-[2rem] bg-ink text-white p-8 shadow-xl">
+              <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-accent mb-5"><ShieldCheck className="w-5 h-5" /></div>
+              <h2 className="text-2xl font-semibold tracking-tight mb-3">What happens after you submit</h2>
+              <div className="space-y-3 text-white/75 leading-relaxed">
+                <p>We review the request, triage fit, and map the likely next step before replying.</p>
+                <p>If the opportunity is a fit, we can share deeper project direction, references, or more tailored scope recommendations directly.</p>
+              </div>
+            </div>
 
             <button type="button" onClick={openChat} className="w-full inline-flex items-center justify-center gap-3 px-6 py-5 rounded-full bg-ink text-white font-semibold hover:bg-accent transition-colors shadow-xl">
               <MessageSquare className="w-5 h-5" />
