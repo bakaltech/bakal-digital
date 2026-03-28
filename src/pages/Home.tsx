@@ -54,9 +54,6 @@ const CategoryVisual: React.FC<{ visual: CategoryCardProps['category']['visual']
       <div className={`absolute top-6 right-6 w-16 h-16 rounded-[1.4rem] bg-gradient-to-br ${style.orb} flex items-center justify-center shadow-[0_18px_34px_rgba(0,0,0,0.18)]`}>
         <Icon className="w-7 h-7 text-white" />
       </div>
-      <div className="absolute top-14 left-6 w-14 h-14 rounded-[1.2rem] border border-white/16 bg-white/6 backdrop-blur-sm flex items-center justify-center opacity-70">
-        <Icon className="w-6 h-6 text-white/75" />
-      </div>
       <div className="absolute left-6 right-6 top-[40%] h-px bg-white/12" />
       <div className="absolute left-6 right-6 bottom-20 flex items-end gap-3 opacity-45">
         <div className="h-12 flex-1 rounded-t-[1.2rem] bg-white/10" />
@@ -96,9 +93,14 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
         </p>
       </div>
       <div className="mt-auto pt-6">
-        <Link to="/services" className="inline-flex items-center text-white text-[10px] font-bold uppercase tracking-widest hover:text-accent transition-colors">
-          View Details
-          <ArrowRight className="ml-2 w-3 h-3" />
+        <Link to="/services" className="inline-flex flex-col items-start gap-2 text-white hover:text-white transition-colors">
+          <span className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest">
+            View Details
+            <ArrowRight className="ml-2 w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
+          </span>
+          <span className="h-[3px] w-24 rounded-full bg-white/16 overflow-hidden">
+            <span className={`block h-full rounded-full ${categoryVisualStyles[category.visual].line} w-10 transition-all duration-500 group-hover:w-full`} />
+          </span>
         </Link>
       </div>
     </div>
