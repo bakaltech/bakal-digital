@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", serif;
+  --color-ink: #1D1D1F;
+  --color-paper: #FFFFFF;
+  --color-soft: #F5F5F7;
+  --color-accent: #0066CC;
+  --color-brand-50: #F5F5F7;
+  --color-brand-100: #E8E8ED;
+  --color-brand-400: #86868B;
+  --color-brand-500: #1D1D1F;
+  --color-brand-600: #000000;
+  --color-brand-900: #000000;
+  --animate-marquee: marquee 60s linear infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@layer base {
+  body {
+    @apply bg-paper text-brand-500 antialiased selection:bg-accent selection:text-white;
+    letter-spacing: -0.011em;
+  }
+  
+  h1, h2, h3, h4 {
+    @apply tracking-tight font-semibold;
+    letter-spacing: -0.022em;
+  }
+}
+
+/* Custom Utilities */
+.glass {
+  @apply bg-white/70 backdrop-blur-xl border border-white/20;
+}
+
+.writing-vertical-rl {
+  writing-mode: vertical-rl;
+}
+
+.serif {
+  font-family: var(--font-serif);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
