@@ -3,7 +3,13 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, ArrowRight, ChevronDown } from 'lucide-react';
 import { projects } from '../data/projects';
-import { AnalyticsChart, IoTChart } from '../components/ChartDemo';
+import {
+  ConceptDemoNote,
+  LuminaPortalDemo,
+  NexusAIOpsDemo,
+  OrbitOpsDemo,
+  VelocityCommerceDemo,
+} from '../components/ChartDemo';
 import BrandedVisual from '../components/BrandedVisual';
 
 export default function CaseStudy() {
@@ -16,30 +22,18 @@ export default function CaseStudy() {
   }
 
   const renderDemo = () => {
-    if (project.id === 'lumina-saas' && activeFeature === 1) {
-      return <AnalyticsChart />;
+    switch (project.id) {
+      case 'nexus-ai':
+        return <NexusAIOpsDemo activeFeature={activeFeature} />;
+      case 'lumina-saas':
+        return <LuminaPortalDemo activeFeature={activeFeature} />;
+      case 'velocity-ecommerce':
+        return <VelocityCommerceDemo activeFeature={activeFeature} />;
+      case 'orbit-automation':
+        return <OrbitOpsDemo activeFeature={activeFeature} />;
+      default:
+        return null;
     }
-    if (project.id === 'orbit-automation' && activeFeature === 0) {
-      return <IoTChart />;
-    }
-
-    return (
-      <div className="w-full h-full p-8 md:p-10 flex flex-col justify-center">
-        <div className="grid gap-4 md:grid-cols-3 mb-8">
-          {['Clearer positioning', 'Lower friction', 'Stronger trust'].map((item, index) => (
-            <div key={item} className="rounded-2xl bg-white border border-brand-100/50 p-5">
-              <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-brand-400 mb-2">Signal 0{index + 1}</p>
-              <h4 className="text-lg font-semibold text-ink tracking-tight">{item}</h4>
-            </div>
-          ))}
-        </div>
-        <div className="rounded-[2rem] bg-white border border-brand-100/50 p-6 md:p-8">
-          <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-3">Feature Focus</p>
-          <h3 className="text-2xl md:text-3xl font-semibold text-ink tracking-tight mb-4">{project.features[activeFeature].title}</h3>
-          <p className="text-brand-400 leading-relaxed text-lg">{project.features[activeFeature].description}</p>
-        </div>
-      </div>
-    );
   };
 
   return (
@@ -92,9 +86,10 @@ export default function CaseStudy() {
 
       <section className="py-20 bg-paper">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="mb-14">
+          <div className="mb-14 max-w-4xl">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Explorer</p>
-            <h2 className="text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">Break the concept into the moments that matter.</h2>
+            <h2 className="text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight mb-6">Break the concept into the moments that matter.</h2>
+            <p className="text-lg text-brand-400 leading-relaxed">Each demo below is tailored to the case study so visitors can experience the product logic, not just read about it.</p>
           </div>
 
           <div className="grid lg:grid-cols-12 gap-10 items-start">
@@ -116,13 +111,13 @@ export default function CaseStudy() {
               ))}
             </div>
 
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-7 space-y-6">
               <div className="relative rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-soft border border-brand-100/50 aspect-[4/5] sm:aspect-[16/10] shadow-2xl flex items-center justify-center">
                 <div className="absolute top-0 inset-x-0 h-12 bg-paper/80 backdrop-blur-md border-b border-brand-100/50 flex items-center px-6 gap-2 z-10">
                   <div className="w-3 h-3 rounded-full bg-brand-100" />
                   <div className="w-3 h-3 rounded-full bg-brand-100" />
                   <div className="w-3 h-3 rounded-full bg-brand-100" />
-                  <div className="ml-4 px-5 py-1.5 bg-white rounded-full text-[11px] text-brand-400 border border-brand-100/50">Concept walkthrough</div>
+                  <div className="ml-4 px-5 py-1.5 bg-white rounded-full text-[11px] text-brand-400 border border-brand-100/50">Interactive concept demo</div>
                 </div>
                 <AnimatePresence mode="wait">
                   <motion.div key={activeFeature} initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 1.02 }} className="absolute inset-0 pt-12 flex flex-col items-center justify-center">
@@ -130,6 +125,8 @@ export default function CaseStudy() {
                   </motion.div>
                 </AnimatePresence>
               </div>
+
+              <ConceptDemoNote />
             </div>
           </div>
         </div>
