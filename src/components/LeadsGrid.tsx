@@ -4,9 +4,9 @@ import { ArrowRight, CheckCircle2, Cpu, Database, Globe, ShoppingBag, X } from '
 
 const needs = [
   { id: 'platform', title: 'Custom platform', icon: Globe },
-  { id: 'ai', title: 'AI product', icon: Cpu },
-  { id: 'commerce', title: 'Commerce system', icon: ShoppingBag },
-  { id: 'data', title: 'Data workflow', icon: Database },
+  { id: 'ai', title: 'AI systems', icon: Cpu },
+  { id: 'commerce', title: 'Commerce flow', icon: ShoppingBag },
+  { id: 'data', title: 'Automation and reporting', icon: Database },
 ];
 
 export default function LeadsGrid() {
@@ -61,7 +61,7 @@ export default function LeadsGrid() {
             <div className="text-center">
               <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Project Focus</p>
               <p className="text-sm sm:text-base text-brand-400 leading-relaxed max-w-xl mx-auto">
-                Choose the area you want to improve first. We will use it to shape the next conversation and route the project properly.
+                Choose the part of the business that needs work first. We will use it to route the brief and keep the next conversation focused.
               </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -89,7 +89,7 @@ export default function LeadsGrid() {
             </div>
             <div className="flex justify-center">
               <button disabled={selected.length === 0} onClick={() => setStep('contact')} className="inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 text-sm font-bold rounded-full text-white bg-ink transition-all shadow-lg hover:bg-accent disabled:opacity-50">
-                Continue
+                Continue To Brief
                 <ArrowRight className="ml-2 h-5 w-5" />
               </button>
             </div>
@@ -103,7 +103,7 @@ export default function LeadsGrid() {
             </button>
             <div className="mb-5">
               <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-2">Quick Intake</p>
-              <h3 className="text-xl sm:text-2xl font-semibold text-ink tracking-tight mb-2">Tell us what you want to build next.</h3>
+              <h3 className="text-xl sm:text-2xl font-semibold text-ink tracking-tight mb-2">Describe the business problem and the outcome you need.</h3>
               <p className="text-sm sm:text-base text-brand-400 leading-relaxed">Selected focus: {selected.map((id) => needs.find((need) => need.id === id)?.title).join(', ')}</p>
             </div>
             <div className="space-y-3">
@@ -113,10 +113,10 @@ export default function LeadsGrid() {
               </div>
               <input value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} type="text" placeholder="Full name" className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm" />
               <input value={formData.email} onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))} type="email" placeholder="Business email" className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm" />
-              <textarea value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} placeholder="Describe the business, the system or experience you need, and what outcome matters most." rows={4} className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm resize-none" />
+              <textarea value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} placeholder="What is slowing the business down now, and what should be working better after this is built?" rows={4} className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm resize-none" />
               {error && <p className="text-sm text-red-600">{error}</p>}
               <button type="button" onClick={() => void handleSubmit()} disabled={isSubmitting} className="w-full py-4 rounded-xl bg-ink text-white font-bold text-sm hover:bg-accent transition-colors disabled:opacity-70">
-                {isSubmitting ? 'Sending...' : 'Submit Project Request'}
+                {isSubmitting ? 'Sending...' : 'Send Project Brief'}
               </button>
             </div>
           </motion.div>
@@ -127,8 +127,8 @@ export default function LeadsGrid() {
             <div className="w-16 h-16 rounded-full bg-white border border-brand-100/50 flex items-center justify-center mx-auto mb-5">
               <CheckCircle2 className="w-8 h-8 text-accent" />
             </div>
-            <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">Request received</h3>
-            <p className="text-brand-400 leading-relaxed">Your focus areas and project notes have been captured. That is enough for us to guide the next step.</p>
+            <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">Brief received</h3>
+            <p className="text-brand-400 leading-relaxed">Your project focus and notes are in. We can use this to route the conversation and respond with the strongest next step.</p>
           </motion.div>
         )}
       </AnimatePresence>

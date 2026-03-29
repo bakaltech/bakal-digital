@@ -13,51 +13,12 @@ interface CategoryCardProps {
     title: string;
     description: string;
     icon: React.ElementType;
-    visual: 'ai' | 'platform' | 'commerce' | 'data';
     outcomes: string[];
     label: string;
+    cta: string;
   };
   idx: number;
 }
-
-const categoryVisualStyles: Record<CategoryCardProps['category']['visual'], { glow: string; orb: string; line: string }> = {
-  ai: {
-    glow: 'from-sky-500/12 via-blue-500/6 to-transparent',
-    orb: 'from-sky-400 to-blue-600',
-    line: 'bg-sky-400/70',
-  },
-  platform: {
-    glow: 'from-cyan-500/12 via-blue-500/6 to-transparent',
-    orb: 'from-cyan-400 to-sky-500',
-    line: 'bg-cyan-400/70',
-  },
-  commerce: {
-    glow: 'from-amber-400/12 via-orange-500/6 to-transparent',
-    orb: 'from-amber-300 to-orange-500',
-    line: 'bg-amber-400/75',
-  },
-  data: {
-    glow: 'from-emerald-400/12 via-teal-500/6 to-transparent',
-    orb: 'from-emerald-300 to-teal-500',
-    line: 'bg-emerald-400/75',
-  },
-};
-
-const CategoryVisual: React.FC<{ visual: CategoryCardProps['category']['visual']; icon: React.ElementType }> = ({ visual, icon: Icon }) => {
-  const style = categoryVisualStyles[visual];
-
-  return (
-    <div className="absolute inset-0 overflow-hidden">
-      <div className={`absolute inset-0 bg-gradient-to-br ${style.glow}`} />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:34px_34px] opacity-[0.18]" />
-      <div className="absolute inset-x-0 top-0 h-[52%] bg-gradient-to-b from-white/10 via-white/4 to-transparent" />
-      <div className={`absolute top-6 right-6 w-16 h-16 rounded-[1.4rem] bg-gradient-to-br ${style.orb} flex items-center justify-center shadow-[0_18px_34px_rgba(0,0,0,0.18)]`}>
-        <Icon className="w-7 h-7 text-white" />
-      </div>
-      <div className="absolute inset-x-6 bottom-6 h-px bg-white/10" />
-    </div>
-  );
-};
 
 const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
   <motion.div
@@ -65,10 +26,10 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-    className="group relative flex min-h-[24rem] flex-col overflow-hidden rounded-[1.75rem] border border-brand-100/60 bg-white shadow-[0_12px_30px_rgba(17,19,21,0.05)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_24px_56px_rgba(17,19,21,0.1)]"
+    className="group relative flex min-h-[26rem] flex-col overflow-hidden rounded-[1.9rem] border border-brand-100/60 bg-white shadow-[0_14px_34px_rgba(17,19,21,0.05)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(17,19,21,0.11)]"
   >
-    <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-br from-white via-white to-soft" />
-    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-soft/80 to-transparent" />
+    <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-br from-white via-white to-soft" />
+    <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-soft/90 to-transparent" />
     <div className="relative flex h-full flex-col p-5 sm:p-6">
       <div className="flex items-start justify-between gap-4">
         <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-100/80 bg-soft text-brand-400 transition-colors duration-300 group-hover:border-transparent group-hover:bg-ink group-hover:text-white">
@@ -80,25 +41,26 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
       </div>
 
       <div className="mt-8">
-        <h3 className="max-w-[10ch] text-[1.65rem] sm:text-[1.9rem] font-semibold leading-[0.98] text-ink">
+        <h3 className="max-w-[11ch] text-[1.7rem] sm:text-[1.95rem] font-semibold leading-[0.98] text-ink">
           {category.title}
         </h3>
-        <p className="mt-4 max-w-[28ch] text-sm sm:text-[15px] leading-relaxed text-brand-400">
+        <p className="mt-4 max-w-[29ch] text-sm sm:text-[15px] leading-relaxed text-brand-400">
           {category.description}
         </p>
       </div>
 
-      <div className="mt-auto pt-6">
-        <div className="mb-5 grid gap-2">
+      <div className="mt-auto pt-7">
+        <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">Where it helps</p>
+        <div className="mb-6 grid gap-2">
           {category.outcomes.slice(0, 2).map((outcome, outcomeIndex) => (
-            <div key={outcome} className="rounded-[1rem] border border-brand-100/70 bg-soft px-3 py-2.5">
+            <div key={outcome} className="rounded-[1rem] border border-brand-100/70 bg-soft px-3 py-3">
               <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-brand-300">0{outcomeIndex + 1}</p>
               <p className="mt-1 text-sm leading-relaxed text-ink">{outcome}</p>
             </div>
           ))}
         </div>
         <Link to="/services" className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-ink transition-colors hover:text-accent">
-          Explore capability
+          {category.cta}
           <ArrowRight className="ml-2 w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
         </Link>
       </div>
@@ -132,35 +94,35 @@ export default function Home() {
   const categories = [
     {
       title: 'AI Products',
-      description: 'Assistants, workflows, and product features that make AI practical inside the business.',
+      description: 'Internal copilots, assistant flows, and product features that shorten response time and improve execution.',
       icon: Cpu,
-      visual: 'ai' as const,
-      outcomes: ['Useful assistant flows', 'Faster qualification and support'],
+      outcomes: ['Shorter lead qualification and support cycles', 'AI features that solve a real operational task'],
       label: 'AI systems',
+      cta: 'See AI systems',
     },
     {
       title: 'Custom Platforms',
-      description: 'Tailored web platforms, portals, and operational tools built around your exact process.',
+      description: 'Client portals, internal tools, and service platforms built around the way the business actually runs.',
       icon: Globe,
-      visual: 'platform' as const,
-      outcomes: ['Clearer customer journeys', 'Interfaces shaped around real workflow'],
+      outcomes: ['Clearer paths from interest to action', 'Tools shaped around the real workflow, not a template'],
       label: 'Platform build',
+      cta: 'See platform work',
     },
     {
       title: 'Commerce Systems',
-      description: 'Storefronts and conversion flows designed to sell cleanly and scale without friction.',
+      description: 'Storefronts, product structure, and checkout systems designed to improve conversion and reduce friction.',
       icon: ShoppingBag,
-      visual: 'commerce' as const,
-      outcomes: ['Stronger product presentation', 'Cleaner checkout and revenue flow'],
+      outcomes: ['Stronger product presentation and offer clarity', 'Cleaner checkout, order flow, and revenue capture'],
       label: 'Commerce flow',
+      cta: 'See commerce systems',
     },
     {
       title: 'Automation & Data',
-      description: 'Connected workflows, reporting, and internal systems that reduce manual work and surface insight.',
+      description: 'Connected automations, reporting, and operational logic that remove drag and surface the right signal faster.',
       icon: Database,
-      visual: 'data' as const,
-      outcomes: ['Less manual operational drag', 'Better visibility across the business'],
+      outcomes: ['Less repeated admin and fewer missed handoffs', 'Reporting that shows where the business is actually slowing down'],
       label: 'Operational systems',
+      cta: 'See automation systems',
     },
   ];
 
@@ -174,15 +136,15 @@ export default function Home() {
             <div className="max-w-xl">
               <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">What We Build</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.8rem] font-semibold text-ink leading-[0.98] tracking-tight">
-                Where we build leverage for the business.
+                The four systems we build when growth or operations start dragging.
               </h2>
             </div>
             <div className="max-w-2xl lg:justify-self-end">
               <p className="text-base sm:text-lg md:text-[1.12rem] text-brand-400 leading-relaxed">
-                We build in four capability areas where strong digital work actually changes business performance: AI execution, customer-facing platforms, commerce infrastructure, and internal operations systems.
+                These are the places where weak digital structure usually costs the business money, time, or trust: unclear offers, clumsy buying paths, disconnected tools, and work that still depends on manual patching.
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
-                {['Growth', 'Operations', 'Customer flow', 'System clarity'].map((item) => (
+                {['Revenue flow', 'Operational clarity', 'Customer trust', 'Execution speed'].map((item) => (
                   <span key={item} className="rounded-full border border-brand-100 bg-soft px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-brand-400">
                     {item}
                   </span>

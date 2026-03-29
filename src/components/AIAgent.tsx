@@ -10,11 +10,11 @@ export default function AIAgent() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: "Hey! I'm the Bakal project guide. I'll ask a few quick questions so our team can send you the right plan. What type of project are you looking for?" },
+    { role: 'model', text: "I’m the Bakal project guide. I’ll ask a few quick questions so we can understand the problem properly and route the right next step. What are you trying to build or improve?" },
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [quickReplies, setQuickReplies] = useState<string[]>(['AI Product', 'Custom Platform', 'Automation System']);
+  const [quickReplies, setQuickReplies] = useState<string[]>(['AI systems', 'Custom platform', 'Automation and reporting']);
   const [leadFormArgs, setLeadFormArgs] = useState<LeadFormArgs | null>(null);
   const [leadFormStartedAt, setLeadFormStartedAt] = useState<number | null>(null);
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -58,7 +58,7 @@ export default function AIAgent() {
       if (!response.ok) throw new Error(`Chat request failed with status ${response.status}`);
 
       const data = (await response.json()) as ChatResponse;
-      const modelText = data.text || "I'm sorry, I couldn't process that. Could you try again?";
+      const modelText = data.text || "I couldn't process that properly. Send that again and I'll keep the intake moving.";
 
       if (data.leadFormArgs) {
         setLeadFormArgs(data.leadFormArgs);
@@ -71,7 +71,7 @@ export default function AIAgent() {
       setMessages((prev) => [...prev, { role: 'model', text: modelText }]);
     } catch (error) {
       console.error('Chat error:', error);
-      setMessages((prev) => [...prev, { role: 'model', text: 'I encountered an error. Please try again later.' }]);
+      setMessages((prev) => [...prev, { role: 'model', text: 'The chat hit a problem. Please try again in a moment, or use the project brief instead.' }]);
     } finally {
       setIsLoading(false);
     }
@@ -99,7 +99,7 @@ export default function AIAgent() {
       setMessages((prev) => [
         ...prev,
         { role: 'user', text: `Email provided: ${emailInput}` },
-        { role: 'model', text: 'Perfect! I have securely sent your project brief and email to our team. One of our experts will reach out shortly with your tailored plan and next steps.' },
+        { role: 'model', text: 'Your project brief is in. Our team now has the summary and your email, and we will follow up with the clearest next step.' },
       ]);
       setLeadFormArgs(null);
       setLeadFormStartedAt(null);
@@ -108,7 +108,7 @@ export default function AIAgent() {
     } catch (error) {
       console.error('Lead submit error:', error);
       setFormStatus('error');
-      setFormError(error instanceof Error ? error.message : 'I collected your information, but the secure submission failed. Please try again in a moment.');
+      setFormError(error instanceof Error ? error.message : 'The secure submission failed. Please try again in a moment.');
     }
   };
 
@@ -189,12 +189,12 @@ export default function AIAgent() {
                           <input id="lead-website" type="text" tabIndex={-1} autoComplete="off" value={websiteInput} onChange={(e) => setWebsiteInput(e.target.value)} />
                         </div>
                         <div className="space-y-2">
-                          <label htmlFor="assistant-email" className="text-xs font-semibold uppercase tracking-wider text-brand-400">Your Best Email</label>
+                          <label htmlFor="assistant-email" className="text-xs font-semibold uppercase tracking-wider text-brand-400">Best Email For Follow-Up</label>
                           <input id="assistant-email" type="email" required value={emailInput} onChange={(e) => setEmailInput(e.target.value)} placeholder="hello@example.com" className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl bg-white border border-brand-100/50 focus:outline-none focus:border-accent transition-colors text-ink text-sm shadow-sm" />
                         </div>
                         {formError && <p className="text-sm text-red-600">{formError}</p>}
                         <button type="submit" disabled={formStatus === 'submitting'} className="w-full py-3 sm:py-4 rounded-xl bg-accent text-white font-semibold text-sm hover:bg-ink transition-colors disabled:opacity-50 flex justify-center items-center">
-                          {formStatus === 'submitting' ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Send My Tailored Plan'}
+                          {formStatus === 'submitting' ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Send Project Brief'}
                         </button>
                       </form>
                     ) : (

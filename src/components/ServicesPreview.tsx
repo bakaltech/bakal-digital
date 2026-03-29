@@ -22,13 +22,13 @@ export default function ServicesPreview() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-4xl mb-10 sm:mb-14 md:mb-20">
           <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">
-            Explore The Capabilities
+            Service Preview
           </p>
           <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-semibold text-ink leading-tight tracking-tight mb-5 sm:mb-8">
-            See how each service takes shape before you even open the detail page.
+            See how each service is structured before you commit to the page.
           </h2>
           <p className="text-base sm:text-xl text-brand-400 leading-relaxed max-w-3xl">
-            The best way to build trust right now is to let people experience the thinking. Each capability below carries a different operational shape, not just a different label.
+            Every capability has a different operating shape, pressure point, and delivery pattern. This preview makes that visible early so the site feels concrete instead of promotional.
           </p>
         </div>
 

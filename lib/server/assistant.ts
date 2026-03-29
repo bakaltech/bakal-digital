@@ -53,33 +53,33 @@ type FlowStep = {
 const flowSteps: FlowStep[] = [
   {
     key: "projectType",
-    prompt: "What type of project are you looking for?",
-    quickReplies: ["AI product", "Custom platform", "Automation system"],
+    prompt: "What are you trying to build or improve?",
+    quickReplies: ["AI systems", "Custom platform", "Automation and reporting"],
   },
   {
     key: "projectStage",
-    prompt: "Is this a brand new project or an existing one you want to improve?",
-    quickReplies: ["Brand new", "Improve existing", "Not sure yet"],
+    prompt: "Is this a new initiative, or an existing system that needs to perform better?",
+    quickReplies: ["Brand new", "Improving existing", "Still defining it"],
   },
   {
     key: "industry",
-    prompt: "What industry or business are you in?",
-    quickReplies: ["Professional services", "E-commerce", "Other industry"],
+    prompt: "What kind of business is this for?",
+    quickReplies: ["Professional services", "Commerce brand", "Other business type"],
   },
   {
     key: "mainGoal",
-    prompt: "What is the main goal for this project?",
-    quickReplies: ["Get more leads", "Look more premium", "Save time"],
+    prompt: "What needs to improve most if this project works well?",
+    quickReplies: ["More qualified demand", "Clearer buying journey", "Less manual operational drag"],
   },
   {
     key: "budget",
-    prompt: "What budget range are you aiming for?",
-    quickReplies: ["Under $2k", "$2k-$5k", "$5k+"],
+    prompt: "Which budget range fits the work you have in mind?",
+    quickReplies: ["Under $5k", "$5k-$15k", "$15k+"],
   },
   {
     key: "timeline",
-    prompt: "When would you like to launch?",
-    quickReplies: ["ASAP", "This month", "Next 2-3 months"],
+    prompt: "What timeline are you working against?",
+    quickReplies: ["As soon as possible", "Within 4-6 weeks", "Within this quarter"],
   },
 ];
 
@@ -220,7 +220,7 @@ export async function generateChatResponse(params: {
   }, {});
 
   return {
-    text: `Here is what I have gathered: ${buildSummary(values)}. Please fill out the secure form below so we can send your tailored plan and next steps.`,
+    text: `Here is the project summary so far: ${buildSummary(values)}. Add the best email for follow-up below and we will route the brief to the right next step.`,
     quickReplies: [],
     leadFormArgs: {
       projectType: values.projectType,
