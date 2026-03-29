@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, useReducedMotion } from 'motion/react';
 import { ArrowRight, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -11,14 +11,49 @@ const systemNodes = [
 ] as const;
 
 function SystemsCanvas() {
+  const prefersReducedMotion = useReducedMotion();
+  const laneTransition = prefersReducedMotion ? { duration: 0 } : { duration: 26, repeat: Infinity, ease: 'easeInOut' as const };
+  const canvasTransition = prefersReducedMotion ? { duration: 0 } : { duration: 30, repeat: Infinity, ease: 'easeInOut' as const };
+  const footerTransition = prefersReducedMotion ? { duration: 0 } : { duration: 32, repeat: Infinity, ease: 'easeInOut' as const };
+  const pulseTransition = prefersReducedMotion ? { duration: 0 } : { duration: 8, repeat: Infinity, ease: 'easeInOut' as const };
+  const pathTransitionA = prefersReducedMotion ? { duration: 0 } : { duration: 10, repeat: Infinity, ease: 'easeInOut' as const };
+  const pathTransitionB = prefersReducedMotion ? { duration: 0 } : { duration: 11, repeat: Infinity, ease: 'easeInOut' as const };
+  const pathTransitionC = prefersReducedMotion ? { duration: 0 } : { duration: 12, repeat: Infinity, ease: 'easeInOut' as const };
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       <div className="absolute inset-0 bg-[linear-gradient(to_bottom,#eff5fb_0%,#f7fbff_18%,#ffffff_48%,#f6f8fc_100%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(rgba(14,29,58,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(14,29,58,0.045)_1px,transparent_1px)] bg-[size:72px_72px]" />
+      <div className="absolute inset-x-5 top-[14%] grid gap-3 sm:gap-4 lg:hidden">
+        <div className="flex items-center justify-between gap-3">
+          {systemNodes.slice(0, 2).map((node) => (
+            <div key={node.title} className="min-w-0 flex-1 rounded-[1.2rem] border border-white/80 bg-white/92 p-3 shadow-[0_12px_24px_rgba(17,19,21,0.06)]">
+              <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-accent">{node.title}</p>
+              <p className="mt-2 text-xs font-semibold leading-snug text-ink">{node.value}</p>
+            </div>
+          ))}
+        </div>
+        <div className="rounded-[1.5rem] border border-white/80 bg-[#111827] p-4 text-white shadow-[0_16px_34px_rgba(17,19,21,0.12)]">
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-white/45">System monitor</p>
+            <div className="rounded-full bg-white/10 px-2.5 py-1 text-[9px] font-bold uppercase tracking-[0.2em] text-white/60">Live</div>
+          </div>
+          <div className="mt-4 h-2 rounded-full bg-white/10">
+            <div className="h-full w-[64%] rounded-full bg-gradient-to-r from-sky-400 to-blue-500" />
+          </div>
+          <div className="mt-4 grid grid-cols-3 gap-2">
+            {['AI', 'Data', 'Ops'].map((label) => (
+              <div key={label} className="rounded-[0.9rem] border border-white/10 bg-white/6 px-2.5 py-3">
+                <p className="text-[8px] font-bold uppercase tracking-[0.2em] text-white/40">{label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
 
       <motion.div
-        animate={{ x: [-40, 40, -40] }}
-        transition={{ duration: 26, repeat: Infinity, ease: 'easeInOut' }}
+        animate={prefersReducedMotion ? undefined : { x: [-40, 40, -40] }}
+        transition={laneTransition}
         className="absolute left-[-4%] right-[-4%] top-[14%] hidden lg:flex items-center justify-between"
       >
         {systemNodes.map((node) => (
@@ -30,8 +65,8 @@ function SystemsCanvas() {
       </motion.div>
 
       <motion.div
-        animate={{ x: [52, -52, 52] }}
-        transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut' }}
+        animate={prefersReducedMotion ? undefined : { x: [52, -52, 52] }}
+        transition={canvasTransition}
         className="absolute left-[-2%] right-[-2%] top-[39%] hidden lg:flex items-center justify-around"
       >
         <div className="w-[18rem] rounded-[2rem] border border-white/80 bg-[#111827] p-5 text-white shadow-[0_24px_54px_rgba(17,19,21,0.16)]">
@@ -41,8 +76,8 @@ function SystemsCanvas() {
               <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-white/40">Signal routing</p>
               <div className="mt-3 h-2 rounded-full bg-white/10">
                 <motion.div
-                  animate={{ width: ['32%', '74%', '56%', '68%'] }}
-                  transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+                  animate={prefersReducedMotion ? undefined : { width: ['32%', '74%', '56%', '68%'] }}
+                  transition={pulseTransition}
                   className="h-full rounded-full bg-gradient-to-r from-sky-400 to-blue-500"
                 />
               </div>
@@ -97,8 +132,8 @@ function SystemsCanvas() {
       </motion.div>
 
       <motion.div
-        animate={{ x: [-48, 48, -48] }}
-        transition={{ duration: 32, repeat: Infinity, ease: 'easeInOut' }}
+        animate={prefersReducedMotion ? undefined : { x: [-48, 48, -48] }}
+        transition={footerTransition}
         className="absolute left-[-6%] right-[-6%] bottom-[10%] hidden lg:flex items-center justify-between"
       >
         {['Conversion path', 'Automation state', 'Platform clarity', 'Delivery rhythm'].map((label, index) => (
@@ -116,8 +151,8 @@ function SystemsCanvas() {
           strokeWidth="3"
           strokeLinecap="round"
           strokeDasharray="10 14"
-          animate={{ pathLength: [0.2, 1, 0.2], opacity: [0.25, 0.65, 0.25] }}
-          transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+          animate={prefersReducedMotion ? undefined : { pathLength: [0.2, 1, 0.2], opacity: [0.25, 0.65, 0.25] }}
+          transition={pathTransitionA}
         />
         <motion.path
           d="M280 500C420 500 460 420 640 420C788 420 828 506 988 506C1148 506 1190 420 1330 420"
@@ -125,8 +160,8 @@ function SystemsCanvas() {
           strokeWidth="3"
           strokeLinecap="round"
           strokeDasharray="12 16"
-          animate={{ pathLength: [1, 0.25, 1], opacity: [0.2, 0.55, 0.2] }}
-          transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
+          animate={prefersReducedMotion ? undefined : { pathLength: [1, 0.25, 1], opacity: [0.2, 0.55, 0.2] }}
+          transition={pathTransitionB}
         />
         <motion.path
           d="M310 690C430 690 506 626 648 626C806 626 852 708 1018 708C1154 708 1222 650 1334 650"
@@ -134,8 +169,8 @@ function SystemsCanvas() {
           strokeWidth="3"
           strokeLinecap="round"
           strokeDasharray="12 18"
-          animate={{ pathLength: [0.35, 1, 0.35], opacity: [0.18, 0.48, 0.18] }}
-          transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+          animate={prefersReducedMotion ? undefined : { pathLength: [0.35, 1, 0.35], opacity: [0.18, 0.48, 0.18] }}
+          transition={pathTransitionC}
         />
         <defs>
           <linearGradient id="lineA" x1="180" y1="210" x2="1420" y2="214" gradientUnits="userSpaceOnUse">
@@ -159,6 +194,7 @@ function SystemsCanvas() {
 }
 
 export default function InteractiveHero() {
+  const prefersReducedMotion = useReducedMotion();
   const openChat = () => {
     window.dispatchEvent(new CustomEvent('open-chat'));
   };
@@ -173,7 +209,7 @@ export default function InteractiveHero() {
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+          transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
           className="relative mx-auto max-w-[48rem] overflow-hidden rounded-[2rem] border border-black/5 bg-white/96 px-5 py-7 shadow-[0_24px_70px_rgba(17,19,21,0.14)] sm:rounded-[2.5rem] sm:px-8 sm:py-8 lg:px-9 lg:py-9"
         >
           <div className="relative z-10 text-center">
