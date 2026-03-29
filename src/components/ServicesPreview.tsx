@@ -32,8 +32,8 @@ export default function ServicesPreview() {
           </p>
         </div>
 
-        <div className="grid xl:grid-cols-[0.9fr_1.1fr] gap-6 sm:gap-8 md:gap-10 items-start">
-          <div className="grid gap-3 sm:gap-4">
+        <div className="grid xl:grid-cols-[0.94fr_1.06fr] gap-6 sm:gap-8 md:gap-10 items-start">
+          <div className="grid gap-3 sm:gap-4 lg:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2">
             {services.map((service) => {
               const isActive = service.id === activeService.id;
 
@@ -42,7 +42,7 @@ export default function ServicesPreview() {
                   key={service.id}
                   type="button"
                   onClick={() => setActiveId(service.id)}
-                  className={`text-left rounded-[1.5rem] sm:rounded-[1.75rem] border p-5 sm:p-6 transition-all duration-300 ${
+                  className={`text-left rounded-[1.5rem] sm:rounded-[1.75rem] border p-5 sm:p-6 transition-all duration-300 h-full ${
                     isActive
                       ? `bg-gradient-to-br ${service.theme.soft} ${service.theme.ring} shadow-[0_20px_50px_rgba(17,19,21,0.07)]`
                       : 'bg-white border-brand-100/50 hover:border-brand-200/80'
@@ -70,7 +70,7 @@ export default function ServicesPreview() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className={`rounded-[2rem] sm:rounded-[2.5rem] border ${activeService.theme.ring} bg-gradient-to-br ${activeService.theme.soft} p-5 sm:p-6 md:p-7 shadow-[0_24px_60px_rgba(17,19,21,0.08)]`}
+            className={`rounded-[2rem] sm:rounded-[2.5rem] border ${activeService.theme.ring} bg-gradient-to-br ${activeService.theme.soft} p-5 sm:p-6 md:p-7 shadow-[0_24px_60px_rgba(17,19,21,0.08)] xl:sticky xl:top-28`}
           >
             <div className="grid lg:grid-cols-[0.86fr_1.14fr] gap-4 sm:gap-5 items-stretch">
               <div className="rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-brand-100/40 shadow-lg min-h-[280px] sm:min-h-[320px]">

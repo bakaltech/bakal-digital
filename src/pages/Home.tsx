@@ -16,6 +16,7 @@ interface CategoryCardProps {
     visual: 'ai' | 'platform' | 'commerce' | 'data';
   };
   idx: number;
+  className?: string;
 }
 
 const categoryVisualStyles: Record<CategoryCardProps['category']['visual'], { glow: string; orb: string; line: string }> = {
@@ -57,13 +58,13 @@ const CategoryVisual: React.FC<{ visual: CategoryCardProps['category']['visual']
   );
 };
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
+const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx, className = '' }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-    className="group relative min-h-[320px] sm:min-h-[360px] md:min-h-[400px] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-soft border border-brand-100/50 shadow-sm hover:shadow-xl transition-all duration-500"
+    className={`group relative min-h-[300px] sm:min-h-[340px] md:min-h-[360px] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-soft border border-brand-100/50 shadow-sm hover:shadow-xl transition-all duration-500 ${className}`}
   >
     <CategoryVisual visual={category.visual} icon={category.icon} />
     <div className="absolute inset-0 bg-gradient-to-t from-ink/92 via-ink/42 to-white/10 opacity-95 group-hover:opacity-100 transition-opacity duration-500" />
@@ -72,10 +73,10 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
         <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-accent group-hover:border-accent transition-all duration-500">
           <category.icon className="w-5 h-5 text-white" />
         </div>
-        <h3 className="text-[1.9rem] sm:text-2xl md:text-[2rem] font-semibold text-white mb-3 tracking-tight leading-[0.96] max-w-[9ch]">
+        <h3 className="text-[1.7rem] sm:text-[1.85rem] md:text-[1.95rem] font-semibold text-white mb-3 tracking-tight leading-[0.98] max-w-[11ch]">
           {category.title}
         </h3>
-        <p className="text-white/72 text-sm leading-relaxed max-w-[24ch]">
+        <p className="text-white/72 text-sm leading-relaxed max-w-[28ch]">
           {category.description}
         </p>
       </div>
@@ -170,11 +171,16 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid xl:grid-cols-[1.15fr_0.85fr] gap-5 sm:gap-6 md:gap-8">
+          <div className="grid xl:grid-cols-[1.12fr_0.88fr] gap-5 sm:gap-6 md:gap-8">
             <CapabilityLeadCard category={categories[0]} />
             <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
               {categories.slice(1).map((cat, idx) => (
-                <CategoryCard key={cat.title} category={cat} idx={idx} />
+                <CategoryCard
+                  key={cat.title}
+                  category={cat}
+                  idx={idx}
+                  className={idx === 2 ? 'sm:col-span-2' : ''}
+                />
               ))}
             </div>
           </div>
