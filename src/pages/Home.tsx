@@ -15,6 +15,7 @@ interface CategoryCardProps {
     icon: React.ElementType;
     visual: 'ai' | 'platform' | 'commerce' | 'data';
     outcomes: string[];
+    label: string;
   };
   idx: number;
 }
@@ -64,25 +65,25 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-    className="group relative min-h-[26rem] rounded-[1.6rem] overflow-hidden border border-brand-100/60 bg-soft shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(17,19,21,0.08)]"
+    className="group relative flex min-h-[24rem] flex-col overflow-hidden rounded-[1.75rem] border border-brand-100/60 bg-white shadow-[0_12px_30px_rgba(17,19,21,0.05)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_24px_56px_rgba(17,19,21,0.1)]"
   >
-    <CategoryVisual visual={category.visual} icon={category.icon} />
-    <div className="absolute inset-0 bg-gradient-to-t from-ink/94 via-ink/58 to-white/8 opacity-95 group-hover:opacity-100 transition-opacity duration-500" />
-    <div className="absolute inset-0 flex flex-col p-5 sm:p-6">
+    <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-br from-white via-white to-soft" />
+    <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-soft/80 to-transparent" />
+    <div className="relative flex h-full flex-col p-5 sm:p-6">
       <div className="flex items-start justify-between gap-4">
-        <div className="w-10 h-10 rounded-xl border border-white/20 bg-white/10 backdrop-blur-xl flex items-center justify-center transition-all duration-500 group-hover:bg-accent group-hover:border-accent">
-          <category.icon className="w-5 h-5 text-white" />
+        <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-100/80 bg-soft text-brand-400 transition-colors duration-300 group-hover:border-transparent group-hover:bg-ink group-hover:text-white">
+          <category.icon className="w-5 h-5" />
         </div>
-        <span className="rounded-full border border-white/12 bg-white/8 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-white/62">
-          Capability
+        <span className="rounded-full border border-brand-100 bg-soft px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">
+          {category.label}
         </span>
       </div>
 
       <div className="mt-8">
-        <h3 className="max-w-[10ch] text-[1.5rem] sm:text-[1.8rem] font-semibold leading-[1.02] text-white">
+        <h3 className="max-w-[10ch] text-[1.65rem] sm:text-[1.9rem] font-semibold leading-[0.98] text-ink">
           {category.title}
         </h3>
-        <p className="mt-4 max-w-[28ch] text-sm sm:text-[15px] leading-relaxed text-white/78">
+        <p className="mt-4 max-w-[28ch] text-sm sm:text-[15px] leading-relaxed text-brand-400">
           {category.description}
         </p>
       </div>
@@ -90,13 +91,13 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
       <div className="mt-auto pt-6">
         <div className="mb-5 grid gap-2">
           {category.outcomes.slice(0, 2).map((outcome, outcomeIndex) => (
-            <div key={outcome} className="rounded-[1rem] border border-white/10 bg-white/6 px-3 py-2.5">
-              <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-white/38">0{outcomeIndex + 1}</p>
-              <p className="mt-1 text-sm leading-relaxed text-white/88">{outcome}</p>
+            <div key={outcome} className="rounded-[1rem] border border-brand-100/70 bg-soft px-3 py-2.5">
+              <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-brand-300">0{outcomeIndex + 1}</p>
+              <p className="mt-1 text-sm leading-relaxed text-ink">{outcome}</p>
             </div>
           ))}
         </div>
-        <Link to="/services" className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-white transition-colors hover:text-white">
+        <Link to="/services" className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-ink transition-colors hover:text-accent">
           Explore capability
           <ArrowRight className="ml-2 w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
         </Link>
@@ -135,6 +136,7 @@ export default function Home() {
       icon: Cpu,
       visual: 'ai' as const,
       outcomes: ['Useful assistant flows', 'Faster qualification and support'],
+      label: 'AI systems',
     },
     {
       title: 'Custom Platforms',
@@ -142,6 +144,7 @@ export default function Home() {
       icon: Globe,
       visual: 'platform' as const,
       outcomes: ['Clearer customer journeys', 'Interfaces shaped around real workflow'],
+      label: 'Platform build',
     },
     {
       title: 'Commerce Systems',
@@ -149,6 +152,7 @@ export default function Home() {
       icon: ShoppingBag,
       visual: 'commerce' as const,
       outcomes: ['Stronger product presentation', 'Cleaner checkout and revenue flow'],
+      label: 'Commerce flow',
     },
     {
       title: 'Automation & Data',
@@ -156,6 +160,7 @@ export default function Home() {
       icon: Database,
       visual: 'data' as const,
       outcomes: ['Less manual operational drag', 'Better visibility across the business'],
+      label: 'Operational systems',
     },
   ];
 
@@ -174,7 +179,7 @@ export default function Home() {
             </div>
             <div className="max-w-2xl lg:justify-self-end">
               <p className="text-base sm:text-lg md:text-[1.12rem] text-brand-400 leading-relaxed">
-                These are the four capability areas where we usually create the most leverage: sharper AI utility, clearer platforms, stronger commerce flow, and cleaner internal operations.
+                We build in four capability areas where strong digital work actually changes business performance: AI execution, customer-facing platforms, commerce infrastructure, and internal operations systems.
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
                 {['Growth', 'Operations', 'Customer flow', 'System clarity'].map((item) => (
