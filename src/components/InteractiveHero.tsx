@@ -37,68 +37,67 @@ export default function InteractiveHero() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-paper pt-24 sm:pt-30 md:pt-34 pb-12 sm:pb-16 md:pb-18">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(0,102,204,0.08),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(0,102,204,0.08),_transparent_26%),linear-gradient(to_bottom,#f8fafc_0%,#ffffff_42%,#f5f7fb_100%)]" />
+    <section className="relative overflow-hidden bg-paper pt-24 sm:pt-28 md:pt-32 pb-10 sm:pb-12 md:pb-14">
+      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,#eef4fb_0%,#f8fbff_22%,#ffffff_52%,#f6f8fb_100%)]" />
 
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <motion.div style={{ x: layer1X }} className="absolute left-[-6%] top-[6%] hidden lg:flex gap-6 rotate-[-7deg]">
+        <motion.div style={{ x: layer1X }} className="absolute left-[-2%] top-[4%] hidden lg:flex gap-5 rotate-[-6deg]">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={`l1-${i}`} className="h-40 w-72 shrink-0 rounded-[1.9rem] overflow-hidden border border-white/60 shadow-[0_28px_60px_rgba(17,19,21,0.12)]">
+            <div key={`l1-${i}`} className="h-36 w-64 shrink-0 rounded-[1.8rem] overflow-hidden border-[10px] border-white shadow-[0_18px_40px_rgba(17,19,21,0.14)]">
               <BrandedVisual variant={galleryVariants[i % galleryVariants.length]} compact title="" />
             </div>
           ))}
         </motion.div>
 
-        <motion.div style={{ x: layer2X }} className="absolute right-[-8%] top-[17%] hidden lg:flex gap-6 rotate-[8deg]">
+        <motion.div style={{ x: layer2X }} className="absolute right-[-1%] top-[10%] hidden lg:flex gap-5 rotate-[7deg]">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={`l2-${i}`} className="h-40 w-72 shrink-0 rounded-[1.9rem] overflow-hidden border border-white/60 shadow-[0_28px_60px_rgba(17,19,21,0.12)]">
+            <div key={`l2-${i}`} className="h-36 w-64 shrink-0 rounded-[1.8rem] overflow-hidden border-[10px] border-white shadow-[0_18px_40px_rgba(17,19,21,0.14)]">
               <BrandedVisual variant={galleryVariants[(i + 2) % galleryVariants.length]} compact title="" />
             </div>
           ))}
         </motion.div>
 
-        <motion.div style={{ y: layer3Y }} className="absolute left-[5%] top-[45%] hidden xl:flex flex-col gap-6 rotate-[-10deg]">
+        <motion.div style={{ y: layer3Y }} className="absolute left-[4%] top-[58%] hidden xl:flex flex-col gap-5 rotate-[-9deg]">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div key={`l3-${i}`} className="h-36 w-64 shrink-0 rounded-[1.75rem] overflow-hidden border border-white/60 shadow-[0_22px_48px_rgba(17,19,21,0.11)]">
+            <div key={`l3-${i}`} className="h-32 w-56 shrink-0 rounded-[1.6rem] overflow-hidden border-[8px] border-white shadow-[0_18px_38px_rgba(17,19,21,0.13)]">
               <BrandedVisual variant={galleryVariants[(i + 1) % galleryVariants.length]} compact title="" />
             </div>
           ))}
         </motion.div>
 
-        <motion.div style={{ y: layer4Y }} className="absolute right-[8%] top-[52%] hidden xl:flex flex-col gap-6 rotate-[11deg]">
+        <motion.div style={{ y: layer4Y }} className="absolute right-[7%] top-[60%] hidden xl:flex flex-col gap-5 rotate-[10deg]">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div key={`l4-${i}`} className="h-36 w-64 shrink-0 rounded-[1.75rem] overflow-hidden border border-white/60 shadow-[0_22px_48px_rgba(17,19,21,0.11)]">
+            <div key={`l4-${i}`} className="h-32 w-56 shrink-0 rounded-[1.6rem] overflow-hidden border-[8px] border-white shadow-[0_18px_38px_rgba(17,19,21,0.13)]">
               <BrandedVisual variant={galleryVariants[(i + 3) % galleryVariants.length]} compact title="" />
             </div>
           ))}
         </motion.div>
 
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_24%,rgba(255,255,255,0.68)_58%,rgba(255,255,255,0.9)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_20%,rgba(255,255,255,0.18)_48%,rgba(255,255,255,0.62)_100%)]" />
       </div>
 
-      <div className="absolute inset-0 z-[5] bg-gradient-to-b from-paper/62 via-paper/70 to-paper/86 lg:from-paper/30 lg:via-paper/40 lg:to-paper/72" />
+      <div className="absolute inset-0 z-[5] bg-gradient-to-b from-paper/40 via-paper/28 to-paper/68 lg:from-paper/18 lg:via-paper/10 lg:to-paper/52" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <motion.div
           initial={{ opacity: 0, y: 34 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mx-auto max-w-[54rem] overflow-hidden rounded-[2rem] sm:rounded-[2.75rem] border border-white/70 bg-white/82 px-5 py-7 sm:px-8 sm:py-9 lg:px-10 lg:py-10 shadow-[0_30px_90px_rgba(17,19,21,0.12)] backdrop-blur-2xl"
+          className="relative mx-auto max-w-[48rem] overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] border border-black/5 bg-white px-5 py-7 sm:px-8 sm:py-8 lg:px-9 lg:py-9 shadow-[0_22px_60px_rgba(17,19,21,0.14)]"
         >
           <div className="absolute -left-20 top-0 h-56 w-56 rounded-full bg-accent/8 blur-[110px]" />
           <div className="absolute bottom-0 right-0 h-56 w-56 rounded-full bg-sky-200/25 blur-[120px]" />
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white to-transparent" />
 
           <div className="relative z-10 text-center">
-            <div className="inline-flex items-center rounded-full border border-brand-100/70 bg-white/84 px-4 py-2 text-[11px] font-bold uppercase tracking-[0.26em] text-accent shadow-[0_10px_24px_rgba(17,19,21,0.04)]">
+            <div className="inline-flex items-center rounded-full border border-brand-100 bg-white px-4 py-2 text-[11px] font-bold uppercase tracking-[0.26em] text-accent shadow-[0_8px_20px_rgba(17,19,21,0.05)]">
               AI Products, Platforms, Automation, and Data Systems
             </div>
 
-            <h1 className="mx-auto mt-6 max-w-[10.5ch] text-[clamp(2.9rem,8vw,5.8rem)] font-bold leading-[0.93] text-ink">
+            <h1 className="mx-auto mt-6 max-w-[9.5ch] text-[clamp(2.85rem,7vw,5.35rem)] font-bold leading-[0.92] text-ink">
                 Digital systems that help the business move faster.
             </h1>
 
-            <p className="mx-auto mt-6 max-w-[40rem] text-base leading-relaxed text-brand-400 sm:text-[1.08rem] md:text-[1.2rem]">
+            <p className="mx-auto mt-5 max-w-[34rem] text-base leading-relaxed text-brand-400 sm:text-[1.05rem] md:text-[1.12rem]">
               We design AI products, custom platforms, automation layers, and customer-facing systems that make sales clearer, operations smoother, and growth easier to support.
             </p>
 
@@ -133,7 +132,7 @@ export default function InteractiveHero() {
                 ['Operational systems', 'Tools and workflows shaped around real business flow.'],
                 ['One delivery partner', 'Strategy, design, engineering, and launch support together.'],
               ].map(([title, detail]) => (
-                <div key={title} className="rounded-[1.5rem] border border-white/60 bg-white/72 p-4 text-left shadow-[0_12px_28px_rgba(17,19,21,0.04)]">
+                <div key={title} className="rounded-[1.35rem] border border-brand-100 bg-white p-4 text-left shadow-[0_10px_24px_rgba(17,19,21,0.04)]">
                   <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.22em] text-accent">{title}</p>
                   <p className="text-sm leading-relaxed text-brand-400">{detail}</p>
                 </div>
@@ -149,9 +148,9 @@ export default function InteractiveHero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto max-w-[64rem]"
+          className="mx-auto max-w-[62rem]"
         >
-          <div className="rounded-[2rem] sm:rounded-[2.5rem] border border-brand-100/60 bg-white/88 p-4 sm:p-5 lg:p-6 shadow-[0_24px_64px_rgba(17,19,21,0.08)] backdrop-blur-2xl">
+          <div className="rounded-[2rem] sm:rounded-[2.35rem] border border-brand-100/60 bg-white p-4 sm:p-5 lg:p-6 shadow-[0_20px_56px_rgba(17,19,21,0.08)]">
             <div className="grid gap-4 lg:grid-cols-[minmax(0,0.62fr)_minmax(0,1fr)] lg:gap-5">
               <div className="overflow-hidden rounded-[1.75rem] border border-brand-100/40 shadow-lg">
                 <BrandedVisual variant="studio" title="Systems create momentum" className="min-h-[15rem] sm:min-h-[17rem] lg:min-h-full" />
