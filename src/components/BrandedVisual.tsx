@@ -39,11 +39,11 @@ export default function BrandedVisual({ variant, title, compact = false, narrow 
   const Icon = config.icon;
   const isCondensed = compact || narrow;
   const titleClassName = compact
-    ? 'text-lg'
+    ? 'text-lg sm:text-[1.2rem]'
     : narrow
-      ? 'text-[1.55rem] md:text-[2rem] xl:text-[2.2rem]'
-      : 'text-2xl md:text-3xl';
-  const titleWidthClassName = compact ? 'max-w-[9ch]' : narrow ? 'max-w-[8ch] md:max-w-[9ch]' : 'max-w-[10ch]';
+      ? 'text-[1.45rem] md:text-[1.9rem] xl:text-[2.1rem]'
+      : 'text-[1.85rem] md:text-[2.35rem]';
+  const titleWidthClassName = compact ? 'max-w-[8ch]' : narrow ? 'max-w-[7ch] md:max-w-[8ch]' : 'max-w-[8.5ch]';
 
   return (
     <div className={`relative h-full w-full overflow-hidden rounded-[2rem] bg-gradient-to-br ${config.panel} ${className}`}>
@@ -53,11 +53,11 @@ export default function BrandedVisual({ variant, title, compact = false, narrow 
 
       <div className={`relative z-10 flex h-full flex-col ${narrow ? 'justify-start' : 'justify-between'} ${compact ? 'p-4' : narrow ? 'p-4 md:p-5 xl:p-6' : 'p-7 md:p-8'}`}>
         <div className="flex items-start justify-between gap-4">
-          <div className="min-w-0">
-            <p className={`mb-3 font-bold uppercase text-white/55 ${narrow ? 'text-[9px] md:text-[10px] tracking-[0.24em] md:tracking-[0.3em]' : 'text-[10px] tracking-[0.3em]'}`}>
+          <div className={`min-w-0 ${compact ? 'pt-1' : narrow ? 'pt-1 md:pt-2' : 'pt-2'}`}>
+            <p className={`font-bold uppercase text-white/55 ${narrow ? 'mb-3 text-[9px] md:text-[10px] tracking-[0.24em] md:tracking-[0.3em]' : 'mb-4 text-[10px] tracking-[0.3em]'}`}>
               {config.eyebrow}
             </p>
-            <h3 className={`${titleClassName} ${titleWidthClassName} text-balance font-semibold tracking-tight leading-[0.92] text-white`}>
+            <h3 className={`${titleClassName} ${titleWidthClassName} text-balance font-semibold tracking-tight leading-[1.02] text-white drop-shadow-[0_8px_18px_rgba(15,23,42,0.2)]`}>
               {title ?? 'System direction'}
             </h3>
           </div>
@@ -66,7 +66,7 @@ export default function BrandedVisual({ variant, title, compact = false, narrow 
           </div>
         </div>
 
-        <div className={`grid ${compact ? 'gap-3' : narrow ? 'gap-3 mt-4 md:mt-5' : 'gap-4'}`}>
+        <div className={`grid ${compact ? 'mt-5 gap-3' : narrow ? 'mt-6 gap-3 md:mt-7' : 'mt-8 gap-4'}`}>
           <div className={`rounded-[1.5rem] border border-white/10 bg-white/8 backdrop-blur-sm ${narrow ? 'p-3.5' : 'p-4'}`}>
             <div className="mb-3 flex items-center gap-2">
               <div className="h-2 w-2 rounded-full bg-white/50" />

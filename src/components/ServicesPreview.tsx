@@ -85,10 +85,10 @@ export default function ServicesPreview() {
                       {activeService.theme.label}
                     </span>
                   </div>
-                  <h3 className="max-w-[12ch] text-2xl sm:text-3xl xl:text-[2.7rem] font-semibold tracking-tight leading-[0.95] text-balance">
+                  <h3 className="max-w-[11ch] text-2xl sm:text-3xl xl:text-[2.55rem] font-semibold tracking-tight leading-[1] text-balance">
                     {activeService.theme.label}
                   </h3>
-                  <h4 className="max-w-[10ch] text-2xl sm:text-3xl xl:text-[2.7rem] font-semibold tracking-tight leading-[0.95] text-balance">
+                  <h4 className="max-w-[9ch] text-2xl sm:text-3xl xl:text-[2.55rem] font-semibold tracking-tight leading-[1] text-balance">
                     {activeService.title}
                   </h4>
                 </div>

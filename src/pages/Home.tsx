@@ -73,7 +73,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx, className = 
         <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-accent group-hover:border-accent transition-all duration-500">
           <category.icon className="w-5 h-5 text-white" />
         </div>
-        <h3 className="text-[1.45rem] sm:text-[1.85rem] md:text-[1.95rem] font-semibold text-white mb-3 tracking-tight leading-[0.98] max-w-[11ch]">
+        <h3 className="text-[1.4rem] sm:text-[1.75rem] md:text-[1.85rem] font-semibold text-white mb-4 tracking-tight leading-[1.02] max-w-[10ch]">
           {category.title}
         </h3>
         <p className="text-white/78 text-sm sm:text-[15px] leading-relaxed max-w-[28ch]">
@@ -105,7 +105,7 @@ const CapabilityLeadCard: React.FC<{ category: CategoryCardProps['category'] }> 
         <category.icon className="w-6 h-6 text-white" />
       </div>
       <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-white/55 mb-4">Featured Capability</p>
-      <h3 className="text-3xl sm:text-5xl font-semibold text-white tracking-tight leading-[0.95] max-w-[8ch] mb-5">{category.title}</h3>
+      <h3 className="text-3xl sm:text-[3.2rem] font-semibold text-white tracking-tight leading-[1] max-w-[7ch] mb-6">{category.title}</h3>
       <p className="text-base sm:text-lg text-white/74 leading-relaxed max-w-[28ch]">{category.description}</p>
 
       <div className="mt-auto pt-8 flex flex-col gap-5">

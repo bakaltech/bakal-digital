@@ -160,7 +160,7 @@ export default function ServiceShowcase({ service }: { service: Service }) {
             <div className="relative z-10 flex items-start justify-between gap-4 mb-8">
               <div>
                 <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-white/55 mb-3">{service.theme.label}</p>
-                <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight max-w-[16ch]">{content.steps[activeStep].title}</h3>
+                <h3 className="max-w-[14ch] text-2xl sm:text-3xl font-semibold tracking-tight leading-[1.02]">{content.steps[activeStep].title}</h3>
               </div>
               <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center">
                 <Icon className="w-5 h-5" />
