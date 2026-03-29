@@ -37,7 +37,7 @@ export default function InteractiveHero() {
   };
 
   return (
-    <section className="relative min-h-[860px] lg:min-h-[980px] w-full overflow-hidden bg-paper pt-24 sm:pt-30 md:pt-34 pb-16 sm:pb-20 md:pb-24">
+    <section className="relative overflow-hidden bg-paper pt-24 sm:pt-30 md:pt-34 pb-12 sm:pb-16 md:pb-18">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(0,102,204,0.08),_transparent_30%),radial-gradient(circle_at_bottom_right,_rgba(0,102,204,0.08),_transparent_26%),linear-gradient(to_bottom,#f8fafc_0%,#ffffff_42%,#f5f7fb_100%)]" />
 
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
@@ -142,29 +142,38 @@ export default function InteractiveHero() {
           </div>
         </motion.div>
 
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-8 sm:pt-10 md:pt-12">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-          className="relative z-10 mx-auto -mt-3 max-w-[58rem] sm:-mt-5"
+          className="mx-auto max-w-[64rem]"
         >
-          <div className="rounded-[1.8rem] sm:rounded-[2.25rem] border border-white/70 bg-white/84 p-3 sm:p-4 shadow-[0_24px_64px_rgba(17,19,21,0.12)] backdrop-blur-2xl">
-            <div className="grid gap-4 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1fr)]">
-              <div className="overflow-hidden rounded-[1.6rem] border border-brand-100/40 shadow-lg">
-                <BrandedVisual variant="studio" title="Systems create momentum" className="min-h-[15rem] sm:min-h-[17rem]" />
+          <div className="rounded-[2rem] sm:rounded-[2.5rem] border border-brand-100/60 bg-white/88 p-4 sm:p-5 lg:p-6 shadow-[0_24px_64px_rgba(17,19,21,0.08)] backdrop-blur-2xl">
+            <div className="grid gap-4 lg:grid-cols-[minmax(0,0.62fr)_minmax(0,1fr)] lg:gap-5">
+              <div className="overflow-hidden rounded-[1.75rem] border border-brand-100/40 shadow-lg">
+                <BrandedVisual variant="studio" title="Systems create momentum" className="min-h-[15rem] sm:min-h-[17rem] lg:min-h-full" />
               </div>
-              <div className="rounded-[1.6rem] border border-brand-100/50 bg-white/82 p-4 sm:p-5">
-                <div className="mb-4 flex items-center justify-between gap-4">
-                  <div>
+
+              <div className="rounded-[1.75rem] border border-brand-100/50 bg-white p-5 sm:p-6">
+                <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                  <div className="max-w-[34rem]">
                     <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent">Quick Project Intake</p>
-                    <p className="mt-2 max-w-[28rem] text-sm leading-relaxed text-brand-400">
-                      Choose what you want to improve first, then send a short brief so we can route the right next step.
+                    <h2 className="mt-3 text-2xl sm:text-[2rem] font-semibold text-ink leading-tight">
+                      Tell us what needs to improve first.
+                    </h2>
+                    <p className="mt-3 text-sm sm:text-base leading-relaxed text-brand-400">
+                      Choose your focus area and send a short brief. We use that to route the project properly and recommend the right next step.
                     </p>
                   </div>
-                  <div className="hidden sm:flex rounded-full border border-brand-100 bg-soft px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.24em] text-brand-400">
+
+                  <div className="inline-flex self-start rounded-full border border-brand-100 bg-soft px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.24em] text-brand-400">
                     Fastest path to contact
                   </div>
                 </div>
+
                 <LeadsGrid />
               </div>
             </div>
