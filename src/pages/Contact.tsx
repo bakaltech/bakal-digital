@@ -71,10 +71,10 @@ export default function Contact() {
 
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           <motion.div className="lg:col-span-5 space-y-8" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.1 }}>
-            {[
-              { icon: Clock3, title: 'Fast first response', text: 'Best for teams that need a clear recommendation without a drawn-out discovery process.' },
-              { icon: Sparkles, title: 'Built around leverage', text: 'We focus on what changes growth, conversion, clarity, or delivery speed, not just what looks polished.' },
-              { icon: MessageSquare, title: 'Two clear starting points', text: 'Use the form if you already know the problem. Use the guided brief if you want help shaping it.' },
+            {[ 
+              { icon: Clock3, title: 'Fast first response', text: 'Best for teams that need a clear recommendation quickly instead of a drawn-out discovery cycle.' },
+              { icon: Sparkles, title: 'Built around leverage', text: 'We focus on the bottleneck that changes conversion, clarity, or execution speed, not just surface polish.' },
+              { icon: MessageSquare, title: 'Two clear starting points', text: 'Use the form if the problem is already clear. Use the guided brief if you want help shaping the scope.' },
             ].map((item) => (
               <div key={item.title} className="rounded-[1.75rem] sm:rounded-[2rem] bg-soft border border-brand-100/50 p-6 sm:p-8">
                 <div className="w-12 h-12 rounded-2xl bg-white border border-brand-100/50 flex items-center justify-center text-accent mb-5"><item.icon className="w-5 h-5" /></div>
@@ -87,8 +87,8 @@ export default function Contact() {
               <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-accent mb-5"><ShieldCheck className="w-5 h-5" /></div>
               <h2 className="text-2xl font-semibold tracking-tight mb-3">What happens next</h2>
               <div className="space-y-3 text-white/75 leading-relaxed">
-                <p>We review the request, assess fit, and map the strongest next step before replying.</p>
-                <p>If the opportunity is aligned, we can move into recommendations, scope direction, examples, or a more direct conversation.</p>
+                <p>We review the request, assess fit, and decide what kind of response will be most useful before replying.</p>
+                <p>If the opportunity is aligned, the next step may be recommendations, scope direction, relevant examples, or a direct conversation.</p>
               </div>
             </div>
 
@@ -104,7 +104,7 @@ export default function Contact() {
                 <div className="text-center py-10 md:py-16">
                   <div className="w-20 h-20 rounded-full bg-white border border-brand-100/50 flex items-center justify-center mx-auto mb-6"><CheckCircle2 className="w-10 h-10 text-accent" /></div>
                   <h3 className="text-3xl font-semibold text-ink tracking-tight mb-4">Message received</h3>
-                  <p className="text-lg text-brand-400 max-w-xl mx-auto leading-relaxed mb-8">Thanks for reaching out. Your project request has been captured and we can follow up from there.</p>
+                  <p className="text-lg text-brand-400 max-w-xl mx-auto leading-relaxed mb-8">Your project request is in. We now have enough context to assess fit and respond with the clearest next step.</p>
                   <button type="button" onClick={() => setIsSuccess(false)} className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-ink text-white font-semibold hover:bg-accent transition-colors">
                     Send another message
                     <ArrowRight className="w-4 h-4" />
@@ -135,7 +135,7 @@ export default function Contact() {
 
                   <div>
                     <label htmlFor="message" className="block text-sm font-semibold text-ink mb-2">Project details</label>
-                    <textarea id="message" name="message" rows={6} value={formData.message} onChange={handleChange} required placeholder="Tell us what the business does, what you want to launch or improve, and what outcome matters most." className="w-full px-5 py-4 rounded-2xl bg-white border border-brand-100/50 text-ink placeholder:text-brand-400 focus:outline-none focus:border-accent resize-none" />
+                    <textarea id="message" name="message" rows={6} value={formData.message} onChange={handleChange} required placeholder="What does the business do, what is not working well enough right now, and what should be measurably better after this project?" className="w-full px-5 py-4 rounded-2xl bg-white border border-brand-100/50 text-ink placeholder:text-brand-400 focus:outline-none focus:border-accent resize-none" />
                   </div>
 
                   {error && <p className="text-sm text-red-600">{error}</p>}

@@ -35,10 +35,10 @@ export default function About() {
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">About</p>
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-ink leading-[1.04] tracking-tight mb-6 sm:mb-8">
-              A digital product studio focused on AI, platforms, automation, and premium execution.
+              We build the systems layer behind clearer growth, better operations, and stronger digital delivery.
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-brand-400 leading-relaxed max-w-3xl">
-              Bakal Digital helps businesses turn ideas, service offers, and operational friction into better digital systems. Sometimes that is a polished public website. Sometimes it is an AI assistant, a custom workflow, a commerce engine, or a client-facing platform.
+              Bakal Digital works where digital structure starts affecting trust, conversion, onboarding, and internal execution. Sometimes that means a sharper public-facing product. Sometimes it means the workflow, platform, or automation layer underneath it.
             </p>
           </motion.div>
         </div>
@@ -55,13 +55,13 @@ export default function About() {
           <div>
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">How We Work</p>
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight mb-6 sm:mb-8">
-              Lean enough to move quickly. Deep enough to build something real.
+              Lean enough to move decisively. Deep enough to build something real.
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-brand-400 leading-relaxed mb-6">
-              We are not trying to create agency theatre. The goal is to understand the problem, shape the right system, and deliver an experience that feels sharp, usable, and commercially useful.
+              We are not trying to create agency theatre. The job is to understand the bottleneck, design the right system around it, and ship something that holds up under real use.
             </p>
             <p className="text-base sm:text-lg md:text-xl text-brand-400 leading-relaxed">
-              That may involve repositioning the brand, simplifying the user journey, wiring up automations, designing an AI-assisted flow, or building a platform that supports the next stage of growth.
+              That can involve positioning, UX, AI-assisted workflows, automation logic, product architecture, or the customer-facing layer that makes the whole thing easier to trust.
             </p>
           </div>
           <div className="grid gap-6">

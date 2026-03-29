@@ -18,10 +18,10 @@ export default function Services() {
         >
           <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6 sm:mb-8">Capabilities</p>
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-ink leading-[1.05] mb-6 sm:mb-10 tracking-tight">
-            Capability areas built to improve growth, clarity, and execution.
+            Service lines built to improve revenue flow, operational clarity, and delivery speed.
           </h1>
           <p className="text-base sm:text-xl md:text-2xl text-brand-400 font-normal leading-relaxed max-w-3xl">
-            Each service is designed to solve a business problem, not just ship deliverables. The goal is clearer positioning, faster operations, stronger product logic, and better paths from interest to action.
+            Each capability is structured around a business pressure point: unclear offers, clumsy journeys, slow internal handling, disconnected tools, or product foundations that are too weak to scale cleanly.
           </p>
         </motion.div>
       </section>
@@ -74,7 +74,7 @@ export default function Services() {
 
                   <div className="mt-auto pt-5 sm:pt-6 border-t border-ink/8 flex items-center justify-between">
                     <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-ink group-hover:text-accent transition-colors">
-                      Explore Capability
+                      View Service Scope
                     </span>
                     <div className="w-8 h-8 rounded-full border border-ink/10 flex items-center justify-center group-hover:bg-ink group-hover:text-white transition-all duration-500">
                       <ChevronRight className="w-4 h-4" />
@@ -92,7 +92,7 @@ export default function Services() {
           <div className="mb-14 sm:mb-16 md:mb-24 text-center md:text-left">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Our Process</p>
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">
-              A direct path from business problem <br className="hidden md:block" /> to working system.
+              A direct path from business friction <br className="hidden md:block" /> to a working system.
             </h2>
           </div>
 

@@ -79,6 +79,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 24);
@@ -99,9 +100,9 @@ const Navbar = () => {
   }, [location.pathname]);
 
   return (
-    <nav className={`fixed inset-x-0 top-0 z-[70] transition-all duration-500 ${isScrolled ? 'bg-paper/94 backdrop-blur-xl border-b border-brand-100/40 py-3 md:py-4 shadow-[0_12px_30px_rgba(17,19,21,0.05)]' : 'bg-transparent py-4 md:py-6'}`}>
+    <nav className={`fixed inset-x-0 top-0 z-[70] transition-all duration-500 ${isScrolled || !isHome ? 'bg-paper/94 backdrop-blur-xl border-b border-brand-100/40 py-3 md:py-4 shadow-[0_12px_30px_rgba(17,19,21,0.05)]' : 'bg-transparent py-4 md:py-6'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`flex items-center justify-between gap-4 rounded-[1.5rem] md:rounded-none px-3 py-2 md:p-0 transition-all duration-500 ${isScrolled ? 'bg-white/80 md:bg-transparent border border-brand-100/40 md:border-0 shadow-[0_10px_24px_rgba(17,19,21,0.04)] md:shadow-none' : 'bg-white/78 md:bg-transparent border border-brand-100/40 md:border-0 backdrop-blur md:backdrop-blur-none shadow-[0_8px_18px_rgba(17,19,21,0.03)] md:shadow-none'}`}>
+        <div className={`flex items-center justify-between gap-4 rounded-[1.5rem] md:rounded-none px-3 py-2 md:p-0 transition-all duration-500 ${isScrolled || !isHome ? 'bg-white/80 md:bg-transparent border border-brand-100/40 md:border-0 shadow-[0_10px_24px_rgba(17,19,21,0.04)] md:shadow-none' : 'bg-white/78 md:bg-transparent border border-brand-100/40 md:border-0 backdrop-blur md:backdrop-blur-none shadow-[0_8px_18px_rgba(17,19,21,0.03)] md:shadow-none'}`}>
           <Link to="/" className="flex items-center gap-3 group min-w-0" aria-label="Bakal Digital home">
             <BrandMark />
           </Link>
@@ -299,12 +300,15 @@ function SeoManager() {
 }
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
+
   return (
     <div className="min-h-screen flex flex-col font-sans bg-paper">
       <SeoManager />
       <ScrollToTop />
       <Navbar />
-      <main className="flex-1 pt-[78px] md:pt-20">{children}</main>
+      <main className={`flex-1 ${isHome ? '' : 'pt-[78px] md:pt-20'}`}>{children}</main>
       <Footer />
       <CookieConsent />
     </div>

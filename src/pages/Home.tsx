@@ -173,11 +173,14 @@ export default function Home() {
             <div className="max-w-4xl">
               <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 md:mb-6">Selected Concepts</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">
-                A look at the kinds of products, systems, and journeys we can shape.
+                Concept directions that show how the work takes shape before a live engagement.
               </h2>
+              <p className="mt-5 max-w-3xl text-base sm:text-lg text-brand-400 leading-relaxed">
+                These are not inflated case studies. They are clear concept studies built to show product thinking, interface quality, and system structure in a way a buyer can judge quickly.
+              </p>
             </div>
             <Link to="/portfolio" className="flex items-center text-base sm:text-lg font-semibold text-ink hover:text-accent transition-colors group">
-              View all concepts
+              See concept studies
               <ChevronRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -195,18 +198,18 @@ export default function Home() {
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-accent/5 to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-[0.95fr_1.05fr] gap-8 sm:gap-12 md:gap-16 items-start relative">
           <div>
-            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 sm:mb-6">Trust And Delivery</p>
+            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 sm:mb-6">Delivery Standard</p>
             <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight mb-5 sm:mb-8">
-              Proof where we have it. Clear standards everywhere else.
+              Clear standards in the work, the process, and the handoff.
             </h2>
             <p className="text-base sm:text-xl text-brand-400 leading-relaxed max-w-2xl">
-              We do not invent outcomes or hide behind vague agency language. When a project is public, we show it. When it is not, we make the thinking, structure, and delivery standard visible instead.
+              Strong delivery should feel visible before a contract is signed. The site, the brief flow, the service structure, and the way projects are presented should all prove the same thing: the work is disciplined, concrete, and built to hold up.
             </p>
             <div className="mt-8 sm:mt-10 grid gap-4">
               {[
-                'Strategy, UX, design, frontend, backend, and automation are treated as one system.',
-                'Lead handling, guided brief, and direct inquiry flows are real and working.',
-                'Concept studies are labeled honestly so visitors know what is demonstrative and what is live.',
+                'Strategy, UX, design, frontend, backend, and automation are treated as one operating system.',
+                'Guided brief, direct inquiry, and service pathways are working flows, not decorative UI.',
+                'Concept studies are labeled honestly so buyers can separate directional work from public launches.',
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-2xl bg-white border border-brand-100/50 flex items-center justify-center text-accent shrink-0">
@@ -220,10 +223,10 @@ export default function Home() {
 
           <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
             {[
-              { title: 'Concept studies, clearly labeled', text: 'Portfolio pieces are marked as concept directions so expectations stay honest.' },
-              { title: 'Real inquiry handling', text: 'Lead forms, guided brief, and contact requests all route through secure working flows.' },
-              { title: 'References available when appropriate', text: 'For qualified opportunities, deeper project context and additional examples can be shared directly.' },
-              { title: 'Focused delivery model', text: 'Strategy, UX, design, frontend, backend, and automation are shaped as one system instead of siloed handoffs.' },
+              { title: 'Honest proof model', text: 'Public concepts are labeled clearly, and deeper examples can be shared directly when the opportunity is qualified.' },
+              { title: 'Real intake, not fake polish', text: 'The guided brief, contact flow, and service pathways all route through live working logic.' },
+              { title: 'Cross-disciplinary execution', text: 'The work is shaped across message, UX, design, frontend, backend, and automation instead of siloed handoffs.' },
+              { title: 'Built for the business layer', text: 'The goal is not just a polished interface. It is a system that helps sales, operations, and delivery move cleanly.' },
             ].map((item, idx) => (
               <motion.div key={item.title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: idx * 0.08 }} className="rounded-[1.5rem] sm:rounded-[2rem] border border-brand-100/50 bg-white p-5 sm:p-7 shadow-sm">
                 <div className="w-11 h-11 rounded-2xl bg-white border border-brand-100/50 flex items-center justify-center text-accent mb-4">
@@ -237,44 +240,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-14 sm:py-20 md:py-32 relative">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="max-w-4xl mb-10 sm:mb-14 md:mb-20">
-            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">How We Think</p>
-            <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-semibold text-ink leading-tight tracking-tight mb-5 sm:mb-8">
-              Good digital work is not just visible. It is operational.
-            </h2>
-            <p className="text-base sm:text-xl text-brand-400 leading-relaxed max-w-3xl">
-              The strongest websites and products do more than look premium. They help people decide, convert, onboard, and continue without friction.
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-[0.95fr_1.05fr] gap-10 sm:gap-12 md:gap-16 items-center">
-            <motion.div initial={{ opacity: 0, scale: 0.94 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }} className="relative aspect-[5/4] rounded-[2rem] sm:rounded-[3rem] overflow-hidden shadow-2xl">
-              <BrandedVisual variant="studio" title="Systems create momentum" className="rounded-[2rem] sm:rounded-[3rem]" />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/28 via-transparent to-transparent" />
-            </motion.div>
-
-            <div className="grid lg:grid-cols-2 gap-5 sm:gap-6">
-              {[
-                { title: 'AI Utility', desc: 'Useful assistants and intelligent workflows shaped around real business needs.' },
-                { title: 'Platform Clarity', desc: 'Interfaces that make complex services easier to understand and easier to trust.' },
-                { title: 'Automation', desc: 'Connected systems that remove repetitive work and improve internal flow.' },
-                { title: 'Credibility', desc: 'A stronger digital presence that feels premium and operationally sound.' },
-              ].map((item, idx) => (
-                <motion.div key={item.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7, delay: idx * 0.08 }} className="rounded-[1.75rem] border border-brand-100/50 bg-soft p-6 sm:p-7">
-                  <div className="w-10 h-10 rounded-2xl bg-white border border-brand-100/50 flex items-center justify-center text-accent mb-4">
-                    <CheckCircle2 className="w-4 h-4" />
-                  </div>
-                  <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">{item.title}</h3>
-                  <p className="text-brand-400 leading-relaxed">{item.desc}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="py-14 sm:py-20 md:py-32 bg-ink relative overflow-hidden text-center md:text-left">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl">
@@ -284,10 +249,15 @@ export default function Home() {
             <p className="text-base sm:text-lg md:text-2xl text-brand-400 mb-8 sm:mb-12 md:mb-16 max-w-2xl font-normal leading-relaxed mx-auto md:mx-0">
               Tell us what you are building, what is slowing the business down, and where AI, automation, design, or engineering can create leverage.
             </p>
-            <Link to="/contact" className="inline-flex items-center justify-center px-8 py-4 md:px-12 md:py-6 text-base md:text-xl font-medium rounded-full text-ink bg-white hover:bg-accent hover:text-white transition-all shadow-2xl">
-              Start a Project
-              <ArrowRight className="ml-3 h-5 w-5 md:h-6 md:w-6" />
-            </Link>
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              <Link to="/contact" className="inline-flex items-center justify-center px-8 py-4 md:px-12 md:py-6 text-base md:text-xl font-medium rounded-full text-ink bg-white hover:bg-accent hover:text-white transition-all shadow-2xl">
+                Start a Project
+                <ArrowRight className="ml-3 h-5 w-5 md:h-6 md:w-6" />
+              </Link>
+              <Link to="/services" className="inline-flex items-center justify-center px-8 py-4 md:px-10 md:py-6 text-base md:text-lg font-medium rounded-full border border-white/15 text-white hover:border-white/40 transition-all">
+                Review Services
+              </Link>
+            </div>
           </div>
         </div>
         <div className="absolute bottom-0 right-0 w-1/2 h-full bg-accent/10 blur-[150px] rounded-full translate-y-1/2 translate-x-1/4" />
