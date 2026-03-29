@@ -32,8 +32,9 @@ export default function ServicesPreview() {
           </p>
         </div>
 
-        <div className="grid xl:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] gap-6 sm:gap-8 md:gap-10 items-start">
-          <div className="grid gap-3 sm:gap-4 xl:grid-cols-1 2xl:grid-cols-2">
+        <div className="grid xl:grid-cols-[minmax(18rem,0.72fr)_minmax(0,1.28fr)] gap-6 sm:gap-8 md:gap-10 items-start">
+          <div className="xl:sticky xl:top-28">
+            <div className="grid gap-3 sm:gap-4 xl:max-h-[52rem] xl:overflow-y-auto xl:pr-2 xl:grid-cols-1 2xl:grid-cols-1">
             {services.map((service) => {
               const isActive = service.id === activeService.id;
 
@@ -42,7 +43,7 @@ export default function ServicesPreview() {
                   key={service.id}
                   type="button"
                   onClick={() => setActiveId(service.id)}
-                  className={`text-left rounded-[1.5rem] sm:rounded-[1.75rem] border p-4 sm:p-6 transition-all duration-300 h-full ${
+                  className={`text-left rounded-[1.5rem] sm:rounded-[1.75rem] border p-4 sm:p-6 transition-all duration-300 h-full xl:min-h-[11.5rem] ${
                     isActive
                       ? `bg-gradient-to-br ${service.theme.soft} ${service.theme.ring} shadow-[0_20px_50px_rgba(17,19,21,0.07)]`
                       : 'bg-white border-brand-100/50 hover:border-brand-200/80'
@@ -63,6 +64,7 @@ export default function ServicesPreview() {
                 </button>
               );
             })}
+            </div>
           </div>
 
           <motion.div
