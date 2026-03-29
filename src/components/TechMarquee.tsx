@@ -16,8 +16,8 @@ const technologies = [
 
 export default function TechMarquee() {
   return (
-    <div className="w-full overflow-hidden bg-soft border-y border-brand-100/30 py-10 sm:py-12 md:py-20 relative flex flex-col items-center">
-      <p className="text-brand-400 text-[10px] md:text-xs font-bold uppercase tracking-[0.32em] sm:tracking-[0.4em] mb-8 sm:mb-10 md:mb-14 px-4 text-center">
+    <div className="w-full overflow-hidden bg-soft border-y border-brand-100/30 py-8 sm:py-12 md:py-20 relative flex flex-col items-center">
+      <p className="text-brand-400 text-[11px] md:text-xs font-bold uppercase tracking-[0.24em] sm:tracking-[0.4em] mb-6 sm:mb-10 md:mb-14 px-4 text-center">
         Deployed & Scaled on World-Class Infrastructure
       </p>
 
@@ -27,14 +27,14 @@ export default function TechMarquee() {
       <div className="relative flex max-w-[100vw] overflow-hidden group">
         <div className="flex w-max animate-marquee group-hover:[animation-play-state:paused]">
           {[...technologies, ...technologies, ...technologies].map((tech, idx) => (
-            <div key={idx} className="mx-4 sm:mx-6 md:mx-12 lg:mx-20 flex items-center gap-2 sm:gap-3 md:gap-5 group/item">
+            <div key={idx} className="mx-3 sm:mx-6 md:mx-12 lg:mx-20 flex items-center gap-2 sm:gap-3 md:gap-5 group/item">
               <img
                 src={tech.logo}
                 alt={tech.name}
-                className="w-5 h-5 sm:w-6 sm:h-6 md:w-10 md:h-10 object-contain grayscale opacity-35 group-hover/item:grayscale-0 group-hover/item:opacity-100 transition-all duration-500"
+                className="w-5 h-5 sm:w-6 sm:h-6 md:w-10 md:h-10 object-contain grayscale opacity-55 group-hover/item:grayscale-0 group-hover/item:opacity-100 transition-all duration-500"
                 referrerPolicy="no-referrer"
               />
-              <span className="text-base sm:text-lg md:text-3xl font-bold text-brand-200 group-hover/item:text-ink transition-colors cursor-default select-none tracking-tight whitespace-nowrap">
+              <span className="text-sm sm:text-lg md:text-3xl font-bold text-brand-300 group-hover/item:text-ink transition-colors cursor-default select-none tracking-tight whitespace-nowrap">
                 {tech.name}
               </span>
             </div>

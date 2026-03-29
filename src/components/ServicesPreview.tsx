@@ -32,8 +32,8 @@ export default function ServicesPreview() {
           </p>
         </div>
 
-        <div className="grid xl:grid-cols-[0.94fr_1.06fr] gap-6 sm:gap-8 md:gap-10 items-start">
-          <div className="grid gap-3 sm:gap-4 lg:grid-cols-2 xl:grid-cols-1 2xl:grid-cols-2">
+        <div className="grid lg:grid-cols-[0.94fr_1.06fr] gap-6 sm:gap-8 md:gap-10 items-start">
+          <div className="grid gap-3 sm:gap-4 lg:grid-cols-1 2xl:grid-cols-2">
             {services.map((service) => {
               const isActive = service.id === activeService.id;
 
@@ -42,7 +42,7 @@ export default function ServicesPreview() {
                   key={service.id}
                   type="button"
                   onClick={() => setActiveId(service.id)}
-                  className={`text-left rounded-[1.5rem] sm:rounded-[1.75rem] border p-5 sm:p-6 transition-all duration-300 h-full ${
+                  className={`text-left rounded-[1.5rem] sm:rounded-[1.75rem] border p-4 sm:p-6 transition-all duration-300 h-full ${
                     isActive
                       ? `bg-gradient-to-br ${service.theme.soft} ${service.theme.ring} shadow-[0_20px_50px_rgba(17,19,21,0.07)]`
                       : 'bg-white border-brand-100/50 hover:border-brand-200/80'
@@ -53,8 +53,8 @@ export default function ServicesPreview() {
                       <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.22em] ${service.theme.chip} mb-4`}>
                         {service.theme.label}
                       </div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-ink tracking-tight mb-2">{service.title}</h3>
-                      <p className="text-sm sm:text-base text-brand-400 leading-relaxed">{service.signature}</p>
+                      <h3 className="text-lg sm:text-2xl font-semibold text-ink tracking-tight mb-2">{service.title}</h3>
+                      <p className="text-sm sm:text-base text-brand-400 leading-relaxed line-clamp-3">{service.signature}</p>
                     </div>
                     <div className={`w-11 h-11 rounded-2xl border flex items-center justify-center shrink-0 ${isActive ? `${service.theme.ring} bg-white/75` : 'border-brand-100/60 bg-soft'}`}>
                       {service.icon}
@@ -70,18 +70,18 @@ export default function ServicesPreview() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className={`rounded-[2rem] sm:rounded-[2.5rem] border ${activeService.theme.ring} bg-gradient-to-br ${activeService.theme.soft} p-5 sm:p-6 md:p-7 shadow-[0_24px_60px_rgba(17,19,21,0.08)] xl:sticky xl:top-28`}
+            className={`rounded-[2rem] sm:rounded-[2.5rem] border ${activeService.theme.ring} bg-gradient-to-br ${activeService.theme.soft} p-4 sm:p-6 md:p-7 shadow-[0_24px_60px_rgba(17,19,21,0.08)] lg:sticky lg:top-28`}
           >
-            <div className="grid lg:grid-cols-[0.86fr_1.14fr] gap-4 sm:gap-5 items-stretch">
-              <div className="rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-brand-100/40 shadow-lg min-h-[280px] sm:min-h-[320px]">
+            <div className="grid md:grid-cols-[0.86fr_1.14fr] gap-4 sm:gap-5 items-stretch">
+              <div className="hidden md:block rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-brand-100/40 shadow-lg min-h-[280px] sm:min-h-[320px]">
                 <BrandedVisual variant={activeService.theme.visual} title={activeService.title} narrow className="rounded-[1.5rem] sm:rounded-[2rem]" />
               </div>
 
-              <div className="rounded-[1.5rem] sm:rounded-[2rem] bg-ink text-white p-5 sm:p-6 md:p-7 flex flex-col justify-between">
+              <div className="rounded-[1.5rem] sm:rounded-[2rem] bg-ink text-white p-5 sm:p-6 md:p-7 flex flex-col justify-between min-w-0">
                 <div className="flex items-start justify-between gap-4 mb-6">
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-white/50 mb-3">Active Service Preview</p>
-                    <h3 className="text-2xl sm:text-3xl font-semibold tracking-tight">{activeService.title}</h3>
+                    <h3 className="text-xl sm:text-3xl font-semibold tracking-tight">{activeService.title}</h3>
                   </div>
                   <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.22em] ${activeService.theme.chip}`}>
                     {activeService.theme.label}
@@ -90,7 +90,7 @@ export default function ServicesPreview() {
 
                 <div className="grid gap-3 mb-5">
                   {activeService.outcomes.map((outcome, index) => (
-                    <div key={outcome} className="rounded-[1.25rem] bg-white/7 border border-white/10 p-4">
+                    <div key={outcome} className={`rounded-[1.25rem] bg-white/7 border border-white/10 p-4 ${index > 1 ? 'hidden sm:block' : ''}`}>
                       <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-white/45 mb-2">0{index + 1}</p>
                       <p className="text-sm sm:text-base text-white/88 leading-relaxed">{outcome}</p>
                     </div>
@@ -100,7 +100,7 @@ export default function ServicesPreview() {
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-white/45 mb-3">Typical Scope</p>
                   <div className="flex flex-wrap gap-2 mb-5">
-                    {activeService.features.slice(0, 4).map((feature) => (
+                    {activeService.features.slice(0, 3).map((feature) => (
                       <span key={feature} className="px-3 py-2 rounded-full bg-white/8 border border-white/12 text-xs font-medium text-white/82">
                         {feature}
                       </span>

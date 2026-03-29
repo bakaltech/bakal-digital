@@ -54,13 +54,15 @@ export default function LeadsGrid() {
   };
 
   return (
-    <div className="w-full mx-auto mt-8">
+    <div className="w-full mx-auto mt-6 sm:mt-8">
       <AnimatePresence mode="wait">
         {step === 'needs' && (
-          <motion.div key="needs-step" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="space-y-6">
+          <motion.div key="needs-step" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="space-y-5 sm:space-y-6">
             <div className="text-center">
-              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-3">Project Focus</p>
-              <p className="text-sm text-brand-400 max-w-xl mx-auto">Choose the area you want to improve first. We will use it to shape the next conversation and route the project properly.</p>
+              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Project Focus</p>
+              <p className="text-sm sm:text-base text-brand-400 leading-relaxed max-w-xl mx-auto">
+                Choose the area you want to improve first. We will use it to shape the next conversation and route the project properly.
+              </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {needs.map((need) => {
@@ -70,12 +72,12 @@ export default function LeadsGrid() {
                     key={need.id}
                     type="button"
                     onClick={() => toggleNeed(need.id)}
-                    className={`relative p-4 rounded-2xl border transition-all duration-300 flex flex-col items-center gap-3 ${isSelected ? 'bg-ink border-ink text-white shadow-xl' : 'bg-soft border-brand-100/50 text-brand-400 hover:border-accent hover:bg-white'}`}
+                    className={`relative min-h-[108px] sm:min-h-[116px] p-4 rounded-2xl border transition-all duration-300 flex flex-col items-center justify-center gap-3 ${isSelected ? 'bg-ink border-ink text-white shadow-xl' : 'bg-soft border-brand-100/50 text-brand-400 hover:border-accent hover:bg-white'}`}
                   >
                     <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isSelected ? 'bg-accent text-white' : 'bg-white text-brand-400'}`}>
                       <need.icon className="w-5 h-5" />
                     </div>
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-center leading-tight">{need.title}</span>
+                    <span className="text-xs sm:text-[13px] font-semibold text-center leading-tight">{need.title}</span>
                     {isSelected && (
                       <div className="absolute top-2 right-2 text-accent">
                         <CheckCircle2 className="w-4 h-4" />
@@ -86,7 +88,7 @@ export default function LeadsGrid() {
               })}
             </div>
             <div className="flex justify-center">
-              <button disabled={selected.length === 0} onClick={() => setStep('contact')} className="inline-flex items-center justify-center px-8 py-4 text-sm font-bold rounded-full text-white bg-ink transition-all shadow-lg hover:bg-accent disabled:opacity-50">
+              <button disabled={selected.length === 0} onClick={() => setStep('contact')} className="inline-flex w-full sm:w-auto items-center justify-center px-8 py-4 text-sm font-bold rounded-full text-white bg-ink transition-all shadow-lg hover:bg-accent disabled:opacity-50">
                 Continue
                 <ArrowRight className="ml-2 h-5 w-5" />
               </button>
@@ -95,14 +97,14 @@ export default function LeadsGrid() {
         )}
 
         {step === 'contact' && (
-          <motion.div key="contact-step" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="glass p-6 rounded-3xl border border-white/20 shadow-2xl relative text-left">
+          <motion.div key="contact-step" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="glass p-5 sm:p-6 rounded-3xl border border-white/20 shadow-2xl relative text-left">
             <button type="button" onClick={() => setStep('needs')} className="absolute top-4 right-4 p-2 hover:bg-soft rounded-full transition-colors text-brand-400">
               <X className="w-4 h-4" />
             </button>
             <div className="mb-5">
-              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent mb-2">Quick Intake</p>
-              <h3 className="text-2xl font-semibold text-ink tracking-tight mb-2">Tell us what you want to build next.</h3>
-              <p className="text-sm text-brand-400 leading-relaxed">Selected focus: {selected.map((id) => needs.find((need) => need.id === id)?.title).join(', ')}</p>
+              <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-2">Quick Intake</p>
+              <h3 className="text-xl sm:text-2xl font-semibold text-ink tracking-tight mb-2">Tell us what you want to build next.</h3>
+              <p className="text-sm sm:text-base text-brand-400 leading-relaxed">Selected focus: {selected.map((id) => needs.find((need) => need.id === id)?.title).join(', ')}</p>
             </div>
             <div className="space-y-3">
               <div className="hidden" aria-hidden="true">
