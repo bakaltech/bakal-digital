@@ -32,8 +32,8 @@ export default function ServicesPreview() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-[0.94fr_1.06fr] gap-6 sm:gap-8 md:gap-10 items-start">
-          <div className="grid gap-3 sm:gap-4 lg:grid-cols-1 2xl:grid-cols-2">
+        <div className="grid xl:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] gap-6 sm:gap-8 md:gap-10 items-start">
+          <div className="grid gap-3 sm:gap-4 xl:grid-cols-1 2xl:grid-cols-2">
             {services.map((service) => {
               const isActive = service.id === activeService.id;
 
@@ -50,7 +50,7 @@ export default function ServicesPreview() {
                 >
                   <div className="flex items-start justify-between gap-4">
                     <div className="min-w-0">
-                      <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.22em] ${service.theme.chip} mb-4`}>
+                      <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] sm:tracking-[0.22em] ${service.theme.chip} mb-4`}>
                         {service.theme.label}
                       </div>
                       <h3 className="text-lg sm:text-2xl font-semibold text-ink tracking-tight mb-2">{service.title}</h3>
@@ -70,38 +70,43 @@ export default function ServicesPreview() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className={`rounded-[2rem] sm:rounded-[2.5rem] border ${activeService.theme.ring} bg-gradient-to-br ${activeService.theme.soft} p-4 sm:p-6 md:p-7 shadow-[0_24px_60px_rgba(17,19,21,0.08)] lg:sticky lg:top-28`}
+            className={`rounded-[2rem] sm:rounded-[2.5rem] border ${activeService.theme.ring} bg-gradient-to-br ${activeService.theme.soft} p-4 sm:p-5 lg:p-6 shadow-[0_24px_60px_rgba(17,19,21,0.08)] xl:sticky xl:top-28 overflow-hidden`}
           >
-            <div className="grid md:grid-cols-[0.86fr_1.14fr] gap-4 sm:gap-5 items-stretch">
-              <div className="hidden md:block rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-brand-100/40 shadow-lg min-h-[280px] sm:min-h-[320px]">
+            <div className="grid lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1fr)] gap-4 sm:gap-5 items-stretch">
+              <div className="hidden lg:block rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-brand-100/40 shadow-lg min-h-[280px] xl:min-h-[320px]">
                 <BrandedVisual variant={activeService.theme.visual} title={activeService.title} narrow className="rounded-[1.5rem] sm:rounded-[2rem]" />
               </div>
 
               <div className="rounded-[1.5rem] sm:rounded-[2rem] bg-ink text-white p-5 sm:p-6 md:p-7 flex flex-col justify-between min-w-0">
-                <div className="flex items-start justify-between gap-4 mb-6">
-                  <div>
-                    <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-white/50 mb-3">Active Service Preview</p>
-                    <h3 className="text-xl sm:text-3xl font-semibold tracking-tight">{activeService.title}</h3>
+                <div className="mb-6">
+                  <div className="mb-4 flex flex-wrap items-center gap-3">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-white/50">Active Service Preview</p>
+                    <span className={`inline-flex max-w-full items-center px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] sm:tracking-[0.22em] ${activeService.theme.chip}`}>
+                      {activeService.theme.label}
+                    </span>
                   </div>
-                  <span className={`inline-flex items-center px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[0.22em] ${activeService.theme.chip}`}>
+                  <h3 className="max-w-[12ch] text-2xl sm:text-3xl xl:text-[2.7rem] font-semibold tracking-tight leading-[0.95] text-balance">
                     {activeService.theme.label}
-                  </span>
+                  </h3>
+                  <h4 className="max-w-[10ch] text-2xl sm:text-3xl xl:text-[2.7rem] font-semibold tracking-tight leading-[0.95] text-balance">
+                    {activeService.title}
+                  </h4>
                 </div>
 
                 <div className="grid gap-3 mb-5">
                   {activeService.outcomes.map((outcome, index) => (
-                    <div key={outcome} className={`rounded-[1.25rem] bg-white/7 border border-white/10 p-4 ${index > 1 ? 'hidden sm:block' : ''}`}>
+                    <div key={outcome} className={`rounded-[1.25rem] bg-white/7 border border-white/10 p-4 xl:p-5 ${index > 1 ? 'hidden sm:block' : ''}`}>
                       <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-white/45 mb-2">0{index + 1}</p>
-                      <p className="text-sm sm:text-base text-white/88 leading-relaxed">{outcome}</p>
+                      <p className="text-sm sm:text-base xl:text-[1.05rem] text-white/88 leading-relaxed">{outcome}</p>
                     </div>
                   ))}
                 </div>
 
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-white/45 mb-3">Typical Scope</p>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] sm:tracking-[0.28em] text-white/45 mb-3">Typical Scope</p>
                   <div className="flex flex-wrap gap-2 mb-5">
                     {activeService.features.slice(0, 3).map((feature) => (
-                      <span key={feature} className="px-3 py-2 rounded-full bg-white/8 border border-white/12 text-xs font-medium text-white/82">
+                      <span key={feature} className="max-w-full px-3 py-2 rounded-full bg-white/8 border border-white/12 text-xs font-medium text-white/82 break-words">
                         {feature}
                       </span>
                     ))}
@@ -110,7 +115,7 @@ export default function ServicesPreview() {
                   <div className="flex flex-col sm:flex-row gap-3">
                     <Link
                       to={`/services/${activeService.id}`}
-                      className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white text-ink font-semibold hover:bg-accent hover:text-white transition-colors"
+                      className="inline-flex min-h-14 items-center justify-center gap-2 px-5 py-3 rounded-full bg-white text-ink font-semibold hover:bg-accent hover:text-white transition-colors"
                     >
                       View Service
                       <ArrowRight className="w-4 h-4" />
@@ -124,7 +129,7 @@ export default function ServicesPreview() {
                           }),
                         )
                       }
-                      className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full border border-white/15 text-white font-semibold hover:border-white/35 transition-colors"
+                      className="inline-flex min-h-14 items-center justify-center gap-2 px-5 py-3 rounded-full border border-white/15 text-white font-semibold hover:border-white/35 transition-colors"
                     >
                       Ask About This
                     </button>

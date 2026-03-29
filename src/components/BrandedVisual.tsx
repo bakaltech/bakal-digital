@@ -38,6 +38,12 @@ export default function BrandedVisual({ variant, title, compact = false, narrow 
   const config = variantConfig[variant];
   const Icon = config.icon;
   const isCondensed = compact || narrow;
+  const titleClassName = compact
+    ? 'text-lg'
+    : narrow
+      ? 'text-[1.55rem] md:text-[2rem] xl:text-[2.2rem]'
+      : 'text-2xl md:text-3xl';
+  const titleWidthClassName = compact ? 'max-w-[9ch]' : narrow ? 'max-w-[8ch] md:max-w-[9ch]' : 'max-w-[10ch]';
 
   return (
     <div className={`relative h-full w-full overflow-hidden rounded-[2rem] bg-gradient-to-br ${config.panel} ${className}`}>
@@ -45,20 +51,22 @@ export default function BrandedVisual({ variant, title, compact = false, narrow 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.08),_transparent_35%),linear-gradient(to_bottom_right,rgba(255,255,255,0.06),transparent_35%),linear-gradient(rgba(255,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.06)_1px,transparent_1px)] bg-[size:auto,auto,36px_36px,36px_36px] opacity-70" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-white/5" />
 
-      <div className={`relative z-10 flex h-full flex-col ${narrow ? 'justify-start' : 'justify-between'} ${compact ? 'p-4' : narrow ? 'p-5 md:p-6' : 'p-7 md:p-8'}`}>
+      <div className={`relative z-10 flex h-full flex-col ${narrow ? 'justify-start' : 'justify-between'} ${compact ? 'p-4' : narrow ? 'p-4 md:p-5 xl:p-6' : 'p-7 md:p-8'}`}>
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0">
-            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.3em] text-white/55">{config.eyebrow}</p>
-            <h3 className={`${compact ? 'text-lg' : narrow ? 'text-[2rem] md:text-[2.35rem]' : 'text-2xl md:text-3xl'} max-w-[10ch] font-semibold tracking-tight leading-[0.95] text-white`}>
+            <p className={`mb-3 font-bold uppercase text-white/55 ${narrow ? 'text-[9px] md:text-[10px] tracking-[0.24em] md:tracking-[0.3em]' : 'text-[10px] tracking-[0.3em]'}`}>
+              {config.eyebrow}
+            </p>
+            <h3 className={`${titleClassName} ${titleWidthClassName} text-balance font-semibold tracking-tight leading-[0.92] text-white`}>
               {title ?? 'System direction'}
             </h3>
           </div>
-          <div className={`flex ${isCondensed ? 'h-10 w-10' : 'h-12 w-12'} items-center justify-center rounded-2xl bg-gradient-to-br ${config.accent} text-white shadow-[0_12px_30px_rgba(0,0,0,0.18)]`}>
-            <Icon className={isCondensed ? 'h-4 w-4' : 'h-5 w-5'} />
+          <div className={`flex shrink-0 ${compact ? 'h-10 w-10' : narrow ? 'h-11 w-11 md:h-12 md:w-12' : 'h-12 w-12'} items-center justify-center rounded-2xl bg-gradient-to-br ${config.accent} text-white shadow-[0_12px_30px_rgba(0,0,0,0.18)]`}>
+            <Icon className={compact ? 'h-4 w-4' : narrow ? 'h-4 w-4 md:h-5 md:w-5' : 'h-5 w-5'} />
           </div>
         </div>
 
-        <div className={`grid ${compact ? 'gap-3' : narrow ? 'gap-4 mt-6' : 'gap-4'}`}>
+        <div className={`grid ${compact ? 'gap-3' : narrow ? 'gap-3 mt-4 md:mt-5' : 'gap-4'}`}>
           <div className={`rounded-[1.5rem] border border-white/10 bg-white/8 backdrop-blur-sm ${narrow ? 'p-3.5' : 'p-4'}`}>
             <div className="mb-3 flex items-center gap-2">
               <div className="h-2 w-2 rounded-full bg-white/50" />
@@ -76,7 +84,7 @@ export default function BrandedVisual({ variant, title, compact = false, narrow 
             {signalRows.map((row, index) => (
               <div key={row} className={`rounded-[1.25rem] border border-white/10 bg-black/15 ${narrow ? 'p-2.5' : 'p-3'}`}>
                 <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.26em] text-white/45">0{index + 1}</p>
-                <p className={`${compact ? 'text-xs' : narrow ? 'text-[0.92rem]' : 'text-sm'} font-medium leading-relaxed text-white/88 break-words`}>{row}</p>
+                <p className={`${compact ? 'text-xs' : narrow ? 'text-[0.84rem] md:text-[0.92rem]' : 'text-sm'} font-medium leading-relaxed text-white/88 break-words`}>{row}</p>
               </div>
             ))}
           </div>
