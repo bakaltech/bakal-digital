@@ -18,10 +18,10 @@ export default function Services() {
         >
           <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6 sm:mb-8">Capabilities</p>
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-ink leading-[1.05] mb-6 sm:mb-10 tracking-tight">
-            AI, platforms, automation, <br /> and digital systems built with intent.
+            Capability areas built to improve growth, clarity, and execution.
           </h1>
           <p className="text-base sm:text-xl md:text-2xl text-brand-400 font-normal leading-relaxed max-w-3xl">
-            We help businesses turn ideas, friction points, and growth opportunities into usable digital products. That can mean an AI assistant, a custom platform, a commerce engine, an internal tool, or a cleaner data workflow.
+            Each service is designed to solve a business problem, not just ship deliverables. The goal is clearer positioning, faster operations, stronger product logic, and better paths from interest to action.
           </p>
         </motion.div>
       </section>
@@ -92,7 +92,7 @@ export default function Services() {
           <div className="mb-14 sm:mb-16 md:mb-24 text-center md:text-left">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Our Process</p>
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">
-              A practical path from problem <br className="hidden md:block" /> to working system.
+              A direct path from business problem <br className="hidden md:block" /> to working system.
             </h2>
           </div>
 
@@ -100,10 +100,10 @@ export default function Services() {
             <div className="absolute top-12 left-0 w-full h-[1px] bg-brand-100/50 hidden lg:block -z-10" />
 
             {[
-              { step: '01', title: 'Discovery', desc: 'We clarify the business problem, the user journey, and the leverage point before proposing features.' },
-              { step: '02', title: 'System Design', desc: 'We shape the product structure, data flow, automation logic, and interface direction before build starts.' },
-              { step: '03', title: 'Build', desc: 'Design, frontend, backend, integrations, and content come together in a focused implementation cycle.' },
-              { step: '04', title: 'Launch & Improve', desc: 'We test, deploy, and refine the product so it keeps working after the first release.' },
+              { step: '01', title: 'Find the leverage', desc: 'We define what is actually slowing growth, delivery, or conversion before we recommend structure.' },
+              { step: '02', title: 'Design the system', desc: 'We shape the interface, product logic, data flow, and operational handoffs before build starts.' },
+              { step: '03', title: 'Build with discipline', desc: 'Design, frontend, backend, integrations, and content move in one implementation cycle instead of siloed handoffs.' },
+              { step: '04', title: 'Launch and refine', desc: 'We deploy, QA, and tighten the system so it keeps performing after the first release.' },
             ].map((phase, idx) => (
               <motion.div
                 key={idx}

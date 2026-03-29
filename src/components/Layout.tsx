@@ -99,9 +99,9 @@ const Navbar = () => {
   }, [location.pathname]);
 
   return (
-    <nav className={`fixed inset-x-0 top-0 z-[70] transition-all duration-500 ${isScrolled ? 'bg-paper/92 backdrop-blur-xl border-b border-brand-100/40 py-3 md:py-4 shadow-[0_12px_30px_rgba(17,19,21,0.04)]' : 'bg-transparent py-4 md:py-7'}`}>
+    <nav className={`fixed inset-x-0 top-0 z-[70] transition-all duration-500 ${isScrolled ? 'bg-paper/94 backdrop-blur-xl border-b border-brand-100/40 py-3 md:py-4 shadow-[0_12px_30px_rgba(17,19,21,0.05)]' : 'bg-transparent py-4 md:py-6'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`flex items-center justify-between gap-4 rounded-[1.5rem] md:rounded-none px-3 py-2 md:p-0 transition-all duration-500 ${isScrolled ? 'bg-white/78 md:bg-transparent border border-brand-100/40 md:border-0 shadow-[0_10px_24px_rgba(17,19,21,0.04)] md:shadow-none' : 'bg-white/66 md:bg-transparent border border-white/50 md:border-0 backdrop-blur md:backdrop-blur-none'}`}>
+        <div className={`flex items-center justify-between gap-4 rounded-[1.5rem] md:rounded-none px-3 py-2 md:p-0 transition-all duration-500 ${isScrolled ? 'bg-white/80 md:bg-transparent border border-brand-100/40 md:border-0 shadow-[0_10px_24px_rgba(17,19,21,0.04)] md:shadow-none' : 'bg-white/78 md:bg-transparent border border-brand-100/40 md:border-0 backdrop-blur md:backdrop-blur-none shadow-[0_8px_18px_rgba(17,19,21,0.03)] md:shadow-none'}`}>
           <Link to="/" className="flex items-center gap-3 group min-w-0" aria-label="Bakal Digital home">
             <BrandMark />
           </Link>
@@ -120,7 +120,7 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-3">
-            <button type="button" onClick={openChat} className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-brand-100 bg-white/90 text-ink text-sm font-semibold hover:border-accent hover:text-accent transition-colors shadow-[0_10px_20px_rgba(17,19,21,0.04)]">
+            <button type="button" onClick={openChat} className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-brand-100 bg-white/92 text-ink text-sm font-semibold hover:border-accent hover:text-accent transition-colors shadow-[0_10px_20px_rgba(17,19,21,0.04)]">
               <MessageSquare className="w-4 h-4" />
               Quick Brief
             </button>
@@ -162,10 +162,10 @@ const Navbar = () => {
 
                 <div className="grid gap-3 pt-5 border-t border-brand-100/40">
                   <button type="button" onClick={() => { setIsOpen(false); openChat(); }} className="w-full px-6 py-4 rounded-2xl border border-brand-100 bg-white text-ink font-semibold">
-                    Open Quick Brief
+                    Start With The Brief
                   </button>
                   <Link to="/contact" className="w-full px-6 py-4 rounded-2xl bg-ink text-white font-semibold text-center">
-                    Start a Project
+                    Contact The Studio
                   </Link>
                 </div>
               </div>
@@ -186,7 +186,7 @@ const Footer = () => {
           <div>
             <div className="inline-flex items-center gap-3 mb-5"><BrandMark /></div>
             <p className="text-brand-400 text-base md:text-lg leading-relaxed max-w-xl">
-              Bakal Digital is a remote-first studio for businesses that need stronger digital products, cleaner automation, sharper platforms, and more credible customer-facing experiences.
+              Bakal Digital helps companies build sharper products, clearer sales paths, stronger platforms, and more reliable operational systems.
             </p>
           </div>
           <div>
@@ -199,15 +199,15 @@ const Footer = () => {
           </div>
           <div className="rounded-[2rem] bg-soft border border-brand-100/50 p-6 md:p-8 shadow-[0_20px_50px_rgba(17,19,21,0.05)]">
             <p className="text-sm font-bold uppercase tracking-[0.25em] text-accent mb-4">Start Here</p>
-            <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">Need a stronger product or system?</h3>
-            <p className="text-brand-400 leading-relaxed mb-6">Use the guided brief for a fast project triage, or send a direct inquiry with your goals, timeline, and current challenges.</p>
+            <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">Need a clearer next move?</h3>
+            <p className="text-brand-400 leading-relaxed mb-6">Use the guided brief if you want fast triage, or send a direct inquiry if you already know what needs to be built.</p>
             <div className="flex flex-col sm:flex-row gap-3">
               <button type="button" onClick={openChat} className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white border border-brand-100 text-ink font-semibold hover:border-accent hover:text-accent transition-colors">
                 <MessageSquare className="w-4 h-4" />
-                Guided Brief
+                Start With Brief
               </button>
               <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-ink text-white font-semibold hover:bg-accent transition-colors">
-                Contact Us
+                Contact Studio
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>

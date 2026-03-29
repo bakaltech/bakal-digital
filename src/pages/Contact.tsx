@@ -61,10 +61,10 @@ export default function Contact() {
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Contact</p>
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-ink leading-[1.04] tracking-tight mb-6 sm:mb-8">
-              Tell us what you want to build, automate, or improve next.
+              Tell us what needs to change, and what outcome matters most.
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-brand-400 leading-relaxed max-w-3xl">
-              Share the business context, the friction point, and the outcome you are aiming for. We can help shape the right next move across AI products, websites, platforms, automation, commerce, or internal systems.
+              Share the business context, the bottleneck, and the result you are trying to create. We will use that to determine fit and map the strongest next step.
             </p>
           </motion.div>
         </div>
@@ -72,9 +72,9 @@ export default function Contact() {
         <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           <motion.div className="lg:col-span-5 space-y-8" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.1 }}>
             {[
-              { icon: Clock3, title: 'Fast project triage', text: 'Best for founders and growing teams who want a clear recommendation without a heavy agency process.' },
-              { icon: Sparkles, title: 'Strategic and premium', text: 'We care about the experience, but also the system behind it: workflows, structure, messaging, and execution.' },
-              { icon: MessageSquare, title: 'Two ways to start', text: 'Use the form for a direct message, or open the guided brief if you want help structuring the scope first.' },
+              { icon: Clock3, title: 'Fast first response', text: 'Best for teams that need a clear recommendation without a drawn-out discovery process.' },
+              { icon: Sparkles, title: 'Built around leverage', text: 'We focus on what changes growth, conversion, clarity, or delivery speed, not just what looks polished.' },
+              { icon: MessageSquare, title: 'Two clear starting points', text: 'Use the form if you already know the problem. Use the guided brief if you want help shaping it.' },
             ].map((item) => (
               <div key={item.title} className="rounded-[1.75rem] sm:rounded-[2rem] bg-soft border border-brand-100/50 p-6 sm:p-8">
                 <div className="w-12 h-12 rounded-2xl bg-white border border-brand-100/50 flex items-center justify-center text-accent mb-5"><item.icon className="w-5 h-5" /></div>
@@ -85,16 +85,16 @@ export default function Contact() {
 
             <div className="rounded-[1.75rem] sm:rounded-[2rem] bg-ink text-white p-6 sm:p-8 shadow-xl">
               <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-accent mb-5"><ShieldCheck className="w-5 h-5" /></div>
-              <h2 className="text-2xl font-semibold tracking-tight mb-3">What happens after you submit</h2>
+              <h2 className="text-2xl font-semibold tracking-tight mb-3">What happens next</h2>
               <div className="space-y-3 text-white/75 leading-relaxed">
-                <p>We review the request, triage fit, and map the likely next step before replying.</p>
-                <p>If the opportunity is a fit, we can share deeper project direction, references, or more tailored scope recommendations directly.</p>
+                <p>We review the request, assess fit, and map the strongest next step before replying.</p>
+                <p>If the opportunity is aligned, we can move into recommendations, scope direction, examples, or a more direct conversation.</p>
               </div>
             </div>
 
             <button type="button" onClick={openChat} className="w-full inline-flex items-center justify-center gap-3 px-6 py-5 rounded-full bg-ink text-white font-semibold hover:bg-accent transition-colors shadow-xl">
               <MessageSquare className="w-5 h-5" />
-              Open Guided Brief
+              Start With Guided Brief
             </button>
           </motion.div>
 
@@ -141,7 +141,7 @@ export default function Contact() {
                   {error && <p className="text-sm text-red-600">{error}</p>}
 
                   <button type="submit" disabled={isSubmitting} className="w-full inline-flex items-center justify-center gap-3 px-6 py-5 rounded-2xl bg-ink text-white font-semibold hover:bg-accent transition-colors disabled:opacity-70">
-                    {isSubmitting ? 'Sending...' : 'Send Project Request'}
+                    {isSubmitting ? 'Sending...' : 'Send Project Details'}
                     {!isSubmitting && <Send className="w-4 h-4" />}
                   </button>
                 </form>
