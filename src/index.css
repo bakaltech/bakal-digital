@@ -10,6 +10,8 @@
   --color-accent: #0066CC;
   --color-brand-50: #F5F5F7;
   --color-brand-100: #E8E8ED;
+  --color-brand-200: #D2D2D7;
+  --color-brand-300: #A1A1A6;
   --color-brand-400: #86868B;
   --color-brand-500: #1D1D1F;
   --color-brand-600: #000000;
@@ -23,9 +25,17 @@
 }
 
 @layer base {
+  html {
+    color-scheme: light;
+  }
+
   body {
     @apply bg-paper text-brand-500 antialiased selection:bg-accent selection:text-white;
     letter-spacing: -0.011em;
+  }
+
+  body, #root {
+    min-height: 100%;
   }
   
   h1, h2, h3, h4 {

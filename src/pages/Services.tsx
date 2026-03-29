@@ -8,8 +8,8 @@ import BrandedVisual from '../components/BrandedVisual';
 
 export default function Services() {
   return (
-    <div className="min-h-screen bg-paper pt-32 sm:pt-36 md:pt-40 pb-0">
-      <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-20 sm:mb-24 md:mb-32">
+    <div className="min-h-screen bg-paper pt-24 sm:pt-28 md:pt-32 pb-0">
+      <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-16 sm:mb-20 md:mb-28">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -17,10 +17,10 @@ export default function Services() {
           className="max-w-4xl"
         >
           <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6 sm:mb-8">Capabilities</p>
-          <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-ink leading-[1.05] mb-8 sm:mb-10 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-ink leading-[1.05] mb-6 sm:mb-10 tracking-tight">
             AI, platforms, automation, <br /> and digital systems built with intent.
           </h1>
-          <p className="text-lg sm:text-xl md:text-2xl text-brand-400 font-normal leading-relaxed max-w-3xl">
+          <p className="text-base sm:text-xl md:text-2xl text-brand-400 font-normal leading-relaxed max-w-3xl">
             We help businesses turn ideas, friction points, and growth opportunities into usable digital products. That can mean an AI assistant, a custom platform, a commerce engine, an internal tool, or a cleaner data workflow.
           </p>
         </motion.div>
@@ -87,7 +87,7 @@ export default function Services() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 md:py-32 bg-paper overflow-hidden">
+      <section className="py-16 sm:py-20 md:py-28 bg-paper overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="mb-14 sm:mb-16 md:mb-24 text-center md:text-left">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Our Process</p>
@@ -96,7 +96,7 @@ export default function Services() {
             </h2>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-14 relative">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 md:gap-12 relative">
             <div className="absolute top-12 left-0 w-full h-[1px] bg-brand-100/50 hidden lg:block -z-10" />
 
             {[
@@ -113,7 +113,7 @@ export default function Services() {
                 transition={{ duration: 0.8, delay: idx * 0.1 }}
                 className="relative group"
               >
-                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-paper border border-brand-100/50 rounded-3xl flex items-center justify-center text-3xl sm:text-4xl md:text-5xl font-semibold text-brand-100 mb-6 sm:mb-8 tracking-tighter group-hover:bg-soft group-hover:text-accent transition-all duration-500 shadow-sm">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-paper border border-brand-100/50 rounded-3xl flex items-center justify-center text-3xl sm:text-4xl md:text-5xl font-semibold text-brand-100 mb-6 sm:mb-8 tracking-[-0.04em] group-hover:bg-soft group-hover:text-accent transition-all duration-500 shadow-sm">
                   {phase.step}
                 </div>
                 <h3 className="text-xl sm:text-2xl font-semibold text-ink mb-3 sm:mb-4 tracking-tight">{phase.title}</h3>

@@ -54,7 +54,7 @@ const flowSteps: FlowStep[] = [
   {
     key: "projectType",
     prompt: "What type of project are you looking for?",
-    quickReplies: ["Website", "Branding", "AI automation"],
+    quickReplies: ["AI product", "Custom platform", "Automation system"],
   },
   {
     key: "projectStage",
@@ -64,7 +64,7 @@ const flowSteps: FlowStep[] = [
   {
     key: "industry",
     prompt: "What industry or business are you in?",
-    quickReplies: ["Professional services", "Ecommerce", "Other industry"],
+    quickReplies: ["Professional services", "E-commerce", "Other industry"],
   },
   {
     key: "mainGoal",

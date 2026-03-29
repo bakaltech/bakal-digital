@@ -14,10 +14,11 @@ export default function AIAgent() {
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [quickReplies, setQuickReplies] = useState<string[]>(['Website', 'Branding', 'AI automation']);
+  const [quickReplies, setQuickReplies] = useState<string[]>(['AI Product', 'Custom Platform', 'Automation System']);
   const [leadFormArgs, setLeadFormArgs] = useState<LeadFormArgs | null>(null);
   const [leadFormStartedAt, setLeadFormStartedAt] = useState<number | null>(null);
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+  const [formError, setFormError] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [websiteInput, setWebsiteInput] = useState('');
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -81,6 +82,7 @@ export default function AIAgent() {
     if (!emailInput || !leadFormArgs || !leadFormStartedAt) return;
 
     setFormStatus('submitting');
+    setFormError('');
 
     try {
       const response = await fetch('/api/leads', {
@@ -101,18 +103,12 @@ export default function AIAgent() {
       ]);
       setLeadFormArgs(null);
       setLeadFormStartedAt(null);
+      setEmailInput('');
       setWebsiteInput('');
     } catch (error) {
       console.error('Lead submit error:', error);
       setFormStatus('error');
-      setMessages((prev) => [
-        ...prev,
-        { role: 'user', text: `Email provided: ${emailInput}` },
-        { role: 'model', text: error instanceof Error ? error.message : 'I collected your information, but the secure submission failed. Please try again in a moment.' },
-      ]);
-      setLeadFormArgs(null);
-      setLeadFormStartedAt(null);
-      setWebsiteInput('');
+      setFormError(error instanceof Error ? error.message : 'I collected your information, but the secure submission failed. Please try again in a moment.');
     }
   };
 
@@ -125,7 +121,7 @@ export default function AIAgent() {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0, opacity: 0 }}
             onClick={() => setIsOpen(true)}
-            className="absolute bottom-4 right-4 sm:bottom-8 sm:right-8 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-ink text-white shadow-2xl flex items-center justify-center hover:bg-accent transition-colors pointer-events-auto"
+            className="absolute bottom-3 right-3 sm:bottom-8 sm:right-8 w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-ink text-white shadow-2xl flex items-center justify-center hover:bg-accent transition-colors pointer-events-auto"
           >
             <MessageSquare className="w-6 h-6 sm:w-7 sm:h-7" />
             <div className="absolute -top-1 -right-1 w-4 h-4 bg-accent rounded-full border-2 border-white animate-pulse" />
@@ -139,7 +135,7 @@ export default function AIAgent() {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className={`absolute bottom-4 right-4 sm:bottom-8 sm:right-8 glass rounded-2xl sm:rounded-[2rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] border border-white/20 overflow-hidden pointer-events-auto w-[calc(100vw-2rem)] sm:w-[400px] max-w-[400px] origin-bottom-right flex flex-col transition-[height] duration-300 ease-in-out ${isMinimized ? 'h-[80px]' : 'h-[420px] sm:h-[520px] md:h-[560px] lg:h-[600px] max-h-[calc(100vh-12rem)]'}`}
+            className={`absolute bottom-3 right-3 sm:bottom-8 sm:right-8 glass rounded-2xl sm:rounded-[2rem] shadow-[0_32px_64px_-16px_rgba(0,0,0,0.3)] border border-white/20 overflow-hidden pointer-events-auto w-[calc(100vw-1.5rem)] sm:w-[400px] max-w-[400px] origin-bottom-right flex flex-col transition-[height] duration-300 ease-in-out ${isMinimized ? 'h-[80px]' : 'h-[420px] sm:h-[520px] max-h-[calc(100vh-7rem)] sm:max-h-[calc(100vh-10rem)]'}`}
           >
             <div className="flex flex-col h-full w-full">
               <div className="p-4 sm:p-6 bg-ink text-white flex items-center justify-between shrink-0">
@@ -153,10 +149,10 @@ export default function AIAgent() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button onClick={() => setIsMinimized(!isMinimized)} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                  <button type="button" aria-label={isMinimized ? 'Expand chat' : 'Minimize chat'} onClick={() => setIsMinimized(!isMinimized)} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
                     {isMinimized ? <Maximize2 className="w-4 h-4" /> : <Minimize2 className="w-4 h-4" />}
                   </button>
-                  <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                  <button type="button" aria-label="Close chat" onClick={() => setIsOpen(false)} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
                     <X className="w-4 h-4" />
                   </button>
                 </div>
@@ -176,7 +172,7 @@ export default function AIAgent() {
                   </div>
 
                   {leadFormArgs === null && (
-                    <div className="px-4 sm:px-6 pb-2 flex flex-wrap gap-2 justify-center sm:justify-start">
+                  <div className="px-4 sm:px-6 pb-2 flex flex-wrap gap-2 justify-start">
                       {quickReplies.map((reply) => (
                         <button key={reply} onClick={() => handleSend(reply)} disabled={isLoading} className="px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-white border border-brand-100/50 text-xs font-semibold text-brand-400 hover:border-accent hover:text-accent transition-all whitespace-nowrap disabled:opacity-50">
                           {reply}
@@ -193,9 +189,10 @@ export default function AIAgent() {
                           <input id="lead-website" type="text" tabIndex={-1} autoComplete="off" value={websiteInput} onChange={(e) => setWebsiteInput(e.target.value)} />
                         </div>
                         <div className="space-y-2">
-                          <label htmlFor="email" className="text-xs font-semibold uppercase tracking-wider text-brand-400">Your Best Email</label>
-                          <input id="email" type="email" required value={emailInput} onChange={(e) => setEmailInput(e.target.value)} placeholder="hello@example.com" className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl bg-white border border-brand-100/50 focus:outline-none focus:border-accent transition-colors text-ink text-sm shadow-sm" />
+                          <label htmlFor="assistant-email" className="text-xs font-semibold uppercase tracking-wider text-brand-400">Your Best Email</label>
+                          <input id="assistant-email" type="email" required value={emailInput} onChange={(e) => setEmailInput(e.target.value)} placeholder="hello@example.com" className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl bg-white border border-brand-100/50 focus:outline-none focus:border-accent transition-colors text-ink text-sm shadow-sm" />
                         </div>
+                        {formError && <p className="text-sm text-red-600">{formError}</p>}
                         <button type="submit" disabled={formStatus === 'submitting'} className="w-full py-3 sm:py-4 rounded-xl bg-accent text-white font-semibold text-sm hover:bg-ink transition-colors disabled:opacity-50 flex justify-center items-center">
                           {formStatus === 'submitting' ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Send My Tailored Plan'}
                         </button>

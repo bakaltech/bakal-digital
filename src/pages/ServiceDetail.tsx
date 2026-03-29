@@ -36,7 +36,7 @@ export default function ServiceDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-paper pt-28 sm:pt-32 pb-20 sm:pb-24">
+    <div className="min-h-screen bg-paper pt-24 sm:pt-28 pb-20 sm:pb-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <Link to="/services" className="inline-flex items-center gap-2 text-brand-400 hover:text-ink transition-colors mb-8 sm:mb-10">
           <ArrowLeft className="w-4 h-4" />

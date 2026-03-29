@@ -22,17 +22,17 @@ export default function Portfolio() {
   }, [filter, search]);
 
   return (
-    <div className="min-h-screen bg-paper pt-36 pb-24">
+    <div className="min-h-screen bg-paper pt-24 sm:pt-28 pb-20 sm:pb-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
-        <div className="max-w-4xl mb-20">
+        <div className="max-w-4xl mb-14 sm:mb-16 md:mb-20">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Portfolio</p>
-            <h1 className="text-5xl md:text-7xl font-semibold text-ink mb-8 tracking-tight leading-[1.04]">Selected concepts and delivery directions.</h1>
-            <p className="text-xl md:text-2xl text-brand-400 leading-relaxed max-w-3xl">These concept studies show the kind of product, service, and brand systems we can shape for new and growing businesses.</p>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-ink mb-6 sm:mb-8 tracking-tight leading-[1.04]">Selected concepts and delivery directions.</h1>
+            <p className="text-lg sm:text-xl md:text-2xl text-brand-400 leading-relaxed max-w-3xl">These concept studies show the kind of product, service, and brand systems we can shape for new and growing businesses.</p>
           </motion.div>
         </div>
 
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8 mb-16">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 sm:gap-8 mb-14 sm:mb-16">
           <div className="flex flex-wrap justify-center md:justify-start gap-3">
             {categories.map((cat) => (
               <button key={cat} onClick={() => setFilter(cat)} className={`px-4 py-2.5 rounded-full text-sm font-semibold transition-all ${filter === cat ? 'bg-ink text-white shadow-lg' : 'bg-soft text-brand-400 hover:text-ink hover:bg-brand-100 border border-brand-100/50'}`}>
@@ -47,7 +47,7 @@ export default function Portfolio() {
           </div>
         </div>
 
-        <motion.div layout className="grid md:grid-cols-2 gap-x-12 gap-y-20">
+        <motion.div layout className="grid md:grid-cols-2 gap-x-10 md:gap-x-12 gap-y-14 sm:gap-y-20">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, idx) => (
               <motion.div key={project.id} layout initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96 }} transition={{ duration: 0.6, delay: idx * 0.05 }} className="group flex flex-col">

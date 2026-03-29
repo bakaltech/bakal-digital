@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowLeft, ArrowRight, ChevronDown } from 'lucide-react';
@@ -16,6 +16,10 @@ export default function CaseStudy() {
   const { id } = useParams<{ id: string }>();
   const project = projects.find((p) => p.id === id);
   const [activeFeature, setActiveFeature] = useState(0);
+
+  useEffect(() => {
+    setActiveFeature(0);
+  }, [id]);
 
   if (!project) {
     return <Navigate to="/portfolio" replace />;
@@ -47,7 +51,7 @@ export default function CaseStudy() {
 
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }}>
-              <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-soft text-accent text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-6 border border-brand-100/50">Concept Study · {project.category}</div>
+              <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-soft text-accent text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-6 border border-brand-100/50">Concept Study | {project.category}</div>
               <h1 className="text-4xl md:text-7xl font-semibold text-ink leading-[1.08] mb-6 tracking-tight">{project.title}</h1>
               <p className="text-lg md:text-2xl text-brand-400 leading-relaxed mb-10">{project.description}</p>
               <div className="flex flex-wrap gap-3">
@@ -95,7 +99,7 @@ export default function CaseStudy() {
           <div className="grid lg:grid-cols-12 gap-10 items-start">
             <div className="lg:col-span-5 space-y-4">
               {project.features.map((feature, idx) => (
-                <button key={feature.title} onClick={() => setActiveFeature(idx)} className={`w-full text-left p-6 rounded-[1.75rem] transition-all border ${activeFeature === idx ? 'bg-soft border-brand-100 shadow-sm' : 'bg-transparent border-transparent hover:bg-soft/60'}`}>
+                <button key={feature.title} type="button" onClick={() => setActiveFeature(idx)} className={`w-full text-left p-6 rounded-[1.75rem] transition-all border ${activeFeature === idx ? 'bg-soft border-brand-100 shadow-sm' : 'bg-transparent border-transparent hover:bg-soft/60'}`}>
                   <div className="flex items-center justify-between mb-3">
                     <h3 className={`text-xl md:text-2xl font-semibold tracking-tight ${activeFeature === idx ? 'text-ink' : 'text-brand-400'}`}>{feature.title}</h3>
                     <ChevronDown className={`h-5 w-5 transition-transform ${activeFeature === idx ? 'rotate-180 text-ink' : 'text-brand-400'}`} />
@@ -137,7 +141,7 @@ export default function CaseStudy() {
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-400 mb-6">Next Step</p>
           <Link to="/contact" className="group inline-block">
             <h2 className="text-4xl md:text-7xl font-semibold text-white mb-10 tracking-tight leading-[1.04] group-hover:text-accent transition-colors">Need this level of direction for your own product or system?</h2>
-            <div className="inline-flex items-center justify-center w-18 h-18 rounded-full border border-brand-400 text-white group-hover:bg-white group-hover:text-ink transition-all duration-500 px-6 py-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full border border-brand-400 text-white group-hover:bg-white group-hover:text-ink transition-all duration-500">
               <ArrowRight className="w-7 h-7" />
             </div>
           </Link>

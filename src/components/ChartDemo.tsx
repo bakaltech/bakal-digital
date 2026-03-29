@@ -1,4 +1,4 @@
-import React from 'react';
+ï»¿import React from 'react';
 import {
   Area,
   AreaChart,
@@ -258,7 +258,7 @@ export function VelocityCommerceDemo({ activeFeature }: { activeFeature: number 
     return (
       <div className="w-full h-full p-6 md:p-8 flex flex-col justify-center gap-4">
         {[
-          { label: 'Cart', state: '1 item • $280' },
+          { label: 'Cart', state: '1 item | $280' },
           { label: 'Delivery', state: 'Express selected' },
           { label: 'Payment', state: 'Apple Pay ready' },
         ].map((item) => (
@@ -317,3 +317,4 @@ export function ConceptDemoNote() {
     </div>
   );
 }
+

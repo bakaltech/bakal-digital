@@ -48,7 +48,7 @@ const CategoryVisual: React.FC<{ visual: CategoryCardProps['category']['visual']
   return (
     <div className="absolute inset-0 overflow-hidden">
       <div className={`absolute inset-0 bg-gradient-to-br ${style.glow}`} />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:34px_34px] opacity-18" />
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:34px_34px] opacity-[0.18]" />
       <div className="absolute inset-x-0 top-0 h-[52%] bg-gradient-to-b from-white/10 via-white/4 to-transparent" />
       <div className={`absolute top-6 right-6 w-16 h-16 rounded-[1.4rem] bg-gradient-to-br ${style.orb} flex items-center justify-center shadow-[0_18px_34px_rgba(0,0,0,0.18)]`}>
         <Icon className="w-7 h-7 text-white" />

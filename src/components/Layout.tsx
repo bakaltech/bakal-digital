@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { ArrowRight, Menu, MessageSquare, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import CookieConsent from './CookieConsent';
+import { projects } from '../data/projects';
+import { services } from '../data/services';
 
 const primaryLinks = [
   { name: 'Work', path: '/portfolio' },
@@ -57,7 +59,21 @@ const routeMetadata: Record<string, { title: string; description: string }> = {
     title: 'Terms of Service | Bakal Digital',
     description: 'Read the terms of service for Bakal Digital.',
   },
+  '/404': {
+    title: 'Page Not Found | Bakal Digital',
+    description: 'The page you requested could not be found.',
+  },
 };
+
+function ScrollToTop() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location.pathname]);
+
+  return null;
+}
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -86,13 +102,18 @@ const Navbar = () => {
     <nav className={`fixed inset-x-0 top-0 z-[70] transition-all duration-500 ${isScrolled ? 'bg-paper/92 backdrop-blur-xl border-b border-brand-100/40 py-3 md:py-4 shadow-[0_12px_30px_rgba(17,19,21,0.04)]' : 'bg-transparent py-4 md:py-7'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className={`flex items-center justify-between gap-4 rounded-[1.5rem] md:rounded-none px-3 py-2 md:p-0 transition-all duration-500 ${isScrolled ? 'bg-white/78 md:bg-transparent border border-brand-100/40 md:border-0 shadow-[0_10px_24px_rgba(17,19,21,0.04)] md:shadow-none' : 'bg-white/66 md:bg-transparent border border-white/50 md:border-0 backdrop-blur md:backdrop-blur-none'}`}>
-          <Link to="/" className="flex items-center gap-3 group min-w-0">
+          <Link to="/" className="flex items-center gap-3 group min-w-0" aria-label="Bakal Digital home">
             <BrandMark />
           </Link>
 
           <div className="hidden md:flex items-center gap-10">
             {primaryLinks.map((link) => (
-              <Link key={link.path} to={link.path} className={`text-sm font-bold uppercase tracking-widest transition-colors ${location.pathname === link.path ? 'text-accent' : 'text-ink hover:text-accent'}`}>
+              <Link
+                key={link.path}
+                to={link.path}
+                aria-current={location.pathname === link.path ? 'page' : undefined}
+                className={`text-sm font-bold uppercase tracking-widest transition-colors ${location.pathname === link.path ? 'text-accent' : 'text-ink hover:text-accent'}`}
+              >
                 {link.name}
               </Link>
             ))}
@@ -109,7 +130,14 @@ const Navbar = () => {
             </Link>
           </div>
 
-          <button type="button" className="md:hidden p-2 rounded-xl text-ink hover:bg-soft transition-colors" aria-label="Toggle menu" onClick={() => setIsOpen((value) => !value)}>
+          <button
+            type="button"
+            className="md:hidden p-2 rounded-xl text-ink hover:bg-soft transition-colors"
+            aria-label="Toggle menu"
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsOpen((value) => !value)}
+          >
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -119,7 +147,7 @@ const Navbar = () => {
         {isOpen && (
           <>
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="md:hidden fixed inset-0 top-[72px] bg-paper/70 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
-            <motion.div initial={{ opacity: 0, y: -24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -24 }} className="md:hidden relative mx-4 mt-3 rounded-[2rem] border border-brand-100/40 bg-paper shadow-[0_25px_80px_rgba(17,19,21,0.08)] overflow-hidden">
+            <motion.div id="mobile-navigation" initial={{ opacity: 0, y: -24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -24 }} className="md:hidden relative mx-4 mt-3 rounded-[2rem] border border-brand-100/40 bg-paper shadow-[0_25px_80px_rgba(17,19,21,0.08)] overflow-hidden">
               <div className="px-5 py-6 flex flex-col gap-5">
                 <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-accent">Navigate</p>
                 {primaryLinks.map((link, index) => (
@@ -186,8 +214,8 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-12 md:mt-14 pt-6 border-t border-brand-100/20 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-brand-400 text-center md:text-left">
-          <p>© {new Date().getFullYear()} Bakal Digital. All rights reserved.</p>
-          <p className="uppercase tracking-[0.25em] text-[11px]">Remote-first studio · AI, platforms, automation, and premium execution</p>
+          <p>&copy; {new Date().getFullYear()} Bakal Digital. All rights reserved.</p>
+          <p className="uppercase tracking-[0.25em] text-[11px]">Remote-first studio | AI, platforms, automation, and premium execution</p>
         </div>
       </div>
     </footer>
@@ -204,39 +232,67 @@ function SeoManager() {
     }
 
     if (location.pathname.startsWith('/portfolio/')) {
+      const project = projects.find((item) => location.pathname === `/portfolio/${item.id}`);
       return {
-        title: 'Case Study | Bakal Digital',
-        description: 'Explore a Bakal Digital concept study across product direction, UX, systems, and implementation thinking.',
+        title: project ? `${project.title} | Bakal Digital` : 'Case Study | Bakal Digital',
+        description: project
+          ? project.description
+          : 'Explore a Bakal Digital concept study across product direction, UX, systems, and implementation thinking.',
       };
     }
 
     if (location.pathname.startsWith('/services/')) {
+      const service = services.find((item) => location.pathname === `/services/${item.id}`);
       return {
-        title: 'Service Detail | Bakal Digital',
-        description: 'See how Bakal Digital approaches delivery across AI, platform, automation, commerce, and data work.',
+        title: service ? `${service.title} | Bakal Digital` : 'Service Detail | Bakal Digital',
+        description: service
+          ? service.description
+          : 'See how Bakal Digital approaches delivery across AI, platform, automation, commerce, and data work.',
       };
     }
 
-    return routeMetadata['/'];
+    return routeMetadata['/404'];
   }, [location.pathname]);
 
   useEffect(() => {
+    const ensureMetaTag = (selector: string, attributeName: string, attributeValue: string) => {
+      let tag = document.head.querySelector(selector) as HTMLMetaElement | null;
+      if (!tag) {
+        tag = document.createElement('meta');
+        tag.setAttribute(attributeName, attributeValue);
+        document.head.appendChild(tag);
+      }
+      return tag;
+    };
+
+    const ensureLinkTag = (rel: string) => {
+      let tag = document.head.querySelector(`link[rel="${rel}"]`) as HTMLLinkElement | null;
+      if (!tag) {
+        tag = document.createElement('link');
+        tag.setAttribute('rel', rel);
+        document.head.appendChild(tag);
+      }
+      return tag;
+    };
+
     document.title = metadata.title;
 
-    const descriptionTag = document.querySelector('meta[name="description"]');
-    if (descriptionTag) {
-      descriptionTag.setAttribute('content', metadata.description);
-    }
+    const currentUrl = window.location.href;
+    const descriptionTag = ensureMetaTag('meta[name="description"]', 'name', 'description');
+    const ogTitle = ensureMetaTag('meta[property="og:title"]', 'property', 'og:title');
+    const ogDescription = ensureMetaTag('meta[property="og:description"]', 'property', 'og:description');
+    const ogUrl = ensureMetaTag('meta[property="og:url"]', 'property', 'og:url');
+    const twitterTitle = ensureMetaTag('meta[name="twitter:title"]', 'name', 'twitter:title');
+    const twitterDescription = ensureMetaTag('meta[name="twitter:description"]', 'name', 'twitter:description');
+    const canonicalLink = ensureLinkTag('canonical');
 
-    const ogTitle = document.querySelector('meta[property="og:title"]');
-    const ogDescription = document.querySelector('meta[property="og:description"]');
-    const twitterTitle = document.querySelector('meta[name="twitter:title"]');
-    const twitterDescription = document.querySelector('meta[name="twitter:description"]');
-
-    ogTitle?.setAttribute('content', metadata.title);
-    ogDescription?.setAttribute('content', metadata.description);
-    twitterTitle?.setAttribute('content', metadata.title);
-    twitterDescription?.setAttribute('content', metadata.description);
+    descriptionTag.setAttribute('content', metadata.description);
+    ogTitle.setAttribute('content', metadata.title);
+    ogDescription.setAttribute('content', metadata.description);
+    ogUrl.setAttribute('content', currentUrl);
+    twitterTitle.setAttribute('content', metadata.title);
+    twitterDescription.setAttribute('content', metadata.description);
+    canonicalLink.setAttribute('href', currentUrl);
   }, [metadata]);
 
   return null;
@@ -246,6 +302,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen flex flex-col font-sans bg-paper">
       <SeoManager />
+      <ScrollToTop />
       <Navbar />
       <main className="flex-1 pt-[78px] md:pt-20">{children}</main>
       <Footer />

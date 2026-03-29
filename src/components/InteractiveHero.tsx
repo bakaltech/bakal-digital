@@ -1,12 +1,11 @@
-import React, { useRef, useEffect } from 'react';
-import { motion, useSpring, useTransform, useMotionValue } from 'motion/react';
+import React, { useEffect } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import LeadsGrid from './LeadsGrid';
 import BrandedVisual from './BrandedVisual';
 
 const galleryVariants = ['ai', 'platform', 'commerce', 'data', 'studio'] as const;
 
 export default function InteractiveHero() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -32,10 +31,7 @@ export default function InteractiveHero() {
   const layer4Y = useTransform(smoothY, [-0.5, 0.5], [-28, 28]);
 
   return (
-    <section
-      ref={containerRef}
-      className="relative min-h-[760px] sm:min-h-[820px] md:min-h-[900px] w-full overflow-hidden bg-paper flex items-center justify-center pt-28 sm:pt-32 md:pt-36 pb-12 sm:pb-14"
-    >
+    <section className="relative min-h-[760px] sm:min-h-[820px] md:min-h-[900px] w-full overflow-hidden bg-paper flex items-center justify-center pt-28 sm:pt-32 md:pt-36 pb-12 sm:pb-14">
       <div className="absolute inset-0 z-0 opacity-28 md:opacity-42 pointer-events-none scale-105 md:scale-110 rotate-[-3deg] md:rotate-[-6deg]">
         <motion.div style={{ x: layer1X }} className="absolute top-[4%] left-[-18%] flex gap-4 sm:gap-6 md:gap-8 whitespace-nowrap">
           {Array.from({ length: 6 }).map((_, i) => (
@@ -84,7 +80,7 @@ export default function InteractiveHero() {
           <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/60 to-transparent" />
 
           <p className="text-[10px] sm:text-xs text-brand-400 font-bold tracking-[0.28em] sm:tracking-[0.35em] uppercase opacity-80 mb-5 sm:mb-7">
-            AI Products • Custom Platforms • Automation • Data Systems
+            AI Products | Custom Platforms | Automation | Data Systems
           </p>
 
           <h1 className="text-[clamp(2.4rem,9vw,5.8rem)] font-bold text-ink leading-[0.98] tracking-tight mb-6 sm:mb-8 max-w-[12ch] mx-auto">

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+﻿import React, { useMemo, useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, BarChart3, Bot, Gauge, Globe, Layers3, ShieldCheck, ShoppingCart, Sparkles, Workflow } from 'lucide-react';
 import type { Service } from '../data/services';
@@ -72,7 +72,7 @@ const showcaseContent: Record<ShowcaseId, ShowcaseContent> = {
     note: 'This is a service simulation, not a live client system.',
     steps: [
       { label: 'Foundation', title: 'Account, role, and tenant logic', detail: 'We define who uses the product, how access works, and what the billing model needs to support from the start.', metric: 'Multi-user ready' },
-      { label: 'Activation', title: 'Onboarding that gets users to value faster', detail: 'The first-run experience is built to reduce friction and guide the user into the product’s core loop.', metric: 'Clear activation path' },
+      { label: 'Activation', title: 'Onboarding that gets users to value faster', detail: 'The first-run experience is built to reduce friction and guide the user into the product core loop.', metric: 'Clear activation path' },
       { label: 'Scale', title: 'A system that can absorb growth', detail: 'The product architecture is shaped for more users, more features, and better reporting without collapsing into rework.', metric: 'Growth-ready spine' },
     ],
   },
@@ -235,3 +235,4 @@ export default function ServiceShowcase({ service }: { service: Service }) {
     </section>
   );
 }
+
