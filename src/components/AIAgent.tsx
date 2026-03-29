@@ -4,13 +4,13 @@ import { Loader2, Maximize2, MessageSquare, Minimize2, Send, Sparkles, X } from 
 
 type ChatMessage = { role: 'user' | 'model'; text: string };
 type LeadFormArgs = { projectType: string; projectStage: string; industry: string; mainGoal: string; budget: string; timeline: string; summary: string };
-type ChatResponse = { text?: string; quickReplies?: string[]; leadFormArgs?: LeadFormArgs | null };
+type ChatResponse = { text?: string; quickReplies?: string[]; leadFormArgs?: LeadFormArgs | null; error?: string };
 
 export default function AIAgent() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: "I’m the Bakal project guide. I’ll ask a few quick questions so we can understand the problem properly and route the right next step. What are you trying to build or improve?" },
+    { role: 'model', text: "I'm the Bakal project guide. I'll ask a few quick questions so we can understand the problem properly and route the right next step. What are you trying to build or improve?" },
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -55,9 +55,11 @@ export default function AIAgent() {
         body: JSON.stringify({ messages, message: messageText }),
       });
 
-      if (!response.ok) throw new Error(`Chat request failed with status ${response.status}`);
+      const data = (await response.json().catch(() => ({}))) as ChatResponse;
+      if (!response.ok) {
+        throw new Error(data.error || `Chat request failed with status ${response.status}`);
+      }
 
-      const data = (await response.json()) as ChatResponse;
       const modelText = data.text || "I couldn't process that properly. Send that again and I'll keep the intake moving.";
 
       if (data.leadFormArgs) {
@@ -71,7 +73,13 @@ export default function AIAgent() {
       setMessages((prev) => [...prev, { role: 'model', text: modelText }]);
     } catch (error) {
       console.error('Chat error:', error);
-      setMessages((prev) => [...prev, { role: 'model', text: 'The chat hit a problem. Please try again in a moment, or use the project brief instead.' }]);
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: 'model',
+          text: error instanceof Error ? error.message : 'The chat hit a problem. Please try again in a moment, or use the project brief instead.',
+        },
+      ]);
     } finally {
       setIsLoading(false);
     }
@@ -172,7 +180,7 @@ export default function AIAgent() {
                   </div>
 
                   {leadFormArgs === null && (
-                  <div className="px-4 sm:px-6 pb-2 flex flex-wrap gap-2 justify-start">
+                    <div className="px-4 sm:px-6 pb-2 flex flex-wrap gap-2 justify-start">
                       {quickReplies.map((reply) => (
                         <button key={reply} onClick={() => handleSend(reply)} disabled={isLoading} className="px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-white border border-brand-100/50 text-xs font-semibold text-brand-400 hover:border-accent hover:text-accent transition-all whitespace-nowrap disabled:opacity-50">
                           {reply}

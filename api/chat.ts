@@ -1,30 +1,35 @@
-﻿import { generateChatResponse, getChatPayload, HttpError } from "../lib/server/assistant";
+import { generateChatResponse, getChatPayload, HttpError } from "../lib/server/assistant";
+import { getRequestMethod, readJsonBody, sendJson } from "./_utils";
 
-function json(body: unknown, status = 200) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-}
+type NodeRequestLike = {
+  method?: string;
+  body?: unknown;
+};
 
-export default async function handler(request: Request): Promise<Response> {
-  if (request.method !== "POST") {
-    return json({ error: "Method not allowed." }, 405);
+type NodeResponseLike = {
+  status(code: number): NodeResponseLike;
+  json(body: unknown): void;
+};
+
+export default async function handler(
+  request: Request | NodeRequestLike,
+  response?: NodeResponseLike,
+): Promise<Response | void> {
+  if (getRequestMethod(request) !== "POST") {
+    return sendJson({ error: "Method not allowed." }, 405, response);
   }
 
   try {
-    const payload = await request.json();
+    const payload = await readJsonBody(request);
     const { messages, messageText } = getChatPayload(payload);
-    const response = await generateChatResponse({ messages, messageText });
-    return json(response);
+    const chatResponse = await generateChatResponse({ messages, messageText });
+    return sendJson(chatResponse, 200, response);
   } catch (error) {
     if (error instanceof HttpError) {
-      return json({ error: error.message }, error.status);
+      return sendJson({ error: error.message }, error.status, response);
     }
 
     console.error("Chat API error:", error);
-    return json({ error: "Failed to generate a response." }, 500);
+    return sendJson({ error: "Failed to generate a response." }, 500, response);
   }
 }

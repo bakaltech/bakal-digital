@@ -1,32 +1,38 @@
 import { enforceRateLimit, getLeadPayload, HttpError, submitLead } from "../lib/server/assistant";
+import { getHeaderValue, getRequestMethod, readJsonBody, sendJson } from "./_utils";
 
-function json(body: unknown, status = 200) {
-  return new Response(JSON.stringify(body), {
-    status,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-}
+type NodeRequestLike = {
+  method?: string;
+  body?: unknown;
+  headers?: Record<string, string | string[] | undefined>;
+};
 
-function getClientIp(request: Request) {
-  const forwardedFor = request.headers.get("x-forwarded-for");
+type NodeResponseLike = {
+  status(code: number): NodeResponseLike;
+  json(body: unknown): void;
+};
+
+function getClientIp(request: Request | NodeRequestLike) {
+  const forwardedFor = getHeaderValue(request, "x-forwarded-for");
   if (forwardedFor) {
     return forwardedFor.split(",")[0]?.trim() || "unknown";
   }
 
-  return request.headers.get("x-real-ip") || "unknown";
+  return getHeaderValue(request, "x-real-ip") || "unknown";
 }
 
-export default async function handler(request: Request): Promise<Response> {
-  if (request.method !== "POST") {
-    return json({ error: "Method not allowed." }, 405);
+export default async function handler(
+  request: Request | NodeRequestLike,
+  response?: NodeResponseLike,
+): Promise<Response | void> {
+  if (getRequestMethod(request) !== "POST") {
+    return sendJson({ error: "Method not allowed." }, 405, response);
   }
 
   try {
     enforceRateLimit(`lead:${getClientIp(request)}`);
 
-    const payload = await request.json();
+    const payload = await readJsonBody(request);
     const { email, details } = getLeadPayload(payload);
 
     await submitLead({
@@ -35,13 +41,13 @@ export default async function handler(request: Request): Promise<Response> {
       webhookUrl: process.env.GOOGLE_SHEETS_WEBHOOK_URL,
     });
 
-    return json({ ok: true });
+    return sendJson({ ok: true }, 200, response);
   } catch (error) {
     if (error instanceof HttpError) {
-      return json({ error: error.message }, error.status);
+      return sendJson({ error: error.message }, error.status, response);
     }
 
     console.error("Lead API error:", error);
-    return json({ error: "Failed to submit the lead." }, 500);
+    return sendJson({ error: "Failed to submit the lead." }, 500, response);
   }
 }
