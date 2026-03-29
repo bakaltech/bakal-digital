@@ -14,9 +14,9 @@ interface CategoryCardProps {
     description: string;
     icon: React.ElementType;
     visual: 'ai' | 'platform' | 'commerce' | 'data';
+    outcomes: string[];
   };
   idx: number;
-  className?: string;
 }
 
 const categoryVisualStyles: Record<CategoryCardProps['category']['visual'], { glow: string; orb: string; line: string }> = {
@@ -58,67 +58,47 @@ const CategoryVisual: React.FC<{ visual: CategoryCardProps['category']['visual']
   );
 };
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx, className = '' }) => (
+const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-    className={`group relative min-h-[280px] sm:min-h-[340px] md:min-h-[360px] rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-soft border border-brand-100/50 shadow-sm hover:shadow-xl transition-all duration-500 ${className}`}
+    className="group relative min-h-[18rem] rounded-[1.6rem] overflow-hidden border border-brand-100/60 bg-soft shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(17,19,21,0.08)]"
   >
     <CategoryVisual visual={category.visual} icon={category.icon} />
-    <div className="absolute inset-0 bg-gradient-to-t from-ink/92 via-ink/42 to-white/10 opacity-95 group-hover:opacity-100 transition-opacity duration-500" />
-    <div className="absolute inset-0 p-5 sm:p-8 flex flex-col">
-      <div>
-        <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-xl border border-white/20 flex items-center justify-center mb-4 sm:mb-6 group-hover:bg-accent group-hover:border-accent transition-all duration-500">
+    <div className="absolute inset-0 bg-gradient-to-t from-ink/94 via-ink/58 to-white/8 opacity-95 group-hover:opacity-100 transition-opacity duration-500" />
+    <div className="absolute inset-0 flex flex-col p-5 sm:p-6">
+      <div className="flex items-start justify-between gap-4">
+        <div className="w-10 h-10 rounded-xl border border-white/20 bg-white/10 backdrop-blur-xl flex items-center justify-center transition-all duration-500 group-hover:bg-accent group-hover:border-accent">
           <category.icon className="w-5 h-5 text-white" />
         </div>
-        <h3 className="text-[1.4rem] sm:text-[1.75rem] md:text-[1.85rem] font-semibold text-white mb-4 tracking-tight leading-[1.02] max-w-[10ch]">
+        <span className="rounded-full border border-white/12 bg-white/8 px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-white/62">
+          Capability
+        </span>
+      </div>
+
+      <div className="mt-8">
+        <h3 className="max-w-[10ch] text-[1.5rem] sm:text-[1.8rem] font-semibold leading-[1.02] text-white">
           {category.title}
         </h3>
-        <p className="text-white/78 text-sm sm:text-[15px] leading-relaxed max-w-[28ch]">
+        <p className="mt-4 max-w-[28ch] text-sm sm:text-[15px] leading-relaxed text-white/78">
           {category.description}
         </p>
       </div>
+
       <div className="mt-auto pt-6">
-        <Link to="/services" className="inline-flex items-center text-white text-[10px] font-bold uppercase tracking-widest hover:text-white transition-colors">
-          View Details
-          <ArrowRight className="ml-2 w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
-        </Link>
-      </div>
-    </div>
-  </motion.div>
-);
-
-const CapabilityLeadCard: React.FC<{ category: CategoryCardProps['category'] }> = ({ category }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 24 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-    className="relative min-h-[380px] sm:min-h-[480px] rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden border border-brand-100/50 bg-ink shadow-[0_28px_70px_rgba(17,19,21,0.14)]"
-  >
-    <CategoryVisual visual={category.visual} icon={category.icon} />
-    <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/72 to-white/10" />
-    <div className="relative z-10 h-full p-6 sm:p-8 md:p-10 flex flex-col">
-      <div className="w-12 h-12 rounded-2xl bg-white/10 backdrop-blur-xl border border-white/16 flex items-center justify-center mb-6">
-        <category.icon className="w-6 h-6 text-white" />
-      </div>
-      <p className="text-[11px] font-bold uppercase tracking-[0.26em] text-white/55 mb-4">Featured Capability</p>
-      <h3 className="text-3xl sm:text-[3.2rem] font-semibold text-white tracking-tight leading-[1] max-w-[7ch] mb-6">{category.title}</h3>
-      <p className="text-base sm:text-lg text-white/74 leading-relaxed max-w-[28ch]">{category.description}</p>
-
-      <div className="mt-auto pt-8 flex flex-col gap-5">
-          <div className="grid grid-cols-2 gap-3 max-w-md">
-            {['Clarity', 'Workflow', 'Structure', 'Trust'].map((item) => (
-            <div key={item} className="rounded-[1.2rem] border border-white/10 bg-white/[0.03] px-4 py-3 text-sm font-medium text-white/82">
-              {item}
+        <div className="mb-5 grid gap-2">
+          {category.outcomes.slice(0, 2).map((outcome, outcomeIndex) => (
+            <div key={outcome} className="rounded-[1rem] border border-white/10 bg-white/6 px-3 py-2.5">
+              <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-white/38">0{outcomeIndex + 1}</p>
+              <p className="mt-1 text-sm leading-relaxed text-white/88">{outcome}</p>
             </div>
           ))}
         </div>
-        <Link to="/services" className="inline-flex items-center text-white text-xs font-bold uppercase tracking-widest hover:text-accent transition-colors">
-          Explore Services
-          <ArrowRight className="ml-2 w-4 h-4" />
+        <Link to="/services" className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-white transition-colors hover:text-white">
+          Explore capability
+          <ArrowRight className="ml-2 w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
         </Link>
       </div>
     </div>
@@ -149,10 +129,34 @@ const ProjectCard: React.FC<{ project: (typeof projects)[number]; idx: number }>
 export default function Home() {
   const featuredProjects = projects.slice(0, 2);
   const categories = [
-    { title: 'AI Products', description: 'Assistants, workflows, and product features that make AI practical inside the business.', icon: Cpu, visual: 'ai' as const },
-    { title: 'Custom Platforms', description: 'Tailored web platforms, portals, and operational tools built around your exact process.', icon: Globe, visual: 'platform' as const },
-    { title: 'Commerce Systems', description: 'Storefronts and conversion flows designed to sell cleanly and scale without friction.', icon: ShoppingBag, visual: 'commerce' as const },
-    { title: 'Automation & Data', description: 'Connected workflows, reporting, and internal systems that reduce manual work and surface insight.', icon: Database, visual: 'data' as const },
+    {
+      title: 'AI Products',
+      description: 'Assistants, workflows, and product features that make AI practical inside the business.',
+      icon: Cpu,
+      visual: 'ai' as const,
+      outcomes: ['Useful assistant flows', 'Faster qualification and support'],
+    },
+    {
+      title: 'Custom Platforms',
+      description: 'Tailored web platforms, portals, and operational tools built around your exact process.',
+      icon: Globe,
+      visual: 'platform' as const,
+      outcomes: ['Clearer customer journeys', 'Interfaces shaped around real workflow'],
+    },
+    {
+      title: 'Commerce Systems',
+      description: 'Storefronts and conversion flows designed to sell cleanly and scale without friction.',
+      icon: ShoppingBag,
+      visual: 'commerce' as const,
+      outcomes: ['Stronger product presentation', 'Cleaner checkout and revenue flow'],
+    },
+    {
+      title: 'Automation & Data',
+      description: 'Connected workflows, reporting, and internal systems that reduce manual work and surface insight.',
+      icon: Database,
+      visual: 'data' as const,
+      outcomes: ['Less manual operational drag', 'Better visibility across the business'],
+    },
   ];
 
   return (
@@ -161,28 +165,35 @@ export default function Home() {
 
       <section className="py-14 sm:py-20 md:py-32 bg-paper">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="max-w-4xl mb-10 sm:mb-14 md:mb-20">
-            <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">What We Build</p>
-            <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-semibold text-ink leading-tight tracking-tight mb-5 sm:mb-8">
-              Digital products, systems, and experiences designed to move the business forward.
-            </h2>
-            <p className="text-base sm:text-xl text-brand-400 leading-relaxed max-w-3xl">
-              We help companies launch sharper digital products, modernize customer-facing platforms, automate operational work, and create cleaner paths from interest to action.
-            </p>
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.58fr)_minmax(0,1fr)] lg:gap-14 items-end mb-10 sm:mb-14 md:mb-18">
+            <div className="max-w-xl">
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">What We Build</p>
+              <h2 className="text-[2rem] sm:text-4xl md:text-[3.8rem] font-semibold text-ink leading-[0.98] tracking-tight">
+                Where we build leverage for the business.
+              </h2>
+            </div>
+            <div className="max-w-2xl lg:justify-self-end">
+              <p className="text-base sm:text-lg md:text-[1.12rem] text-brand-400 leading-relaxed">
+                The work usually lands in four areas: AI product utility, customer-facing platforms, commerce systems, and connected automation with cleaner reporting underneath.
+              </p>
+              <div className="mt-5 flex flex-wrap gap-3">
+                {['Growth', 'Operations', 'Customer flow', 'System clarity'].map((item) => (
+                  <span key={item} className="rounded-full border border-brand-100 bg-soft px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-brand-400">
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-5 sm:gap-6 md:gap-8">
-            <CapabilityLeadCard category={categories[0]} />
-            <div className="grid lg:grid-cols-2 gap-4 sm:gap-5">
-              {categories.slice(1).map((cat, idx) => (
-                <CategoryCard
-                  key={cat.title}
-                  category={cat}
-                  idx={idx}
-                  className={idx === 2 ? 'lg:col-span-2' : ''}
-                />
-              ))}
-            </div>
+          <div className="grid gap-4 sm:gap-5 lg:grid-cols-2 xl:grid-cols-4">
+            {categories.map((cat, idx) => (
+              <CategoryCard
+                key={cat.title}
+                category={cat}
+                idx={idx}
+              />
+            ))}
           </div>
         </div>
       </section>
