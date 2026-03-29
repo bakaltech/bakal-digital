@@ -64,7 +64,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-    className="group relative min-h-[18rem] rounded-[1.6rem] overflow-hidden border border-brand-100/60 bg-soft shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(17,19,21,0.08)]"
+    className="group relative min-h-[26rem] rounded-[1.6rem] overflow-hidden border border-brand-100/60 bg-soft shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_22px_50px_rgba(17,19,21,0.08)]"
   >
     <CategoryVisual visual={category.visual} icon={category.icon} />
     <div className="absolute inset-0 bg-gradient-to-t from-ink/94 via-ink/58 to-white/8 opacity-95 group-hover:opacity-100 transition-opacity duration-500" />
@@ -174,7 +174,7 @@ export default function Home() {
             </div>
             <div className="max-w-2xl lg:justify-self-end">
               <p className="text-base sm:text-lg md:text-[1.12rem] text-brand-400 leading-relaxed">
-                The work usually lands in four areas: AI product utility, customer-facing platforms, commerce systems, and connected automation with cleaner reporting underneath.
+                These are the four capability areas where we usually create the most leverage: sharper AI utility, clearer platforms, stronger commerce flow, and cleaner internal operations.
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
                 {['Growth', 'Operations', 'Customer flow', 'System clarity'].map((item) => (
