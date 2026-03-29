@@ -54,7 +54,7 @@ export default function LeadsGrid() {
   };
 
   return (
-    <div className="w-full mx-auto mt-6 sm:mt-8">
+    <div className="w-full mx-auto">
       <AnimatePresence mode="wait">
         {step === 'needs' && (
           <motion.div key="needs-step" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="space-y-5 sm:space-y-6">
