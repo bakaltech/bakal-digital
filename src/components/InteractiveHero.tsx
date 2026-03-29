@@ -1,36 +1,17 @@
-import React, { useEffect } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
+import React from 'react';
+import { motion } from 'motion/react';
 import { ArrowRight, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import BrandedVisual from './BrandedVisual';
 
 const galleryVariants = ['ai', 'platform', 'commerce', 'data', 'studio'] as const;
+const collageRows = [
+  ['ai', 'platform', 'commerce', 'data', 'studio', 'platform'],
+  ['commerce', 'data', 'ai', 'studio', 'platform', 'commerce'],
+  ['studio', 'ai', 'data', 'platform', 'commerce', 'studio'],
+] as const;
 
 export default function InteractiveHero() {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springConfig = { damping: 25, stiffness: 150 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
-      const { innerWidth, innerHeight } = window;
-      mouseX.set(clientX / innerWidth - 0.5);
-      mouseY.set(clientY / innerHeight - 0.5);
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [mouseX, mouseY]);
-
-  const layer1X = useTransform(smoothX, [-0.5, 0.5], [24, -24]);
-  const layer2X = useTransform(smoothX, [-0.5, 0.5], [-24, 24]);
-  const layer3Y = useTransform(smoothY, [-0.5, 0.5], [28, -28]);
-  const layer4Y = useTransform(smoothY, [-0.5, 0.5], [-28, 28]);
-
   const openChat = () => {
     window.dispatchEvent(new CustomEvent('open-chat'));
   };
@@ -40,59 +21,29 @@ export default function InteractiveHero() {
       <div className="absolute inset-0 bg-[linear-gradient(to_bottom,#edf4fb_0%,#f5f9fe_20%,#ffffff_50%,#f5f8fc_100%)]" />
 
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <motion.div
-          animate={{ x: [0, -110, 0], y: [0, 10, 0] }}
-          transition={{ duration: 34, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ x: layer1X }}
-          className="absolute left-[-4%] top-[5%] hidden lg:flex gap-5 rotate-[-6deg]"
-        >
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={`l1-${i}`} className="h-36 w-64 shrink-0 rounded-[1.8rem] overflow-hidden border-[10px] border-white shadow-[0_18px_42px_rgba(17,19,21,0.16)]">
-              <BrandedVisual variant={galleryVariants[i % galleryVariants.length]} compact title="" />
-            </div>
+        <div className="absolute inset-x-[-10%] top-[4%] hidden lg:grid gap-5 opacity-[0.92]">
+          {collageRows.map((row, rowIndex) => (
+            <motion.div
+              key={rowIndex}
+              animate={{ x: rowIndex % 2 === 0 ? [0, -160, 0] : [0, 160, 0] }}
+              transition={{ duration: 34 + rowIndex * 4, repeat: Infinity, ease: 'linear' }}
+              className={`flex gap-5 ${rowIndex === 1 ? 'translate-x-[-6%]' : rowIndex === 2 ? 'translate-x-[8%]' : ''}`}
+            >
+              {[...row, ...row].map((variant, index) => (
+                <div
+                  key={`${rowIndex}-${index}`}
+                  className={`shrink-0 overflow-hidden rounded-[1.8rem] border-[10px] border-white shadow-[0_18px_42px_rgba(17,19,21,0.16)] ${
+                    rowIndex === 1 ? 'h-40 w-72' : 'h-36 w-64'
+                  }`}
+                >
+                  <BrandedVisual variant={variant} compact title="" />
+                </div>
+              ))}
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
 
-        <motion.div
-          animate={{ x: [0, 130, 0], y: [0, -12, 0] }}
-          transition={{ duration: 38, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ x: layer2X }}
-          className="absolute right-[-8%] top-[10%] hidden lg:flex gap-5 rotate-[7deg]"
-        >
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={`l2-${i}`} className="h-36 w-64 shrink-0 rounded-[1.8rem] overflow-hidden border-[10px] border-white shadow-[0_18px_42px_rgba(17,19,21,0.16)]">
-              <BrandedVisual variant={galleryVariants[(i + 2) % galleryVariants.length]} compact title="" />
-            </div>
-          ))}
-        </motion.div>
-
-        <motion.div
-          animate={{ y: [0, -70, 0], x: [0, 10, 0] }}
-          transition={{ duration: 28, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ y: layer3Y }}
-          className="absolute left-[4%] top-[52%] hidden xl:flex flex-col gap-5 rotate-[-9deg]"
-        >
-          {Array.from({ length: 3 }).map((_, i) => (
-            <div key={`l3-${i}`} className="h-32 w-56 shrink-0 rounded-[1.6rem] overflow-hidden border-[8px] border-white shadow-[0_18px_38px_rgba(17,19,21,0.13)]">
-              <BrandedVisual variant={galleryVariants[(i + 1) % galleryVariants.length]} compact title="" />
-            </div>
-          ))}
-        </motion.div>
-
-        <motion.div
-          animate={{ y: [0, 64, 0], x: [0, -12, 0] }}
-          transition={{ duration: 32, repeat: Infinity, ease: 'easeInOut' }}
-          style={{ y: layer4Y }}
-          className="absolute right-[6%] top-[54%] hidden xl:flex flex-col gap-5 rotate-[10deg]"
-        >
-          {Array.from({ length: 3 }).map((_, i) => (
-            <div key={`l4-${i}`} className="h-32 w-56 shrink-0 rounded-[1.6rem] overflow-hidden border-[8px] border-white shadow-[0_18px_38px_rgba(17,19,21,0.13)]">
-              <BrandedVisual variant={galleryVariants[(i + 3) % galleryVariants.length]} compact title="" />
-            </div>
-          ))}
-        </motion.div>
-
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_12%,rgba(255,255,255,0.08)_38%,rgba(255,255,255,0.42)_78%,rgba(255,255,255,0.78)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_16%,rgba(255,255,255,0.08)_42%,rgba(255,255,255,0.36)_74%,rgba(255,255,255,0.74)_100%)]" />
       </div>
 
       <div className="absolute inset-0 z-[5] bg-gradient-to-b from-paper/34 via-paper/16 to-paper/60 lg:from-paper/10 lg:via-paper/6 lg:to-paper/42" />
