@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'motion/react';
 import { ArrowRight, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import LeadsGrid from './LeadsGrid';
 import BrandedVisual from './BrandedVisual';
 
 const galleryVariants = ['ai', 'platform', 'commerce', 'data', 'studio'] as const;
@@ -37,27 +36,42 @@ export default function InteractiveHero() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-paper pt-24 sm:pt-28 md:pt-32 pb-10 sm:pb-12 md:pb-14">
-      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,#eef4fb_0%,#f8fbff_22%,#ffffff_52%,#f6f8fb_100%)]" />
+    <section className="relative overflow-hidden bg-paper pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-14 md:pb-16">
+      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,#edf4fb_0%,#f5f9fe_20%,#ffffff_50%,#f5f8fc_100%)]" />
 
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <motion.div style={{ x: layer1X }} className="absolute left-[-2%] top-[4%] hidden lg:flex gap-5 rotate-[-6deg]">
+        <motion.div
+          animate={{ x: [0, -110, 0], y: [0, 10, 0] }}
+          transition={{ duration: 34, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ x: layer1X }}
+          className="absolute left-[-4%] top-[5%] hidden lg:flex gap-5 rotate-[-6deg]"
+        >
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={`l1-${i}`} className="h-36 w-64 shrink-0 rounded-[1.8rem] overflow-hidden border-[10px] border-white shadow-[0_18px_40px_rgba(17,19,21,0.14)]">
+            <div key={`l1-${i}`} className="h-36 w-64 shrink-0 rounded-[1.8rem] overflow-hidden border-[10px] border-white shadow-[0_18px_42px_rgba(17,19,21,0.16)]">
               <BrandedVisual variant={galleryVariants[i % galleryVariants.length]} compact title="" />
             </div>
           ))}
         </motion.div>
 
-        <motion.div style={{ x: layer2X }} className="absolute right-[-1%] top-[10%] hidden lg:flex gap-5 rotate-[7deg]">
+        <motion.div
+          animate={{ x: [0, 130, 0], y: [0, -12, 0] }}
+          transition={{ duration: 38, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ x: layer2X }}
+          className="absolute right-[-8%] top-[10%] hidden lg:flex gap-5 rotate-[7deg]"
+        >
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={`l2-${i}`} className="h-36 w-64 shrink-0 rounded-[1.8rem] overflow-hidden border-[10px] border-white shadow-[0_18px_40px_rgba(17,19,21,0.14)]">
+            <div key={`l2-${i}`} className="h-36 w-64 shrink-0 rounded-[1.8rem] overflow-hidden border-[10px] border-white shadow-[0_18px_42px_rgba(17,19,21,0.16)]">
               <BrandedVisual variant={galleryVariants[(i + 2) % galleryVariants.length]} compact title="" />
             </div>
           ))}
         </motion.div>
 
-        <motion.div style={{ y: layer3Y }} className="absolute left-[4%] top-[58%] hidden xl:flex flex-col gap-5 rotate-[-9deg]">
+        <motion.div
+          animate={{ y: [0, -70, 0], x: [0, 10, 0] }}
+          transition={{ duration: 28, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ y: layer3Y }}
+          className="absolute left-[4%] top-[52%] hidden xl:flex flex-col gap-5 rotate-[-9deg]"
+        >
           {Array.from({ length: 3 }).map((_, i) => (
             <div key={`l3-${i}`} className="h-32 w-56 shrink-0 rounded-[1.6rem] overflow-hidden border-[8px] border-white shadow-[0_18px_38px_rgba(17,19,21,0.13)]">
               <BrandedVisual variant={galleryVariants[(i + 1) % galleryVariants.length]} compact title="" />
@@ -65,7 +79,12 @@ export default function InteractiveHero() {
           ))}
         </motion.div>
 
-        <motion.div style={{ y: layer4Y }} className="absolute right-[7%] top-[60%] hidden xl:flex flex-col gap-5 rotate-[10deg]">
+        <motion.div
+          animate={{ y: [0, 64, 0], x: [0, -12, 0] }}
+          transition={{ duration: 32, repeat: Infinity, ease: 'easeInOut' }}
+          style={{ y: layer4Y }}
+          className="absolute right-[6%] top-[54%] hidden xl:flex flex-col gap-5 rotate-[10deg]"
+        >
           {Array.from({ length: 3 }).map((_, i) => (
             <div key={`l4-${i}`} className="h-32 w-56 shrink-0 rounded-[1.6rem] overflow-hidden border-[8px] border-white shadow-[0_18px_38px_rgba(17,19,21,0.13)]">
               <BrandedVisual variant={galleryVariants[(i + 3) % galleryVariants.length]} compact title="" />
@@ -73,10 +92,10 @@ export default function InteractiveHero() {
           ))}
         </motion.div>
 
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_20%,rgba(255,255,255,0.18)_48%,rgba(255,255,255,0.62)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_12%,rgba(255,255,255,0.08)_38%,rgba(255,255,255,0.42)_78%,rgba(255,255,255,0.78)_100%)]" />
       </div>
 
-      <div className="absolute inset-0 z-[5] bg-gradient-to-b from-paper/40 via-paper/28 to-paper/68 lg:from-paper/18 lg:via-paper/10 lg:to-paper/52" />
+      <div className="absolute inset-0 z-[5] bg-gradient-to-b from-paper/34 via-paper/16 to-paper/60 lg:from-paper/10 lg:via-paper/6 lg:to-paper/42" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <motion.div
@@ -137,44 +156,6 @@ export default function InteractiveHero() {
                   <p className="text-sm leading-relaxed text-brand-400">{detail}</p>
                 </div>
               ))}
-            </div>
-          </div>
-        </motion.div>
-
-      </div>
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-8 sm:pt-10 md:pt-12">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto max-w-[62rem]"
-        >
-          <div className="rounded-[2rem] sm:rounded-[2.35rem] border border-brand-100/60 bg-white p-4 sm:p-5 lg:p-6 shadow-[0_20px_56px_rgba(17,19,21,0.08)]">
-            <div className="grid gap-4 lg:grid-cols-[minmax(0,0.62fr)_minmax(0,1fr)] lg:gap-5">
-              <div className="overflow-hidden rounded-[1.75rem] border border-brand-100/40 shadow-lg">
-                <BrandedVisual variant="studio" title="Systems create momentum" className="min-h-[15rem] sm:min-h-[17rem] lg:min-h-full" />
-              </div>
-
-              <div className="rounded-[1.75rem] border border-brand-100/50 bg-white p-5 sm:p-6">
-                <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                  <div className="max-w-[34rem]">
-                    <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent">Quick Project Intake</p>
-                    <h2 className="mt-3 text-2xl sm:text-[2rem] font-semibold text-ink leading-tight">
-                      Tell us what needs to improve first.
-                    </h2>
-                    <p className="mt-3 text-sm sm:text-base leading-relaxed text-brand-400">
-                      Choose your focus area and send a short brief. We use that to route the project properly and recommend the right next step.
-                    </p>
-                  </div>
-
-                  <div className="inline-flex self-start rounded-full border border-brand-100 bg-soft px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.24em] text-brand-400">
-                    Fastest path to contact
-                  </div>
-                </div>
-
-                <LeadsGrid />
-              </div>
             </div>
           </div>
         </motion.div>
