@@ -303,7 +303,8 @@ export function getContactPayload(body: unknown): ContactPayload {
 
 async function postToWebhook(webhookUrl: string | undefined, payload: Record<string, unknown>) {
   if (!webhookUrl) {
-    throw new HttpError(500, "Lead webhook is not configured.");
+    console.warn("Lead capture webhook not configured. Logging payload instead.", payload);
+    return;
   }
 
   const webhookResponse = await fetch(webhookUrl, {

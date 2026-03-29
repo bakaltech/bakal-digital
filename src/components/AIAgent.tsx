@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Loader2, Maximize2, MessageSquare, Minimize2, Send, Sparkles, X } from 'lucide-react';
+import { advanceGuidedChat, type GuidedChatResponse } from '../lib/guidedChat';
 
 type ChatMessage = { role: 'user' | 'model'; text: string };
 type LeadFormArgs = { projectType: string; projectStage: string; industry: string; mainGoal: string; budget: string; timeline: string; summary: string };
-type ChatResponse = { text?: string; quickReplies?: string[]; leadFormArgs?: LeadFormArgs | null; error?: string };
+type ChatResponse = GuidedChatResponse;
 
 export default function AIAgent() {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,17 +50,7 @@ export default function AIAgent() {
     setQuickReplies([]);
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages, message: messageText }),
-      });
-
-      const data = (await response.json().catch(() => ({}))) as ChatResponse;
-      if (!response.ok) {
-        throw new Error(data.error || `Chat request failed with status ${response.status}`);
-      }
-
+      const data = advanceGuidedChat(messages, messageText) as ChatResponse;
       const modelText = data.text || "I couldn't process that properly. Send that again and I'll keep the intake moving.";
 
       if (data.leadFormArgs) {
