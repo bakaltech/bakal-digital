@@ -12,6 +12,29 @@ import {
 } from '../components/ChartDemo';
 import BrandedVisual from '../components/BrandedVisual';
 
+const conceptContext = {
+  'nexus-ai': {
+    audience: 'Service businesses and operators handling high inbound volume, fragmented knowledge, and slow first-response handling.',
+    pressurePoint: 'Lead intake, support, and internal context are spread across too many tools, so response quality drops as volume grows.',
+    commercialOutcome: 'Better-fit leads, faster handling, and a cleaner handoff from conversation to action without sacrificing human control.',
+  },
+  'lumina-saas': {
+    audience: 'Studios, consultants, and service teams that need a more premium and structured client experience.',
+    pressurePoint: 'Client communication, approvals, and reporting are still happening in ways that feel manual, fragmented, and hard to scale.',
+    commercialOutcome: 'A stronger client experience, clearer accountability, and a service model that looks more credible from the first interaction.',
+  },
+  'velocity-ecommerce': {
+    audience: 'Premium and niche brands that need a storefront strong enough to support both trust and conversion.',
+    pressurePoint: 'The products are strong, but the current storefront leaks trust through weak storytelling, slow performance, or a shaky mobile path.',
+    commercialOutcome: 'Clearer product presentation, less drop-off on mobile, and a storefront that supports revenue without feeling generic.',
+  },
+  'orbit-automation': {
+    audience: 'Operational teams running complex delivery, approval, or fulfillment workflows across multiple systems.',
+    pressurePoint: 'Automation exists, but no one has a trustworthy view of failures, exceptions, and delivery health across the operation.',
+    commercialOutcome: 'Fewer surprises, clearer workflow health, and an operating layer the team can actually trust as volume grows.',
+  },
+} as const;
+
 export default function CaseStudy() {
   const { id } = useParams<{ id: string }>();
   const project = projects.find((p) => p.id === id);
@@ -24,6 +47,8 @@ export default function CaseStudy() {
   if (!project) {
     return <Navigate to="/portfolio" replace />;
   }
+
+  const context = conceptContext[project.id as keyof typeof conceptContext];
 
   const renderDemo = () => {
     switch (project.id) {
@@ -54,6 +79,16 @@ export default function CaseStudy() {
               <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-soft text-accent text-[10px] md:text-xs font-semibold uppercase tracking-widest mb-6 border border-brand-100/50">Concept Study | {project.category}</div>
               <h1 className="text-4xl md:text-7xl font-semibold text-ink leading-[1.08] mb-6 tracking-tight">{project.title}</h1>
               <p className="text-lg md:text-2xl text-brand-400 leading-relaxed mb-10">{project.description}</p>
+              <div className="grid gap-4 mb-10">
+                <div className="rounded-[1.6rem] border border-brand-100/50 bg-soft p-5">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-2">Best for</p>
+                  <p className="text-base text-brand-400 leading-relaxed">{context.audience}</p>
+                </div>
+                <div className="rounded-[1.6rem] border border-brand-100/50 bg-white p-5">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-2">Commercial lens</p>
+                  <p className="text-base text-brand-400 leading-relaxed">{context.commercialOutcome}</p>
+                </div>
+              </div>
               <div className="flex flex-wrap gap-3">
                 {project.techStack.map((tech) => (
                   <span key={tech} className="px-4 py-2 bg-soft border border-brand-100/50 rounded-full text-sm font-medium text-ink">{tech}</span>
@@ -71,18 +106,18 @@ export default function CaseStudy() {
       <section className="py-20 bg-soft">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-3 gap-12">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-widest text-accent mb-4">01. Opportunity</div>
-            <h2 className="text-2xl md:text-3xl font-semibold text-ink mb-5 tracking-tight">Where the friction shows up.</h2>
-            <p className="text-base md:text-lg text-brand-400 leading-relaxed">{project.challenge}</p>
+            <div className="text-xs font-semibold uppercase tracking-widest text-accent mb-4">01. Pressure point</div>
+            <h2 className="text-2xl md:text-3xl font-semibold text-ink mb-5 tracking-tight">What is breaking in the current system.</h2>
+            <p className="text-base md:text-lg text-brand-400 leading-relaxed">{context.pressurePoint}</p>
           </div>
           <div>
             <div className="text-xs font-semibold uppercase tracking-widest text-accent mb-4">02. Direction</div>
-            <h2 className="text-2xl md:text-3xl font-semibold text-ink mb-5 tracking-tight">What the product layer should do.</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold text-ink mb-5 tracking-tight">What the product layer should do next.</h2>
             <p className="text-base md:text-lg text-brand-400 leading-relaxed">{project.solution}</p>
           </div>
           <div>
-            <div className="text-xs font-semibold uppercase tracking-widest text-accent mb-4">03. Potential Impact</div>
-            <h2 className="text-2xl md:text-3xl font-semibold text-ink mb-5 tracking-tight">Why this direction matters.</h2>
+            <div className="text-xs font-semibold uppercase tracking-widest text-accent mb-4">03. Outcome</div>
+            <h2 className="text-2xl md:text-3xl font-semibold text-ink mb-5 tracking-tight">Why this direction is commercially useful.</h2>
             <p className="text-base md:text-lg text-brand-400 leading-relaxed">{project.results}</p>
           </div>
         </div>
@@ -131,6 +166,12 @@ export default function CaseStudy() {
               </div>
 
               <ConceptDemoNote />
+              <div className="rounded-[1.75rem] border border-brand-100/50 bg-white p-6 shadow-sm">
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Honest proof note</p>
+                <p className="text-sm sm:text-base text-brand-400 leading-relaxed">
+                  This is a concept study used to show decision-making, UX structure, and system thinking. It is not presented as a live client deployment.
+                </p>
+              </div>
             </div>
           </div>
         </div>

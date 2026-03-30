@@ -20,6 +20,7 @@ function RouteFallback() {
       <div className="text-center">
         <p className="text-[10px] sm:text-xs text-brand-400 font-bold tracking-[0.35em] uppercase mb-4">Loading</p>
         <div className="w-16 h-16 mx-auto rounded-full border border-brand-100/60 border-t-accent animate-spin" />
+        <p className="mt-5 text-sm text-brand-400">Loading the next page...</p>
       </div>
     </div>
   );

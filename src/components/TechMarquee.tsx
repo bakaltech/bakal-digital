@@ -18,7 +18,7 @@ export default function TechMarquee() {
   return (
     <div className="w-full overflow-hidden bg-soft border-y border-brand-100/30 py-8 sm:py-12 md:py-20 relative flex flex-col items-center">
       <p className="text-brand-400 text-[11px] md:text-xs font-bold uppercase tracking-[0.24em] sm:tracking-[0.4em] mb-6 sm:mb-10 md:mb-14 px-4 text-center">
-        Deployed & Scaled on World-Class Infrastructure
+        Platforms and tools we build with when the system needs to hold up
       </p>
 
       <div className="absolute inset-y-0 left-0 w-10 sm:w-16 md:w-48 bg-gradient-to-r from-soft to-transparent z-10 pointer-events-none" />
@@ -31,6 +31,7 @@ export default function TechMarquee() {
               <img
                 src={tech.logo}
                 alt={tech.name}
+                loading="lazy"
                 className="w-5 h-5 sm:w-6 sm:h-6 md:w-10 md:h-10 object-contain grayscale opacity-55 group-hover/item:grayscale-0 group-hover/item:opacity-100 transition-all duration-500"
                 referrerPolicy="no-referrer"
               />
