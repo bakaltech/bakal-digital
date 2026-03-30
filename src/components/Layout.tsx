@@ -32,24 +32,24 @@ const BrandMark = () => (
 
 const routeMetadata: Record<string, { title: string; description: string }> = {
   '/': {
-    title: 'Bakal Digital | AI Products, Platforms, Automation',
-    description: 'Bakal Digital builds AI products, custom platforms, automation systems, commerce experiences, and premium digital infrastructure for modern businesses.',
+    title: 'Bakal Digital | AI-Powered Products And Custom Systems',
+    description: 'Bakal Digital helps startups and growing businesses build AI-powered products, websites, custom software, and operational systems once generic tools stop being enough.',
   },
   '/portfolio': {
-    title: 'Work | Bakal Digital',
-    description: 'Explore concept studies and digital product directions across AI, commerce, systems, and platform design.',
+    title: 'Concept Studies | Bakal Digital',
+    description: 'Explore concept studies showing how Bakal Digital approaches AI products, SaaS, commerce systems, and operational tooling for startups and growing businesses.',
   },
   '/about': {
     title: 'About | Bakal Digital',
-    description: 'Learn how Bakal Digital approaches AI products, custom platforms, automation systems, and premium digital execution.',
+    description: 'Learn how Bakal Digital builds AI-powered products and custom systems for startups and growing businesses that need more than generic tools.',
   },
   '/services': {
     title: 'Services | Bakal Digital',
-    description: 'Discover Bakal Digital services across AI development, custom platforms, automation systems, commerce, SaaS, and data intelligence.',
+    description: 'See how Bakal Digital helps startups and growing businesses launch stronger websites, products, automations, and custom systems.',
   },
   '/contact': {
     title: 'Contact | Bakal Digital',
-    description: 'Start a project with Bakal Digital across AI products, websites, platforms, automation, commerce, and digital systems.',
+    description: 'Tell Bakal Digital what is slowing the business down and get the clearest next step for a website, product, platform, or operational system.',
   },
   '/privacy': {
     title: 'Privacy Policy | Bakal Digital',
@@ -163,10 +163,10 @@ const Navbar = () => {
 
                 <div className="grid gap-3 pt-5 border-t border-brand-100/40">
                   <button type="button" onClick={() => { setIsOpen(false); openChat(); }} className="w-full px-6 py-4 rounded-2xl border border-brand-100 bg-white text-ink font-semibold">
-                    Start With The Brief
+                    Open Quick Brief
                   </button>
                   <Link to="/contact" className="w-full px-6 py-4 rounded-2xl bg-ink text-white font-semibold text-center">
-                    Contact The Studio
+                    Start a Project
                   </Link>
                 </div>
               </div>
@@ -187,7 +187,7 @@ const Footer = () => {
           <div>
             <div className="inline-flex items-center gap-3 mb-5"><BrandMark /></div>
             <p className="text-brand-400 text-base md:text-lg leading-relaxed max-w-xl">
-              Bakal Digital helps companies build sharper products, clearer sales paths, stronger platforms, and more reliable operational systems.
+              Bakal Digital helps startups and growing businesses replace generic tools with AI-powered products, stronger websites, custom software, and operational systems built to scale cleanly.
             </p>
           </div>
           <div>
@@ -200,15 +200,15 @@ const Footer = () => {
           </div>
           <div className="rounded-[2rem] bg-soft border border-brand-100/50 p-6 md:p-8 shadow-[0_20px_50px_rgba(17,19,21,0.05)]">
             <p className="text-sm font-bold uppercase tracking-[0.25em] text-accent mb-4">Start Here</p>
-            <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">Need a clearer next move?</h3>
-            <p className="text-brand-400 leading-relaxed mb-6">Use the guided brief if you want fast triage, or send a direct inquiry if you already know what needs to be built.</p>
+            <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">Need a better system than the one you have now?</h3>
+            <p className="text-brand-400 leading-relaxed mb-6">Use the quick brief if the problem still needs shaping, or start a direct project inquiry if you already know where the friction is.</p>
             <div className="flex flex-col sm:flex-row gap-3">
               <button type="button" onClick={openChat} className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white border border-brand-100 text-ink font-semibold hover:border-accent hover:text-accent transition-colors">
                 <MessageSquare className="w-4 h-4" />
-                Start With Brief
+                Open Quick Brief
               </button>
               <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-ink text-white font-semibold hover:bg-accent transition-colors">
-                Contact Studio
+                Start a Project
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -216,7 +216,7 @@ const Footer = () => {
         </div>
         <div className="mt-12 md:mt-14 pt-6 border-t border-brand-100/20 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-brand-400 text-center md:text-left">
           <p>&copy; {new Date().getFullYear()} Bakal Digital. All rights reserved.</p>
-          <p className="uppercase tracking-[0.25em] text-[11px]">Remote-first studio | AI, platforms, automation, and premium execution</p>
+          <p className="uppercase tracking-[0.25em] text-[11px]">AI-powered products, websites, software, and systems for startups and growing teams</p>
         </div>
       </div>
     </footer>
@@ -238,7 +238,7 @@ function SeoManager() {
         title: project ? `${project.title} | Bakal Digital` : 'Case Study | Bakal Digital',
         description: project
           ? project.description
-          : 'Explore a Bakal Digital concept study across product direction, UX, systems, and implementation thinking.',
+          : 'Explore a Bakal Digital concept study showing product direction, system design, and UX thinking for startups and growing businesses.',
       };
     }
 
@@ -248,7 +248,7 @@ function SeoManager() {
         title: service ? `${service.title} | Bakal Digital` : 'Service Detail | Bakal Digital',
         description: service
           ? service.description
-          : 'See how Bakal Digital approaches delivery across AI, platform, automation, commerce, and data work.',
+          : 'See how Bakal Digital approaches AI-powered products, websites, software, automation, and custom systems.',
       };
     }
 
@@ -305,10 +305,16 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen flex flex-col font-sans bg-paper">
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[120] focus:rounded-full focus:bg-ink focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
+      >
+        Skip to main content
+      </a>
       <SeoManager />
       <ScrollToTop />
       <Navbar />
-      <main className={`flex-1 ${isHome ? '' : 'pt-[78px] md:pt-20'}`}>{children}</main>
+      <main id="main-content" className={`flex-1 ${isHome ? '' : 'pt-[78px] md:pt-20'}`}>{children}</main>
       <Footer />
       <CookieConsent />
     </div>

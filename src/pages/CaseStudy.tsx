@@ -92,8 +92,8 @@ export default function CaseStudy() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="mb-14 max-w-4xl">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Explorer</p>
-            <h2 className="text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight mb-6">Break the concept into the moments that matter.</h2>
-            <p className="text-lg text-brand-400 leading-relaxed">Each demo below is tailored to the case study so visitors can experience the product logic, not just read about it.</p>
+            <h2 className="text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight mb-6">Break the concept into the moments that actually matter.</h2>
+            <p className="text-lg text-brand-400 leading-relaxed">Each demo is tailored to the concept so visitors can judge the interaction logic, not just read a description of it.</p>
           </div>
 
           <div className="grid lg:grid-cols-12 gap-10 items-start">
@@ -140,7 +140,7 @@ export default function CaseStudy() {
         <div className="max-w-4xl mx-auto">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-400 mb-6">Next Step</p>
           <Link to="/contact" className="group inline-block">
-            <h2 className="text-4xl md:text-7xl font-semibold text-white mb-10 tracking-tight leading-[1.04] group-hover:text-accent transition-colors">Need this level of direction for your own product or system?</h2>
+            <h2 className="text-4xl md:text-7xl font-semibold text-white mb-10 tracking-tight leading-[1.04] group-hover:text-accent transition-colors">Need this level of direction for your own product, platform, or system?</h2>
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full border border-brand-400 text-white group-hover:bg-white group-hover:text-ink transition-all duration-500">
               <ArrowRight className="w-7 h-7" />
             </div>

@@ -25,10 +25,10 @@ export default function ServicesPreview() {
             Service Preview
           </p>
           <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-semibold text-ink leading-tight tracking-tight mb-5 sm:mb-8">
-            See how each service is structured before you commit to the page.
+            See how the offer, the UX, and the business outcome line up before you ever start.
           </h2>
           <p className="text-base sm:text-xl text-brand-400 leading-relaxed max-w-3xl">
-            Every capability has a different operating shape, pressure point, and delivery pattern. This preview makes that visible early so the site feels concrete instead of promotional.
+            Every service needs a different operating shape. This preview shows the pressure point, the likely business gain, and the kind of build behind it so the site stays concrete instead of promotional.
           </p>
         </div>
 
@@ -55,7 +55,7 @@ export default function ServicesPreview() {
                         {service.theme.label}
                       </div>
                       <h3 className="text-lg sm:text-2xl font-semibold text-ink tracking-tight mb-2">{service.title}</h3>
-                      <p className="text-sm sm:text-base text-brand-400 leading-relaxed line-clamp-3">{service.signature}</p>
+                      <p className="text-sm sm:text-base text-brand-400 leading-relaxed line-clamp-3">{service.problem}</p>
                     </div>
                     <div className={`w-11 h-11 rounded-2xl border flex items-center justify-center shrink-0 ${isActive ? `${service.theme.ring} bg-white/75` : 'border-brand-100/60 bg-soft'}`}>
                       {service.icon}
@@ -91,7 +91,7 @@ export default function ServicesPreview() {
                     {activeService.theme.label}
                   </h3>
                   <h4 className="max-w-[9ch] text-2xl sm:text-3xl xl:text-[2.55rem] font-semibold tracking-tight leading-[1] text-balance">
-                    {activeService.title}
+                    {activeService.shortTitle}
                   </h4>
                 </div>
 
@@ -119,7 +119,7 @@ export default function ServicesPreview() {
                       to={`/services/${activeService.id}`}
                       className="inline-flex min-h-14 items-center justify-center gap-2 px-5 py-3 rounded-full bg-white text-ink font-semibold hover:bg-accent hover:text-white transition-colors"
                     >
-                      View Service
+                      {activeService.ctaLabel}
                       <ArrowRight className="w-4 h-4" />
                     </Link>
                     <button

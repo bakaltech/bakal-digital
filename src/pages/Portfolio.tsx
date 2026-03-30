@@ -26,9 +26,9 @@ export default function Portfolio() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-4xl mb-14 sm:mb-16 md:mb-20">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
-            <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Portfolio</p>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-ink mb-6 sm:mb-8 tracking-tight leading-[1.04]">Selected concepts and delivery directions.</h1>
-            <p className="text-lg sm:text-xl md:text-2xl text-brand-400 leading-relaxed max-w-3xl">These concept studies show the kind of product, service, and brand systems we can shape for new and growing businesses.</p>
+            <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Concept Studies</p>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-ink mb-6 sm:mb-8 tracking-tight leading-[1.04]">How we would solve real product and systems problems.</h1>
+            <p className="text-lg sm:text-xl md:text-2xl text-brand-400 leading-relaxed max-w-3xl">These are honest concept directions, not padded client claims. They show how we think about AI products, SaaS, commerce, and operations systems when the goal is to launch something credible and scalable.</p>
           </motion.div>
         </div>
 
@@ -43,7 +43,7 @@ export default function Portfolio() {
 
           <div className="relative w-full md:w-80 group">
             <div className="absolute inset-y-0 left-0 pl-5 flex items-center pointer-events-none"><Search className="h-4 w-4 text-brand-400" /></div>
-            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search concepts..." className="block w-full pl-12 pr-6 py-3.5 bg-soft border border-brand-100/50 rounded-full text-sm text-ink focus:outline-none focus:ring-4 focus:ring-accent/10 focus:border-accent transition-all placeholder:text-brand-400 shadow-sm" />
+            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder="Search by concept or use case..." className="block w-full pl-12 pr-6 py-3.5 bg-soft border border-brand-100/50 rounded-full text-sm text-ink focus:outline-none focus:ring-4 focus:ring-accent/10 focus:border-accent transition-all placeholder:text-brand-400 shadow-sm" />
           </div>
         </div>
 
@@ -76,8 +76,8 @@ export default function Portfolio() {
 
         {filteredProjects.length === 0 && (
           <div className="text-center py-28">
-            <h3 className="text-2xl font-semibold text-ink mb-4 tracking-tight">No concepts found</h3>
-            <p className="text-lg text-brand-400 mb-10">Try adjusting your search or filters.</p>
+            <h3 className="text-2xl font-semibold text-ink mb-4 tracking-tight">No concept studies match that view</h3>
+            <p className="text-lg text-brand-400 mb-10">Try a different category or search term.</p>
             <button onClick={() => { setFilter('All'); setSearch(''); }} className="text-accent font-semibold hover:underline underline-offset-8">Clear all filters</button>
           </div>
         )}

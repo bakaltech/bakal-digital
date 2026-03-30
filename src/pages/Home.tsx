@@ -1,21 +1,25 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { ArrowRight, CheckCircle2, Cpu, Database, Globe, ChevronRight, ShoppingBag } from 'lucide-react';
+import { ArrowRight, CheckCircle2, ChevronRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import TechMarquee from '../components/TechMarquee';
 import { projects } from '../data/projects';
 import InteractiveHero from '../components/InteractiveHero';
 import BrandedVisual from '../components/BrandedVisual';
 import ServicesPreview from '../components/ServicesPreview';
+import { services } from '../data/services';
 
 interface CategoryCardProps {
   category: {
+    buyer: string;
     title: string;
+    offerTitle: string;
     description: string;
-    icon: React.ElementType;
     outcomes: string[];
     label: string;
     cta: string;
+    icon: React.ReactNode;
+    id: string;
   };
   idx: number;
 }
@@ -26,14 +30,14 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-    className="group relative flex min-h-[26rem] flex-col overflow-hidden rounded-[1.9rem] border border-brand-100/60 bg-white shadow-[0_14px_34px_rgba(17,19,21,0.05)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(17,19,21,0.11)]"
+    className="group relative flex min-h-[28rem] flex-col overflow-hidden rounded-[1.9rem] border border-brand-100/60 bg-white shadow-[0_14px_34px_rgba(17,19,21,0.05)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(17,19,21,0.11)]"
   >
     <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-br from-white via-white to-soft" />
     <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-soft/90 to-transparent" />
     <div className="relative flex h-full flex-col p-5 sm:p-6">
       <div className="flex items-start justify-between gap-4">
         <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-brand-100/80 bg-soft text-brand-400 transition-colors duration-300 group-hover:border-transparent group-hover:bg-ink group-hover:text-white">
-          <category.icon className="w-5 h-5" />
+          {category.icon}
         </div>
         <span className="rounded-full border border-brand-100 bg-soft px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">
           {category.label}
@@ -41,16 +45,22 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
       </div>
 
       <div className="mt-8">
-        <h3 className="max-w-[11ch] text-[1.7rem] sm:text-[1.95rem] font-semibold leading-[0.98] text-ink">
-          {category.title}
+        <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent">
+          {category.buyer}
+        </p>
+        <h3 className="mt-4 max-w-[14ch] text-[1.7rem] sm:text-[1.95rem] font-semibold leading-[0.98] text-ink">
+          {category.offerTitle}
         </h3>
+        <p className="mt-4 text-lg font-semibold leading-tight text-ink">
+          {category.title}
+        </p>
         <p className="mt-4 max-w-[29ch] text-sm sm:text-[15px] leading-relaxed text-brand-400">
           {category.description}
         </p>
       </div>
 
       <div className="mt-auto pt-7">
-        <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">Where it helps</p>
+        <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">What improves</p>
         <div className="mb-6 grid gap-2">
           {category.outcomes.slice(0, 2).map((outcome, outcomeIndex) => (
             <div key={outcome} className="rounded-[1rem] border border-brand-100/70 bg-soft px-3 py-3">
@@ -59,7 +69,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
             </div>
           ))}
         </div>
-        <Link to="/services" className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-ink transition-colors hover:text-accent">
+        <Link to={`/services/${category.id}`} className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-ink transition-colors hover:text-accent">
           {category.cta}
           <ArrowRight className="ml-2 w-3 h-3 transition-transform duration-300 group-hover:translate-x-1" />
         </Link>
@@ -91,40 +101,17 @@ const ProjectCard: React.FC<{ project: (typeof projects)[number]; idx: number }>
 
 export default function Home() {
   const featuredProjects = projects.slice(0, 2);
-  const categories = [
-    {
-      title: 'AI Products',
-      description: 'Internal copilots, assistant flows, and product features that shorten response time and improve execution.',
-      icon: Cpu,
-      outcomes: ['Shorter lead qualification and support cycles', 'AI features that solve a real operational task'],
-      label: 'AI systems',
-      cta: 'See AI systems',
-    },
-    {
-      title: 'Custom Platforms',
-      description: 'Client portals, internal tools, and service platforms built around the way the business actually runs.',
-      icon: Globe,
-      outcomes: ['Clearer paths from interest to action', 'Tools shaped around the real workflow, not a template'],
-      label: 'Platform build',
-      cta: 'See platform work',
-    },
-    {
-      title: 'Commerce Systems',
-      description: 'Storefronts, product structure, and checkout systems designed to improve conversion and reduce friction.',
-      icon: ShoppingBag,
-      outcomes: ['Stronger product presentation and offer clarity', 'Cleaner checkout, order flow, and revenue capture'],
-      label: 'Commerce flow',
-      cta: 'See commerce systems',
-    },
-    {
-      title: 'Automation & Data',
-      description: 'Connected automations, reporting, and operational logic that remove drag and surface the right signal faster.',
-      icon: Database,
-      outcomes: ['Less repeated admin and fewer missed handoffs', 'Reporting that shows where the business is actually slowing down'],
-      label: 'Operational systems',
-      cta: 'See automation systems',
-    },
-  ];
+  const categories = services.slice(0, 4).map((service) => ({
+    id: service.id,
+    buyer: service.buyer,
+    title: service.shortTitle,
+    offerTitle: service.offerTitle,
+    description: service.homepageSummary,
+    icon: service.icon,
+    outcomes: service.outcomes,
+    label: service.theme.label,
+    cta: service.ctaLabel,
+  }));
 
   return (
     <div className="bg-paper overflow-hidden">
@@ -136,15 +123,15 @@ export default function Home() {
             <div className="max-w-xl">
               <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">What We Build</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.8rem] font-semibold text-ink leading-[0.98] tracking-tight">
-                The systems we build when templates, plugins, and patchwork workflows stop being enough.
+                The core offers are built around the friction that actually blocks growth.
               </h2>
             </div>
             <div className="max-w-2xl lg:justify-self-end">
               <p className="text-base sm:text-lg md:text-[1.12rem] text-brand-400 leading-relaxed">
-                This work is for startups launching real products and for growing businesses that need better websites, custom software, stronger operations, and AI-powered systems once generic tools start creating drag.
+                Clients do not come here to buy a category. They come when revenue, delivery, onboarding, support, or internal execution starts breaking under generic tools and stitched-together workflows.
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
-                {['Launch readiness', 'Operational scale', 'Customer trust', 'AI leverage'].map((item) => (
+                {['Launch stronger', 'Operate cleaner', 'Reduce manual drag', 'Build around real workflow'].map((item) => (
                   <span key={item} className="rounded-full border border-brand-100 bg-soft px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-brand-400">
                     {item}
                   </span>
@@ -171,30 +158,36 @@ export default function Home() {
             <div className="max-w-xl">
               <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">Who We Work With</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.4rem] font-semibold text-ink leading-[0.98] tracking-tight">
-                Built for teams that need more than another generic build.
+                Best for teams that are replacing the next bottleneck, not buying another brochure site.
               </h2>
               <p className="mt-5 text-base sm:text-lg text-brand-400 leading-relaxed">
-                We are best when the business is trying to launch something real, modernize what is already there, or replace the operational drag that off-the-shelf tools can no longer handle cleanly.
+                The fit is strongest when the business is launching something real, modernizing a weak digital layer, or replacing manual work and disconnected tools with a system that can actually hold up.
               </p>
+              <div className="mt-8 rounded-[1.75rem] border border-brand-100/50 bg-white p-6 sm:p-7 shadow-sm">
+                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Not the right fit</p>
+                <p className="text-sm sm:text-base text-brand-400 leading-relaxed">
+                  If the job is only a quick brochure site, a logo-only refresh, or a low-context build with no business logic underneath, this is not the right studio.
+                </p>
+              </div>
             </div>
 
             <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
               {[
                 {
                   title: 'Startups building a real product',
-                  text: 'Founders who need a serious website, app, SaaS platform, or AI-enabled product foundation instead of a one-off design pass.',
+                  text: 'Founders who need a credible website, app, SaaS product, or AI-enabled platform with enough structure to launch and learn from real users.',
                 },
                 {
-                  title: 'Growing businesses replacing manual work',
-                  text: 'Teams that have outgrown spreadsheets, disconnected tools, and repetitive handling across sales, onboarding, support, or reporting.',
+                  title: 'Growing businesses replacing manual drag',
+                  text: 'Teams that are still moving work through spreadsheets, inboxes, patched automations, or disconnected tools across sales, onboarding, and delivery.',
                 },
                 {
                   title: 'Operators who need custom systems',
-                  text: 'Businesses that need internal tools, portals, automations, and better workflow logic because templates no longer match the way they operate.',
+                  text: 'Businesses that need internal tools, portals, automation, and reporting shaped around the real workflow instead of forcing the workflow to fit the software.',
                 },
                 {
                   title: 'Brands that need a stronger digital layer',
-                  text: 'Companies whose positioning, website, and product experience now need to look sharper and work harder at the same time.',
+                  text: 'Companies whose positioning, website, and product experience need to convert more clearly while the backend operation becomes easier to run.',
                 },
               ].map((item, idx) => (
                 <motion.div key={item.title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: idx * 0.08 }} className="rounded-[1.6rem] border border-brand-100/50 bg-white p-5 sm:p-7 shadow-sm">
@@ -218,10 +211,10 @@ export default function Home() {
             <div className="max-w-4xl">
               <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 md:mb-6">Selected Concepts</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">
-                Concept studies that show how we would solve real product and systems problems.
+                Concept studies that make the thinking visible before you ever hire us.
               </h2>
               <p className="mt-5 max-w-3xl text-base sm:text-lg text-brand-400 leading-relaxed">
-                These are not inflated client claims. They are concept directions built to show how we think about structure, user flow, interface quality, and system design when the goal is to launch something credible and scalable.
+                These are honest concept directions, not inflated client claims. Each one shows how we would structure the product, the interface, and the system logic when the goal is to make something credible, useful, and scalable.
               </p>
             </div>
             <Link to="/portfolio" className="flex items-center text-base sm:text-lg font-semibold text-ink hover:text-accent transition-colors group">
@@ -245,10 +238,10 @@ export default function Home() {
           <div>
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 sm:mb-6">Delivery Standard</p>
             <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight mb-5 sm:mb-8">
-              Clear standards in the work, the process, and the handoff.
+              The product should feel sharp because the delivery system behind it is sharp.
             </h2>
             <p className="text-base sm:text-xl text-brand-400 leading-relaxed max-w-2xl">
-              Strong delivery should feel visible before a contract is signed. The site, the brief flow, the service structure, and the way projects are presented should all prove the same thing: the work is disciplined, concrete, and built to hold up.
+              Strong execution is not a promise at the end of the sales process. The site, the service paths, the brief flow, and the way work is framed should already prove that the delivery is disciplined and commercially aware.
             </p>
             <div className="mt-8 sm:mt-10 grid gap-4">
               {[

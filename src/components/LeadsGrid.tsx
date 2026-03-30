@@ -3,9 +3,9 @@ import { AnimatePresence, motion } from 'motion/react';
 import { ArrowRight, CheckCircle2, Cpu, Database, Globe, ShoppingBag, X } from 'lucide-react';
 
 const needs = [
-  { id: 'platform', title: 'Custom platform', icon: Globe },
-  { id: 'ai', title: 'AI systems', icon: Cpu },
-  { id: 'commerce', title: 'Commerce flow', icon: ShoppingBag },
+  { id: 'platform', title: 'Website, portal, or product layer', icon: Globe },
+  { id: 'ai', title: 'AI workflow or assistant', icon: Cpu },
+  { id: 'commerce', title: 'Commerce and checkout', icon: ShoppingBag },
   { id: 'data', title: 'Automation and reporting', icon: Database },
 ];
 
@@ -16,14 +16,16 @@ export default function LeadsGrid() {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [error, setError] = React.useState('');
   const [formData, setFormData] = React.useState({ name: '', email: '', message: '', website: '' });
+  const messageLength = formData.message.trim().length;
+  const canSubmit = formData.name.trim().length > 0 && formData.email.trim().length > 0 && messageLength >= 20;
 
   const toggleNeed = (id: string) => {
     setSelected((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]));
   };
 
   const handleSubmit = async () => {
-    if (!formData.name || !formData.email || !formData.message) {
-      setError('Please complete all fields before sending.');
+    if (!canSubmit) {
+      setError('Please complete the form and share enough detail before sending.');
       return;
     }
 
@@ -45,6 +47,7 @@ export default function LeadsGrid() {
 
       setStep('success');
       setFormData({ name: '', email: '', message: '', website: '' });
+      setSelected([]);
     } catch (submissionError) {
       console.error('Hero form error:', submissionError);
       setError(submissionError instanceof Error ? submissionError.message : 'We could not send this right now. Please try again in a moment.');
@@ -61,7 +64,7 @@ export default function LeadsGrid() {
             <div className="text-center">
               <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Project Focus</p>
               <p className="text-sm sm:text-base text-brand-400 leading-relaxed max-w-xl mx-auto">
-                Choose the part of the business that needs work first. We will use it to route the brief and keep the next conversation focused.
+                Choose the business area that needs attention first. We use this to route the brief and keep the next step focused.
               </p>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -103,7 +106,7 @@ export default function LeadsGrid() {
             </button>
             <div className="mb-5">
               <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-2">Quick Intake</p>
-              <h3 className="text-xl sm:text-2xl font-semibold text-ink tracking-tight mb-2">Describe the business problem and the outcome you need.</h3>
+              <h3 className="text-xl sm:text-2xl font-semibold text-ink tracking-tight mb-2">Describe the business problem, not just the deliverable.</h3>
               <p className="text-sm sm:text-base text-brand-400 leading-relaxed">Selected focus: {selected.map((id) => needs.find((need) => need.id === id)?.title).join(', ')}</p>
             </div>
             <div className="space-y-3">
@@ -113,9 +116,13 @@ export default function LeadsGrid() {
               </div>
               <input value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} type="text" placeholder="Full name" className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm" />
               <input value={formData.email} onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))} type="email" placeholder="Business email" className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm" />
-              <textarea value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} placeholder="What is slowing the business down now, and what should be working better after this is built?" rows={4} className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm resize-none" />
-              {error && <p className="text-sm text-red-600">{error}</p>}
-              <button type="button" onClick={() => void handleSubmit()} disabled={isSubmitting} className="w-full py-4 rounded-xl bg-ink text-white font-bold text-sm hover:bg-accent transition-colors disabled:opacity-70">
+              <textarea value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} placeholder="What is broken today, what should work better after this is built, and what is driving the urgency?" rows={4} className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm resize-none" />
+              <div className="flex items-center justify-between gap-3 text-xs text-brand-400">
+                <p>Enough detail helps us recommend the right next move.</p>
+                <p className={messageLength >= 20 ? 'text-emerald-700 font-semibold' : ''}>{messageLength}/20 minimum</p>
+              </div>
+              {error && <p className="text-sm text-red-600" role="alert">{error}</p>}
+              <button type="button" onClick={() => void handleSubmit()} disabled={isSubmitting || !canSubmit} className="w-full py-4 rounded-xl bg-ink text-white font-bold text-sm hover:bg-accent transition-colors disabled:opacity-70">
                 {isSubmitting ? 'Sending...' : 'Send Project Brief'}
               </button>
             </div>
@@ -128,7 +135,7 @@ export default function LeadsGrid() {
               <CheckCircle2 className="w-8 h-8 text-accent" />
             </div>
             <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">Brief received</h3>
-            <p className="text-brand-400 leading-relaxed">Your project focus and notes are in. We can use this to route the conversation and respond with the strongest next step.</p>
+            <p className="text-brand-400 leading-relaxed">Your project focus and notes are in. We can now review the friction point properly and respond with the strongest next step.</p>
           </motion.div>
         )}
       </AnimatePresence>

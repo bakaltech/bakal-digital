@@ -1,21 +1,24 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
-import { Loader2, Maximize2, MessageSquare, Minimize2, Send, Sparkles, X } from 'lucide-react';
+import { Loader2, Maximize2, MessageSquare, Minimize2, RotateCcw, Send, Sparkles, X } from 'lucide-react';
 import { advanceGuidedChat, type GuidedChatResponse } from '../lib/guidedChat';
 
 type ChatMessage = { role: 'user' | 'model'; text: string };
 type LeadFormArgs = { projectType: string; projectStage: string; industry: string; mainGoal: string; budget: string; timeline: string; summary: string };
 type ChatResponse = GuidedChatResponse;
 
+const openingMessage = "I'm the Bakal project guide. I will ask a few quick questions so we can understand the bottleneck properly and route the strongest next step. What needs to be built or fixed first?";
+const initialReplies = ['Website or platform', 'AI workflow', 'Automation and reporting'];
+
 export default function AIAgent() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'model', text: "I'm the Bakal project guide. I'll ask a few quick questions so we can understand the problem properly and route the right next step. What are you trying to build or improve?" },
+    { role: 'model', text: openingMessage },
   ]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [quickReplies, setQuickReplies] = useState<string[]>(['AI systems', 'Custom platform', 'Automation and reporting']);
+  const [quickReplies, setQuickReplies] = useState<string[]>(initialReplies);
   const [leadFormArgs, setLeadFormArgs] = useState<LeadFormArgs | null>(null);
   const [leadFormStartedAt, setLeadFormStartedAt] = useState<number | null>(null);
   const [formStatus, setFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
@@ -27,6 +30,19 @@ export default function AIAgent() {
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
   }, [messages]);
+
+  const resetChat = () => {
+    setMessages([{ role: 'model', text: openingMessage }]);
+    setQuickReplies(initialReplies);
+    setLeadFormArgs(null);
+    setLeadFormStartedAt(null);
+    setFormStatus('idle');
+    setFormError('');
+    setEmailInput('');
+    setWebsiteInput('');
+    setInput('');
+    setIsLoading(false);
+  };
 
   useEffect(() => {
     const handleOpenChat = (event: Event) => {
@@ -64,13 +80,7 @@ export default function AIAgent() {
       setMessages((prev) => [...prev, { role: 'model', text: modelText }]);
     } catch (error) {
       console.error('Chat error:', error);
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: 'model',
-          text: error instanceof Error ? error.message : 'The chat hit a problem. Please try again in a moment, or use the project brief instead.',
-        },
-      ]);
+      setMessages((prev) => [...prev, { role: 'model', text: error instanceof Error ? error.message : 'The brief guide hit a problem. Try that answer again, or switch to the contact form if you already know the scope.' }]);
     } finally {
       setIsLoading(false);
     }
@@ -148,6 +158,9 @@ export default function AIAgent() {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
+                  <button type="button" aria-label="Restart brief" onClick={resetChat} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
+                    <RotateCcw className="w-4 h-4" />
+                  </button>
                   <button type="button" aria-label={isMinimized ? 'Expand chat' : 'Minimize chat'} onClick={() => setIsMinimized(!isMinimized)} className="p-2 hover:bg-white/10 rounded-lg transition-colors">
                     {isMinimized ? <Maximize2 className="w-4 h-4" /> : <Minimize2 className="w-4 h-4" />}
                   </button>
@@ -159,7 +172,7 @@ export default function AIAgent() {
 
               {!isMinimized && (
                 <>
-                  <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3 sm:space-y-4 no-scrollbar min-h-0">
+                  <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-3 sm:space-y-4 no-scrollbar min-h-0" aria-live="polite">
                     {messages.map((message, index) => (
                       <motion.div key={index} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                         <div className={`max-w-[85%] sm:max-w-[80%] p-3 sm:p-4 rounded-2xl text-sm leading-relaxed ${message.role === 'user' ? 'bg-accent text-white rounded-tr-sm sm:rounded-tr-none' : 'bg-soft text-ink rounded-tl-sm sm:rounded-tl-none border border-brand-100/50'}`}>
@@ -170,8 +183,8 @@ export default function AIAgent() {
                     {isLoading && <div className="flex justify-start"><div className="bg-soft p-3 sm:p-4 rounded-2xl rounded-tl-sm sm:rounded-tl-none border border-brand-100/50"><Loader2 className="w-4 h-4 animate-spin text-accent" /></div></div>}
                   </div>
 
-                  {leadFormArgs === null && (
-                    <div className="px-4 sm:px-6 pb-2 flex flex-wrap gap-2 justify-start">
+                    {leadFormArgs === null && (
+                      <div className="px-4 sm:px-6 pb-2 flex flex-wrap gap-2 justify-start">
                       {quickReplies.map((reply) => (
                         <button key={reply} onClick={() => handleSend(reply)} disabled={isLoading} className="px-3 py-2 sm:px-4 sm:py-2 rounded-full bg-white border border-brand-100/50 text-xs font-semibold text-brand-400 hover:border-accent hover:text-accent transition-all whitespace-nowrap disabled:opacity-50">
                           {reply}
@@ -183,6 +196,10 @@ export default function AIAgent() {
                   <div className="p-4 sm:p-6 border-t border-brand-100/50 bg-white/50 shrink-0">
                     {leadFormArgs ? (
                       <form onSubmit={handleFormSubmit} className="space-y-4">
+                        <div className="rounded-2xl border border-brand-100/50 bg-soft px-4 py-3">
+                          <p className="text-[10px] font-bold uppercase tracking-[0.22em] text-accent mb-2">Brief summary</p>
+                          <p className="text-sm leading-relaxed text-brand-400">{leadFormArgs.summary}</p>
+                        </div>
                         <div className="hidden" aria-hidden="true">
                           <label htmlFor="lead-website">Website</label>
                           <input id="lead-website" type="text" tabIndex={-1} autoComplete="off" value={websiteInput} onChange={(e) => setWebsiteInput(e.target.value)} />
@@ -191,7 +208,7 @@ export default function AIAgent() {
                           <label htmlFor="assistant-email" className="text-xs font-semibold uppercase tracking-wider text-brand-400">Best Email For Follow-Up</label>
                           <input id="assistant-email" type="email" required value={emailInput} onChange={(e) => setEmailInput(e.target.value)} placeholder="hello@example.com" className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl bg-white border border-brand-100/50 focus:outline-none focus:border-accent transition-colors text-ink text-sm shadow-sm" />
                         </div>
-                        {formError && <p className="text-sm text-red-600">{formError}</p>}
+                        {formError && <p className="text-sm text-red-600" role="alert">{formError}</p>}
                         <button type="submit" disabled={formStatus === 'submitting'} className="w-full py-3 sm:py-4 rounded-xl bg-accent text-white font-semibold text-sm hover:bg-ink transition-colors disabled:opacity-50 flex justify-center items-center">
                           {formStatus === 'submitting' ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Send Project Brief'}
                         </button>

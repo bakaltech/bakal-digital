@@ -5,12 +5,18 @@ export interface Service {
   id: string;
   icon: React.ReactNode;
   title: string;
+  shortTitle: string;
+  offerTitle: string;
   description: string;
   features: string[];
   benefits: string[];
   longDescription: string;
   technologies: string[];
   signature: string;
+  buyer: string;
+  problem: string;
+  homepageSummary: string;
+  ctaLabel: string;
   idealFor: string[];
   outcomes: string[];
   engagementSteps: {
@@ -32,9 +38,15 @@ export const services: Service[] = [
     id: 'ai-development',
     icon: <Bot className="h-8 w-8 text-brand-500" />,
     title: 'AI Development',
+    shortTitle: 'AI products',
+    offerTitle: 'Build AI workflows people can actually use',
     description: 'AI assistants, product features, and intelligent workflows designed to solve real business problems instead of acting like demos.',
     longDescription: 'We build AI products and AI-powered workflows that are grounded in real operational value. That can include website assistants, lead qualification flows, internal copilots, summarization pipelines, or domain-specific tools that help a team respond faster, reduce manual work, and make better decisions.',
     signature: 'Best when a business wants AI to improve response speed, qualification, support, or internal execution without turning the product into a gimmick.',
+    buyer: 'Startups and teams turning AI from an idea into a working product or workflow.',
+    problem: 'The business wants AI to handle a real job, but the current flow is manual, slow, or stuck at the demo stage.',
+    homepageSummary: 'AI assistants, copilots, and product features that reduce manual handling and route the next action cleanly.',
+    ctaLabel: 'See AI workflow scope',
     features: [
       'AI Assistants & Chatbots',
       'Lead Qualification Flows',
@@ -70,9 +82,15 @@ export const services: Service[] = [
     id: 'custom-web-platforms',
     icon: <Globe className="h-8 w-8 text-brand-500" />,
     title: 'Custom Web Platforms',
+    shortTitle: 'Platforms',
+    offerTitle: 'Build websites and platforms that fit the real workflow',
     description: 'Tailored websites, portals, and digital products built around your exact service model, workflow, and customer journey.',
     longDescription: 'We design and build custom web platforms that are clearer, faster, and more aligned with how the business actually operates. That may be a premium marketing site, a customer portal, a booking or onboarding flow, or a more complex web application that needs strong UX and reliable engineering.',
     signature: 'Best when off-the-shelf website patterns no longer match the way your business sells, serves, or operates.',
+    buyer: 'Founders and growing businesses that need a stronger website, portal, or product layer.',
+    problem: 'The offer is hard to understand, the path to action is weak, or the business needs more than a template can support.',
+    homepageSummary: 'Websites, portals, and product flows built around how the business actually sells, serves, and delivers.',
+    ctaLabel: 'See platform scope',
     features: [
       'Marketing Websites',
       'Customer Portals',
@@ -108,9 +126,15 @@ export const services: Service[] = [
     id: 'ecommerce-systems',
     icon: <ShoppingCart className="h-8 w-8 text-brand-500" />,
     title: 'E-commerce Systems',
+    shortTitle: 'Commerce',
+    offerTitle: 'Fix the revenue path from product story to payment',
     description: 'Storefronts and revenue flows built to sell clearly, operate smoothly, and scale without unnecessary friction.',
     longDescription: 'We create e-commerce experiences that do more than look good. The work covers storefront design, product architecture, checkout flow improvement, subscription or recurring revenue systems, and the backend logic needed to keep commerce operations clean.',
     signature: 'Best when revenue depends on a clean product story, a smoother checkout flow, and fewer operational bottlenecks behind the store.',
+    buyer: 'Brands that need a storefront and backend flow strong enough to support growth.',
+    problem: 'The business is losing confidence or revenue across product presentation, checkout, subscriptions, or post-purchase operations.',
+    homepageSummary: 'Storefronts, checkout systems, and revenue operations designed to reduce friction and support scale.',
+    ctaLabel: 'See commerce scope',
     features: [
       'Custom Storefronts',
       'Payment Integrations',
@@ -146,9 +170,15 @@ export const services: Service[] = [
     id: 'saas-development',
     icon: <Cloud className="h-8 w-8 text-brand-500" />,
     title: 'SaaS Development',
+    shortTitle: 'SaaS',
+    offerTitle: 'Launch software with a real product spine',
     description: 'Multi-user software products with structured onboarding, billing, permissions, and room to grow.',
     longDescription: 'We help founders and teams build SaaS products that feel coherent from the first release. That includes shaping the product architecture, user roles, account flows, billing setup, dashboards, and the core workflows that make the platform valuable to customers.',
     signature: 'Best when you need a real product foundation, not just a clickable prototype or a stack of disconnected screens.',
+    buyer: 'Founders building a product that needs real users, real accounts, and room to grow.',
+    problem: 'The software idea is moving beyond mockups and now needs product architecture, onboarding, billing, and operational logic that can hold up.',
+    homepageSummary: 'Multi-user software products with onboarding, permissions, billing, and a foundation built for expansion.',
+    ctaLabel: 'See SaaS scope',
     features: [
       'Multi-tenant Architecture',
       'Authentication & Roles',
@@ -184,9 +214,15 @@ export const services: Service[] = [
     id: 'automation-systems',
     icon: <Zap className="h-8 w-8 text-brand-500" />,
     title: 'Automation Systems',
+    shortTitle: 'Automation',
+    offerTitle: 'Replace repeated admin work with trusted automation',
     description: 'Connected workflows that reduce manual work, improve consistency, and make the business easier to run.',
     longDescription: 'We design automations around the way your team already works. That can mean lead routing, CRM updates, internal approvals, notification systems, reporting handoffs, or API-based workflows that connect tools which currently operate in silos.',
     signature: 'Best when the business is losing time to repeated admin work, messy handoffs, and tools that do not talk to each other.',
+    buyer: 'Teams running on spreadsheets, handoffs, and disconnected tools that keep slowing execution down.',
+    problem: 'Work is getting duplicated, delayed, or dropped because the systems do not talk to each other cleanly.',
+    homepageSummary: 'Routing, approvals, tool sync, and operational logic that reduce repeated work and missed handoffs.',
+    ctaLabel: 'See automation scope',
     features: [
       'Workflow Automation',
       'Tool & API Integrations',
@@ -222,9 +258,15 @@ export const services: Service[] = [
     id: 'data-intelligence',
     icon: <BarChart className="h-8 w-8 text-brand-500" />,
     title: 'Data Intelligence',
+    shortTitle: 'Reporting',
+    offerTitle: 'Turn scattered reporting into a usable decision layer',
     description: 'Dashboards, reporting layers, and decision tools that turn scattered information into something clear and useful.',
     longDescription: 'We help businesses organize and surface the data they need to make better decisions. That may involve analytics dashboards, business reporting, operational visibility tools, or data pipelines that consolidate information from different systems into one cleaner view.',
     signature: 'Best when decisions are being slowed down by scattered reporting, unclear metrics, or too much manual reconciliation.',
+    buyer: 'Operators and leaders who need one trustworthy view of what is working, slipping, or slowing down.',
+    problem: 'Important signals are spread across too many tools, and the team is still stitching together answers by hand.',
+    homepageSummary: 'Dashboards, reporting, and visibility layers that turn disconnected signals into useful operating guidance.',
+    ctaLabel: 'See reporting scope',
     features: [
       'Custom Dashboards',
       'Business Reporting',

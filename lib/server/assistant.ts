@@ -53,23 +53,23 @@ type FlowStep = {
 const flowSteps: FlowStep[] = [
   {
     key: "projectType",
-    prompt: "What are you trying to build or improve?",
-    quickReplies: ["AI systems", "Custom platform", "Automation and reporting"],
+    prompt: "What needs to be built or fixed first?",
+    quickReplies: ["Website or platform", "AI workflow", "Automation and reporting"],
   },
   {
     key: "projectStage",
-    prompt: "Is this a new initiative, or an existing system that needs to perform better?",
-    quickReplies: ["Brand new", "Improving existing", "Still defining it"],
+    prompt: "Is this a new initiative, or something existing that is not performing well enough?",
+    quickReplies: ["Brand new build", "Improving existing", "Still shaping scope"],
   },
   {
     key: "industry",
     prompt: "What kind of business is this for?",
-    quickReplies: ["Professional services", "Commerce brand", "Other business type"],
+    quickReplies: ["Startup", "Service business", "Commerce brand"],
   },
   {
     key: "mainGoal",
-    prompt: "What needs to improve most if this project works well?",
-    quickReplies: ["More qualified demand", "Clearer buying journey", "Less manual operational drag"],
+    prompt: "If this works well, what should improve most?",
+    quickReplies: ["More qualified demand", "Clearer product or buying flow", "Less manual operational drag"],
   },
   {
     key: "budget",
@@ -220,7 +220,7 @@ export async function generateChatResponse(params: {
   }, {});
 
   return {
-    text: `Here is the project summary so far: ${buildSummary(values)}. Add the best email for follow-up below and we will route the brief to the right next step.`,
+    text: `Here is the brief summary so far: ${buildSummary(values)}. Add the best email for follow-up below and we will reply with the clearest next step.`,
     quickReplies: [],
     leadFormArgs: {
       projectType: values.projectType,

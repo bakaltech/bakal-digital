@@ -51,7 +51,7 @@ export default function ServiceDetail() {
             <div className={`w-16 h-16 rounded-3xl bg-gradient-to-br ${service.theme.soft} border ${service.theme.ring} flex items-center justify-center mb-8 ${service.theme.accent}`}>
               {service.icon}
             </div>
-            <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Service Detail</p>
+            <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Service Breakdown</p>
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-ink tracking-tight leading-[1.02] mb-6">{service.title}</h1>
             <p className="text-lg sm:text-xl text-brand-400 leading-relaxed mb-6">{service.longDescription}</p>
             <p className="text-base sm:text-lg text-ink/80 leading-relaxed mb-8 sm:mb-10 max-w-2xl">{service.signature}</p>
@@ -59,7 +59,7 @@ export default function ServiceDetail() {
             <div className="flex flex-col sm:flex-row gap-3">
               <button type="button" onClick={() => openChat(service.title)} className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full bg-ink text-white font-semibold hover:bg-accent transition-colors">
                 <MessageSquare className="w-4 h-4" />
-                Discuss this service
+                Start with this service
               </button>
               <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full border border-brand-100 bg-white text-ink font-semibold hover:border-accent hover:text-accent transition-colors">
                 Send direct inquiry
@@ -90,8 +90,8 @@ export default function ServiceDetail() {
           <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-8 sm:gap-10 md:gap-14 items-start">
             <div className="max-w-3xl">
               <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Where it creates leverage</p>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight mb-5">A more specific shape for how this service helps.</h2>
-              <p className="text-base sm:text-lg text-brand-400 leading-relaxed">Each engagement is tailored, but the strongest outcomes usually show up in these areas.</p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight mb-5">Where this service changes the business, not just the interface.</h2>
+              <p className="text-base sm:text-lg text-brand-400 leading-relaxed">Every engagement is tailored, but these are the business outcomes the work is designed to move.</p>
             </div>
             <div className="grid sm:grid-cols-3 gap-4 sm:gap-5">
               {service.outcomes.map((outcome, index) => (
@@ -109,7 +109,7 @@ export default function ServiceDetail() {
         <section className="py-12 sm:py-16 border-t border-brand-100/30">
           <div className="max-w-3xl mb-10 sm:mb-12">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Engagement shape</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">A practical path from idea or friction point to a working system.</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">A practical path from friction point to working system.</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-5 sm:gap-6">
             {service.engagementSteps.map((step, index) => (
@@ -125,7 +125,7 @@ export default function ServiceDetail() {
         <section className="py-12 sm:py-16 border-t border-brand-100/30">
           <div className="max-w-3xl mb-10 sm:mb-12">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Capabilities In Scope</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">The kinds of components we can shape inside this engagement.</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">The kinds of components we can shape inside the engagement.</h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {service.features.map((feature, index) => (
@@ -141,7 +141,7 @@ export default function ServiceDetail() {
         <section className="py-12 sm:py-16 border-t border-brand-100/30">
           <div className="max-w-3xl mb-10 sm:mb-12">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Value Layer</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">What this should improve for the business, not just the interface.</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">What this should improve for the business.</h2>
           </div>
           <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5 sm:gap-6">
             {service.benefits.map((benefit, index) => (

@@ -18,10 +18,10 @@ export default function Services() {
         >
           <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6 sm:mb-8">Capabilities</p>
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-ink leading-[1.05] mb-6 sm:mb-10 tracking-tight">
-            AI-powered products, websites, and custom systems built for launch, growth, and operational scale.
+            Offers built around the points where growth, operations, and product quality usually start to break.
           </h1>
           <p className="text-base sm:text-xl md:text-2xl text-brand-400 font-normal leading-relaxed max-w-3xl">
-            We help startups and growing businesses launch stronger digital products, replace weak workflows, and build the customer-facing and internal systems that generic tools cannot support well anymore.
+            Each service is a response to a concrete business problem: manual handling, weak conversion paths, shaky product foundations, disconnected tools, or reporting that still needs too much human stitching.
           </p>
         </motion.div>
       </section>
@@ -57,13 +57,16 @@ export default function Services() {
                       {service.icon}
                     </div>
                     <h3 className="text-2xl sm:text-3xl font-semibold text-ink mb-3 sm:mb-4 tracking-tight">
-                      {service.title}
+                      {service.offerTitle}
                     </h3>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">
+                      {service.title}
+                    </p>
                     <p className="text-sm sm:text-base text-brand-400 leading-relaxed mb-5 sm:mb-6 font-normal">
-                      {service.description}
+                      {service.problem}
                     </p>
                     <div className="space-y-2 mb-8 sm:mb-10">
-                      {service.features.slice(0, 3).map((feature, fIdx) => (
+                      {service.outcomes.slice(0, 3).map((feature, fIdx) => (
                         <div key={fIdx} className="flex items-center text-[11px] sm:text-xs font-bold uppercase tracking-widest text-brand-400/70">
                           <span className="mr-2 sm:mr-3 w-1.5 h-1.5 bg-ink/70 rounded-full" />
                           {feature}
@@ -74,7 +77,7 @@ export default function Services() {
 
                   <div className="mt-auto pt-5 sm:pt-6 border-t border-ink/8 flex items-center justify-between">
                     <span className="text-xs sm:text-sm font-bold uppercase tracking-widest text-ink group-hover:text-accent transition-colors">
-                      View Service Scope
+                      {service.ctaLabel}
                     </span>
                     <div className="w-8 h-8 rounded-full border border-ink/10 flex items-center justify-center group-hover:bg-ink group-hover:text-white transition-all duration-500">
                       <ChevronRight className="w-4 h-4" />
@@ -92,7 +95,7 @@ export default function Services() {
           <div className="mb-14 sm:mb-16 md:mb-24 text-center md:text-left">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Our Process</p>
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">
-              A direct path from business friction <br className="hidden md:block" /> to a working system.
+              A direct path from business friction <br className="hidden md:block" /> to a system people can actually rely on.
             </h2>
           </div>
 
