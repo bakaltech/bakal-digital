@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, Search } from 'lucide-react';
 import { projects } from '../data/projects';
+import { projectContext, type ProjectContextId } from '../data/projectContext';
 import BrandedVisual from '../components/BrandedVisual';
 
 export default function Portfolio() {
@@ -30,6 +31,19 @@ export default function Portfolio() {
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-ink mb-6 sm:mb-8 tracking-tight leading-[1.04]">How we would solve real product and systems problems.</h1>
             <p className="text-lg sm:text-xl md:text-2xl text-brand-400 leading-relaxed max-w-3xl">These are honest concept directions, not padded client claims. They show how we think about AI products, SaaS, commerce, and operations systems when the goal is to launch something credible and scalable.</p>
           </motion.div>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3 mb-12 sm:mb-14">
+          {[
+            ['What they are', 'Concept studies that make the decision-making visible before a live build exists.'],
+            ['What they prove', 'How the offer, UX, system logic, and commercial outcome can line up in one coherent direction.'],
+            ['What they are not', 'Inflated client claims or fake case studies pretending to be shipped production work.'],
+          ].map(([title, text]) => (
+            <div key={title} className="rounded-[1.5rem] border border-brand-100/50 bg-soft p-5 sm:p-6 shadow-sm">
+              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">{title}</p>
+              <p className="text-sm sm:text-base text-brand-400 leading-relaxed">{text}</p>
+            </div>
+          ))}
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 sm:gap-8 mb-14 sm:mb-16">
@@ -65,6 +79,20 @@ export default function Portfolio() {
                       </div>
                       <h3 className="text-2xl md:text-3xl font-semibold text-ink mb-3 tracking-tight group-hover:text-accent transition-colors duration-500">{project.title}</h3>
                       <p className="text-base md:text-lg text-brand-400 line-clamp-2 leading-relaxed">{project.description}</p>
+                      <div className="mt-5 grid gap-3">
+                        <div className="rounded-[1.1rem] border border-brand-100/50 bg-soft px-4 py-3">
+                          <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent mb-1">Best for</p>
+                          <p className="text-sm text-brand-400 leading-relaxed line-clamp-2">
+                            {projectContext[project.id as ProjectContextId].audience}
+                          </p>
+                        </div>
+                        <div className="rounded-[1.1rem] border border-brand-100/50 bg-white px-4 py-3">
+                          <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent mb-1">Commercial outcome</p>
+                          <p className="text-sm text-brand-400 leading-relaxed line-clamp-2">
+                            {projectContext[project.id as ProjectContextId].commercialOutcome}
+                          </p>
+                        </div>
+                      </div>
                     </div>
                     <div className="w-11 h-11 rounded-full border border-brand-100 flex items-center justify-center group-hover:bg-ink group-hover:text-white transition-all duration-500"><ChevronRight className="w-5 h-5" /></div>
                   </div>

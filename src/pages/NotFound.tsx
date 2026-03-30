@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, MessageSquare } from 'lucide-react';
 
 export default function NotFound() {
+  const openChat = () => {
+    window.dispatchEvent(new CustomEvent('open-chat'));
+  };
+
   return (
     <div className="min-h-screen bg-paper pt-24 sm:pt-28 pb-20 sm:pb-24">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
@@ -12,7 +16,7 @@ export default function NotFound() {
             This page does not exist anymore.
           </h1>
           <p className="text-lg sm:text-xl text-brand-400 leading-relaxed max-w-2xl mx-auto mb-10">
-            The link may be outdated, or the page may have moved. You can head back home or continue to the contact page.
+            The link may be outdated, or the page may have moved. You can go back home, review the services, or use the quick brief if you already know what needs attention.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <Link
@@ -23,12 +27,20 @@ export default function NotFound() {
               Back Home
             </Link>
             <Link
-              to="/contact"
+              to="/services"
               className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full border border-brand-100 bg-white text-ink font-semibold hover:border-accent hover:text-accent transition-colors"
             >
-              Start a Project
+              Review Services
               <ArrowRight className="w-4 h-4" />
             </Link>
+            <button
+              type="button"
+              onClick={openChat}
+              className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full border border-brand-100 bg-white text-ink font-semibold hover:border-accent hover:text-accent transition-colors"
+            >
+              <MessageSquare className="w-4 h-4" />
+              Open Quick Brief
+            </button>
           </div>
         </div>
       </div>

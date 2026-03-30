@@ -42,6 +42,20 @@ export default function About() {
             </p>
           </motion.div>
         </div>
+        <div className="mt-10 grid gap-4 lg:grid-cols-2">
+          <div className="rounded-[1.75rem] border border-brand-100/50 bg-soft p-6 sm:p-7 shadow-sm">
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Who this is for</p>
+            <p className="text-base sm:text-lg text-brand-400 leading-relaxed">
+              Founders and operators who have a real business problem to solve: weak conversion, patchwork operations, manual drag, or a product that now needs a stronger foundation.
+            </p>
+          </div>
+          <div className="rounded-[1.75rem] border border-brand-100/50 bg-white p-6 sm:p-7 shadow-sm">
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">What we are not</p>
+            <p className="text-base sm:text-lg text-brand-400 leading-relaxed">
+              Not a volume agency, not a branding-only shop, and not a team that separates UX, product thinking, and implementation into disconnected handoffs.
+            </p>
+          </div>
+        </div>
       </section>
 
       <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-20 sm:mb-24 md:mb-28">
@@ -67,9 +81,9 @@ export default function About() {
           <div className="grid gap-6">
             {[
               'Audit the message, workflow, and friction points across the current experience.',
-              'Identify where AI, automation, or product design can create real leverage.',
-              'Design the structure so users can understand, act, and move forward with confidence.',
-              'Build the system so it stays useful after launch instead of becoming another fragile layer.',
+              'Define where AI, automation, UX, or product structure will create the most leverage first.',
+              'Shape the system so users can understand, act, and move forward without confusion.',
+              'Build the thing so it survives real use instead of becoming another fragile layer to manage.',
             ].map((point) => (
               <div key={point} className="rounded-[1.75rem] sm:rounded-[2rem] bg-paper border border-brand-100/50 p-6 sm:p-7">
                 <p className="text-base sm:text-lg text-ink leading-relaxed">{point}</p>
@@ -101,12 +115,17 @@ export default function About() {
         <div className="max-w-4xl mx-auto">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-400 mb-6">Next Step</p>
           <h2 className="text-3xl sm:text-4xl md:text-7xl font-semibold text-white tracking-tight leading-[1.06] mb-8">
-            If the business needs a stronger digital system, this is exactly the kind of work we are built for.
+            If the business needs a stronger website, product, or operating system, this is exactly the kind of work we are built for.
           </h2>
-          <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-ink font-semibold hover:bg-accent hover:text-white transition-colors">
-            Start a Project
-            <ArrowRight className="w-5 h-5" />
-          </Link>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-ink font-semibold hover:bg-accent hover:text-white transition-colors">
+              Start a Project
+              <ArrowRight className="w-5 h-5" />
+            </Link>
+            <Link to="/services" className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/15 text-white font-semibold hover:border-white/40 transition-colors">
+              Review Services
+            </Link>
+          </div>
         </div>
       </section>
     </div>

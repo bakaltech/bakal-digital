@@ -24,6 +24,20 @@ export default function Services() {
             Each service is a response to a concrete business problem: manual handling, weak conversion paths, shaky product foundations, disconnected tools, or reporting that still needs too much human stitching.
           </p>
         </motion.div>
+        <div className="mt-10 grid gap-4 lg:grid-cols-2">
+          <div className="rounded-[1.75rem] border border-brand-100/50 bg-soft p-6 sm:p-7 shadow-sm">
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Best fit</p>
+            <p className="text-base sm:text-lg text-brand-400 leading-relaxed">
+              Startups launching something real, and growing businesses replacing weak websites, brittle workflows, or disconnected operations with systems that can actually scale.
+            </p>
+          </div>
+          <div className="rounded-[1.75rem] border border-brand-100/50 bg-white p-6 sm:p-7 shadow-sm">
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Not this</p>
+            <p className="text-base sm:text-lg text-brand-400 leading-relaxed">
+              If the need is only a low-context brochure site, a logo refresh, or another tool duct-taped onto an already messy stack, this is the wrong approach.
+            </p>
+          </div>
+        </div>
       </section>
 
       <section className="bg-soft py-16 sm:py-20 md:py-32">
@@ -123,6 +137,28 @@ export default function Services() {
                 <p className="text-base md:text-lg text-brand-400 leading-relaxed font-normal">{phase.desc}</p>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20 md:py-24 bg-ink text-center px-6">
+        <div className="max-w-4xl mx-auto">
+          <p className="text-sm font-semibold uppercase tracking-widest text-brand-400 mb-6">Next Step</p>
+          <h2 className="text-3xl sm:text-4xl md:text-7xl font-semibold text-white tracking-tight leading-[1.06] mb-8">
+            If you already know where the friction is, the fastest move is to start from the right service.
+          </h2>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-ink font-semibold hover:bg-accent hover:text-white transition-colors">
+              Start a Project
+              <ChevronRight className="w-5 h-5" />
+            </Link>
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent('open-chat'))}
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/15 text-white font-semibold hover:border-white/40 transition-colors"
+            >
+              Open Quick Brief
+            </button>
           </div>
         </div>
       </section>
