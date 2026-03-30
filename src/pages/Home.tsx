@@ -214,6 +214,49 @@ export default function Home() {
 
       <TechMarquee />
 
+      <section className="py-14 sm:py-20 md:py-28 bg-paper border-y border-brand-100/30">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-14 items-start">
+            <div className="max-w-xl">
+              <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 sm:mb-6">Proof Layer</p>
+              <h2 className="text-[2rem] sm:text-4xl md:text-[3.4rem] font-semibold text-ink tracking-tight leading-[1]">
+                What you can review today before a full case-study library exists.
+              </h2>
+              <p className="mt-5 text-base sm:text-lg md:text-[1.08rem] text-brand-400 leading-relaxed">
+                The site does not pretend there is a giant portfolio behind it. Instead, it shows the kinds of proof we can stand behind right now: how the work is framed, how the systems are structured, and how the flows actually behave.
+              </p>
+            </div>
+
+            <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
+              {[
+                {
+                  title: 'Concept studies with commercial context',
+                  text: 'Real scenarios are broken down by audience, bottleneck, product direction, and business outcome so you can judge the thinking, not just the visuals.',
+                },
+                {
+                  title: 'Service breakdowns that show the build shape',
+                  text: 'Each service is explained through problem, likely scope, outcomes, and engagement path so the offer feels concrete before any sales call happens.',
+                },
+                {
+                  title: 'Working intake and routing flows',
+                  text: 'The quick brief, direct inquiry path, and service navigation are real product surfaces, not placeholder UI pretending to be interactive.',
+                },
+                {
+                  title: 'Honest labeling instead of inflated claims',
+                  text: 'Concept work is labeled as concept work, and proof is framed around what is genuinely visible today rather than what sounds impressive in a headline.',
+                },
+              ].map((item) => (
+                <div key={item.title} className="rounded-[1.6rem] border border-brand-100/50 bg-soft p-5 sm:p-6 shadow-sm">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">What this proves</p>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-ink tracking-tight mb-3">{item.title}</h3>
+                  <p className="text-sm sm:text-base text-brand-400 leading-relaxed">{item.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section className="py-14 sm:py-20 md:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 sm:mb-16 md:mb-24 gap-5 sm:gap-8">
