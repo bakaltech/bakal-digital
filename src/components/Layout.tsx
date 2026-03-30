@@ -7,7 +7,7 @@ import { projects } from '../data/projects';
 import { services } from '../data/services';
 
 const primaryLinks = [
-  { name: 'Work', path: '/portfolio' },
+  { name: 'Proof', path: '/portfolio' },
   { name: 'Services', path: '/services' },
   { name: 'About', path: '/about' },
   { name: 'Contact', path: '/contact' },
@@ -36,8 +36,8 @@ const routeMetadata: Record<string, { title: string; description: string }> = {
     description: 'Bakal Digital helps startups and growing businesses build AI-powered products, websites, custom software, and operational systems once generic tools stop being enough.',
   },
   '/portfolio': {
-    title: 'Concept Studies | Bakal Digital',
-    description: 'Explore concept studies showing how Bakal Digital approaches AI products, SaaS, commerce systems, and operational tooling for startups and growing businesses.',
+    title: 'Proof Library | Bakal Digital',
+    description: 'Review Bakal Digital proof assets, working demos, concept studies, and delivery process examples for AI products, platforms, commerce, and operational software.',
   },
   '/about': {
     title: 'About | Bakal Digital',

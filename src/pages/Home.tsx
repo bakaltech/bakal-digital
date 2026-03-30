@@ -287,7 +287,7 @@ export default function Home() {
               </p>
             </div>
             <Link to="/portfolio" className="flex items-center text-base sm:text-lg font-semibold text-ink hover:text-accent transition-colors group">
-              See concept studies
+              See proof library
               <ChevronRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>

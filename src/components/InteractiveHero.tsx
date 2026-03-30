@@ -230,7 +230,7 @@ export default function InteractiveHero() {
                 to="/portfolio"
                 className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-transparent px-4 py-4 text-sm font-semibold text-brand-400 transition-colors hover:text-ink"
               >
-                See Our Work
+                See Proof
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <button
