@@ -136,15 +136,15 @@ export default function Home() {
             <div className="max-w-xl">
               <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">What We Build</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.8rem] font-semibold text-ink leading-[0.98] tracking-tight">
-                The four systems we build when growth or operations start dragging.
+                The systems we build when templates, plugins, and patchwork workflows stop being enough.
               </h2>
             </div>
             <div className="max-w-2xl lg:justify-self-end">
               <p className="text-base sm:text-lg md:text-[1.12rem] text-brand-400 leading-relaxed">
-                These are the places where weak digital structure usually costs the business money, time, or trust: unclear offers, clumsy buying paths, disconnected tools, and work that still depends on manual patching.
+                This work is for startups launching real products and for growing businesses that need better websites, custom software, stronger operations, and AI-powered systems once generic tools start creating drag.
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
-                {['Revenue flow', 'Operational clarity', 'Customer trust', 'Execution speed'].map((item) => (
+                {['Launch readiness', 'Operational scale', 'Customer trust', 'AI leverage'].map((item) => (
                   <span key={item} className="rounded-full border border-brand-100 bg-soft px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-brand-400">
                     {item}
                   </span>
@@ -165,6 +165,51 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="py-14 sm:py-20 md:py-28 bg-soft">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14 items-start">
+            <div className="max-w-xl">
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">Who We Work With</p>
+              <h2 className="text-[2rem] sm:text-4xl md:text-[3.4rem] font-semibold text-ink leading-[0.98] tracking-tight">
+                Built for teams that need more than another generic build.
+              </h2>
+              <p className="mt-5 text-base sm:text-lg text-brand-400 leading-relaxed">
+                We are best when the business is trying to launch something real, modernize what is already there, or replace the operational drag that off-the-shelf tools can no longer handle cleanly.
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
+              {[
+                {
+                  title: 'Startups building a real product',
+                  text: 'Founders who need a serious website, app, SaaS platform, or AI-enabled product foundation instead of a one-off design pass.',
+                },
+                {
+                  title: 'Growing businesses replacing manual work',
+                  text: 'Teams that have outgrown spreadsheets, disconnected tools, and repetitive handling across sales, onboarding, support, or reporting.',
+                },
+                {
+                  title: 'Operators who need custom systems',
+                  text: 'Businesses that need internal tools, portals, automations, and better workflow logic because templates no longer match the way they operate.',
+                },
+                {
+                  title: 'Brands that need a stronger digital layer',
+                  text: 'Companies whose positioning, website, and product experience now need to look sharper and work harder at the same time.',
+                },
+              ].map((item, idx) => (
+                <motion.div key={item.title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: idx * 0.08 }} className="rounded-[1.6rem] border border-brand-100/50 bg-white p-5 sm:p-7 shadow-sm">
+                  <div className="w-11 h-11 rounded-2xl bg-soft border border-brand-100/50 flex items-center justify-center text-accent mb-4">
+                    <CheckCircle2 className="w-5 h-5" />
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-semibold text-ink tracking-tight mb-3">{item.title}</h3>
+                  <p className="text-sm sm:text-base text-brand-400 leading-relaxed">{item.text}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       <TechMarquee />
 
       <section className="py-14 sm:py-20 md:py-32">
@@ -173,10 +218,10 @@ export default function Home() {
             <div className="max-w-4xl">
               <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 md:mb-6">Selected Concepts</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">
-                Concept directions that show how the work takes shape before a live engagement.
+                Concept studies that show how we would solve real product and systems problems.
               </h2>
               <p className="mt-5 max-w-3xl text-base sm:text-lg text-brand-400 leading-relaxed">
-                These are not inflated case studies. They are clear concept studies built to show product thinking, interface quality, and system structure in a way a buyer can judge quickly.
+                These are not inflated client claims. They are concept directions built to show how we think about structure, user flow, interface quality, and system design when the goal is to launch something credible and scalable.
               </p>
             </div>
             <Link to="/portfolio" className="flex items-center text-base sm:text-lg font-semibold text-ink hover:text-accent transition-colors group">
@@ -244,10 +289,10 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="max-w-4xl">
             <h2 className="text-[2rem] sm:text-5xl md:text-8xl font-semibold text-white leading-[1.05] tracking-tight mb-6 sm:mb-10 md:mb-12">
-              Ready to turn the idea into a product, platform, or system that actually works?
+              Ready to fix what is slowing the business down?
             </h2>
             <p className="text-base sm:text-lg md:text-2xl text-brand-400 mb-8 sm:mb-12 md:mb-16 max-w-2xl font-normal leading-relaxed mx-auto md:mx-0">
-              Tell us what you are building, what is slowing the business down, and where AI, automation, design, or engineering can create leverage.
+              Tell us whether the pressure is in the website, the product, the workflow, the automation layer, or the internal tooling, and we will help map the strongest next move.
             </p>
             <div className="flex flex-col sm:flex-row items-center gap-4">
               <Link to="/contact" className="inline-flex items-center justify-center px-8 py-4 md:px-12 md:py-6 text-base md:text-xl font-medium rounded-full text-ink bg-white hover:bg-accent hover:text-white transition-all shadow-2xl">

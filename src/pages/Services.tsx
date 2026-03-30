@@ -18,10 +18,10 @@ export default function Services() {
         >
           <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6 sm:mb-8">Capabilities</p>
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-ink leading-[1.05] mb-6 sm:mb-10 tracking-tight">
-            Service lines built to improve revenue flow, operational clarity, and delivery speed.
+            AI-powered products, websites, and custom systems built for launch, growth, and operational scale.
           </h1>
           <p className="text-base sm:text-xl md:text-2xl text-brand-400 font-normal leading-relaxed max-w-3xl">
-            Each capability is structured around a business pressure point: unclear offers, clumsy journeys, slow internal handling, disconnected tools, or product foundations that are too weak to scale cleanly.
+            We help startups and growing businesses launch stronger digital products, replace weak workflows, and build the customer-facing and internal systems that generic tools cannot support well anymore.
           </p>
         </motion.div>
       </section>

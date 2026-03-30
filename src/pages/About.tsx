@@ -35,10 +35,10 @@ export default function About() {
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">About</p>
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-ink leading-[1.04] tracking-tight mb-6 sm:mb-8">
-              We build the systems layer behind clearer growth, better operations, and stronger digital delivery.
+              We build AI-powered products and custom systems for startups and growing businesses that need more than generic tools.
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-brand-400 leading-relaxed max-w-3xl">
-              Bakal Digital works where digital structure starts affecting trust, conversion, onboarding, and internal execution. Sometimes that means a sharper public-facing product. Sometimes it means the workflow, platform, or automation layer underneath it.
+              The work can look like a sharper website, a real SaaS platform, a client portal, an internal tool, a custom automation layer, or an AI-assisted product flow. The throughline is the same: build the digital system the business actually needs next.
             </p>
           </motion.div>
         </div>
