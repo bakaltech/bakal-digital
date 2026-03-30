@@ -4,6 +4,7 @@ export interface ProofDemo {
   title: string;
   summary: string;
   whatItShows: string[];
+  whyItMatters: string;
 }
 
 export interface DeliveryStep {
@@ -27,6 +28,7 @@ export const proofDemos: ProofDemo[] = [
     summary:
       'Shows how a service business can qualify inbound demand, generate useful internal context, and keep final approval with the team.',
     whatItShows: ['Guided intake logic', 'Knowledge routing', 'Human review before action'],
+    whyItMatters: 'This is the kind of workflow we build when inbound demand is growing faster than the team can sort, qualify, and route by hand.',
   },
   {
     id: 'lumina-saas',
@@ -35,6 +37,7 @@ export const proofDemos: ProofDemo[] = [
     summary:
       'Shows how a service or SaaS business can package milestones, approvals, and reporting into a cleaner customer-facing experience.',
     whatItShows: ['Shared milestones', 'Approval checkpoints', 'Reporting clarity'],
+    whyItMatters: 'This is the kind of product layer we build when the customer experience needs to feel more organized, premium, and easier to trust.',
   },
   {
     id: 'velocity-ecommerce',
@@ -43,6 +46,7 @@ export const proofDemos: ProofDemo[] = [
     summary:
       'Shows how product storytelling, checkout structure, and performance signals can work together to support revenue instead of leaking trust.',
     whatItShows: ['Editorial product pages', 'Checkout pacing', 'Performance guardrails'],
+    whyItMatters: 'This is the kind of commerce system we build when a strong product deserves a storefront and checkout path that convert more cleanly.',
   },
   {
     id: 'orbit-automation',
@@ -51,6 +55,7 @@ export const proofDemos: ProofDemo[] = [
     summary:
       'Shows how workflow health, exceptions, and operational signals can be surfaced in one place instead of getting buried across disconnected tools.',
     whatItShows: ['Workflow visibility', 'Exception queues', 'Operational signals'],
+    whyItMatters: 'This is the kind of operations tool we build when the business needs fewer surprises and more confidence in how work is moving.',
   },
 ];
 

@@ -28,6 +28,27 @@ function DemoPreview({ id }: { id: (typeof proofDemos)[number]['id'] }) {
   }
 }
 
+function DemoSnapshot({
+  id,
+  feature,
+}: {
+  id: (typeof proofDemos)[number]['id'];
+  feature: number;
+}) {
+  switch (id) {
+    case 'nexus-ai':
+      return <NexusAIOpsDemo activeFeature={feature} />;
+    case 'lumina-saas':
+      return <LuminaPortalDemo activeFeature={feature} />;
+    case 'velocity-ecommerce':
+      return <VelocityCommerceDemo activeFeature={feature} />;
+    case 'orbit-automation':
+      return <OrbitOpsDemo activeFeature={feature} />;
+    default:
+      return null;
+  }
+}
+
 export default function Portfolio() {
   const [filter, setFilter] = useState('All');
   const [search, setSearch] = useState('');
@@ -157,6 +178,11 @@ export default function Portfolio() {
                   ))}
                 </div>
 
+                <div className="mt-5 rounded-[1.25rem] border border-brand-100/50 bg-soft px-4 py-4">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent mb-2">Why this matters</p>
+                  <p className="text-sm sm:text-base text-brand-400 leading-relaxed">{demo.whyItMatters}</p>
+                </div>
+
                 <div className="mt-5 flex flex-col sm:flex-row gap-3">
                   <Link
                     to={`/portfolio/${demo.id}`}
@@ -249,7 +275,8 @@ export default function Portfolio() {
                   transition={{ duration: 0.6, delay: idx * 0.05 }}
                   className="group flex flex-col"
                 >
-                  <Link to={`/portfolio/${project.id}`} className="block">
+                  <div className="block">
+                    <Link to={`/portfolio/${project.id}`} className="block">
                     <div className="relative aspect-[16/10] overflow-hidden rounded-[2.5rem] bg-soft mb-8 shadow-sm group-hover:shadow-2xl transition-all duration-700 group-hover:-translate-y-2">
                       <BrandedVisual
                         variant={project.id as 'nexus-ai' | 'lumina-saas' | 'velocity-ecommerce' | 'orbit-automation'}
@@ -288,7 +315,46 @@ export default function Portfolio() {
                         <ChevronRight className="w-5 h-5" />
                       </div>
                     </div>
-                  </Link>
+                    </Link>
+
+                    <div className="px-2">
+                        <div className="mt-5 grid grid-cols-2 gap-3">
+                          {[0, 1].map((feature) => (
+                            <div key={feature} className="overflow-hidden rounded-[1.1rem] border border-brand-100/50 bg-soft">
+                              <div className="border-b border-brand-100/50 px-3 py-2">
+                                <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent">
+                                  Screen {feature + 1}
+                                </p>
+                              </div>
+                              <div className="aspect-[16/10]">
+                                <DemoSnapshot id={project.id as (typeof proofDemos)[number]['id']} feature={feature} />
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="mt-5 flex flex-col sm:flex-row gap-3">
+                          <span className="inline-flex min-h-11 items-center justify-center rounded-full border border-brand-100 bg-soft px-4 py-2 text-sm font-medium text-ink">
+                            Ask about building this for your workflow
+                          </span>
+                          <button
+                            type="button"
+                            onClick={(event) => {
+                              event.preventDefault();
+                              event.stopPropagation();
+                              window.dispatchEvent(
+                                new CustomEvent('open-chat', {
+                                  detail: { query: `I want to build a workflow like ${project.title} for my business.` },
+                                }),
+                              );
+                            }}
+                            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent"
+                          >
+                            Ask about this workflow
+                            <ArrowRight className="w-4 h-4" />
+                          </button>
+                        </div>
+                    </div>
+                  </div>
                 </motion.div>
               ))}
             </AnimatePresence>
