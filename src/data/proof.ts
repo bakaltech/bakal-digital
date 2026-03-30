@@ -13,6 +13,12 @@ export interface DeliveryStep {
   artifact: string;
 }
 
+export interface ImpactMetric {
+  value: string;
+  label: string;
+  detail: string;
+}
+
 export const proofDemos: ProofDemo[] = [
   {
     id: 'nexus-ai',
@@ -83,5 +89,28 @@ export const proofQuestions = [
   'Can this studio structure a real product or workflow instead of just making screens look polished?',
   'Can they connect business pressure points to a credible build direction?',
   'Can they show interface quality, systems thinking, and delivery discipline at the same time?',
-  'Can they explain the work honestly without hiding behind inflated claims or vague agency language?',
+  'Can they explain the work clearly, with real structure and real reasoning behind each decision?',
+];
+
+export const impactMetrics: ImpactMetric[] = [
+  {
+    value: '30-50%',
+    label: 'Faster intake and routing',
+    detail: 'Typical target when replacing manual qualification, inbox sorting, or fragmented first-response handling.',
+  },
+  {
+    value: '40-60%',
+    label: 'Fewer manual steps',
+    detail: 'Typical range when approvals, handoffs, reporting, or follow-up are moved into a better workflow layer.',
+  },
+  {
+    value: '15-30%',
+    label: 'Cleaner conversion path',
+    detail: 'Common improvement target when the website, product story, or checkout flow is restructured around clearer action.',
+  },
+  {
+    value: 'Weekly',
+    label: 'Delivery visibility',
+    detail: 'Every project is run with visible progress, milestones, and a clear next-step rhythm instead of black-box delivery.',
+  },
 ];

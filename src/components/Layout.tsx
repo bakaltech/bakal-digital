@@ -189,6 +189,10 @@ const Footer = () => {
             <p className="text-brand-400 text-base md:text-lg leading-relaxed max-w-xl">
               Bakal Digital helps startups and growing businesses replace generic tools with AI-powered products, stronger websites, custom software, and operational systems built to scale cleanly.
             </p>
+            <div className="mt-5 inline-flex flex-wrap items-center gap-2 rounded-full border border-brand-100/50 bg-soft px-4 py-2">
+              <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent">Built for</span>
+              <span className="text-sm text-brand-400">Founders, operators, and growing teams across SaaS, commerce, and services.</span>
+            </div>
           </div>
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.25em] text-accent mb-5">Navigate</p>

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, ChevronRight, Search } from 'lucide-react';
 import { projects } from '../data/projects';
 import { projectContext, type ProjectContextId } from '../data/projectContext';
-import { deliverySteps, proofDemos, proofQuestions } from '../data/proof';
+import { deliverySteps, impactMetrics, proofDemos, proofQuestions } from '../data/proof';
 import BrandedVisual from '../components/BrandedVisual';
 import {
   LuminaPortalDemo,
@@ -55,7 +55,7 @@ export default function Portfolio() {
               Visible proof for how we think, what we build, and how delivery actually runs.
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-brand-400 leading-relaxed max-w-4xl">
-              This page is built to answer the trust question honestly. It combines working demos, concept studies, and delivery structure so you can judge the product thinking and build quality without inflated claims.
+              Review real product behavior, structured concept studies, and the delivery rhythm behind every build so you can judge the thinking, build quality, and operating discipline for yourself.
             </p>
           </motion.div>
         </div>
@@ -73,6 +73,38 @@ export default function Portfolio() {
           ))}
         </div>
 
+        <section className="py-4 sm:py-6 md:py-8">
+          <div className="grid gap-5 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:items-start">
+            <div className="rounded-[1.9rem] border border-brand-100/50 bg-white p-6 sm:p-7 shadow-sm">
+              <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-4">Founder Profile</p>
+              <div className="flex items-start gap-5">
+                <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-[1.8rem] border border-brand-100/60 bg-soft text-2xl font-semibold text-ink">
+                  BD
+                </div>
+                <div>
+                  <h2 className="text-2xl sm:text-3xl font-semibold text-ink tracking-tight">Builder-led from first diagnosis to final handoff.</h2>
+                  <p className="mt-3 text-sm sm:text-base text-brand-400 leading-relaxed">
+                    Bakal Digital is run as a direct build partner for founders, operators, and growing teams that need software, AI workflows, and product systems tied to real business pressure. The studio stays close to the problem framing, the UX decisions, and the implementation shape so the work does not lose clarity between strategy and build.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-3 gap-4">
+              {[
+                ['Direct communication', 'The person framing the bottleneck stays close to the build.'],
+                ['Commercial reasoning', 'Every screen, workflow, and system choice has to support revenue, delivery, or operations.'],
+                ['Honest scope control', 'Projects are shaped around what needs to work first so momentum is real from the start.'],
+              ].map(([title, text]) => (
+                <div key={title} className="rounded-[1.6rem] border border-brand-100/50 bg-soft p-5 shadow-sm">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">{title}</p>
+                  <p className="text-sm sm:text-base text-brand-400 leading-relaxed">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section id="working-demos" className="scroll-mt-32 py-8 sm:py-10 md:py-12">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-10 sm:mb-12">
             <div className="max-w-4xl">
@@ -80,6 +112,9 @@ export default function Portfolio() {
               <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">
                 Interactive proof that the studio can shape real product behavior, not just polished static screens.
               </h2>
+              <p className="mt-5 max-w-3xl text-base sm:text-lg text-brand-400 leading-relaxed">
+                These demos are intentionally small and focused. They show interface quality, workflow logic, and system behavior in motion instead of relying on still images and promises.
+              </p>
             </div>
             <Link to="/contact" className="inline-flex items-center gap-2 text-base font-semibold text-ink hover:text-accent transition-colors">
               Start from your bottleneck
@@ -157,7 +192,7 @@ export default function Portfolio() {
                 Proof stories that connect the business problem, the build direction, and the commercial outcome.
               </h2>
               <p className="mt-5 text-base sm:text-lg text-brand-400 leading-relaxed max-w-3xl">
-                These are not padded client stories. They are structured concept studies that show how the work would be framed before code is written and before scope drifts into guesswork.
+                These are structured concept studies that show how the work would be framed before code is written and before scope drifts into guesswork.
               </p>
             </div>
           </div>
@@ -274,6 +309,30 @@ export default function Portfolio() {
               </button>
             </div>
           )}
+        </section>
+
+        <section className="py-16 sm:py-18 md:py-20">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-14 items-start">
+            <div className="max-w-xl">
+              <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-4">Typical Impact Targets</p>
+              <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">
+                Evidence should point to business change, not just interface polish.
+              </h2>
+              <p className="mt-5 text-base sm:text-lg text-brand-400 leading-relaxed">
+                These are typical targets for this kind of work, not client-specific claims. They show the kinds of improvements the studio is usually trying to create when the right system is put in place.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4">
+              {impactMetrics.map((metric) => (
+                <div key={metric.label} className="rounded-[1.7rem] border border-brand-100/50 bg-white p-5 sm:p-6 shadow-sm">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-3">{metric.label}</p>
+                  <p className="text-3xl sm:text-4xl font-semibold tracking-tight text-ink">{metric.value}</p>
+                  <p className="mt-3 text-sm sm:text-base text-brand-400 leading-relaxed">{metric.detail}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
         <section id="delivery-process" className="scroll-mt-32 py-16 sm:py-18 md:py-20">
