@@ -50,9 +50,9 @@ export default function About() {
             </p>
           </div>
           <div className="rounded-[1.75rem] border border-brand-100/50 bg-white p-6 sm:p-7 shadow-sm">
-            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">What we are not</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">How the studio is set up</p>
             <p className="text-base sm:text-lg text-brand-400 leading-relaxed">
-              Not a volume agency, not a branding-only shop, and not a team that separates UX, product thinking, and implementation into disconnected handoffs.
+              The work is built for teams that need message, UX, product thinking, and implementation to stay connected instead of getting split across disconnected handoffs.
             </p>
           </div>
         </div>
@@ -61,6 +61,49 @@ export default function About() {
       <section className="max-w-7xl mx-auto px-6 lg:px-8 mb-20 sm:mb-24 md:mb-28">
         <div className="rounded-[2rem] sm:rounded-[3rem] overflow-hidden shadow-2xl border border-brand-100/40 aspect-[5/4] md:aspect-[21/9]">
           <BrandedVisual variant="studio" title="Operational clarity, premium execution" className="rounded-[3rem]" />
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-20 md:py-24 bg-soft border-y border-brand-100/30">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] gap-10 md:gap-14 items-start">
+          <div className="max-w-xl">
+            <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Founder Note</p>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight mb-6 sm:mb-8">
+              The studio is led like a build partner, not passed through layers of agency management.
+            </h2>
+            <p className="text-base sm:text-lg md:text-xl text-brand-400 leading-relaxed">
+              Clients come here for direct thinking, clear tradeoffs, and a builder who can move from positioning into UX, product structure, and implementation without losing the thread.
+            </p>
+          </div>
+
+          <div className="grid gap-4">
+            <div className="rounded-[1.75rem] border border-brand-100/50 bg-white p-6 sm:p-7 shadow-sm">
+              <div className="flex items-start gap-5">
+                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[1.6rem] border border-brand-100/60 bg-soft text-xl font-semibold text-ink">
+                  BD
+                </div>
+                <div>
+                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-2">What that means in practice</p>
+                  <p className="text-base sm:text-lg text-brand-400 leading-relaxed">
+                    The same studio lead stays close to the problem framing, the UX decisions, the implementation shape, and the delivery rhythm. That keeps the work coherent and shortens the path from decision to shipped output.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid sm:grid-cols-3 gap-4">
+              {[
+                ['Direct communication', 'Short path between the problem, the decision, and the work.'],
+                ['Commercial focus', 'Every build choice has to support conversion, delivery, or operations.'],
+                ['Honest scope', 'Projects are framed around what needs to work first, not what sounds biggest.'],
+              ].map(([title, text]) => (
+                <div key={title} className="rounded-[1.5rem] border border-brand-100/50 bg-paper p-5 shadow-sm">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">{title}</p>
+                  <p className="text-sm sm:text-base text-brand-400 leading-relaxed">{text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -84,7 +127,7 @@ export default function About() {
               },
               {
                 title: 'How the work is led',
-                text: 'Each engagement is run with direct communication, a clear decision-maker, and a short path from discovery to build instead of layers of agency theatre.',
+                text: 'Each engagement is run with direct communication, a clear decision-maker, and a short path from discovery to build without unnecessary layers in the middle.',
               },
               {
                 title: 'Why that matters',
@@ -108,7 +151,7 @@ export default function About() {
               Lean enough to move decisively. Deep enough to build something real.
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-brand-400 leading-relaxed mb-6">
-              We are not trying to create agency theatre. The job is to understand the bottleneck, design the right system around it, and ship something that holds up under real use.
+              The job is to understand the bottleneck, design the right system around it, and ship something that holds up under real use.
             </p>
             <p className="text-base sm:text-lg md:text-xl text-brand-400 leading-relaxed">
               That can involve positioning, UX, AI-assisted workflows, automation logic, product architecture, or the customer-facing layer that makes the whole thing easier to trust.
@@ -151,7 +194,7 @@ export default function About() {
         <div className="max-w-4xl mx-auto">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-400 mb-6">Next Step</p>
           <h2 className="text-3xl sm:text-4xl md:text-7xl font-semibold text-white tracking-tight leading-[1.06] mb-8">
-            If the business needs a stronger website, product, or operating system, this is exactly the kind of work we are built for.
+            If the business needs a stronger website, product, tool, or workflow layer, this is exactly the kind of build the studio is set up for.
           </h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-ink font-semibold hover:bg-accent hover:text-white transition-colors">

@@ -251,9 +251,9 @@ export default function InteractiveHero() {
             </div>
 
             <div className="mt-6 rounded-[1.25rem] border border-brand-100 bg-soft/75 px-4 py-3 text-center shadow-[0_8px_20px_rgba(17,19,21,0.03)]">
-              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-accent">Built for real operators</p>
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-accent">Built around real operating pressure</p>
               <p className="mt-2 text-sm leading-relaxed text-brand-400">
-                Used to shape work for founders, operators, and growing teams across SaaS, commerce, service businesses, and internal operations.
+                Shaped for founders, operators, and growing teams in SaaS, commerce, services, and operations-heavy businesses.
               </p>
             </div>
 

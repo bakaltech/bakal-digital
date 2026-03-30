@@ -24,6 +24,12 @@ export interface Service {
     title: string;
     detail: string;
   }[];
+  proofExample: {
+    title: string;
+    situation: string;
+    build: string;
+    outcome: string;
+  };
   theme: {
     accent: string;
     soft: string;
@@ -70,6 +76,12 @@ export const services: Service[] = [
       { title: 'Design the interaction', detail: 'We shape the prompt flow, user interface, and fallback logic so the experience feels guided and useful.' },
       { title: 'Deploy with guardrails', detail: 'We connect the workflow to the business systems and make sure outputs route somewhere practical.' },
     ],
+    proofExample: {
+      title: 'AI-assisted intake and routing',
+      situation: 'A service team is handling inbound requests across forms, chat, and inboxes, and response quality is starting to slip.',
+      build: 'A branded AI intake layer, qualification rules, and an operator review dashboard that routes the next action cleanly.',
+      outcome: 'Less manual triage, faster first response, and cleaner handoff from conversation to delivery.',
+    },
     technologies: ['OpenAI', 'Anthropic', 'Google AI', 'Python', 'Node.js', 'TypeScript'],
     theme: {
       accent: 'text-sky-600',
@@ -115,6 +127,12 @@ export const services: Service[] = [
       { title: 'Shape the product layer', detail: 'We design the content structure, screens, interactions, and system logic around real business needs.' },
       { title: 'Launch for scale', detail: 'We build for maintainability, responsiveness, and future expansion instead of one-off pages.' },
     ],
+    proofExample: {
+      title: 'Client portal and workflow layer',
+      situation: 'A growing service business has outgrown email, spreadsheets, and patched follow-up across onboarding and approvals.',
+      build: 'A premium portal with milestones, approvals, reporting visibility, and cleaner customer handoffs.',
+      outcome: 'A more credible customer experience and a workflow the team can run without constant manual chasing.',
+    },
     technologies: ['React', 'Next.js', 'TypeScript', 'Vercel', 'Node.js', 'PostgreSQL'],
     theme: {
       accent: 'text-cyan-700',
@@ -160,6 +178,12 @@ export const services: Service[] = [
       { title: 'Refine the storefront', detail: 'We improve merchandising, product architecture, checkout pacing, and conversion details.' },
       { title: 'Connect the backend flow', detail: 'We align billing, fulfillment, and reporting so the business can support growth cleanly.' },
     ],
+    proofExample: {
+      title: 'Headless storefront upgrade',
+      situation: 'A premium brand has strong products but keeps leaking trust through generic templates, weak mobile flow, and clumsy checkout.',
+      build: 'A faster storefront with stronger product storytelling, cleaner checkout pacing, and backend revenue flow that is easier to manage.',
+      outcome: 'Better conversion confidence, stronger brand presentation, and fewer leaks between product page and payment.',
+    },
     technologies: ['Shopify', 'WooCommerce', 'Stripe', 'Next.js', 'Tailwind CSS', 'PostgreSQL'],
     theme: {
       accent: 'text-amber-700',
@@ -205,6 +229,12 @@ export const services: Service[] = [
       { title: 'Build the core experience', detail: 'We shape dashboards, onboarding, workflows, and product UI around the value the software delivers.' },
       { title: 'Prepare for growth', detail: 'We structure the product so it can absorb more users, more features, and more complexity cleanly.' },
     ],
+    proofExample: {
+      title: 'SaaS MVP with real account logic',
+      situation: 'A founder is moving from product idea to launch and now needs onboarding, permissions, billing, and a dashboard that actually works.',
+      build: 'A multi-user SaaS foundation with account roles, billing setup, onboarding flow, and a product core ready for iteration.',
+      outcome: 'A launchable product spine instead of a stack of disconnected screens that needs rewriting later.',
+    },
     technologies: ['Next.js', 'PostgreSQL', 'Stripe', 'Auth.js', 'Prisma', 'Redis'],
     theme: {
       accent: 'text-fuchsia-700',
@@ -250,6 +280,12 @@ export const services: Service[] = [
       { title: 'Build the workflow layer', detail: 'We create the triggers, routing logic, and integrations that reduce manual effort.' },
       { title: 'Monitor and refine', detail: 'We make the automation observable so the team can trust it and improve it over time.' },
     ],
+    proofExample: {
+      title: 'Operations workflow cleanup',
+      situation: 'A team is relying on spreadsheets, inboxes, and disconnected tools to move work across sales, delivery, and internal approvals.',
+      build: 'An automation layer that syncs tools, routes approvals, and makes exceptions visible instead of burying them.',
+      outcome: 'Less duplicated admin work, fewer dropped handoffs, and faster operational follow-through.',
+    },
     technologies: ['Zapier', 'Make.com', 'n8n', 'Node.js', 'Python', 'GitHub Actions'],
     theme: {
       accent: 'text-emerald-700',
@@ -295,6 +331,12 @@ export const services: Service[] = [
       { title: 'Unify the sources', detail: 'We connect the systems and shape the model so the data becomes easier to trust.' },
       { title: 'Design for action', detail: 'We turn the reporting layer into dashboards and workflows that help teams respond, not just observe.' },
     ],
+    proofExample: {
+      title: 'Reporting layer for operators',
+      situation: 'Leaders are still stitching together answers from multiple tools and do not trust the reporting enough to move quickly.',
+      build: 'A unified dashboard and reporting layer that consolidates signals into one operating view with clear next actions.',
+      outcome: 'Faster decision-making, less manual reconciliation, and a stronger foundation for future automation and AI.',
+    },
     technologies: ['D3.js', 'Power BI', 'BigQuery', 'Snowflake', 'Python', 'PostgreSQL'],
     theme: {
       accent: 'text-violet-700',

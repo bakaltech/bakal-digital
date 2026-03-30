@@ -28,7 +28,7 @@ export default function ServicesPreview() {
             See how the offer, the UX, and the business outcome line up before you ever start.
           </h2>
           <p className="text-base sm:text-xl text-brand-400 leading-relaxed max-w-3xl">
-            Every service needs a different operating shape. This preview shows the pressure point, the likely business gain, and the kind of build behind it so the site stays concrete instead of promotional.
+            Every service needs a different operating shape. This preview shows the pressure point, the likely business gain, the build shape, and one grounded example so the offer stays concrete instead of promotional.
           </p>
         </div>
 
@@ -108,6 +108,25 @@ export default function ServicesPreview() {
                 </div>
 
                 <div>
+                  <div className="mb-5 rounded-[1.25rem] border border-white/10 bg-white/6 p-4 xl:p-5">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-white/45">Example scenario</p>
+                    <h5 className="mt-2 text-base sm:text-lg font-semibold text-white">{activeService.proofExample.title}</h5>
+                    <div className="mt-4 grid gap-3">
+                      <div>
+                        <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-white/40">Situation</p>
+                        <p className="mt-1 text-sm leading-relaxed text-white/78">{activeService.proofExample.situation}</p>
+                      </div>
+                      <div>
+                        <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-white/40">Build</p>
+                        <p className="mt-1 text-sm leading-relaxed text-white/78">{activeService.proofExample.build}</p>
+                      </div>
+                      <div>
+                        <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-white/40">Outcome</p>
+                        <p className="mt-1 text-sm leading-relaxed text-white/88">{activeService.proofExample.outcome}</p>
+                      </div>
+                    </div>
+                  </div>
+
                   <p className="text-[10px] font-bold uppercase tracking-[0.24em] sm:tracking-[0.28em] text-white/45 mb-3">Typical Scope</p>
                   <div className="flex flex-wrap gap-2 mb-5">
                     {activeService.features.slice(0, 3).map((feature) => (

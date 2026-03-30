@@ -8,6 +8,7 @@ import InteractiveHero from '../components/InteractiveHero';
 import BrandedVisual from '../components/BrandedVisual';
 import ServicesPreview from '../components/ServicesPreview';
 import { services } from '../data/services';
+import { projectContext, type ProjectContextId } from '../data/projectContext';
 
 interface CategoryCardProps {
   category: {
@@ -101,6 +102,7 @@ const ProjectCard: React.FC<{ project: (typeof projects)[number]; idx: number }>
 
 export default function Home() {
   const featuredProjects = projects.slice(0, 2);
+  const proofProjects = projects.slice(0, 3);
   const categories = services.slice(0, 4).map((service) => ({
     id: service.id,
     buyer: service.buyer,
@@ -128,7 +130,7 @@ export default function Home() {
             </div>
             <div className="max-w-2xl lg:justify-self-end">
               <p className="text-base sm:text-lg md:text-[1.12rem] text-brand-400 leading-relaxed">
-                Clients do not come here to buy a category. They come when revenue, delivery, onboarding, support, or internal execution starts breaking under generic tools and stitched-together workflows.
+                Teams usually arrive when onboarding feels messy, internal work is still manual, the product is underpowered, or the website is not helping the business convert clearly enough.
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
                 {['Launch stronger', 'Operate cleaner', 'Reduce manual drag', 'Build around real workflow'].map((item) => (
@@ -164,18 +166,18 @@ export default function Home() {
             <div className="max-w-xl">
               <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">Who We Work With</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.4rem] font-semibold text-ink leading-[0.98] tracking-tight">
-                Best for teams that are replacing the next bottleneck, not buying another brochure site.
+                Best for teams that need software, automation, or product work tied to a real business bottleneck.
               </h2>
               <p className="mt-5 text-base sm:text-lg text-brand-400 leading-relaxed">
-                The fit is strongest when the business is launching something real, modernizing a weak digital layer, or replacing manual work and disconnected tools with a system that can actually hold up.
+                The fit is strongest when the business is launching something real, cleaning up a weak digital layer, or replacing manual work and disconnected tools with software that fits the way the team already operates.
               </p>
               <p className="mt-4 text-base sm:text-lg text-ink leading-relaxed">
-                Best fit for teams who need real software, automation, or AI-driven workflows, not just a website.
+                We work best with teams who already feel the cost of messy workflows and want software, automation, or AI tools that actually fit.
               </p>
               <div className="mt-8 rounded-[1.75rem] border border-brand-100/50 bg-white p-6 sm:p-7 shadow-sm">
-                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Not the right fit</p>
+                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Best used when</p>
                 <p className="text-sm sm:text-base text-brand-400 leading-relaxed">
-                  If the job is only a quick brochure site, a logo-only refresh, or a low-context build with no business logic underneath, this is not the right studio.
+                  The strongest engagements are the ones where the business needs a real website, app, internal tool, workflow layer, or product system, not just a cosmetic refresh with no logic underneath.
                 </p>
               </div>
             </div>
@@ -216,42 +218,54 @@ export default function Home() {
 
       <section className="py-14 sm:py-20 md:py-28 bg-paper border-y border-brand-100/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-14 items-start">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:gap-14 items-start">
             <div className="max-w-xl">
-              <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 sm:mb-6">Proof Layer</p>
+              <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 sm:mb-6">Proof In Practice</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.4rem] font-semibold text-ink tracking-tight leading-[1]">
-                What you can review today before a full case-study library exists.
+                Real examples of the problems, builds, and outcomes this studio is set up to handle.
               </h2>
               <p className="mt-5 text-base sm:text-lg md:text-[1.08rem] text-brand-400 leading-relaxed">
-                The site does not pretend there is a giant portfolio behind it. Instead, it shows the kinds of proof we can stand behind right now: how the work is framed, how the systems are structured, and how the flows actually behave.
+                These are concept-backed proof stories. Each one shows the pressure point, the product or workflow layer we would build, and the business outcome it is meant to improve.
               </p>
+              <div className="mt-6 rounded-[1.5rem] border border-brand-100/50 bg-soft p-5 shadow-sm">
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-2">How to read them</p>
+                <p className="text-sm sm:text-base text-brand-400 leading-relaxed">
+                  Judge the clarity of the problem, the shape of the build, and whether the outcome sounds commercially useful. That is the level of thinking we bring into real engagements.
+                </p>
+              </div>
             </div>
 
-            <div className="grid gap-4 sm:gap-5 md:grid-cols-2">
-              {[
-                {
-                  title: 'Concept studies with commercial context',
-                  text: 'Real scenarios are broken down by audience, bottleneck, product direction, and business outcome so you can judge the thinking, not just the visuals.',
-                },
-                {
-                  title: 'Service breakdowns that show the build shape',
-                  text: 'Each service is explained through problem, likely scope, outcomes, and engagement path so the offer feels concrete before any sales call happens.',
-                },
-                {
-                  title: 'Working intake and routing flows',
-                  text: 'The quick brief, direct inquiry path, and service navigation are real product surfaces, not placeholder UI pretending to be interactive.',
-                },
-                {
-                  title: 'Honest labeling instead of inflated claims',
-                  text: 'Concept work is labeled as concept work, and proof is framed around what is genuinely visible today rather than what sounds impressive in a headline.',
-                },
-              ].map((item) => (
-                <div key={item.title} className="rounded-[1.6rem] border border-brand-100/50 bg-soft p-5 sm:p-6 shadow-sm">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">What this proves</p>
-                  <h3 className="text-xl sm:text-2xl font-semibold text-ink tracking-tight mb-3">{item.title}</h3>
-                  <p className="text-sm sm:text-base text-brand-400 leading-relaxed">{item.text}</p>
-                </div>
-              ))}
+            <div className="grid gap-4 sm:gap-5">
+              {proofProjects.map((project) => {
+                const context = projectContext[project.id as ProjectContextId];
+
+                return (
+                  <div key={project.id} className="rounded-[1.7rem] border border-brand-100/50 bg-white p-5 sm:p-6 shadow-sm">
+                    <div className="flex flex-wrap items-center gap-3">
+                      <span className="rounded-full border border-brand-100 bg-soft px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent">
+                        {project.category}
+                      </span>
+                      <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">
+                        {project.title}
+                      </span>
+                    </div>
+                    <div className="mt-4 grid gap-4 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)_minmax(0,1fr)]">
+                      <div className="rounded-[1.2rem] border border-brand-100/50 bg-soft px-4 py-4">
+                        <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent mb-2">Problem</p>
+                        <p className="text-sm leading-relaxed text-brand-400">{context.pressurePoint}</p>
+                      </div>
+                      <div className="rounded-[1.2rem] border border-brand-100/50 bg-white px-4 py-4">
+                        <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent mb-2">What we would build</p>
+                        <p className="text-sm leading-relaxed text-brand-400">{project.solution}</p>
+                      </div>
+                      <div className="rounded-[1.2rem] border border-brand-100/50 bg-soft px-4 py-4">
+                        <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent mb-2">What improves</p>
+                        <p className="text-sm leading-relaxed text-brand-400">{context.commercialOutcome}</p>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -266,7 +280,7 @@ export default function Home() {
                 Concept studies that make the thinking visible before you ever hire us.
               </h2>
               <p className="mt-5 max-w-3xl text-base sm:text-lg text-brand-400 leading-relaxed">
-                These are honest concept directions, not inflated client claims. Each one shows how we would structure the product, the interface, and the system logic when the goal is to make something credible, useful, and scalable.
+                These are honest concept directions. Each one shows how we would structure the product, the interface, and the system logic when the goal is to make something credible, useful, and scalable.
               </p>
               <p className="mt-4 max-w-3xl text-base sm:text-lg text-ink leading-relaxed">
                 These examples show how we structure real products, workflows, and systems before writing a single line of code.
@@ -296,16 +310,16 @@ export default function Home() {
               The product should feel sharp because the delivery system behind it is sharp.
             </h2>
             <p className="text-base sm:text-xl text-brand-400 leading-relaxed max-w-2xl">
-              Strong execution is not a promise at the end of the sales process. The site, the service paths, the brief flow, and the way work is framed should already prove that the delivery is disciplined and commercially aware.
+              Strong execution is not something you discover after signing. The site, the service paths, the brief flow, and the project language should already show a delivery rhythm you can trust.
             </p>
             <p className="mt-4 text-base sm:text-lg text-ink leading-relaxed max-w-2xl">
               Every project includes clear milestones, weekly progress, and a delivery rhythm that keeps the build moving.
             </p>
             <div className="mt-8 sm:mt-10 grid gap-4">
               {[
-                'Strategy, UX, design, frontend, backend, and automation are treated as one operating system.',
-                'Guided brief, direct inquiry, and service pathways are working flows, not decorative UI.',
-                'Concept studies are labeled honestly so buyers can separate directional work from public launches.',
+                'Strategy, UX, design, frontend, backend, and automation are handled as one connected build, not siloed handoffs.',
+                'The guided brief, direct inquiry, and service pathways work like real product surfaces, not decorative UI.',
+                'Concept studies are labeled honestly so buyers can judge the thinking on its own terms.',
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-2xl bg-white border border-brand-100/50 flex items-center justify-center text-accent shrink-0">
@@ -319,10 +333,10 @@ export default function Home() {
 
           <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
             {[
-              { title: 'Honest proof model', text: 'Public concepts are labeled clearly, and deeper examples can be shared directly when the opportunity is qualified.' },
-              { title: 'Real intake, not fake polish', text: 'The guided brief, contact flow, and service pathways all route through live working logic.' },
-              { title: 'Cross-disciplinary execution', text: 'The work is shaped across message, UX, design, frontend, backend, and automation instead of siloed handoffs.' },
-              { title: 'Built for the business layer', text: 'The goal is not just a polished interface. It is a system that helps sales, operations, and delivery move cleanly.' },
+              { title: '1. Brief and bottleneck audit', text: 'Start with the pressure point, current workflow, business goal, and what must improve first.' },
+              { title: '2. Direction and scope', text: 'Turn that into a clear build shape, scope boundary, and delivery plan the team can actually follow.' },
+              { title: '3. Design and implementation', text: 'Move through UX, interface, frontend, backend, and automation without breaking the logic between them.' },
+              { title: '4. QA, launch, and refinement', text: 'Ship with clean handoff, visible progress, and enough structure to keep improving after launch.' },
             ].map((item, idx) => (
               <motion.div key={item.title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: idx * 0.08 }} className="rounded-[1.5rem] sm:rounded-[2rem] border border-brand-100/50 bg-white p-5 sm:p-7 shadow-sm">
                 <div className="w-11 h-11 rounded-2xl bg-white border border-brand-100/50 flex items-center justify-center text-accent mb-4">
