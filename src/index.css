@@ -34,6 +34,14 @@
     letter-spacing: -0.011em;
   }
 
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-paper;
+  }
+
   body, #root {
     min-height: 100%;
   }
