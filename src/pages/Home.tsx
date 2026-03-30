@@ -137,6 +137,12 @@ export default function Home() {
                   </span>
                 ))}
               </div>
+              <div className="mt-6 rounded-[1.5rem] border border-brand-100/50 bg-white p-5 shadow-sm">
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-2">Proof of range</p>
+                <p className="text-sm sm:text-base text-brand-400 leading-relaxed">
+                  Delivered and concepted across SaaS products, commerce systems, internal tools, AI workflows, portals, and automation layers.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -162,6 +168,9 @@ export default function Home() {
               </h2>
               <p className="mt-5 text-base sm:text-lg text-brand-400 leading-relaxed">
                 The fit is strongest when the business is launching something real, modernizing a weak digital layer, or replacing manual work and disconnected tools with a system that can actually hold up.
+              </p>
+              <p className="mt-4 text-base sm:text-lg text-ink leading-relaxed">
+                Best fit for teams who need real software, automation, or AI-driven workflows, not just a website.
               </p>
               <div className="mt-8 rounded-[1.75rem] border border-brand-100/50 bg-white p-6 sm:p-7 shadow-sm">
                 <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Not the right fit</p>
@@ -216,6 +225,9 @@ export default function Home() {
               <p className="mt-5 max-w-3xl text-base sm:text-lg text-brand-400 leading-relaxed">
                 These are honest concept directions, not inflated client claims. Each one shows how we would structure the product, the interface, and the system logic when the goal is to make something credible, useful, and scalable.
               </p>
+              <p className="mt-4 max-w-3xl text-base sm:text-lg text-ink leading-relaxed">
+                These examples show how we structure real products, workflows, and systems before writing a single line of code.
+              </p>
             </div>
             <Link to="/portfolio" className="flex items-center text-base sm:text-lg font-semibold text-ink hover:text-accent transition-colors group">
               See concept studies
@@ -242,6 +254,9 @@ export default function Home() {
             </h2>
             <p className="text-base sm:text-xl text-brand-400 leading-relaxed max-w-2xl">
               Strong execution is not a promise at the end of the sales process. The site, the service paths, the brief flow, and the way work is framed should already prove that the delivery is disciplined and commercially aware.
+            </p>
+            <p className="mt-4 text-base sm:text-lg text-ink leading-relaxed max-w-2xl">
+              Every project includes clear milestones, weekly progress, and a delivery rhythm that keeps the build moving.
             </p>
             <div className="mt-8 sm:mt-10 grid gap-4">
               {[
@@ -274,6 +289,31 @@ export default function Home() {
                 <p className="text-brand-400 leading-relaxed text-sm sm:text-base">{item.text}</p>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14 sm:py-20 md:py-24 bg-paper">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start">
+            <div className="max-w-xl">
+              <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 sm:mb-6">Results We Aim For</p>
+              <h2 className="text-[2rem] sm:text-4xl md:text-[3.4rem] font-semibold text-ink tracking-tight leading-[1]">
+                The work should change how the business runs, not just how the interface looks.
+              </h2>
+            </div>
+            <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
+              {[
+                'Reduced manual work across intake, support, and operations',
+                'Faster onboarding and clearer paths to action',
+                'Cleaner workflows between the tools and the team',
+                'Higher-conviction conversion paths and stronger product clarity',
+              ].map((result) => (
+                <div key={result} className="rounded-[1.5rem] border border-brand-100/50 bg-soft p-5 sm:p-6 shadow-sm">
+                  <p className="text-sm sm:text-base text-ink leading-relaxed font-medium">{result}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

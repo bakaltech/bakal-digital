@@ -218,11 +218,11 @@ export default function InteractiveHero() {
             </div>
 
             <h1 className="mx-auto mt-6 max-w-[9.5ch] text-[clamp(2.85rem,7vw,5.35rem)] font-bold leading-[0.92] text-ink">
-              AI-powered products and custom systems for businesses that have outgrown generic tools.
+              Custom software, AI tools, and automation systems that remove bottlenecks and scale with your business.
             </h1>
 
             <p className="mx-auto mt-5 max-w-[34rem] text-base leading-relaxed text-brand-400 sm:text-[1.05rem] md:text-[1.12rem]">
-              We help startups and growing teams replace patchwork tools, manual work, and brittle workflows with AI-centered websites, apps, portals, automations, and internal platforms built to support real scale.
+              Web apps, internal tools, AI workflows, and automation layers built around your real operations.
             </p>
 
             <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
@@ -248,6 +248,13 @@ export default function InteractiveHero() {
                 Start a Project
                 <ArrowRight className="h-4 w-4" />
               </Link>
+            </div>
+
+            <div className="mt-6 rounded-[1.25rem] border border-brand-100 bg-soft/75 px-4 py-3 text-center shadow-[0_8px_20px_rgba(17,19,21,0.03)]">
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-accent">Built for real operators</p>
+              <p className="mt-2 text-sm leading-relaxed text-brand-400">
+                Used to shape work for founders, operators, and growing teams across SaaS, commerce, service businesses, and internal operations.
+              </p>
             </div>
 
             <div className="mt-8 grid gap-3 sm:grid-cols-3">

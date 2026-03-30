@@ -93,6 +93,9 @@ export default function ServicesPreview() {
                   <h4 className="max-w-[9ch] text-2xl sm:text-3xl xl:text-[2.55rem] font-semibold tracking-tight leading-[1] text-balance">
                     {activeService.shortTitle}
                   </h4>
+                  <p className="mt-4 max-w-[34rem] text-sm sm:text-base leading-relaxed text-white/74">
+                    {activeService.previewLead}
+                  </p>
                 </div>
 
                 <div className="grid gap-3 mb-5">

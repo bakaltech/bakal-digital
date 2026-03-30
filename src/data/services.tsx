@@ -16,6 +16,7 @@ export interface Service {
   buyer: string;
   problem: string;
   homepageSummary: string;
+  previewLead: string;
   ctaLabel: string;
   idealFor: string[];
   outcomes: string[];
@@ -46,6 +47,7 @@ export const services: Service[] = [
     buyer: 'Startups and teams turning AI from an idea into a working product or workflow.',
     problem: 'The business wants AI to handle a real job, but the current flow is manual, slow, or stuck at the demo stage.',
     homepageSummary: 'AI assistants, copilots, and product features that reduce manual handling and route the next action cleanly.',
+    previewLead: 'We build AI workflows that automate decisions, reduce manual work, and route the next action cleanly.',
     ctaLabel: 'See AI workflow scope',
     features: [
       'AI Assistants & Chatbots',
@@ -90,6 +92,7 @@ export const services: Service[] = [
     buyer: 'Founders and growing businesses that need a stronger website, portal, or product layer.',
     problem: 'The offer is hard to understand, the path to action is weak, or the business needs more than a template can support.',
     homepageSummary: 'Websites, portals, and product flows built around how the business actually sells, serves, and delivers.',
+    previewLead: 'We design and build platforms that turn your workflow into a smooth, conversion-ready experience.',
     ctaLabel: 'See platform scope',
     features: [
       'Marketing Websites',
@@ -134,6 +137,7 @@ export const services: Service[] = [
     buyer: 'Brands that need a storefront and backend flow strong enough to support growth.',
     problem: 'The business is losing confidence or revenue across product presentation, checkout, subscriptions, or post-purchase operations.',
     homepageSummary: 'Storefronts, checkout systems, and revenue operations designed to reduce friction and support scale.',
+    previewLead: 'We fix the revenue path from product story to payment with optimized storefronts and checkout systems.',
     ctaLabel: 'See commerce scope',
     features: [
       'Custom Storefronts',
@@ -178,6 +182,7 @@ export const services: Service[] = [
     buyer: 'Founders building a product that needs real users, real accounts, and room to grow.',
     problem: 'The software idea is moving beyond mockups and now needs product architecture, onboarding, billing, and operational logic that can hold up.',
     homepageSummary: 'Multi-user software products with onboarding, permissions, billing, and a foundation built for expansion.',
+    previewLead: 'We build SaaS products with real onboarding, permissions, billing, and room to grow.',
     ctaLabel: 'See SaaS scope',
     features: [
       'Multi-tenant Architecture',
@@ -222,6 +227,7 @@ export const services: Service[] = [
     buyer: 'Teams running on spreadsheets, handoffs, and disconnected tools that keep slowing execution down.',
     problem: 'Work is getting duplicated, delayed, or dropped because the systems do not talk to each other cleanly.',
     homepageSummary: 'Routing, approvals, tool sync, and operational logic that reduce repeated work and missed handoffs.',
+    previewLead: 'We connect tools, automate repetitive work, and make workflow handoffs easier to trust.',
     ctaLabel: 'See automation scope',
     features: [
       'Workflow Automation',
@@ -266,6 +272,7 @@ export const services: Service[] = [
     buyer: 'Operators and leaders who need one trustworthy view of what is working, slipping, or slowing down.',
     problem: 'Important signals are spread across too many tools, and the team is still stitching together answers by hand.',
     homepageSummary: 'Dashboards, reporting, and visibility layers that turn disconnected signals into useful operating guidance.',
+    previewLead: 'We build reporting layers that turn scattered data into clearer decisions and faster follow-through.',
     ctaLabel: 'See reporting scope',
     features: [
       'Custom Dashboards',
