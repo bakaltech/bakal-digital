@@ -64,6 +64,42 @@ export default function About() {
         </div>
       </section>
 
+      <section className="py-16 sm:py-20 md:py-24 bg-paper border-y border-brand-100/30">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-[0.9fr_1.1fr] gap-10 md:gap-14 items-start">
+          <div className="max-w-xl">
+            <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Studio Point Of View</p>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight mb-6 sm:mb-8">
+              The work is usually less about adding something new and more about removing what keeps slowing the business down.
+            </h2>
+            <p className="text-base sm:text-lg md:text-xl text-brand-400 leading-relaxed">
+              That friction might show up in a weak website, manual handling, unclear onboarding, disconnected tools, or a product idea that still has no credible path to launch. The job is to isolate the bottleneck and build the right layer around it.
+            </p>
+          </div>
+
+          <div className="grid gap-4">
+            {[
+              {
+                title: 'What clients are actually buying',
+                text: 'A tighter offer, a stronger digital product, clearer workflow logic, and one team that can carry strategy, UX, design, and implementation together.',
+              },
+              {
+                title: 'How the work is led',
+                text: 'Each engagement is run with direct communication, a clear decision-maker, and a short path from discovery to build instead of layers of agency theatre.',
+              },
+              {
+                title: 'Why that matters',
+                text: 'The result is not just a polished surface. It is a system that can sell, onboard, route, report, and operate with less friction.',
+              },
+            ].map((item) => (
+              <div key={item.title} className="rounded-[1.75rem] border border-brand-100/50 bg-soft p-6 sm:p-7 shadow-sm">
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">{item.title}</p>
+                <p className="text-base sm:text-lg text-brand-400 leading-relaxed">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="py-16 sm:py-20 md:py-24 bg-soft">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-start">
           <div>

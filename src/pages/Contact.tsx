@@ -111,6 +111,15 @@ export default function Contact() {
               </div>
             </div>
 
+            <div className="rounded-[1.75rem] sm:rounded-[2rem] bg-white border border-brand-100/50 p-6 sm:p-8 shadow-sm">
+              <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Typical response rhythm</p>
+              <div className="space-y-3 text-brand-400 leading-relaxed">
+                <p>1. Review the inquiry and identify the bottleneck.</p>
+                <p>2. Reply with the clearest next move instead of a generic sales response.</p>
+                <p>3. Move into scope, references, or a direct conversation if the fit is real.</p>
+              </div>
+            </div>
+
             <button type="button" onClick={openChat} className="w-full inline-flex items-center justify-center gap-3 px-6 py-5 rounded-full bg-ink text-white font-semibold hover:bg-accent transition-colors shadow-xl">
               <MessageSquare className="w-5 h-5" />
               Start With Guided Brief
