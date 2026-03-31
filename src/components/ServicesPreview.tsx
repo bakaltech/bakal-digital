@@ -32,9 +32,9 @@ export default function ServicesPreview() {
           </p>
         </div>
 
-        <div className="grid xl:grid-cols-[minmax(18rem,0.72fr)_minmax(0,1.28fr)] gap-6 sm:gap-8 md:gap-10 items-start">
-          <div className="xl:sticky xl:top-28">
-            <div className="grid gap-3 sm:gap-4 xl:max-h-[52rem] xl:overflow-y-auto xl:pr-2 xl:grid-cols-1 2xl:grid-cols-1">
+        <div className="grid gap-6 sm:gap-8 md:gap-10 items-start 2xl:grid-cols-[minmax(18rem,0.72fr)_minmax(0,1.28fr)]">
+          <div className="2xl:sticky 2xl:top-28">
+            <div className="grid gap-3 sm:gap-4 lg:grid-cols-2 2xl:max-h-[52rem] 2xl:overflow-y-auto 2xl:pr-2 2xl:grid-cols-1">
             {services.map((service) => {
               const isActive = service.id === activeService.id;
 
@@ -43,7 +43,7 @@ export default function ServicesPreview() {
                   key={service.id}
                   type="button"
                   onClick={() => setActiveId(service.id)}
-                  className={`text-left rounded-[1.5rem] sm:rounded-[1.75rem] border p-4 sm:p-6 transition-all duration-300 h-full xl:min-h-[11.5rem] ${
+                  className={`text-left rounded-[1.5rem] sm:rounded-[1.75rem] border p-4 sm:p-6 transition-all duration-300 h-full 2xl:min-h-[11.5rem] ${
                     isActive
                       ? `bg-gradient-to-br ${service.theme.soft} ${service.theme.ring} shadow-[0_20px_50px_rgba(17,19,21,0.07)]`
                       : 'bg-white border-brand-100/50 hover:border-brand-200/80'
@@ -72,10 +72,10 @@ export default function ServicesPreview() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-            className={`rounded-[2rem] sm:rounded-[2.5rem] border ${activeService.theme.ring} bg-gradient-to-br ${activeService.theme.soft} p-4 sm:p-5 lg:p-6 shadow-[0_24px_60px_rgba(17,19,21,0.08)] xl:sticky xl:top-28 overflow-hidden`}
+            className={`rounded-[2rem] sm:rounded-[2.5rem] border ${activeService.theme.ring} bg-gradient-to-br ${activeService.theme.soft} p-4 sm:p-5 lg:p-6 shadow-[0_24px_60px_rgba(17,19,21,0.08)] 2xl:sticky 2xl:top-28 overflow-hidden`}
           >
-            <div className="grid lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1fr)] gap-4 sm:gap-5 items-stretch">
-              <div className="hidden lg:block rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-brand-100/40 shadow-lg min-h-[280px] xl:min-h-[320px]">
+            <div className="grid xl:grid-cols-[minmax(0,0.72fr)_minmax(0,1fr)] gap-4 sm:gap-5 items-stretch">
+              <div className="hidden xl:block rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden border border-brand-100/40 shadow-lg min-h-[280px] 2xl:min-h-[320px]">
                 <BrandedVisual variant={activeService.theme.visual} title={activeService.title} narrow className="rounded-[1.5rem] sm:rounded-[2rem]" />
               </div>
 
@@ -87,10 +87,10 @@ export default function ServicesPreview() {
                       {activeService.theme.label}
                     </span>
                   </div>
-                  <h3 className="max-w-[11ch] text-2xl sm:text-3xl xl:text-[2.55rem] font-semibold tracking-tight leading-[1] text-balance">
+                  <h3 className="max-w-[14ch] text-2xl sm:text-3xl xl:max-w-[11ch] xl:text-[2.55rem] font-semibold tracking-tight leading-[1] text-balance">
                     {activeService.theme.label}
                   </h3>
-                  <h4 className="max-w-[9ch] text-2xl sm:text-3xl xl:text-[2.55rem] font-semibold tracking-tight leading-[1] text-balance">
+                  <h4 className="max-w-[12ch] text-2xl sm:text-3xl xl:max-w-[9ch] xl:text-[2.55rem] font-semibold tracking-tight leading-[1] text-balance">
                     {activeService.shortTitle}
                   </h4>
                   <p className="mt-4 max-w-[34rem] text-sm sm:text-base leading-relaxed text-white/74">
@@ -100,7 +100,7 @@ export default function ServicesPreview() {
 
                 <div className="grid gap-3 mb-5">
                   {activeService.outcomes.map((outcome, index) => (
-                    <div key={outcome} className={`rounded-[1.25rem] bg-white/7 border border-white/10 p-4 xl:p-5 ${index > 1 ? 'hidden sm:block' : ''}`}>
+                    <div key={outcome} className={`rounded-[1.25rem] bg-white/7 border border-white/10 p-4 xl:p-5 ${index > 1 ? 'hidden md:block' : ''}`}>
                       <p className="text-[9px] font-bold uppercase tracking-[0.24em] text-white/45 mb-2">0{index + 1}</p>
                       <p className="text-sm sm:text-base xl:text-[1.05rem] text-white/88 leading-relaxed">{outcome}</p>
                     </div>

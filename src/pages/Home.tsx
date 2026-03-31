@@ -31,7 +31,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
-    className="group relative flex min-h-[28rem] flex-col overflow-hidden rounded-[1.9rem] border border-brand-100/60 bg-white shadow-[0_14px_34px_rgba(17,19,21,0.05)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(17,19,21,0.11)]"
+    className="group relative flex min-h-[24rem] flex-col overflow-hidden rounded-[1.9rem] border border-brand-100/60 bg-white shadow-[0_14px_34px_rgba(17,19,21,0.05)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_26px_60px_rgba(17,19,21,0.11)] sm:min-h-[26rem] lg:min-h-[28rem]"
   >
     <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-br from-white via-white to-soft" />
     <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-soft/90 to-transparent" />
@@ -49,7 +49,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
         <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent">
           {category.buyer}
         </p>
-        <h3 className="mt-4 max-w-[14ch] text-[1.7rem] sm:text-[1.95rem] font-semibold leading-[0.98] text-ink">
+        <h3 className="mt-4 max-w-[16ch] text-balance text-[1.7rem] sm:max-w-[14ch] sm:text-[1.95rem] font-semibold leading-[0.98] text-ink">
           {category.offerTitle}
         </h3>
         <p className="mt-4 text-lg font-semibold leading-tight text-ink">
@@ -121,7 +121,7 @@ export default function Home() {
 
       <section className="py-14 sm:py-20 md:py-32 bg-paper">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.58fr)_minmax(0,1fr)] lg:gap-14 items-end mb-10 sm:mb-14 md:mb-18">
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,0.58fr)_minmax(0,1fr)] xl:gap-14 items-end mb-10 sm:mb-14 md:mb-18">
             <div className="max-w-xl">
               <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">What We Build</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.8rem] font-semibold text-ink leading-[0.98] tracking-tight">
@@ -148,7 +148,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid gap-4 sm:gap-5 lg:grid-cols-2 xl:grid-cols-4">
+          <div className="grid gap-4 sm:gap-5 lg:grid-cols-2 2xl:grid-cols-4">
             {categories.map((cat, idx) => (
               <CategoryCard
                 key={cat.title}
@@ -162,7 +162,7 @@ export default function Home() {
 
       <section className="py-14 sm:py-20 md:py-28 bg-soft">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14 items-start">
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] xl:gap-14 items-start">
             <div className="max-w-xl">
               <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">Who We Work With</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.4rem] font-semibold text-ink leading-[0.98] tracking-tight">
@@ -182,7 +182,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
+            <div className="grid xl:grid-cols-2 gap-4 sm:gap-5">
               {[
                 {
                   title: 'Startups building a real product',
@@ -218,7 +218,7 @@ export default function Home() {
 
       <section className="py-14 sm:py-20 md:py-28 bg-paper border-y border-brand-100/30">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] lg:gap-14 items-start">
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] xl:gap-14 items-start">
             <div className="max-w-xl">
               <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 sm:mb-6">Proof In Practice</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.4rem] font-semibold text-ink tracking-tight leading-[1]">
@@ -249,7 +249,7 @@ export default function Home() {
                         {project.title}
                       </span>
                     </div>
-                    <div className="mt-4 grid gap-4 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)_minmax(0,1fr)]">
+                    <div className="mt-4 grid gap-4 xl:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)_minmax(0,1fr)]">
                       <div className="rounded-[1.2rem] border border-brand-100/50 bg-soft px-4 py-4">
                         <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent mb-2">Problem</p>
                         <p className="text-sm leading-relaxed text-brand-400">{context.pressurePoint}</p>
@@ -291,7 +291,7 @@ export default function Home() {
               <ChevronRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
-          <div className="grid lg:grid-cols-2 gap-x-12 gap-y-12 sm:gap-y-16 md:gap-y-24">
+          <div className="grid xl:grid-cols-2 gap-x-12 gap-y-12 sm:gap-y-16 md:gap-y-24">
             {featuredProjects.map((project, idx) => (
               <ProjectCard key={project.id} project={project} idx={idx} />
             ))}
@@ -303,7 +303,7 @@ export default function Home() {
 
       <section className="py-14 sm:py-20 md:py-32 bg-soft relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-accent/5 to-transparent pointer-events-none" />
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-[0.95fr_1.05fr] gap-8 sm:gap-12 md:gap-16 items-start relative">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid xl:grid-cols-[0.95fr_1.05fr] gap-8 sm:gap-12 md:gap-16 items-start relative">
           <div>
             <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 sm:mb-6">Delivery Standard</p>
             <h2 className="text-[2rem] sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight mb-5 sm:mb-8">
@@ -331,7 +331,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
+          <div className="grid xl:grid-cols-2 gap-4 sm:gap-6">
             {[
               { title: '1. Brief and bottleneck audit', text: 'Start with the pressure point, current workflow, business goal, and what must improve first.' },
               { title: '2. Direction and scope', text: 'Turn that into a clear build shape, scope boundary, and delivery plan the team can actually follow.' },
@@ -352,14 +352,14 @@ export default function Home() {
 
       <section className="py-14 sm:py-20 md:py-24 bg-paper">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-start">
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] xl:items-start">
             <div className="max-w-xl">
               <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 sm:mb-6">Results We Aim For</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.4rem] font-semibold text-ink tracking-tight leading-[1]">
                 The work should change how the business runs, not just how the interface looks.
               </h2>
             </div>
-            <div className="grid sm:grid-cols-2 gap-4 sm:gap-5">
+            <div className="grid lg:grid-cols-2 gap-4 sm:gap-5">
               {[
                 'Reduced manual work across intake, support, and operations',
                 'Faster onboarding and clearer paths to action',

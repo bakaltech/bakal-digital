@@ -210,14 +210,14 @@ export default function InteractiveHero() {
           initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
           transition={prefersReducedMotion ? { duration: 0 } : { duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mx-auto max-w-[48rem] overflow-hidden rounded-[2rem] border border-black/5 bg-white/96 px-5 py-7 shadow-[0_24px_70px_rgba(17,19,21,0.14)] sm:rounded-[2.5rem] sm:px-8 sm:py-8 lg:px-9 lg:py-9"
+          className="relative mx-auto max-w-[54rem] overflow-hidden rounded-[2rem] border border-black/5 bg-white/96 px-5 py-7 shadow-[0_24px_70px_rgba(17,19,21,0.14)] sm:rounded-[2.5rem] sm:px-8 sm:py-8 lg:px-9 lg:py-9"
         >
           <div className="relative z-10 text-center">
             <div className="inline-flex items-center rounded-full border border-brand-100 bg-white px-4 py-2 text-[11px] font-bold uppercase tracking-[0.26em] text-accent shadow-[0_8px_20px_rgba(17,19,21,0.05)]">
               For Startups And Growing Businesses
             </div>
 
-            <h1 className="mx-auto mt-6 max-w-[9.5ch] text-[clamp(2.85rem,7vw,5.35rem)] font-bold leading-[0.92] text-ink">
+            <h1 className="mx-auto mt-6 max-w-[12ch] text-balance text-[clamp(2.5rem,9vw,5.2rem)] font-bold leading-[0.9] text-ink sm:max-w-[13ch]">
               Custom software, AI tools, and automation systems that remove bottlenecks and scale with your business.
             </h1>
 
@@ -225,12 +225,12 @@ export default function InteractiveHero() {
               Web apps, internal tools, AI workflows, and automation layers built around your real operations.
             </p>
 
-            <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap">
+            <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
-                to="/portfolio"
-                className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-transparent px-4 py-4 text-sm font-semibold text-brand-400 transition-colors hover:text-ink"
+                to="/contact"
+                className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 py-4 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-accent"
               >
-                See Proof
+                Start a Project
                 <ArrowRight className="h-4 w-4" />
               </Link>
               <button
@@ -242,10 +242,10 @@ export default function InteractiveHero() {
                 Open Quick Brief
               </button>
               <Link
-                to="/contact"
-                className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full bg-ink px-7 py-4 text-sm font-semibold text-white shadow-lg transition-colors hover:bg-accent"
+                to="/portfolio"
+                className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-transparent px-4 py-4 text-sm font-semibold text-brand-400 transition-colors hover:text-ink"
               >
-                Start a Project
+                See Proof
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -257,7 +257,7 @@ export default function InteractiveHero() {
               </p>
             </div>
 
-            <div className="mt-8 grid gap-3 sm:grid-cols-3">
+            <div className="mt-8 grid gap-3 md:grid-cols-3">
               {[
                 ['AI-centered delivery', 'AI is used where it creates leverage, not where it creates noise.'],
                 ['Custom systems', 'We build around the way the business actually sells, operates, and delivers.'],
