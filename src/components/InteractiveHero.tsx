@@ -214,15 +214,15 @@ export default function InteractiveHero() {
         >
           <div className="relative z-10 text-center">
             <div className="inline-flex items-center rounded-full border border-brand-100 bg-white px-4 py-2 text-[11px] font-bold uppercase tracking-[0.26em] text-accent shadow-[0_8px_20px_rgba(17,19,21,0.05)]">
-              For Startups And Growing Businesses
+              Product Builder + AI Automation Studio
             </div>
 
             <h1 className="mx-auto mt-6 max-w-[12ch] text-balance text-[clamp(2.5rem,9vw,5.2rem)] font-bold leading-[0.9] text-ink sm:max-w-[13ch]">
-              Custom software, AI tools, and automation systems that remove bottlenecks and scale with your business.
+              Custom software and AI workflows that remove bottlenecks fast.
             </h1>
 
             <p className="mx-auto mt-5 max-w-[34rem] text-base leading-relaxed text-brand-400 sm:text-[1.05rem] md:text-[1.12rem]">
-              Web apps, internal tools, AI workflows, and automation layers built around your real operations.
+              We build websites, apps, portals, internal tools, and automation systems around the way your business actually sells, operates, and delivers.
             </p>
 
             <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center">
@@ -251,17 +251,17 @@ export default function InteractiveHero() {
             </div>
 
             <div className="mt-6 rounded-[1.25rem] border border-brand-100 bg-soft/75 px-4 py-3 text-center shadow-[0_8px_20px_rgba(17,19,21,0.03)]">
-              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-accent">Built around real operating pressure</p>
+              <p className="text-[11px] font-bold uppercase tracking-[0.22em] text-accent">Best for teams that need more than a simple website</p>
               <p className="mt-2 text-sm leading-relaxed text-brand-400">
-                Shaped for founders, operators, and growing teams in SaaS, commerce, services, and operations-heavy businesses.
+                Built for startups and growing businesses that need real software, product structure, workflow automation, or a stronger conversion layer.
               </p>
             </div>
 
             <div className="mt-8 grid gap-3 md:grid-cols-3">
               {[
-                ['AI-centered delivery', 'AI is used where it creates leverage, not where it creates noise.'],
-                ['Custom systems', 'We build around the way the business actually sells, operates, and delivers.'],
-                ['Built for scale', 'The goal is cleaner execution now and stronger infrastructure later.'],
+                ['What you can hire us for', 'Websites, portals, SaaS products, internal tools, AI assistants, and workflow automation.'],
+                ['What changes after the build', 'Clearer conversion paths, less manual handling, faster execution, and stronger operating clarity.'],
+                ['What buyers can review first', 'Proof studies, working demos, and service scopes before starting a conversation.'],
               ].map(([title, detail]) => (
                 <div key={title} className="rounded-[1.35rem] border border-brand-100 bg-white p-4 text-left shadow-[0_10px_24px_rgba(17,19,21,0.04)]">
                   <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.22em] text-accent">{title}</p>

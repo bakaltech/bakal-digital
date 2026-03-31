@@ -17,6 +17,7 @@ interface CategoryCardProps {
     offerTitle: string;
     description: string;
     outcomes: string[];
+    features: string[];
     label: string;
     cta: string;
     icon: React.ReactNode;
@@ -61,14 +62,18 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category, idx }) => (
       </div>
 
       <div className="mt-auto pt-7">
-        <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">What improves</p>
+        <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">What gets built</p>
         <div className="mb-6 grid gap-2">
-          {category.outcomes.slice(0, 2).map((outcome, outcomeIndex) => (
-            <div key={outcome} className="rounded-[1rem] border border-brand-100/70 bg-soft px-3 py-3">
-              <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-brand-300">0{outcomeIndex + 1}</p>
-              <p className="mt-1 text-sm leading-relaxed text-ink">{outcome}</p>
+          {category.features.slice(0, 2).map((feature, featureIndex) => (
+            <div key={feature} className="rounded-[1rem] border border-brand-100/70 bg-soft px-3 py-3">
+              <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-brand-300">0{featureIndex + 1}</p>
+              <p className="mt-1 text-sm leading-relaxed text-ink">{feature}</p>
             </div>
           ))}
+        </div>
+        <div className="mb-6 rounded-[1rem] border border-brand-100/70 bg-white px-3 py-3">
+          <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent">What improves</p>
+          <p className="mt-1 text-sm leading-relaxed text-brand-400">{category.outcomes[0]}</p>
         </div>
         <Link to={`/services/${category.id}`} className="inline-flex items-center text-[10px] font-bold uppercase tracking-widest text-ink transition-colors hover:text-accent">
           {category.cta}
@@ -111,6 +116,7 @@ export default function Home() {
     description: service.homepageSummary,
     icon: service.icon,
     outcomes: service.outcomes,
+    features: service.features,
     label: service.theme.label,
     cta: service.ctaLabel,
   }));
@@ -125,15 +131,15 @@ export default function Home() {
             <div className="max-w-xl">
               <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">What We Build</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.8rem] font-semibold text-ink leading-[0.98] tracking-tight">
-                The core offers are built around the friction that actually blocks growth.
+                Pick the build shape that matches the bottleneck.
               </h2>
             </div>
             <div className="max-w-2xl lg:justify-self-end">
               <p className="text-base sm:text-lg md:text-[1.12rem] text-brand-400 leading-relaxed">
-                Teams usually arrive when onboarding feels messy, internal work is still manual, the product is underpowered, or the website is not helping the business convert clearly enough.
+                These offers are packaged around concrete deliverables: websites and portals, SaaS foundations, AI workflows, internal tools, and automation systems that fix real pressure points.
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
-                {['Launch stronger', 'Operate cleaner', 'Reduce manual drag', 'Build around real workflow'].map((item) => (
+                {['Websites and portals', 'SaaS and apps', 'AI workflows', 'Automation systems'].map((item) => (
                   <span key={item} className="rounded-full border border-brand-100 bg-soft px-3.5 py-2 text-[11px] font-bold uppercase tracking-[0.22em] text-brand-400">
                     {item}
                   </span>
@@ -164,41 +170,43 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid gap-8 xl:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] xl:gap-14 items-start">
             <div className="max-w-xl">
-              <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">Who We Work With</p>
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">Choose Your Path</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.4rem] font-semibold text-ink leading-[0.98] tracking-tight">
-                Best for teams that need software, automation, or product work tied to a real business bottleneck.
+                The site should help the right buyer recognize the right path quickly.
               </h2>
               <p className="mt-5 text-base sm:text-lg text-brand-400 leading-relaxed">
-                The fit is strongest when the business is launching something real, cleaning up a weak digital layer, or replacing manual work and disconnected tools with software that fits the way the team already operates.
+                Most inquiries land in one of three buckets: launching or upgrading a product, replacing manual operational drag, or fixing a weak digital layer that is hurting conversion and trust.
               </p>
               <p className="mt-4 text-base sm:text-lg text-ink leading-relaxed">
-                We work best with teams who already feel the cost of messy workflows and want software, automation, or AI tools that actually fit.
+                If one of these feels like your situation, the next move should feel obvious.
               </p>
               <div className="mt-8 rounded-[1.75rem] border border-brand-100/50 bg-white p-6 sm:p-7 shadow-sm">
-                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Best used when</p>
+                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Best fit</p>
                 <p className="text-sm sm:text-base text-brand-400 leading-relaxed">
-                  The strongest engagements are the ones where the business needs a real website, app, internal tool, workflow layer, or product system, not just a cosmetic refresh with no logic underneath.
+                  Best for teams who need real software, automation, product structure, or a stronger conversion layer, not just a cosmetic reskin with no system behind it.
                 </p>
               </div>
             </div>
 
-            <div className="grid xl:grid-cols-2 gap-4 sm:gap-5">
+            <div className="grid gap-4 sm:gap-5">
               {[
                 {
-                  title: 'Startups building a real product',
-                  text: 'Founders who need a credible website, app, SaaS product, or AI-enabled platform with enough structure to launch and learn from real users.',
+                  title: 'Launching or upgrading a product',
+                  text: 'Best when the business needs a real website, portal, app, or SaaS foundation with enough product structure to launch and grow.',
+                  cta: 'See product-facing services',
+                  href: '/services',
                 },
                 {
-                  title: 'Growing businesses replacing manual drag',
-                  text: 'Teams that are still moving work through spreadsheets, inboxes, patched automations, or disconnected tools across sales, onboarding, and delivery.',
+                  title: 'Replacing manual operational drag',
+                  text: 'Best when work is still moving through spreadsheets, inboxes, disconnected tools, or patchwork automations across sales, onboarding, and delivery.',
+                  cta: 'See automation and ops proof',
+                  href: '/portfolio',
                 },
                 {
-                  title: 'Operators who need custom systems',
-                  text: 'Businesses that need internal tools, portals, automation, and reporting shaped around the real workflow instead of forcing the workflow to fit the software.',
-                },
-                {
-                  title: 'Brands that need a stronger digital layer',
-                  text: 'Companies whose positioning, website, and product experience need to convert more clearly while the backend operation becomes easier to run.',
+                  title: 'Fixing a weak digital layer',
+                  text: 'Best when the current website, storefront, or customer flow is leaking trust, confusing the offer, or undercutting conversion.',
+                  cta: 'See proof before inquiry',
+                  href: '/portfolio',
                 },
               ].map((item, idx) => (
                 <motion.div key={item.title} initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6, delay: idx * 0.08 }} className="rounded-[1.6rem] border border-brand-100/50 bg-white p-5 sm:p-7 shadow-sm">
@@ -207,6 +215,10 @@ export default function Home() {
                   </div>
                   <h3 className="text-xl sm:text-2xl font-semibold text-ink tracking-tight mb-3">{item.title}</h3>
                   <p className="text-sm sm:text-base text-brand-400 leading-relaxed">{item.text}</p>
+                  <Link to={item.href} className="mt-5 inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.22em] text-ink transition-colors hover:text-accent">
+                    {item.cta}
+                    <ArrowRight className="w-3 h-3" />
+                  </Link>
                 </motion.div>
               ))}
             </div>
@@ -222,15 +234,15 @@ export default function Home() {
             <div className="max-w-xl">
               <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 sm:mb-6">Proof In Practice</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.4rem] font-semibold text-ink tracking-tight leading-[1]">
-                Real examples of the problems, builds, and outcomes this studio is set up to handle.
+                Three proof stories that show the problem, the build, and the business gain at a glance.
               </h2>
               <p className="mt-5 text-base sm:text-lg md:text-[1.08rem] text-brand-400 leading-relaxed">
-                These are concept-backed proof stories. Each one shows the pressure point, the product or workflow layer we would build, and the business outcome it is meant to improve.
+                The point of this section is speed: you should be able to scan the pressure point, see what gets built, and decide whether the approach feels commercially useful in under a minute.
               </p>
               <div className="mt-6 rounded-[1.5rem] border border-brand-100/50 bg-soft p-5 shadow-sm">
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-2">How to read them</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-2">What to look for</p>
                 <p className="text-sm sm:text-base text-brand-400 leading-relaxed">
-                  Judge the clarity of the problem, the shape of the build, and whether the outcome sounds commercially useful. That is the level of thinking we bring into real engagements.
+                  Does the problem sound real, does the build shape make sense, and does the result map to revenue, operations, or delivery quality? That is the standard each engagement is designed around.
                 </p>
               </div>
             </div>
@@ -249,6 +261,8 @@ export default function Home() {
                         {project.title}
                       </span>
                     </div>
+                    <h3 className="mt-4 text-2xl font-semibold tracking-tight text-ink">{project.title}</h3>
+                    <p className="mt-2 text-sm sm:text-base text-brand-400 leading-relaxed">{context.audience}</p>
                     <div className="mt-4 grid gap-4 xl:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)_minmax(0,1fr)]">
                       <div className="rounded-[1.2rem] border border-brand-100/50 bg-soft px-4 py-4">
                         <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent mb-2">Problem</p>
@@ -259,9 +273,28 @@ export default function Home() {
                         <p className="text-sm leading-relaxed text-brand-400">{project.solution}</p>
                       </div>
                       <div className="rounded-[1.2rem] border border-brand-100/50 bg-soft px-4 py-4">
-                        <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent mb-2">What improves</p>
+                        <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent mb-2">Result</p>
                         <p className="text-sm leading-relaxed text-brand-400">{context.commercialOutcome}</p>
                       </div>
+                    </div>
+                    <div className="mt-5 flex flex-col sm:flex-row gap-3">
+                      <Link to={`/portfolio/${project.id}`} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent">
+                        Open proof study
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                      <button
+                        type="button"
+                        onClick={() =>
+                          window.dispatchEvent(
+                            new CustomEvent('open-chat', {
+                              detail: { query: `I want a build shaped like ${project.title} for my business.` },
+                            }),
+                          )
+                        }
+                        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-brand-100 bg-white px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-accent"
+                      >
+                        Ask about this example
+                      </button>
                     </div>
                   </div>
                 );
@@ -346,6 +379,43 @@ export default function Home() {
                 <p className="text-brand-400 leading-relaxed text-sm sm:text-base">{item.text}</p>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-14 sm:py-20 md:py-24 bg-paper border-t border-brand-100/30">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] xl:gap-14 items-start">
+            <div className="max-w-xl">
+              <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 sm:mb-6">Typical Starting Points</p>
+              <h2 className="text-[2rem] sm:text-4xl md:text-[3.4rem] font-semibold text-ink tracking-tight leading-[1]">
+                Enough scope clarity to decide whether the engagement fits.
+              </h2>
+              <p className="mt-5 text-base sm:text-lg text-brand-400 leading-relaxed">
+                Not every project starts at the same depth. Some teams need a sharper website or portal first. Others need an automation layer, a SaaS foundation, or an internal system that clears repeated operational drag.
+              </p>
+            </div>
+            <div className="grid lg:grid-cols-3 gap-4 sm:gap-5">
+              {[
+                {
+                  title: 'Digital layer rebuild',
+                  text: 'Website, portal, or conversion-path work when the business needs sharper positioning, stronger UX, and a clearer path to action.',
+                },
+                {
+                  title: 'Product and platform build',
+                  text: 'SaaS, app, portal, or internal tool work when the idea is moving beyond mockups and needs product logic that can hold up.',
+                },
+                {
+                  title: 'Workflow and automation cleanup',
+                  text: 'AI routing, approvals, reporting, and system sync when the team is still doing too much by hand.',
+                },
+              ].map((item) => (
+                <div key={item.title} className="rounded-[1.5rem] border border-brand-100/50 bg-soft p-5 sm:p-6 shadow-sm">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">{item.title}</p>
+                  <p className="text-sm sm:text-base text-brand-400 leading-relaxed">{item.text}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

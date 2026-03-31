@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Loader2, Maximize2, MessageSquare, Minimize2, RotateCcw, Send, Sparkles, X } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 import { advanceGuidedChat, type GuidedChatResponse } from '../lib/guidedChat';
 import { isValidEmail } from '../lib/validation';
 
@@ -12,8 +13,10 @@ const openingMessage = "I'm the Bakal project guide. I will ask a few quick ques
 const initialReplies = ['Website or platform', 'AI workflow', 'Automation and reporting'];
 
 export default function AIAgent() {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
+  const [showLauncher, setShowLauncher] = useState(() => (typeof window === 'undefined' ? true : window.location.pathname !== '/'));
   const [messages, setMessages] = useState<ChatMessage[]>([
     { role: 'model', text: openingMessage },
   ]);
@@ -57,6 +60,20 @@ export default function AIAgent() {
     window.addEventListener('open-chat', handleOpenChat as EventListener);
     return () => window.removeEventListener('open-chat', handleOpenChat as EventListener);
   }, []);
+
+  useEffect(() => {
+    const updateLauncherVisibility = () => {
+      const isHome = location.pathname === '/';
+      setShowLauncher(!isHome || window.scrollY > 720);
+    };
+
+    updateLauncherVisibility();
+    window.addEventListener('scroll', updateLauncherVisibility, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', updateLauncherVisibility);
+    };
+  }, [location.pathname]);
 
   const handleSend = async (textOverride?: string) => {
     const messageText = textOverride || input.trim();
@@ -132,7 +149,7 @@ export default function AIAgent() {
   return (
     <div className="fixed inset-0 z-[90] pointer-events-none">
       <AnimatePresence>
-        {!isOpen && (
+        {!isOpen && showLauncher && (
           <motion.button
             initial={{ scale: 0, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
