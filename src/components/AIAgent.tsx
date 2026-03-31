@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Loader2, Maximize2, MessageSquare, Minimize2, RotateCcw, Send, Sparkles, X } from 'lucide-react';
 import { advanceGuidedChat, type GuidedChatResponse } from '../lib/guidedChat';
+import { isValidEmail } from '../lib/validation';
 
 type ChatMessage = { role: 'user' | 'model'; text: string };
 type LeadFormArgs = { projectType: string; projectStage: string; industry: string; mainGoal: string; budget: string; timeline: string; summary: string };
@@ -26,6 +27,7 @@ export default function AIAgent() {
   const [emailInput, setEmailInput] = useState('');
   const [websiteInput, setWebsiteInput] = useState('');
   const scrollRef = useRef<HTMLDivElement>(null);
+  const hasValidEmail = isValidEmail(emailInput);
 
   useEffect(() => {
     if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -88,7 +90,13 @@ export default function AIAgent() {
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!emailInput || !leadFormArgs || !leadFormStartedAt) return;
+    if (!leadFormArgs || !leadFormStartedAt) return;
+
+    if (!hasValidEmail) {
+      setFormStatus('error');
+      setFormError('Please enter a valid email so we can send the next step to the right inbox.');
+      return;
+    }
 
     setFormStatus('submitting');
     setFormError('');
@@ -206,10 +214,20 @@ export default function AIAgent() {
                         </div>
                         <div className="space-y-2">
                           <label htmlFor="assistant-email" className="text-xs font-semibold uppercase tracking-wider text-brand-400">Best Email For Follow-Up</label>
-                          <input id="assistant-email" type="email" required value={emailInput} onChange={(e) => setEmailInput(e.target.value)} placeholder="hello@example.com" className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl bg-white border border-brand-100/50 focus:outline-none focus:border-accent transition-colors text-ink text-sm shadow-sm" />
+                          <input
+                            id="assistant-email"
+                            type="email"
+                            required
+                            value={emailInput}
+                            onChange={(e) => setEmailInput(e.target.value)}
+                            aria-invalid={!!emailInput && !hasValidEmail}
+                            aria-describedby={formError ? 'assistant-form-error' : undefined}
+                            placeholder="hello@example.com"
+                            className="w-full px-4 py-3 sm:px-6 sm:py-4 rounded-xl bg-white border border-brand-100/50 focus:outline-none focus:border-accent transition-colors text-ink text-sm shadow-sm"
+                          />
                         </div>
-                        {formError && <p className="text-sm text-red-600" role="alert">{formError}</p>}
-                        <button type="submit" disabled={formStatus === 'submitting'} className="w-full py-3 sm:py-4 rounded-xl bg-accent text-white font-semibold text-sm hover:bg-ink transition-colors disabled:opacity-50 flex justify-center items-center">
+                        {formError && <p id="assistant-form-error" className="text-sm text-red-600" role="alert">{formError}</p>}
+                        <button type="submit" disabled={formStatus === 'submitting' || !hasValidEmail} className="w-full py-3 sm:py-4 rounded-xl bg-accent text-white font-semibold text-sm hover:bg-ink transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center">
                           {formStatus === 'submitting' ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Send Project Brief'}
                         </button>
                       </form>

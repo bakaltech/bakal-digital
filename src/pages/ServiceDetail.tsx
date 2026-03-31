@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, CheckCircle2, MessageSquare } from 'lucide-react
 import { services } from '../data/services';
 import BrandedVisual from '../components/BrandedVisual';
 import ServiceShowcase from '../components/ServiceShowcase';
+import { proofDemos } from '../data/proof';
 
 const openChat = (serviceTitle: string) => {
   window.dispatchEvent(
@@ -17,6 +18,15 @@ const openChat = (serviceTitle: string) => {
 export default function ServiceDetail() {
   const { id } = useParams<{ id: string }>();
   const service = services.find((item) => item.id === id);
+  const relatedProofId =
+    id === 'ai-development'
+      ? 'nexus-ai'
+      : id === 'custom-web-platforms' || id === 'saas-development'
+        ? 'lumina-saas'
+        : id === 'ecommerce-systems'
+          ? 'velocity-ecommerce'
+          : 'orbit-automation';
+  const relatedProof = proofDemos.find((item) => item.id === relatedProofId);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -85,6 +95,58 @@ export default function ServiceDetail() {
             </div>
           </motion.div>
         </div>
+
+        <section className="py-12 sm:py-16 border-t border-brand-100/30">
+          <div className="grid lg:grid-cols-[0.82fr_1.18fr] gap-8 sm:gap-10 md:gap-14 items-start">
+            <div className="max-w-3xl">
+              <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Proof Example</p>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight mb-5">
+                A grounded example of the kind of build this service can turn into.
+              </h2>
+              <p className="text-base sm:text-lg text-brand-400 leading-relaxed">
+                Before you inquire, you should be able to see the business situation, the build shape, and the kind of outcome this service is designed to support.
+              </p>
+            </div>
+            <div className="rounded-[1.9rem] border border-brand-100/50 bg-soft p-6 sm:p-7 shadow-sm">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="rounded-full border border-brand-100 bg-white px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent">
+                  Example scenario
+                </span>
+                {relatedProof && (
+                  <Link to={`/portfolio/${relatedProof.id}`} className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300 hover:text-accent transition-colors">
+                    Open full proof study
+                  </Link>
+                )}
+              </div>
+              <h3 className="mt-4 text-2xl sm:text-3xl font-semibold text-ink tracking-tight">{service.proofExample.title}</h3>
+              <div className="mt-5 grid gap-3">
+                <div className="rounded-[1.2rem] border border-brand-100/50 bg-white px-4 py-4">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent mb-2">Situation</p>
+                  <p className="text-sm sm:text-base text-brand-400 leading-relaxed">{service.proofExample.situation}</p>
+                </div>
+                <div className="rounded-[1.2rem] border border-brand-100/50 bg-soft px-4 py-4">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent mb-2">Build</p>
+                  <p className="text-sm sm:text-base text-brand-400 leading-relaxed">{service.proofExample.build}</p>
+                </div>
+                <div className="rounded-[1.2rem] border border-brand-100/50 bg-white px-4 py-4">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent mb-2">Outcome</p>
+                  <p className="text-sm sm:text-base text-brand-400 leading-relaxed">{service.proofExample.outcome}</p>
+                </div>
+              </div>
+              <div className="mt-5 flex flex-col sm:flex-row gap-3">
+                {relatedProof && (
+                  <Link to={`/portfolio/${relatedProof.id}`} className="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent">
+                    Review proof study
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                )}
+                <button type="button" onClick={() => openChat(service.title)} className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-100 bg-white px-5 py-3 text-sm font-semibold text-ink transition-colors hover:border-accent hover:text-accent">
+                  Ask about this build
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="py-12 sm:py-16 border-t border-brand-100/30">
           <div className="grid lg:grid-cols-[0.8fr_1.2fr] gap-8 sm:gap-10 md:gap-14 items-start">

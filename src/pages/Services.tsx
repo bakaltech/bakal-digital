@@ -32,11 +32,21 @@ export default function Services() {
             </p>
           </div>
           <div className="rounded-[1.75rem] border border-brand-100/50 bg-white p-6 sm:p-7 shadow-sm">
-            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Not this</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Best used when</p>
             <p className="text-base sm:text-lg text-brand-400 leading-relaxed">
-              If the need is only a low-context brochure site, a logo refresh, or another tool duct-taped onto an already messy stack, this is the wrong approach.
+              The strongest results come when the business needs real product structure, workflow improvement, automation, or a stronger conversion layer, not just a surface-level refresh.
             </p>
           </div>
+        </div>
+        <div className="mt-4 rounded-[1.75rem] border border-brand-100/50 bg-white p-6 sm:p-7 shadow-sm">
+          <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Proof before inquiry</p>
+          <p className="text-base sm:text-lg text-brand-400 leading-relaxed">
+            If you want to judge the build quality first, the proof library shows working demos, concept studies, and the delivery rhythm behind each type of engagement.
+          </p>
+          <Link to="/portfolio" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ink hover:text-accent transition-colors">
+            Review the proof library
+            <ChevronRight className="w-4 h-4" />
+          </Link>
         </div>
       </section>
 

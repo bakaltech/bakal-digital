@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
 import { ArrowRight, CheckCircle2, Clock3, MessageSquare, Send, ShieldCheck, Sparkles } from 'lucide-react';
+import { isValidEmail } from '../lib/validation';
 
 const openChat = () => {
   window.dispatchEvent(new CustomEvent('open-chat'));
@@ -23,7 +24,8 @@ export default function Contact() {
   const [interests, setInterests] = useState<string[]>([]);
 
   const messageLength = formData.message.trim().length;
-  const canSubmit = formData.name.trim().length > 0 && formData.email.trim().length > 0 && messageLength >= 20;
+  const hasValidEmail = isValidEmail(formData.email);
+  const canSubmit = formData.name.trim().length > 0 && hasValidEmail && messageLength >= 20;
 
   const focusAreas = [
     'Website or positioning',
@@ -36,8 +38,18 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!canSubmit) {
-      setError('Please complete the form and share enough detail before sending.');
+    if (!formData.name.trim()) {
+      setError('Please add your name so we know who the inquiry is for.');
+      return;
+    }
+
+    if (!hasValidEmail) {
+      setError('Please enter a valid business email so we can reply properly.');
+      return;
+    }
+
+    if (messageLength < 20) {
+      setError('Please share a bit more detail about the bottleneck and the outcome you need.');
       return;
     }
 
@@ -172,11 +184,11 @@ export default function Contact() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-semibold text-ink mb-2">Name</label>
-                      <input id="name" name="name" value={formData.name} onChange={handleChange} required placeholder="Your full name" className="w-full px-5 py-4 rounded-2xl bg-white border border-brand-100/50 text-ink placeholder:text-brand-400 focus:outline-none focus:border-accent" />
+                      <input id="name" name="name" value={formData.name} onChange={handleChange} required placeholder="Your full name" aria-invalid={!!error && formData.name.trim().length === 0} aria-describedby={error ? 'contact-form-error' : undefined} className="w-full px-5 py-4 rounded-2xl bg-white border border-brand-100/50 text-ink placeholder:text-brand-400 focus:outline-none focus:border-accent" />
                     </div>
                     <div>
                       <label htmlFor="email" className="block text-sm font-semibold text-ink mb-2">Email</label>
-                      <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="you@company.com" className="w-full px-5 py-4 rounded-2xl bg-white border border-brand-100/50 text-ink placeholder:text-brand-400 focus:outline-none focus:border-accent" />
+                      <input id="email" name="email" type="email" value={formData.email} onChange={handleChange} required placeholder="you@company.com" aria-invalid={!!formData.email && !hasValidEmail} aria-describedby={error ? 'contact-form-error' : undefined} className="w-full px-5 py-4 rounded-2xl bg-white border border-brand-100/50 text-ink placeholder:text-brand-400 focus:outline-none focus:border-accent" />
                     </div>
                   </div>
 
@@ -187,7 +199,7 @@ export default function Contact() {
 
                   <div>
                     <label htmlFor="message" className="block text-sm font-semibold text-ink mb-2">Project details</label>
-                    <textarea id="message" name="message" rows={6} value={formData.message} onChange={handleChange} required placeholder="What does the business do, what is slowing things down now, and what should be measurably better after this project is live?" className="w-full px-5 py-4 rounded-2xl bg-white border border-brand-100/50 text-ink placeholder:text-brand-400 focus:outline-none focus:border-accent resize-none" />
+                    <textarea id="message" name="message" rows={6} value={formData.message} onChange={handleChange} required aria-invalid={!!error && messageLength < 20} aria-describedby={error ? 'contact-form-error' : undefined} placeholder="What does the business do, what is slowing things down now, and what should be measurably better after this project is live?" className="w-full px-5 py-4 rounded-2xl bg-white border border-brand-100/50 text-ink placeholder:text-brand-400 focus:outline-none focus:border-accent resize-none" />
                     <div className="mt-2 flex items-center justify-between gap-3">
                       <p className="text-xs text-brand-400">Enough detail to understand the real bottleneck helps us respond properly.</p>
                       <p className={`text-xs font-semibold ${messageLength >= 20 ? 'text-emerald-700' : 'text-brand-400'}`}>
@@ -196,9 +208,9 @@ export default function Contact() {
                     </div>
                   </div>
 
-                  {error && <p className="text-sm text-red-600" role="alert">{error}</p>}
+                  {error && <p id="contact-form-error" className="text-sm text-red-600" role="alert">{error}</p>}
 
-                  <button type="submit" disabled={isSubmitting || !canSubmit} className="w-full inline-flex items-center justify-center gap-3 px-6 py-5 rounded-2xl bg-ink text-white font-semibold hover:bg-accent transition-colors disabled:opacity-70">
+                  <button type="submit" disabled={isSubmitting || !canSubmit} className="w-full inline-flex items-center justify-center gap-3 px-6 py-5 rounded-2xl bg-ink text-white font-semibold hover:bg-accent transition-colors disabled:opacity-70 disabled:cursor-not-allowed">
                     {isSubmitting ? 'Sending...' : 'Send Project Details'}
                     {!isSubmitting && <Send className="w-4 h-4" />}
                   </button>

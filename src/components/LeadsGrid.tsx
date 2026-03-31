@@ -1,6 +1,7 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { ArrowRight, CheckCircle2, Cpu, Database, Globe, ShoppingBag, X } from 'lucide-react';
+import { isValidEmail } from '../lib/validation';
 
 const needs = [
   { id: 'platform', title: 'Website, portal, or product layer', icon: Globe },
@@ -17,15 +18,26 @@ export default function LeadsGrid() {
   const [error, setError] = React.useState('');
   const [formData, setFormData] = React.useState({ name: '', email: '', message: '', website: '' });
   const messageLength = formData.message.trim().length;
-  const canSubmit = formData.name.trim().length > 0 && formData.email.trim().length > 0 && messageLength >= 20;
+  const hasValidEmail = isValidEmail(formData.email);
+  const canSubmit = formData.name.trim().length > 0 && hasValidEmail && messageLength >= 20;
 
   const toggleNeed = (id: string) => {
     setSelected((prev) => (prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]));
   };
 
   const handleSubmit = async () => {
-    if (!canSubmit) {
-      setError('Please complete the form and share enough detail before sending.');
+    if (!formData.name.trim()) {
+      setError('Please add your name so we can route the brief properly.');
+      return;
+    }
+
+    if (!hasValidEmail) {
+      setError('Please enter a valid business email for follow-up.');
+      return;
+    }
+
+    if (messageLength < 20) {
+      setError('Please share a bit more detail about what is broken and what should improve.');
       return;
     }
 
@@ -114,15 +126,15 @@ export default function LeadsGrid() {
                 <label htmlFor="hero-website">Website</label>
                 <input id="hero-website" value={formData.website} onChange={(e) => setFormData((prev) => ({ ...prev, website: e.target.value }))} tabIndex={-1} autoComplete="off" />
               </div>
-              <input value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} type="text" placeholder="Full name" className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm" />
-              <input value={formData.email} onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))} type="email" placeholder="Business email" className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm" />
-              <textarea value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} placeholder="What is broken today, what should work better after this is built, and what is driving the urgency?" rows={4} className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm resize-none" />
+              <input value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} type="text" aria-invalid={!!error && formData.name.trim().length === 0} aria-describedby={error ? 'hero-brief-error' : undefined} placeholder="Full name" className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm" />
+              <input value={formData.email} onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))} type="email" aria-invalid={!!formData.email && !hasValidEmail} aria-describedby={error ? 'hero-brief-error' : undefined} placeholder="Business email" className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm" />
+              <textarea value={formData.message} onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))} aria-invalid={!!error && messageLength < 20} aria-describedby={error ? 'hero-brief-error' : undefined} placeholder="What is broken today, what should work better after this is built, and what is driving the urgency?" rows={4} className="w-full px-5 py-4 rounded-xl bg-soft border border-brand-100/50 focus:outline-none focus:border-accent text-ink text-sm resize-none" />
               <div className="flex items-center justify-between gap-3 text-xs text-brand-400">
                 <p>Enough detail helps us recommend the right next move.</p>
                 <p className={messageLength >= 20 ? 'text-emerald-700 font-semibold' : ''}>{messageLength}/20 minimum</p>
               </div>
-              {error && <p className="text-sm text-red-600" role="alert">{error}</p>}
-              <button type="button" onClick={() => void handleSubmit()} disabled={isSubmitting || !canSubmit} className="w-full py-4 rounded-xl bg-ink text-white font-bold text-sm hover:bg-accent transition-colors disabled:opacity-70">
+              {error && <p id="hero-brief-error" className="text-sm text-red-600" role="alert">{error}</p>}
+              <button type="button" onClick={() => void handleSubmit()} disabled={isSubmitting || !canSubmit} className="w-full py-4 rounded-xl bg-ink text-white font-bold text-sm hover:bg-accent transition-colors disabled:opacity-70 disabled:cursor-not-allowed">
                 {isSubmitting ? 'Sending...' : 'Send Project Brief'}
               </button>
             </div>
