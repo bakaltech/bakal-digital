@@ -83,7 +83,7 @@ export const projects: Project[] = [
     features: [
       { title: 'Workflow Visibility', description: 'Shows what is running, blocked, or failing in real time.' },
       { title: 'Exception Handling', description: 'Turns edge cases into manageable queues instead of hidden problems.' },
-      { title: 'Performance Signals', description: 'Tracks throughput, delays, and operational bottlenecks.' }
+      { title: 'Performance Signals', description: 'Tracks throughput, delays, and operational drag.' }
     ]
   }
 ];

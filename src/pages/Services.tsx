@@ -26,25 +26,25 @@ export default function Services() {
         </motion.div>
         <div className="mt-10 grid gap-4 lg:grid-cols-2">
           <div className="rounded-[1.75rem] border border-brand-100/50 bg-soft p-6 sm:p-7 shadow-sm">
-            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Best fit</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Typical clients</p>
             <p className="text-base sm:text-lg text-brand-400 leading-relaxed">
               Startups launching something real, and growing businesses replacing weak websites, brittle workflows, or disconnected operations with systems that can actually scale.
             </p>
           </div>
           <div className="rounded-[1.75rem] border border-brand-100/50 bg-white p-6 sm:p-7 shadow-sm">
-            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Best used when</p>
+            <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Common use cases</p>
             <p className="text-base sm:text-lg text-brand-400 leading-relaxed">
               The strongest results come when the business needs real product structure, workflow improvement, automation, or a stronger conversion layer, not just a surface-level refresh.
             </p>
           </div>
         </div>
         <div className="mt-4 rounded-[1.75rem] border border-brand-100/50 bg-white p-6 sm:p-7 shadow-sm">
-          <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Proof before inquiry</p>
+          <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Work before inquiry</p>
           <p className="text-base sm:text-lg text-brand-400 leading-relaxed">
-            If you want to judge the build quality first, the proof library shows working demos, concept studies, and the delivery rhythm behind each type of engagement.
+            If you want to judge the build quality first, the work section shows demonstrations, case studies, and the delivery model behind each type of engagement.
           </p>
           <Link to="/portfolio" className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ink hover:text-accent transition-colors">
-            Review the proof library
+            Review work and demos
             <ChevronRight className="w-4 h-4" />
           </Link>
         </div>
@@ -119,7 +119,7 @@ export default function Services() {
           <div className="mb-14 sm:mb-16 md:mb-24 text-center md:text-left">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Our Process</p>
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">
-              A direct path from business friction <br className="hidden md:block" /> to a system people can actually rely on.
+              A direct path from business requirements <br className="hidden md:block" /> to a system people can actually rely on.
             </h2>
           </div>
 
@@ -155,7 +155,7 @@ export default function Services() {
         <div className="max-w-4xl mx-auto">
           <p className="text-sm font-semibold uppercase tracking-widest text-brand-400 mb-6">Next Step</p>
           <h2 className="text-3xl sm:text-4xl md:text-7xl font-semibold text-white tracking-tight leading-[1.06] mb-8">
-            If you already know where the friction is, the fastest move is to start from the right service.
+            If you already know the priority, the fastest move is to start from the right service.
           </h2>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link to="/contact" className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white text-ink font-semibold hover:bg-accent hover:text-white transition-colors">
@@ -167,7 +167,7 @@ export default function Services() {
               onClick={() => window.dispatchEvent(new CustomEvent('open-chat'))}
               className="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-white/15 text-white font-semibold hover:border-white/40 transition-colors"
             >
-              Open Quick Brief
+              Open Project Intake
             </button>
           </div>
         </div>

@@ -71,21 +71,21 @@ export default function Portfolio() {
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-5xl mb-14 sm:mb-16 md:mb-20">
           <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
-            <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Proof Library</p>
+            <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Work & Demos</p>
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-semibold text-ink mb-6 sm:mb-8 tracking-tight leading-[1.04]">
-              Visible proof for how we think, what we build, and how delivery actually runs.
+              Selected work, working demos, and delivery examples.
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-brand-400 leading-relaxed max-w-4xl">
-              Review real product behavior, structured concept studies, and the delivery rhythm behind every build so you can judge the thinking, build quality, and operating discipline for yourself.
+              Review product behavior, case studies, and delivery examples so you can evaluate the thinking, build quality, and operating discipline for yourself.
             </p>
           </motion.div>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3 mb-12 sm:mb-14 md:mb-16">
           {[
-            ['Working demos', 'Interactive product slices that show how AI flows, portals, commerce paths, and ops tools can actually behave.'],
-            ['Concept studies', 'Structured proof stories that connect business pressure, build direction, and commercial outcome.'],
-            ['Delivery process', 'A visible build rhythm that shows how work moves from bottleneck to shipped system.'],
+            ['Product demos', 'Interactive product slices that show how AI flows, portals, commerce paths, and operations tools can actually behave.'],
+            ['Case studies', 'Structured examples that connect business context, build direction, and commercial outcome.'],
+            ['Delivery model', 'A visible delivery model that shows how work moves from requirements to shipped system.'],
           ].map(([title, text]) => (
             <div key={title} className="rounded-[1.5rem] border border-brand-100/50 bg-soft p-5 sm:p-6 shadow-sm">
               <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">{title}</p>
@@ -113,9 +113,9 @@ export default function Portfolio() {
 
             <div className="grid sm:grid-cols-3 gap-4">
               {[
-                ['Direct communication', 'The person framing the bottleneck stays close to the build.'],
+                ['Direct communication', 'The person framing the requirement stays close to the build.'],
                 ['Commercial reasoning', 'Every screen, workflow, and system choice has to support revenue, delivery, or operations.'],
-                ['Honest scope control', 'Projects are shaped around what needs to work first so momentum is real from the start.'],
+                ['Scope control', 'Projects are shaped around what needs to work first so momentum is real from the start.'],
               ].map(([title, text]) => (
                 <div key={title} className="rounded-[1.6rem] border border-brand-100/50 bg-soft p-5 shadow-sm">
                   <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">{title}</p>
@@ -129,16 +129,16 @@ export default function Portfolio() {
         <section id="working-demos" className="scroll-mt-32 py-8 sm:py-10 md:py-12">
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-5 mb-10 sm:mb-12">
             <div className="max-w-4xl">
-              <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-4">Working Demos</p>
+              <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-4">Product Demonstrations</p>
               <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">
-                Interactive proof that the studio can shape real product behavior, not just polished static screens.
+                Interactive demonstrations that show how the studio shapes real product behavior, not just polished static screens.
               </h2>
               <p className="mt-5 max-w-3xl text-base sm:text-lg text-brand-400 leading-relaxed">
                 These demos are intentionally small and focused. They show interface quality, workflow logic, and system behavior in motion instead of relying on still images and promises.
               </p>
             </div>
             <Link to="/contact" className="inline-flex items-center gap-2 text-base font-semibold text-ink hover:text-accent transition-colors">
-              Start from your bottleneck
+              Start from your requirements
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -188,7 +188,7 @@ export default function Portfolio() {
                     to={`/portfolio/${demo.id}`}
                     className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent"
                   >
-                    Open full proof study
+                    Open full case study
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                   <button
@@ -213,12 +213,12 @@ export default function Portfolio() {
         <section id="concept-studies" className="scroll-mt-32 py-16 sm:py-18 md:py-20">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 sm:gap-8 mb-12 sm:mb-14">
             <div className="max-w-4xl">
-              <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-4">Concept Studies</p>
+              <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-4">Case Studies</p>
               <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">
-                Proof stories that connect the business problem, the build direction, and the commercial outcome.
+                Case studies that connect the business problem, the build direction, and the commercial outcome.
               </h2>
               <p className="mt-5 text-base sm:text-lg text-brand-400 leading-relaxed max-w-3xl">
-                These are structured concept studies that show how the work would be framed before code is written and before scope drifts into guesswork.
+                These structured concept cases show how the work would be framed before code is written and before scope drifts into guesswork.
               </p>
             </div>
           </div>
@@ -226,7 +226,7 @@ export default function Portfolio() {
           <div className="grid gap-4 md:grid-cols-4 mb-12 sm:mb-14">
             {proofQuestions.map((question) => (
               <div key={question} className="rounded-[1.4rem] border border-brand-100/50 bg-soft p-5 shadow-sm">
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Trust check</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Evaluation point</p>
                 <p className="text-sm sm:text-base text-brand-400 leading-relaxed">{question}</p>
               </div>
             ))}
@@ -257,7 +257,7 @@ export default function Portfolio() {
                 type="text"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search by concept or pressure point..."
+                placeholder="Search by project or business context..."
                 className="block w-full pl-12 pr-6 py-3.5 bg-soft border border-brand-100/50 rounded-full text-sm text-ink focus:outline-none focus:ring-4 focus:ring-accent/10 focus:border-accent transition-all placeholder:text-brand-400 shadow-sm"
               />
             </div>
@@ -290,7 +290,7 @@ export default function Portfolio() {
                         <div className="flex items-center gap-3 mb-4">
                           <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-accent">{project.category}</span>
                           <div className="h-[1px] w-8 bg-brand-100" />
-                          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-400">Concept Study</span>
+                          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-brand-400">Case Study</span>
                         </div>
                         <h3 className="text-2xl md:text-3xl font-semibold text-ink mb-3 tracking-tight group-hover:text-accent transition-colors duration-500">
                           {project.title}
@@ -298,7 +298,7 @@ export default function Portfolio() {
                         <p className="text-base md:text-lg text-brand-400 line-clamp-2 leading-relaxed">{project.description}</p>
                         <div className="mt-5 grid gap-3">
                           <div className="rounded-[1.1rem] border border-brand-100/50 bg-soft px-4 py-3">
-                            <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent mb-1">Pressure point</p>
+                            <p className="text-[9px] font-bold uppercase tracking-[0.22em] text-accent mb-1">Business context</p>
                             <p className="text-sm text-brand-400 leading-relaxed line-clamp-2">
                               {projectContext[project.id as ProjectContextId].pressurePoint}
                             </p>
@@ -334,7 +334,7 @@ export default function Portfolio() {
                         </div>
                         <div className="mt-5 flex flex-col sm:flex-row gap-3">
                           <span className="inline-flex min-h-11 items-center justify-center rounded-full border border-brand-100 bg-soft px-4 py-2 text-sm font-medium text-ink">
-                            Ask about building this for your workflow
+                            Discuss this engagement
                           </span>
                           <button
                             type="button"
@@ -362,7 +362,7 @@ export default function Portfolio() {
 
           {filteredProjects.length === 0 && (
             <div className="text-center py-28">
-              <h3 className="text-2xl font-semibold text-ink mb-4 tracking-tight">No proof study matches that view</h3>
+              <h3 className="text-2xl font-semibold text-ink mb-4 tracking-tight">No case study matches that view</h3>
               <p className="text-lg text-brand-400 mb-10">Try a different category or search term.</p>
               <button
                 onClick={() => {
@@ -380,7 +380,7 @@ export default function Portfolio() {
         <section className="py-16 sm:py-18 md:py-20">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-14 items-start">
             <div className="max-w-xl">
-              <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-4">Typical Impact Targets</p>
+              <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-4">Typical Outcomes</p>
               <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">
                 Evidence should point to business change, not just interface polish.
               </h2>
@@ -404,12 +404,12 @@ export default function Portfolio() {
         <section id="delivery-process" className="scroll-mt-32 py-16 sm:py-18 md:py-20">
           <div className="grid gap-10 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)] lg:gap-14 items-start">
             <div className="max-w-xl">
-              <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-4">Delivery Process</p>
+              <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-4">Delivery Model</p>
               <h2 className="text-3xl sm:text-4xl md:text-6xl font-semibold text-ink tracking-tight leading-tight">
-                Proof that the work can move from bottleneck to shipped system without losing clarity in the middle.
+                A delivery model that moves from requirements to shipped system without losing clarity in the middle.
               </h2>
               <p className="mt-5 text-base sm:text-lg text-brand-400 leading-relaxed">
-                Buyers do not only need proof of taste. They need proof that the project can be scoped, run, built, and launched in a way that stays commercially useful all the way through.
+                Buyers do not only need taste. They need confidence that the project can be scoped, run, built, and launched in a way that stays commercially useful all the way through.
               </p>
             </div>
 
@@ -438,7 +438,7 @@ export default function Portfolio() {
           <div className="rounded-[2rem] border border-brand-100/50 bg-soft p-6 sm:p-8 md:p-10">
             <div className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-start">
               <div className="max-w-xl">
-                <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-4">What This Proof Should Tell You</p>
+                <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-4">What You Can Review Here</p>
                 <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">
                   The studio can think clearly, design carefully, and build software around the way the business actually works.
                 </h2>

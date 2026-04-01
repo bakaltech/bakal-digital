@@ -151,7 +151,7 @@ export const services: Service[] = [
     offerTitle: 'Fix the revenue path from product story to payment',
     description: 'Storefronts and revenue flows built to sell clearly, operate smoothly, and scale without unnecessary friction.',
     longDescription: 'We create e-commerce experiences that do more than look good. The work covers storefront design, product architecture, checkout flow improvement, subscription or recurring revenue systems, and the backend logic needed to keep commerce operations clean.',
-    signature: 'Best when revenue depends on a clean product story, a smoother checkout flow, and fewer operational bottlenecks behind the store.',
+    signature: 'Best when revenue depends on a clean product story, a smoother checkout flow, and less operational drag behind the store.',
     buyer: 'Brands that need a storefront and backend flow strong enough to support growth.',
     problem: 'The business is losing confidence or revenue across product presentation, checkout, subscriptions, or post-purchase operations.',
     homepageSummary: 'Storefronts, checkout systems, and revenue operations designed to reduce friction and support scale.',
@@ -273,7 +273,7 @@ export const services: Service[] = [
       'Keep tools in sync without constant manual updates',
       'Improve response speed across customer and internal operations',
     ],
-    idealFor: ['Teams juggling multiple tools and manual updates', 'Operations that need routing, approvals, or sync flows', 'Businesses trying to reduce bottlenecks without hiring immediately'],
+    idealFor: ['Teams juggling multiple tools and manual updates', 'Operations that need routing, approvals, or sync flows', 'Businesses trying to reduce operational drag without hiring immediately'],
     outcomes: ['Less repetitive work and fewer missed handoffs', 'Faster internal response and execution cycles', 'Better visibility into where workflows break'],
     engagementSteps: [
       { title: 'Find the friction', detail: 'We map where work gets duplicated, delayed, or dropped between tools and people.' },

@@ -16,7 +16,7 @@ export default function Terms() {
           </div>
           <div className="rounded-[1.75rem] border border-brand-100/50 bg-soft p-6 sm:p-7 shadow-sm">
             <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Inquiry submissions</p>
-            <p>Submitting a form or guided brief does not create a client relationship, reserve project time, or guarantee project acceptance.</p>
+          <p>Submitting a form or project intake does not create a client relationship, reserve project time, or guarantee project acceptance.</p>
           </div>
           <div className="rounded-[1.75rem] border border-brand-100/50 bg-soft p-6 sm:p-7 shadow-sm">
             <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Content ownership</p>

@@ -99,7 +99,7 @@ export default function ServiceDetail() {
         <section className="py-12 sm:py-16 border-t border-brand-100/30">
           <div className="grid lg:grid-cols-[0.82fr_1.18fr] gap-8 sm:gap-10 md:gap-14 items-start">
             <div className="max-w-3xl">
-              <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Proof Example</p>
+              <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Example Engagement</p>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight mb-5">
                 A grounded example of the kind of build this service can turn into.
               </h2>
@@ -114,7 +114,7 @@ export default function ServiceDetail() {
                 </span>
                 {relatedProof && (
                   <Link to={`/portfolio/${relatedProof.id}`} className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300 hover:text-accent transition-colors">
-                    Open full proof study
+                    Open full case study
                   </Link>
                 )}
               </div>
@@ -136,7 +136,7 @@ export default function ServiceDetail() {
               <div className="mt-5 flex flex-col sm:flex-row gap-3">
                 {relatedProof && (
                   <Link to={`/portfolio/${relatedProof.id}`} className="inline-flex items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent">
-                    Review proof study
+                    Review case study
                     <ArrowRight className="w-4 h-4" />
                   </Link>
                 )}
@@ -171,7 +171,7 @@ export default function ServiceDetail() {
         <section className="py-12 sm:py-16 border-t border-brand-100/30">
           <div className="max-w-3xl mb-10 sm:mb-12">
             <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-5">Engagement shape</p>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">A practical path from friction point to working system.</h2>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-ink tracking-tight leading-tight">A practical path from business requirement to working system.</h2>
           </div>
           <div className="grid md:grid-cols-3 gap-5 sm:gap-6">
             {service.engagementSteps.map((step, index) => (

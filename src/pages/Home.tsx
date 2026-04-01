@@ -131,12 +131,12 @@ export default function Home() {
             <div className="max-w-xl">
               <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">What We Build</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.8rem] font-semibold text-ink leading-[0.98] tracking-tight">
-                Pick the build shape that matches the bottleneck.
+                Pick the build shape that matches the requirement.
               </h2>
             </div>
             <div className="max-w-2xl lg:justify-self-end">
               <p className="text-base sm:text-lg md:text-[1.12rem] text-brand-400 leading-relaxed">
-                These offers are packaged around concrete deliverables: websites and portals, SaaS foundations, AI workflows, internal tools, and automation systems that fix real pressure points.
+                These offers are packaged around concrete deliverables: websites and portals, SaaS foundations, AI workflows, internal tools, and automation systems that solve real business requirements.
               </p>
               <div className="mt-5 flex flex-wrap gap-3">
                 {['Websites and portals', 'SaaS and apps', 'AI workflows', 'Automation systems'].map((item) => (
@@ -146,7 +146,7 @@ export default function Home() {
                 ))}
               </div>
               <div className="mt-6 rounded-[1.5rem] border border-brand-100/50 bg-white p-5 shadow-sm">
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-2">Proof of range</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-2">Range of work</p>
                 <p className="text-sm sm:text-base text-brand-400 leading-relaxed">
                   Delivered and concepted across SaaS products, commerce systems, internal tools, AI workflows, portals, and automation layers.
                 </p>
@@ -170,7 +170,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid gap-8 xl:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] xl:gap-14 items-start">
             <div className="max-w-xl">
-              <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">Choose Your Path</p>
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.28em] sm:tracking-[0.3em] text-accent mb-4 sm:mb-6">Where We Can Help</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.4rem] font-semibold text-ink leading-[0.98] tracking-tight">
                 The site should help the right buyer recognize the right path quickly.
               </h2>
@@ -181,7 +181,7 @@ export default function Home() {
                 If one of these feels like your situation, the next move should feel obvious.
               </p>
               <div className="mt-8 rounded-[1.75rem] border border-brand-100/50 bg-white p-6 sm:p-7 shadow-sm">
-                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Best fit</p>
+                <p className="text-[11px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Typical clients</p>
                 <p className="text-sm sm:text-base text-brand-400 leading-relaxed">
                   Best for teams who need real software, automation, product structure, or a stronger conversion layer, not just a cosmetic reskin with no system behind it.
                 </p>
@@ -199,13 +199,13 @@ export default function Home() {
                 {
                   title: 'Replacing manual operational drag',
                   text: 'Best when work is still moving through spreadsheets, inboxes, disconnected tools, or patchwork automations across sales, onboarding, and delivery.',
-                  cta: 'See automation and ops proof',
+                  cta: 'See automation and ops examples',
                   href: '/portfolio',
                 },
                 {
                   title: 'Fixing a weak digital layer',
                   text: 'Best when the current website, storefront, or customer flow is leaking trust, confusing the offer, or undercutting conversion.',
-                  cta: 'See proof before inquiry',
+                  cta: 'Review work before inquiry',
                   href: '/portfolio',
                 },
               ].map((item, idx) => (
@@ -232,12 +232,12 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="grid gap-8 xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] xl:gap-14 items-start">
             <div className="max-w-xl">
-              <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 sm:mb-6">Proof In Practice</p>
+              <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.24em] sm:tracking-widest text-accent mb-4 sm:mb-6">Example Engagements</p>
               <h2 className="text-[2rem] sm:text-4xl md:text-[3.4rem] font-semibold text-ink tracking-tight leading-[1]">
-                Three proof stories that show the problem, the build, and the business gain at a glance.
+                Three example engagements that show the problem, the build, and the business gain at a glance.
               </h2>
               <p className="mt-5 text-base sm:text-lg md:text-[1.08rem] text-brand-400 leading-relaxed">
-                The point of this section is speed: you should be able to scan the pressure point, see what gets built, and decide whether the approach feels commercially useful in under a minute.
+                The point of this section is speed: you should be able to scan the business context, see what gets built, and decide whether the approach feels commercially useful in under a minute.
               </p>
               <div className="mt-6 rounded-[1.5rem] border border-brand-100/50 bg-soft p-5 shadow-sm">
                 <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-2">What to look for</p>
@@ -279,7 +279,7 @@ export default function Home() {
                     </div>
                     <div className="mt-5 flex flex-col sm:flex-row gap-3">
                       <Link to={`/portfolio/${project.id}`} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-ink px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent">
-                        Open proof study
+                        Open case study
                         <ArrowRight className="w-4 h-4" />
                       </Link>
                       <button
@@ -313,14 +313,14 @@ export default function Home() {
                 Concept studies that make the thinking visible before you ever hire us.
               </h2>
               <p className="mt-5 max-w-3xl text-base sm:text-lg text-brand-400 leading-relaxed">
-                These are honest concept directions. Each one shows how we would structure the product, the interface, and the system logic when the goal is to make something credible, useful, and scalable.
+                These concept studies show how we would structure the product, interface, and system logic when the goal is to make something credible, useful, and scalable.
               </p>
               <p className="mt-4 max-w-3xl text-base sm:text-lg text-ink leading-relaxed">
                 These examples show how we structure real products, workflows, and systems before writing a single line of code.
               </p>
             </div>
             <Link to="/portfolio" className="flex items-center text-base sm:text-lg font-semibold text-ink hover:text-accent transition-colors group">
-              See proof library
+              View case studies
               <ChevronRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
@@ -343,16 +343,16 @@ export default function Home() {
               The product should feel sharp because the delivery system behind it is sharp.
             </h2>
             <p className="text-base sm:text-xl text-brand-400 leading-relaxed max-w-2xl">
-              Strong execution is not something you discover after signing. The site, the service paths, the brief flow, and the project language should already show a delivery rhythm you can trust.
+              Strong execution is not something you discover after signing. The site, the service paths, the intake flow, and the project language should already show a delivery model you can trust.
             </p>
             <p className="mt-4 text-base sm:text-lg text-ink leading-relaxed max-w-2xl">
-              Every project includes clear milestones, weekly progress, and a delivery rhythm that keeps the build moving.
+              Every project includes clear milestones, weekly progress, and a delivery model that keeps the build moving.
             </p>
             <div className="mt-8 sm:mt-10 grid gap-4">
               {[
                 'Strategy, UX, design, frontend, backend, and automation are handled as one connected build, not siloed handoffs.',
-                'The guided brief, direct inquiry, and service pathways work like real product surfaces, not decorative UI.',
-                'Concept studies are labeled honestly so buyers can judge the thinking on its own terms.',
+                'The project intake, direct inquiry, and service pathways work like real product surfaces, not decorative UI.',
+                'Concept studies are presented clearly so buyers can evaluate the thinking without sales theater.',
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3">
                   <div className="w-8 h-8 rounded-2xl bg-white border border-brand-100/50 flex items-center justify-center text-accent shrink-0">
@@ -366,7 +366,7 @@ export default function Home() {
 
           <div className="grid xl:grid-cols-2 gap-4 sm:gap-6">
             {[
-              { title: '1. Brief and bottleneck audit', text: 'Start with the pressure point, current workflow, business goal, and what must improve first.' },
+              { title: '1. Intake and requirements review', text: 'Start with the business priority, current workflow, commercial goal, and what must improve first.' },
               { title: '2. Direction and scope', text: 'Turn that into a clear build shape, scope boundary, and delivery plan the team can actually follow.' },
               { title: '3. Design and implementation', text: 'Move through UX, interface, frontend, backend, and automation without breaking the logic between them.' },
               { title: '4. QA, launch, and refinement', text: 'Ship with clean handoff, visible progress, and enough structure to keep improving after launch.' },

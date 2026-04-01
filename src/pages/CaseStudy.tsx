@@ -84,7 +84,7 @@ export default function CaseStudy() {
       <section className="py-20 bg-soft">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-3 gap-12">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-widest text-accent mb-4">01. Pressure point</div>
+            <div className="text-xs font-semibold uppercase tracking-widest text-accent mb-4">01. Business context</div>
             <h2 className="text-2xl md:text-3xl font-semibold text-ink mb-5 tracking-tight">What is breaking in the current system.</h2>
             <p className="text-base md:text-lg text-brand-400 leading-relaxed">{context.pressurePoint}</p>
           </div>
@@ -145,7 +145,7 @@ export default function CaseStudy() {
 
               <ConceptDemoNote />
               <div className="rounded-[1.75rem] border border-brand-100/50 bg-white p-6 shadow-sm">
-                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Honest proof note</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Scope note</p>
                 <p className="text-sm sm:text-base text-brand-400 leading-relaxed">
                   This is a concept study used to show decision-making, UX structure, and system thinking. It is not presented as a live client deployment.
                 </p>

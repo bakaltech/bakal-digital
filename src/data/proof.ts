@@ -62,7 +62,7 @@ export const proofDemos: ProofDemo[] = [
 export const deliverySteps: DeliveryStep[] = [
   {
     step: '01',
-    title: 'Diagnose the bottleneck',
+    title: 'Define the requirement',
     detail:
       'Review the current website, workflow, product layer, and operating constraints so the real problem is clear before anything is designed.',
     artifact: 'Audit and direction brief',
@@ -71,7 +71,7 @@ export const deliverySteps: DeliveryStep[] = [
     step: '02',
     title: 'Define the build shape',
     detail:
-      'Turn the bottleneck into a scoped product direction with the right screens, system logic, integrations, and delivery boundary.',
+      'Turn the requirement into a scoped product direction with the right screens, system logic, integrations, and delivery boundary.',
     artifact: 'Scope, structure, and key flows',
   },
   {
@@ -92,7 +92,7 @@ export const deliverySteps: DeliveryStep[] = [
 
 export const proofQuestions = [
   'Can this studio structure a real product or workflow instead of just making screens look polished?',
-  'Can they connect business pressure points to a credible build direction?',
+  'Can they connect business requirements to a credible build direction?',
   'Can they show interface quality, systems thinking, and delivery discipline at the same time?',
   'Can they explain the work clearly, with real structure and real reasoning behind each decision?',
 ];

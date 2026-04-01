@@ -49,7 +49,7 @@ export default function Contact() {
     }
 
     if (messageLength < 20) {
-      setError('Please share a bit more detail about the bottleneck and the outcome you need.');
+      setError('Please share a bit more detail about what needs to change and the result you need.');
       return;
     }
 
@@ -74,7 +74,7 @@ export default function Contact() {
       setInterests([]);
     } catch (submissionError) {
       console.error('Contact form error:', submissionError);
-      setError(submissionError instanceof Error ? submissionError.message : 'Your message could not be sent right now. Please try again or use the guided brief.');
+      setError(submissionError instanceof Error ? submissionError.message : 'Your message could not be sent right now. Please try again or use the project intake.');
     } finally {
       setIsSubmitting(false);
     }
@@ -95,7 +95,7 @@ export default function Contact() {
               Tell us where the business is stuck, and what needs to work better after the build.
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-brand-400 leading-relaxed max-w-3xl">
-              Share the business context, the friction point, and the result you need. We will use that to assess fit, spot the leverage, and respond with the strongest next step.
+              Share the business context, the requirement, and the result you need. We will use that to assess scope, identify the right opportunity, and respond with the strongest next step.
             </p>
           </motion.div>
         </div>
@@ -104,8 +104,8 @@ export default function Contact() {
           <motion.div className="lg:col-span-5 space-y-8" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.1 }}>
             {[ 
               { icon: Clock3, title: 'Fast first response', text: 'Best for teams that need a clear recommendation quickly instead of a long qualification cycle.' },
-              { icon: Sparkles, title: 'Built around leverage', text: 'We focus on the bottleneck that will change conversion, delivery speed, or operational clarity, not just surface polish.' },
-              { icon: MessageSquare, title: 'Two valid ways to start', text: 'Use the form when the problem is already clear. Use the guided brief when you need help shaping the scope before talking.' },
+              { icon: Sparkles, title: 'Built around business impact', text: 'We focus on the requirement that will change conversion, delivery speed, or operational clarity, not just surface polish.' },
+              { icon: MessageSquare, title: 'Two clear ways to start', text: 'Use the form when the requirement is already clear. Use the project intake when you need help shaping the scope before talking.' },
             ].map((item) => (
               <div key={item.title} className="rounded-[1.75rem] sm:rounded-[2rem] bg-soft border border-brand-100/50 p-6 sm:p-8">
                 <div className="w-12 h-12 rounded-2xl bg-white border border-brand-100/50 flex items-center justify-center text-accent mb-5"><item.icon className="w-5 h-5" /></div>
@@ -118,7 +118,7 @@ export default function Contact() {
               <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-accent mb-5"><ShieldCheck className="w-5 h-5" /></div>
               <h2 className="text-2xl font-semibold tracking-tight mb-3">What happens next</h2>
               <div className="space-y-3 text-white/75 leading-relaxed">
-                <p>We review the request, assess fit, and identify the clearest pressure point before replying.</p>
+                <p>We review the request, assess scope, and identify the clearest priority before replying.</p>
                 <p>If the opportunity is aligned, the next step may be scope direction, implementation guidance, a concept reference, or a direct conversation.</p>
               </div>
             </div>
@@ -126,7 +126,7 @@ export default function Contact() {
             <div className="rounded-[1.75rem] sm:rounded-[2rem] bg-white border border-brand-100/50 p-6 sm:p-8 shadow-sm">
               <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">Typical response rhythm</p>
               <div className="space-y-3 text-brand-400 leading-relaxed">
-                <p>1. Review the inquiry and identify the bottleneck.</p>
+                <p>1. Review the inquiry and identify the priority.</p>
                 <p>2. Reply with the clearest next move instead of a generic sales response.</p>
                 <p>3. Move into scope, references, or a direct conversation if the fit is real.</p>
               </div>
@@ -134,7 +134,7 @@ export default function Contact() {
 
             <button type="button" onClick={openChat} className="w-full inline-flex items-center justify-center gap-3 px-6 py-5 rounded-full bg-ink text-white font-semibold hover:bg-accent transition-colors shadow-xl">
               <MessageSquare className="w-5 h-5" />
-              Start With Guided Brief
+              Start With Project Intake
             </button>
           </motion.div>
 
@@ -201,7 +201,7 @@ export default function Contact() {
                     <label htmlFor="message" className="block text-sm font-semibold text-ink mb-2">Project details</label>
                     <textarea id="message" name="message" rows={6} value={formData.message} onChange={handleChange} required aria-invalid={!!error && messageLength < 20} aria-describedby={error ? 'contact-form-error' : undefined} placeholder="What does the business do, what is slowing things down now, and what should be measurably better after this project is live?" className="w-full px-5 py-4 rounded-2xl bg-white border border-brand-100/50 text-ink placeholder:text-brand-400 focus:outline-none focus:border-accent resize-none" />
                     <div className="mt-2 flex items-center justify-between gap-3">
-                      <p className="text-xs text-brand-400">Enough detail to understand the real bottleneck helps us respond properly.</p>
+                      <p className="text-xs text-brand-400">Enough detail to understand the real requirement helps us respond properly.</p>
                       <p className={`text-xs font-semibold ${messageLength >= 20 ? 'text-emerald-700' : 'text-brand-400'}`}>
                         {messageLength}/20 minimum
                       </p>

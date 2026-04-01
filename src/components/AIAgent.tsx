@@ -9,7 +9,7 @@ type ChatMessage = { role: 'user' | 'model'; text: string };
 type LeadFormArgs = { projectType: string; projectStage: string; industry: string; mainGoal: string; budget: string; timeline: string; summary: string };
 type ChatResponse = GuidedChatResponse;
 
-const openingMessage = "I'm the Bakal project guide. I will ask a few quick questions so we can understand the bottleneck properly and route the strongest next step. What needs to be built or fixed first?";
+const openingMessage = "I'm the Bakal project intake assistant. I will ask a few concise questions so we can understand the requirement and recommend the strongest next step. What needs to be built, improved, or replaced first?";
 const initialReplies = ['Website or platform', 'AI workflow', 'Automation and reporting'];
 
 export default function AIAgent() {
@@ -99,7 +99,7 @@ export default function AIAgent() {
       setMessages((prev) => [...prev, { role: 'model', text: modelText }]);
     } catch (error) {
       console.error('Chat error:', error);
-      setMessages((prev) => [...prev, { role: 'model', text: error instanceof Error ? error.message : 'The brief guide hit a problem. Try that answer again, or switch to the contact form if you already know the scope.' }]);
+      setMessages((prev) => [...prev, { role: 'model', text: error instanceof Error ? error.message : 'The intake assistant hit a problem. Try that answer again, or switch to the contact form if you already know the scope.' }]);
     } finally {
       setIsLoading(false);
     }
@@ -178,7 +178,7 @@ export default function AIAgent() {
                     <Sparkles className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
                   <div>
-                    <p className="text-xs font-bold uppercase tracking-widest text-accent">Bakal Guide</p>
+                    <p className="text-xs font-bold uppercase tracking-widest text-accent">Bakal Digital</p>
                     <p className="text-sm font-medium opacity-70 hidden sm:block">Project Intake</p>
                   </div>
                 </div>

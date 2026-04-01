@@ -11,12 +11,12 @@ export default function Privacy() {
         <p className="text-sm font-semibold uppercase tracking-widest text-accent mb-6">Privacy Policy</p>
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-semibold text-ink tracking-tight leading-[1.05] mb-8">How inquiry and site data are handled.</h1>
         <p className="text-lg sm:text-xl text-brand-400 leading-relaxed max-w-3xl mb-10">
-          This page explains what we collect through the site, why it is collected, and how it is used when someone submits a project inquiry or guided brief.
+          This page explains what we collect through the site, why it is collected, and how it is used when someone submits a project inquiry or project intake.
         </p>
         <div className="grid gap-5 text-base sm:text-lg text-brand-400 leading-relaxed">
           <div className="rounded-[1.75rem] border border-brand-100/50 bg-soft p-6 sm:p-7 shadow-sm">
             <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">What we collect</p>
-            <p>When you submit a direct inquiry or guided brief, we collect the details you provide so we can review the request, assess fit, and follow up.</p>
+            <p>When you submit a direct inquiry or project intake, we collect the details you provide so we can review the request, assess scope, and follow up.</p>
           </div>
           <div className="rounded-[1.75rem] border border-brand-100/50 bg-soft p-6 sm:p-7 shadow-sm">
             <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">How it is used</p>
@@ -42,7 +42,7 @@ export default function Privacy() {
               Start a Project
             </a>
             <button type="button" onClick={openChat} className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-full border border-brand-100 bg-white text-ink font-semibold hover:border-accent hover:text-accent transition-colors">
-              Open Quick Brief
+              Open Project Intake
             </button>
           </div>
         </div>

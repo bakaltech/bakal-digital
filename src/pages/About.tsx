@@ -23,8 +23,8 @@ export default function About() {
     },
     {
       icon: ShieldCheck,
-      title: 'Honest, durable execution',
-      description: 'No inflated claims, no fragile shortcuts, and no bloated process that slows down good work.',
+      title: 'Durable execution',
+      description: 'Clear scope, reliable delivery, and no bloated process that slows down good work.',
     },
   ];
 
@@ -95,7 +95,7 @@ export default function About() {
               {[
                 ['Direct communication', 'Short path between the problem, the decision, and the work.'],
                 ['Commercial focus', 'Every build choice has to support conversion, delivery, or operations.'],
-                ['Honest scope', 'Projects are framed around what needs to work first, not what sounds biggest.'],
+                ['Scope discipline', 'Projects are framed around what needs to work first, not what sounds biggest.'],
               ].map(([title, text]) => (
                 <div key={title} className="rounded-[1.5rem] border border-brand-100/50 bg-paper p-5 shadow-sm">
                   <p className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent mb-3">{title}</p>
@@ -115,7 +115,7 @@ export default function About() {
               The work is usually less about adding something new and more about removing what keeps slowing the business down.
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-brand-400 leading-relaxed">
-              That friction might show up in a weak website, manual handling, unclear onboarding, disconnected tools, or a product idea that still has no credible path to launch. The job is to isolate the bottleneck and build the right layer around it.
+              That problem might show up in a weak website, manual handling, unclear onboarding, disconnected tools, or a product idea that still has no credible path to launch. The job is to identify the requirement and build the right layer around it.
             </p>
           </div>
 
@@ -131,7 +131,7 @@ export default function About() {
               },
               {
                 title: 'Why that matters',
-                text: 'The result is not just a polished surface. It is a system that can sell, onboard, route, report, and operate with less friction.',
+                text: 'The result is not just a polished surface. It is a system that can sell, onboard, route, report, and operate with less operational drag.',
               },
             ].map((item) => (
               <div key={item.title} className="rounded-[1.75rem] border border-brand-100/50 bg-soft p-6 sm:p-7 shadow-sm">
@@ -151,7 +151,7 @@ export default function About() {
               Lean enough to move decisively. Deep enough to build something real.
             </h2>
             <p className="text-base sm:text-lg md:text-xl text-brand-400 leading-relaxed mb-6">
-              The job is to understand the bottleneck, design the right system around it, and ship something that holds up under real use.
+              The job is to understand the requirement, design the right system around it, and ship something that holds up under real use.
             </p>
             <p className="text-base sm:text-lg md:text-xl text-brand-400 leading-relaxed">
               That can involve positioning, UX, AI-assisted workflows, automation logic, product architecture, or the customer-facing layer that makes the whole thing easier to trust.
@@ -159,7 +159,7 @@ export default function About() {
           </div>
           <div className="grid gap-6">
             {[
-              'Audit the message, workflow, and friction points across the current experience.',
+              'Audit the message, workflow, and operational gaps across the current experience.',
               'Define where AI, automation, UX, or product structure will create the most leverage first.',
               'Shape the system so users can understand, act, and move forward without confusion.',
               'Build the thing so it survives real use instead of becoming another fragile layer to manage.',

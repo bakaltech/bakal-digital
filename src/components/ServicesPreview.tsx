@@ -28,7 +28,7 @@ export default function ServicesPreview() {
             See how the offer, the UX, and the business outcome line up before you ever start.
           </h2>
           <p className="text-base sm:text-xl text-brand-400 leading-relaxed max-w-3xl">
-            Every service needs a different operating shape. This preview shows the pressure point, the likely business gain, the build shape, and one grounded example so the offer stays concrete instead of promotional.
+            Every service needs a different operating shape. This preview shows the business context, the likely business gain, the build shape, and one grounded example so the offer stays concrete instead of promotional.
           </p>
         </div>
 

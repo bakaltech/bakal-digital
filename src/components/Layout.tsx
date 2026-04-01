@@ -7,7 +7,7 @@ import { projects } from '../data/projects';
 import { services } from '../data/services';
 
 const primaryLinks = [
-  { name: 'Proof', path: '/portfolio' },
+  { name: 'Work', path: '/portfolio' },
   { name: 'Services', path: '/services' },
   { name: 'About', path: '/about' },
   { name: 'Contact', path: '/contact' },
@@ -36,8 +36,8 @@ const routeMetadata: Record<string, { title: string; description: string }> = {
     description: 'Bakal Digital helps startups and growing businesses build AI-powered products, websites, custom software, and operational systems once generic tools stop being enough.',
   },
   '/portfolio': {
-    title: 'Proof Library | Bakal Digital',
-    description: 'Review Bakal Digital proof assets, working demos, concept studies, and delivery process examples for AI products, platforms, commerce, and operational software.',
+    title: 'Work & Demos | Bakal Digital',
+    description: 'Review Bakal Digital case studies, working demos, and delivery examples for AI products, platforms, commerce, and operational software.',
   },
   '/about': {
     title: 'About | Bakal Digital',
@@ -123,7 +123,7 @@ const Navbar = () => {
           <div className="hidden md:flex items-center gap-3">
             <button type="button" onClick={openChat} className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-brand-100 bg-white/92 text-ink text-sm font-semibold hover:border-accent hover:text-accent transition-colors shadow-[0_10px_20px_rgba(17,19,21,0.04)]">
               <MessageSquare className="w-4 h-4" />
-              Quick Brief
+              Project Intake
             </button>
             <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-ink text-white text-sm font-semibold hover:bg-accent transition-colors shadow-lg">
               Start a Project
@@ -163,7 +163,7 @@ const Navbar = () => {
 
                 <div className="grid gap-3 pt-5 border-t border-brand-100/40">
                   <button type="button" onClick={() => { setIsOpen(false); openChat(); }} className="w-full px-6 py-4 rounded-2xl border border-brand-100 bg-white text-ink font-semibold">
-                    Open Quick Brief
+                    Open Project Intake
                   </button>
                   <Link to="/contact" className="w-full px-6 py-4 rounded-2xl bg-ink text-white font-semibold text-center">
                     Start a Project
@@ -205,11 +205,11 @@ const Footer = () => {
           <div className="rounded-[2rem] bg-soft border border-brand-100/50 p-6 md:p-8 shadow-[0_20px_50px_rgba(17,19,21,0.05)]">
             <p className="text-sm font-bold uppercase tracking-[0.25em] text-accent mb-4">Start Here</p>
             <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">Need a better system than the one you have now?</h3>
-            <p className="text-brand-400 leading-relaxed mb-6">Use the quick brief if the problem still needs shaping, or start a direct project inquiry if you already know where the friction is.</p>
+            <p className="text-brand-400 leading-relaxed mb-6">Use the project intake if the scope still needs shaping, or start a direct inquiry if you already know what needs to be built or improved.</p>
             <div className="flex flex-col sm:flex-row gap-3">
               <button type="button" onClick={openChat} className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white border border-brand-100 text-ink font-semibold hover:border-accent hover:text-accent transition-colors">
                 <MessageSquare className="w-4 h-4" />
-                Open Quick Brief
+                Open Project Intake
               </button>
               <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-ink text-white font-semibold hover:bg-accent transition-colors">
                 Start a Project

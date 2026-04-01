@@ -218,7 +218,7 @@ export default function InteractiveHero() {
             </div>
 
             <h1 className="mx-auto mt-6 max-w-[12ch] text-balance text-[clamp(2.5rem,9vw,5.2rem)] font-bold leading-[0.9] text-ink sm:max-w-[13ch]">
-              Custom software and AI workflows that remove bottlenecks fast.
+              Custom software and AI workflows that remove operational drag fast.
             </h1>
 
             <p className="mx-auto mt-5 max-w-[34rem] text-base leading-relaxed text-brand-400 sm:text-[1.05rem] md:text-[1.12rem]">
@@ -239,13 +239,13 @@ export default function InteractiveHero() {
                 className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-brand-100 bg-white px-7 py-4 text-sm font-semibold text-ink shadow-[0_10px_24px_rgba(17,19,21,0.04)] transition-colors hover:border-accent hover:text-accent"
               >
                 <MessageSquare className="h-4 w-4" />
-                Open Quick Brief
+                Open Project Intake
               </button>
               <Link
                 to="/portfolio"
                 className="inline-flex min-h-14 items-center justify-center gap-2 rounded-full border border-transparent px-4 py-4 text-sm font-semibold text-brand-400 transition-colors hover:text-ink"
               >
-                See Proof
+                View Work
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
@@ -261,7 +261,7 @@ export default function InteractiveHero() {
               {[
                 ['What you can hire us for', 'Websites, portals, SaaS products, internal tools, AI assistants, and workflow automation.'],
                 ['What changes after the build', 'Clearer conversion paths, less manual handling, faster execution, and stronger operating clarity.'],
-                ['What buyers can review first', 'Proof studies, working demos, and service scopes before starting a conversation.'],
+                ['What buyers can review first', 'Case studies, working demos, and service scopes before starting a conversation.'],
               ].map(([title, detail]) => (
                 <div key={title} className="rounded-[1.35rem] border border-brand-100 bg-white p-4 text-left shadow-[0_10px_24px_rgba(17,19,21,0.04)]">
                   <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.22em] text-accent">{title}</p>
