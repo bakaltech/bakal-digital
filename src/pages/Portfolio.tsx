@@ -29,30 +29,100 @@ function DemoPreview({ id }: { id: (typeof proofDemos)[number]['id'] }) {
   }
 }
 
-function SectionHeader({ eyebrow, title, text }: { eyebrow: string; title: string; text: string }) {
+function Shell({ children, className = '' }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className="max-w-4xl">
-      <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-accent">{eyebrow}</p>
-      <h2 className="text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl md:text-6xl">{title}</h2>
-      <p className="mt-5 max-w-3xl text-base leading-relaxed text-brand-300 sm:text-lg">{text}</p>
-    </div>
-  );
-}
-
-function DarkShell({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return (
-    <div className={`rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(16,19,31,0.96)_0%,rgba(10,12,20,0.98)_100%)] shadow-[0_30px_90px_rgba(0,0,0,0.35)] ${className}`}>
+    <div
+      className={`rounded-[1.75rem] border border-white/10 bg-[linear-gradient(180deg,rgba(17,19,28,0.98)_0%,rgba(10,12,18,0.98)_100%)] shadow-[0_24px_80px_rgba(0,0,0,0.34)] ${className}`}
+    >
       {children}
     </div>
   );
 }
 
-function MiniMetric({ label, value }: { label: string; value: string }) {
+function SectionIntro({
+  eyebrow,
+  title,
+  text,
+}: {
+  eyebrow: string;
+  title: string;
+  text: string;
+}) {
   return (
-    <div className="rounded-[1.2rem] border border-white/10 bg-white/[0.04] px-4 py-4 sm:px-5 sm:py-5">
-      <p className="text-xl font-semibold tracking-tight text-white">{value}</p>
+    <div className="max-w-3xl">
+      <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-accent">{eyebrow}</p>
+      <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">{title}</h2>
+      <p className="mt-4 text-base leading-relaxed text-brand-300 sm:text-lg">{text}</p>
+    </div>
+  );
+}
+
+function StatPill({ value, label }: { value: string; label: string }) {
+  return (
+    <div className="rounded-[1.15rem] border border-white/10 bg-white/[0.04] px-4 py-4">
+      <p className="text-lg font-semibold tracking-tight text-white sm:text-xl">{value}</p>
       <p className="mt-1 text-xs leading-relaxed text-brand-300">{label}</p>
     </div>
+  );
+}
+
+function CaseCard({
+  projectId,
+  title,
+  category,
+  description,
+}: {
+  projectId: string;
+  title: string;
+  category: string;
+  description: string;
+}) {
+  return (
+    <Shell className="h-full p-5 sm:p-6">
+      <Link to={`/portfolio/${projectId}`} className="block">
+        <div className="overflow-hidden rounded-[1.4rem] border border-white/10 bg-[#0e1320]">
+          <div className="aspect-[4/3]">
+            <BrandedVisual
+              variant={projectId as VisualVariant}
+              title={title}
+              className="rounded-[1.4rem]"
+            />
+          </div>
+        </div>
+      </Link>
+
+      <div className="mt-5 flex items-center gap-3">
+        <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-accent">{category}</span>
+        <div className="h-px w-8 bg-white/10" />
+        <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">Case study</span>
+      </div>
+
+      <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white">{title}</h3>
+      <p className="mt-3 text-sm leading-relaxed text-brand-300 sm:text-base">{description}</p>
+
+      <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+        <Link
+          to={`/portfolio/${projectId}`}
+          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1f7dff]"
+        >
+          Open case study
+          <ChevronRight className="h-4 w-4" />
+        </Link>
+        <button
+          type="button"
+          onClick={() =>
+            window.dispatchEvent(
+              new CustomEvent('open-chat', {
+                detail: { query: `I want to build a workflow like ${title} for my business.` },
+              }),
+            )
+          }
+          className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent"
+        >
+          Ask about this
+        </button>
+      </div>
+    </Shell>
   );
 }
 
@@ -63,7 +133,7 @@ export default function Portfolio() {
   const categories = ['All', 'AI Systems', 'SaaS', 'E-commerce', 'Automation'];
   const featuredProject = projects.find((project) => project.id === 'acengeers');
 
-  const filteredProjects = useMemo(() => {
+  const supportingProjects = useMemo(() => {
     return projects.filter((project) => {
       if (project.id === 'acengeers') {
         return false;
@@ -73,26 +143,35 @@ export default function Portfolio() {
       const matchesSearch =
         project.title.toLowerCase().includes(search.toLowerCase()) ||
         project.description.toLowerCase().includes(search.toLowerCase()) ||
-        projectContext[project.id as ProjectContextId].pressurePoint.toLowerCase().includes(search.toLowerCase());
+        projectContext[project.id as ProjectContextId].pressurePoint
+          .toLowerCase()
+          .includes(search.toLowerCase());
 
       return matchesFilter && matchesSearch;
     });
   }, [filter, search]);
 
   return (
-    <div className="min-h-screen bg-[#05070c] pt-24 pb-20 text-white sm:pt-28 sm:pb-24">
+    <div className="min-h-screen bg-[#05070c] pb-20 pt-24 text-white sm:pb-24 sm:pt-28">
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        <section className="mb-18 md:mb-24">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-12">
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
+        <section className="relative overflow-hidden pb-18 pt-4 md:pb-24">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(40,90,255,0.12),_transparent_42%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:52px_52px] opacity-[0.12]" />
+
+          <div className="relative mx-auto max-w-4xl text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
               <p className="mb-6 text-sm font-semibold uppercase tracking-widest text-accent">Work</p>
-              <h1 className="max-w-[11ch] text-4xl font-semibold leading-[0.94] tracking-tight text-white sm:text-6xl md:text-7xl lg:max-w-[9ch] lg:text-[5.15rem]">
-                Clear, premium work with a cleaner path from attention to action.
+              <h1 className="mx-auto max-w-[12ch] text-4xl font-semibold leading-[0.94] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5.3rem]">
+                Case studies designed to feel clear, calm, and commercially sharp.
               </h1>
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-brand-300 sm:text-lg md:text-xl">
-                A tighter showcase of one featured launch, focused demos, and supporting case studies built to feel organized on desktop and calm on mobile.
+              <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand-300 sm:text-lg md:text-xl">
+                One flagship launch, a tighter case-study grid, and a cleaner proof layer that makes the work easier to scan on desktop and stronger on mobile.
               </p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
                 <Link
                   to="/portfolio/acengeers"
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1f7dff]"
@@ -108,241 +187,119 @@ export default function Portfolio() {
                 </Link>
               </div>
             </motion.div>
-
-            <DarkShell className="overflow-hidden p-4 sm:p-5 lg:p-6">
-              <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_15rem]">
-                <div className="overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#0d1220] min-h-[20rem]">
-                  <AcengeersShowcase activeFeature={0} />
-                </div>
-                <div className="grid gap-3">
-                  {[
-                    ['Featured launch', 'Acengeers leads the page as the flagship website case study.'],
-                    ['Cleaner structure', 'Each section now has one job instead of trying to do everything.'],
-                    ['Better scale', 'Desktop gets a stronger rhythm and mobile gets fewer cramped blocks.'],
-                  ].map(([title, text]) => (
-                    <div key={title} className="rounded-[1.25rem] border border-white/10 bg-white/[0.04] p-4">
-                      <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.24em] text-accent">{title}</p>
-                      <p className="text-sm leading-relaxed text-brand-300">{text}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </DarkShell>
           </div>
         </section>
 
         {featuredProject ? (
           <section className="mb-20 md:mb-24">
-            <DarkShell className="overflow-hidden p-6 sm:p-8 lg:p-10">
-              <div className="grid gap-8 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:items-center">
-                <div>
-                  <div className="mb-4 flex flex-wrap items-center gap-3">
-                    <span className="rounded-full border border-white/12 bg-white/[0.05] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent">
-                      Featured launch
-                    </span>
-                    <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">{featuredProject.category}</span>
+            <SectionIntro
+              eyebrow="Featured launch"
+              title="A real website launch given the weight of a proper flagship case study."
+              text="Acengeers now leads the page as the main proof point instead of fighting for attention in a crowded card grid."
+            />
+
+            <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center">
+              <Shell className="p-6 sm:p-7 md:p-8">
+                <div className="mb-4 flex items-center gap-3">
+                  <span className="rounded-full border border-white/12 bg-white/[0.05] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent">
+                    Live launch
+                  </span>
+                  <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">
+                    {featuredProject.category}
+                  </span>
+                </div>
+
+                <h2 className="max-w-[12ch] text-3xl font-semibold tracking-tight text-white sm:text-4xl">
+                  {featuredProject.title}
+                </h2>
+                <p className="mt-4 max-w-xl text-base leading-relaxed text-brand-300 sm:text-lg">
+                  {featuredProject.description}
+                </p>
+
+                <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-[1.2rem] border border-white/10 bg-white/[0.04] p-4">
+                    <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.22em] text-accent">Business problem</p>
+                    <p className="text-sm leading-relaxed text-brand-300">
+                      {projectContext[featuredProject.id as ProjectContextId].pressurePoint}
+                    </p>
                   </div>
-                  <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">{featuredProject.title}</h2>
-                  <p className="mt-4 text-base leading-relaxed text-brand-300 sm:text-lg">{featuredProject.description}</p>
-
-                  <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                    <div className="rounded-[1.35rem] border border-white/10 bg-white/[0.04] p-4">
-                      <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.22em] text-accent">Business problem</p>
-                      <p className="text-sm leading-relaxed text-brand-300">
-                        {projectContext[featuredProject.id as ProjectContextId].pressurePoint}
-                      </p>
-                    </div>
-                    <div className="rounded-[1.35rem] border border-white/10 bg-white/[0.04] p-4">
-                      <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.22em] text-accent">Commercial outcome</p>
-                      <p className="text-sm leading-relaxed text-brand-300">
-                        {projectContext[featuredProject.id as ProjectContextId].commercialOutcome}
-                      </p>
-                    </div>
+                  <div className="rounded-[1.2rem] border border-white/10 bg-white/[0.04] p-4">
+                    <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.22em] text-accent">Commercial outcome</p>
+                    <p className="text-sm leading-relaxed text-brand-300">
+                      {projectContext[featuredProject.id as ProjectContextId].commercialOutcome}
+                    </p>
                   </div>
+                </div>
 
-                  {featuredProject.metricHighlights ? (
-                    <div className="mt-6 grid grid-cols-2 gap-3">
-                      {featuredProject.metricHighlights.map((metric) => (
-                        <div key={metric.label}>
-                          <MiniMetric label={metric.label} value={metric.value} />
-                        </div>
-                      ))}
-                    </div>
-                  ) : null}
+                {featuredProject.metricHighlights ? (
+                  <div className="mt-6 grid grid-cols-2 gap-3">
+                    {featuredProject.metricHighlights.map((metric) => (
+                      <div key={metric.label}>
+                        <StatPill value={metric.value} label={metric.label} />
+                      </div>
+                    ))}
+                  </div>
+                ) : null}
 
-                  <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-                    <Link
-                      to={`/portfolio/${featuredProject.id}`}
-                      className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1f7dff]"
-                    >
-                      Open full case study
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                  <Link
+                    to={`/portfolio/${featuredProject.id}`}
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1f7dff]"
+                  >
+                    Open full case study
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <a
+                    href={featuredProject.liveUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent"
+                  >
+                    Live site
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                  {featuredProject.repoUrl ? (
                     <a
-                      href={featuredProject.liveUrl}
+                      href={featuredProject.repoUrl}
                       target="_blank"
                       rel="noreferrer"
                       className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent"
                     >
-                      Live site
-                      <ExternalLink className="h-4 w-4" />
+                      Repository
+                      <Github className="h-4 w-4" />
                     </a>
-                    {featuredProject.repoUrl ? (
-                      <a
-                        href={featuredProject.repoUrl}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent"
-                      >
-                        Repository
-                        <Github className="h-4 w-4" />
-                      </a>
-                    ) : null}
-                  </div>
+                  ) : null}
                 </div>
+              </Shell>
 
-                <div className="grid gap-4">
-                  <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#0d1220] min-h-[22rem]">
-                    <AcengeersShowcase activeFeature={1} />
+              <div className="grid gap-4">
+                <Shell className="overflow-hidden p-3 sm:p-4">
+                  <div className="overflow-hidden rounded-[1.35rem] border border-white/10 bg-[#0d1220]">
+                    <AcengeersShowcase activeFeature={0} />
                   </div>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    {featuredProject.features.slice(0, 2).map((feature) => (
-                      <div key={feature.title} className="rounded-[1.4rem] border border-white/10 bg-white/[0.04] p-4">
+                </Shell>
+                <div className="grid gap-4 md:grid-cols-2">
+                  {featuredProject.features.slice(0, 2).map((feature) => (
+                    <div key={feature.title}>
+                      <Shell className="p-5">
                         <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.22em] text-accent">Focus area</p>
                         <h3 className="text-lg font-semibold tracking-tight text-white">{feature.title}</h3>
                         <p className="mt-2 text-sm leading-relaxed text-brand-300">{feature.description}</p>
-                      </div>
-                    ))}
-                  </div>
+                      </Shell>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </DarkShell>
+            </div>
           </section>
         ) : null}
 
-        <section className="mb-20 md:mb-24">
-          <SectionHeader
-            eyebrow="Start building"
-            title="Three ways to review the work without fighting the layout."
-            text="The page is now organized into one featured launch, focused demos, and a supporting set of concept studies so each layer has a clear purpose."
-          />
-
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {[
-              {
-                title: 'Featured website launch',
-                text: 'A stronger flagship presentation for Acengeers so shipped website work gets the visual weight it deserves.',
-                cta: 'Open Acengeers',
-                to: '/portfolio/acengeers',
-                preview: <AcengeersShowcase activeFeature={2} />,
-              },
-              {
-                title: 'Interactive product demos',
-                text: 'Smaller, more isolated demos that show workflow behavior without collapsing into a grid of tiny previews.',
-                cta: 'See demos below',
-                to: '#working-demos',
-                preview: <DemoPreview id="nexus-ai" />,
-              },
-              {
-                title: 'Supporting case studies',
-                text: 'A cleaner secondary layer for concept studies so the page keeps range without losing hierarchy.',
-                cta: 'Browse studies',
-                to: '#case-studies',
-                preview: <BrandedVisual variant={'lumina-saas' as VisualVariant} title="Lumina Client Portal" className="rounded-[1.3rem]" />,
-              },
-            ].map((item) => (
-              <div key={item.title}>
-                <DarkShell className="h-full overflow-hidden p-5 sm:p-6">
-                  <div className="mb-5 overflow-hidden rounded-[1.3rem] border border-white/10 bg-[#0d1220] min-h-[15rem]">{item.preview}</div>
-                  <h3 className="text-2xl font-semibold tracking-tight text-white">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-brand-300 sm:text-base">{item.text}</p>
-                  <Link
-                    to={item.to}
-                    className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent"
-                  >
-                    {item.cta}
-                    <ArrowRight className="h-4 w-4" />
-                  </Link>
-                </DarkShell>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="working-demos" className="mb-20 scroll-mt-32 md:mb-24">
-          <SectionHeader
-            eyebrow="Product demos"
-            title="Focused demonstrations that stay organized and easy to scan."
-            text="Each demo sits inside the same modular shell, so the page feels consistent even while the product categories change."
-          />
-
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            {proofDemos.map((demo, idx) => (
-              <motion.div
-                key={demo.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: idx * 0.05 }}
-              >
-                <DarkShell className="h-full p-5 sm:p-6">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <span className="rounded-full border border-white/12 bg-white/[0.05] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent">
-                      {demo.eyebrow}
-                    </span>
-                    <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">
-                      {projects.find((project) => project.id === demo.id)?.category}
-                    </span>
-                  </div>
-
-                  <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white sm:text-3xl">{demo.title}</h3>
-                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-brand-300 sm:text-base">{demo.summary}</p>
-
-                  <div className="mt-5 overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1220] min-h-[14rem]">
-                    <div className="aspect-[16/10]">
-                      <DemoPreview id={demo.id} />
-                    </div>
-                  </div>
-
-                  <div className="mt-5 rounded-[1.25rem] border border-white/10 bg-white/[0.04] px-4 py-4">
-                    <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.22em] text-accent">Why this matters</p>
-                    <p className="text-sm leading-relaxed text-brand-300 sm:text-base">{demo.whyItMatters}</p>
-                  </div>
-
-                  <div className="mt-5 flex flex-col gap-3 sm:flex-row">
-                    <Link
-                      to={`/portfolio/${demo.id}`}
-                      className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1f7dff]"
-                    >
-                      Open case study
-                      <ArrowRight className="h-4 w-4" />
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() =>
-                        window.dispatchEvent(
-                          new CustomEvent('open-chat', {
-                            detail: { query: `I want a system like the ${demo.title.toLowerCase()} example.` },
-                          }),
-                        )
-                      }
-                      className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent"
-                    >
-                      Ask about this build
-                    </button>
-                  </div>
-                </DarkShell>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
         <section id="case-studies" className="mb-20 scroll-mt-32 md:mb-24">
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-end">
-            <SectionHeader
-              eyebrow="Case studies"
-              title="A supporting grid that feels cleaner, calmer, and easier to browse."
-              text="The concept studies still show range, but they now sit inside a tighter visual system instead of competing with the flagship launch."
+            <SectionIntro
+              eyebrow="Explore cases"
+              title="A tighter grid that feels calmer, more visual, and easier to browse."
+              text="The supporting case studies now work as a clean secondary layer instead of competing with the flagship project."
             />
 
             <div className="space-y-4">
@@ -358,6 +315,7 @@ export default function Portfolio() {
                   className="block w-full rounded-full border border-white/12 bg-white/[0.04] py-3.5 pl-12 pr-6 text-sm text-white placeholder:text-brand-300 focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/10"
                 />
               </div>
+
               <div className="flex flex-wrap gap-3">
                 {categories.map((cat) => (
                   <button
@@ -376,81 +334,98 @@ export default function Portfolio() {
             </div>
           </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2">
-            {filteredProjects.map((project, idx) => (
+          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {supportingProjects.map((project) => (
+              <div key={project.id}>
+                <CaseCard
+                  projectId={project.id}
+                  title={project.title}
+                  category={project.category}
+                  description={project.description}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="working-demos" className="mb-20 scroll-mt-32 md:mb-24">
+          <SectionIntro
+            eyebrow="Focused demos"
+            title="Smaller product slices that still feel structured and premium."
+            text="Each demo is presented inside the same visual system so the page stays coherent while still showing product range."
+          />
+
+          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+            {proofDemos.map((demo, idx) => (
               <motion.div
-                key={project.id}
+                key={demo.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.05 }}
               >
-                <DarkShell className="h-full p-5 sm:p-6">
-                  <div className="overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1220]">
+                <Shell className="h-full p-5 sm:p-6">
+                  <div className="flex items-center gap-3">
+                    <span className="rounded-full border border-white/12 bg-white/[0.05] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent">
+                      {demo.eyebrow}
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">
+                      {projects.find((project) => project.id === demo.id)?.category}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white">{demo.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-brand-300 sm:text-base">{demo.summary}</p>
+
+                  <div className="mt-5 overflow-hidden rounded-[1.35rem] border border-white/10 bg-[#0d1220]">
                     <div className="aspect-[16/10]">
-                      <BrandedVisual variant={project.id as VisualVariant} title={project.title} className="rounded-[1.5rem]" />
+                      <DemoPreview id={demo.id} />
                     </div>
-                  </div>
-
-                  <div className="mt-5 flex flex-wrap items-center gap-3">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-accent">{project.category}</span>
-                    <div className="h-[1px] w-8 bg-white/10" />
-                    <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">Case Study</span>
-                  </div>
-
-                  <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white md:text-3xl">{project.title}</h3>
-                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-brand-300 sm:text-base">{project.description}</p>
-
-                  <div className="mt-5 rounded-[1.25rem] border border-white/10 bg-white/[0.04] px-4 py-4">
-                    <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.22em] text-accent">Business context</p>
-                    <p className="text-sm leading-relaxed text-brand-300">
-                      {projectContext[project.id as ProjectContextId].pressurePoint}
-                    </p>
                   </div>
 
                   <div className="mt-5 flex flex-col gap-3 sm:flex-row">
                     <Link
-                      to={`/portfolio/${project.id}`}
-                      className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1f7dff]"
+                      to={`/portfolio/${demo.id}`}
+                      className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1f7dff]"
                     >
                       Open case study
-                      <ChevronRight className="h-4 w-4" />
+                      <ArrowRight className="h-4 w-4" />
                     </Link>
                     <button
                       type="button"
                       onClick={() =>
                         window.dispatchEvent(
                           new CustomEvent('open-chat', {
-                            detail: { query: `I want to build a workflow like ${project.title} for my business.` },
+                            detail: { query: `I want a system like the ${demo.title.toLowerCase()} example.` },
                           }),
                         )
                       }
-                      className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent"
+                      className="inline-flex min-h-11 items-center justify-center rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent"
                     >
-                      Ask about this workflow
+                      Ask about this
                     </button>
                   </div>
-                </DarkShell>
+                </Shell>
               </motion.div>
             ))}
           </div>
         </section>
 
         <section className="mb-20 md:mb-24">
-          <SectionHeader
+          <SectionIntro
             eyebrow="Outcomes"
             title="A cleaner proof layer that keeps business impact visible."
-            text="The portfolio should not only look polished. It should show the kinds of commercial improvements the work is meant to create."
+            text="The page should not only look premium. It should also make the commercial intent of the work easy to understand."
           />
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {impactMetrics.map((metric) => (
               <div key={metric.label}>
-                <DarkShell className="h-full p-5 sm:p-6">
+                <Shell className="h-full p-5 sm:p-6">
                   <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.24em] text-accent">{metric.label}</p>
                   <p className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">{metric.value}</p>
                   <p className="mt-3 text-sm leading-relaxed text-brand-300 sm:text-base">{metric.detail}</p>
-                </DarkShell>
+                </Shell>
               </div>
             ))}
           </div>
@@ -458,16 +433,16 @@ export default function Portfolio() {
 
         <section className="mb-20 md:mb-24">
           <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
-            <SectionHeader
+            <SectionIntro
               eyebrow="Delivery model"
               title="A modular process that stays clear from diagnosis to launch."
-              text="The same structure that makes the page easier to understand also reflects how the projects themselves are run."
+              text="The page structure mirrors the way the work is delivered: clear framing, visible steps, and less unnecessary noise in the middle."
             />
 
             <div className="grid gap-4">
               {deliverySteps.map((item) => (
                 <div key={item.step}>
-                  <DarkShell className="p-5 sm:p-6">
+                  <Shell className="p-5 sm:p-6">
                     <div className="grid gap-4 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-start">
                       <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-sm font-bold text-accent">
                         {item.step}
@@ -480,7 +455,7 @@ export default function Portfolio() {
                         {item.artifact}
                       </div>
                     </div>
-                  </DarkShell>
+                  </Shell>
                 </div>
               ))}
             </div>
