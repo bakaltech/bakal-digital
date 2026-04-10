@@ -49,7 +49,7 @@ function DarkShell({ children, className = '' }: { children: React.ReactNode; cl
 
 function MiniMetric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[1.2rem] border border-white/10 bg-white/[0.04] px-4 py-4">
+    <div className="rounded-[1.2rem] border border-white/10 bg-white/[0.04] px-4 py-4 sm:px-5 sm:py-5">
       <p className="text-xl font-semibold tracking-tight text-white">{value}</p>
       <p className="mt-1 text-xs leading-relaxed text-brand-300">{label}</p>
     </div>
@@ -82,15 +82,15 @@ export default function Portfolio() {
   return (
     <div className="min-h-screen bg-[#05070c] pt-24 pb-20 text-white sm:pt-28 sm:pb-24">
       <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        <section className="mb-16 md:mb-20">
-          <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-center">
+        <section className="mb-18 md:mb-24">
+          <div className="grid gap-8 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:items-center lg:gap-12">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}>
               <p className="mb-6 text-sm font-semibold uppercase tracking-widest text-accent">Work</p>
-              <h1 className="max-w-[10ch] text-5xl font-semibold leading-[0.96] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5.5rem]">
-                Built to feel clear, premium, and commercially useful.
+              <h1 className="max-w-[11ch] text-4xl font-semibold leading-[0.94] tracking-tight text-white sm:text-6xl md:text-7xl lg:max-w-[9ch] lg:text-[5.15rem]">
+                Clear, premium work with a cleaner path from attention to action.
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-brand-300 sm:text-xl">
-                A more organized showcase of real launches, focused product demos, and case studies with stronger hierarchy, cleaner spacing, and less noise.
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-brand-300 sm:text-lg md:text-xl">
+                A tighter showcase of one featured launch, focused demos, and supporting case studies built to feel organized on desktop and calm on mobile.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                 <Link
@@ -109,18 +109,18 @@ export default function Portfolio() {
               </div>
             </motion.div>
 
-            <DarkShell className="overflow-hidden p-4 sm:p-5">
-              <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_18rem]">
-                <div className="overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#0d1220]">
+            <DarkShell className="overflow-hidden p-4 sm:p-5 lg:p-6">
+              <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_15rem]">
+                <div className="overflow-hidden rounded-[1.6rem] border border-white/10 bg-[#0d1220] min-h-[20rem]">
                   <AcengeersShowcase activeFeature={0} />
                 </div>
-                <div className="grid gap-4">
+                <div className="grid gap-3">
                   {[
                     ['Featured launch', 'Acengeers leads the page as the flagship website case study.'],
                     ['Cleaner structure', 'Each section now has one job instead of trying to do everything.'],
                     ['Better scale', 'Desktop gets a stronger rhythm and mobile gets fewer cramped blocks.'],
                   ].map(([title, text]) => (
-                    <div key={title} className="rounded-[1.4rem] border border-white/10 bg-white/[0.04] p-4">
+                    <div key={title} className="rounded-[1.25rem] border border-white/10 bg-white/[0.04] p-4">
                       <p className="mb-2 text-[10px] font-bold uppercase tracking-[0.24em] text-accent">{title}</p>
                       <p className="text-sm leading-relaxed text-brand-300">{text}</p>
                     </div>
@@ -134,7 +134,7 @@ export default function Portfolio() {
         {featuredProject ? (
           <section className="mb-20 md:mb-24">
             <DarkShell className="overflow-hidden p-6 sm:p-8 lg:p-10">
-              <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
+              <div className="grid gap-8 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:items-center">
                 <div>
                   <div className="mb-4 flex flex-wrap items-center gap-3">
                     <span className="rounded-full border border-white/12 bg-white/[0.05] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent">
@@ -202,7 +202,7 @@ export default function Portfolio() {
                 </div>
 
                 <div className="grid gap-4">
-                  <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#0d1220]">
+                  <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#0d1220] min-h-[22rem]">
                     <AcengeersShowcase activeFeature={1} />
                   </div>
                   <div className="grid gap-4 sm:grid-cols-2">
@@ -227,7 +227,7 @@ export default function Portfolio() {
             text="The page is now organized into one featured launch, focused demos, and a supporting set of concept studies so each layer has a clear purpose."
           />
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-3">
+          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {[
               {
                 title: 'Featured website launch',
@@ -252,17 +252,17 @@ export default function Portfolio() {
               },
             ].map((item) => (
               <div key={item.title}>
-                <DarkShell className="overflow-hidden p-5 sm:p-6">
-                <div className="mb-5 overflow-hidden rounded-[1.3rem] border border-white/10 bg-[#0d1220]">{item.preview}</div>
-                <h3 className="text-2xl font-semibold tracking-tight text-white">{item.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-brand-300 sm:text-base">{item.text}</p>
-                <Link
-                  to={item.to}
-                  className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent"
-                >
-                  {item.cta}
-                  <ArrowRight className="h-4 w-4" />
-                </Link>
+                <DarkShell className="h-full overflow-hidden p-5 sm:p-6">
+                  <div className="mb-5 overflow-hidden rounded-[1.3rem] border border-white/10 bg-[#0d1220] min-h-[15rem]">{item.preview}</div>
+                  <h3 className="text-2xl font-semibold tracking-tight text-white">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-brand-300 sm:text-base">{item.text}</p>
+                  <Link
+                    to={item.to}
+                    className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-4 py-2 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent"
+                  >
+                    {item.cta}
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </DarkShell>
               </div>
             ))}
@@ -296,9 +296,9 @@ export default function Portfolio() {
                   </div>
 
                   <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white sm:text-3xl">{demo.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-brand-300 sm:text-base">{demo.summary}</p>
+                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-brand-300 sm:text-base">{demo.summary}</p>
 
-                  <div className="mt-5 overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1220]">
+                  <div className="mt-5 overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0d1220] min-h-[14rem]">
                     <div className="aspect-[16/10]">
                       <DemoPreview id={demo.id} />
                     </div>
@@ -399,7 +399,7 @@ export default function Portfolio() {
                   </div>
 
                   <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white md:text-3xl">{project.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-brand-300 sm:text-base">{project.description}</p>
+                  <p className="mt-3 max-w-xl text-sm leading-relaxed text-brand-300 sm:text-base">{project.description}</p>
 
                   <div className="mt-5 rounded-[1.25rem] border border-white/10 bg-white/[0.04] px-4 py-4">
                     <p className="mb-2 text-[9px] font-bold uppercase tracking-[0.22em] text-accent">Business context</p>
@@ -446,10 +446,10 @@ export default function Portfolio() {
           <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
             {impactMetrics.map((metric) => (
               <div key={metric.label}>
-                <DarkShell className="p-5 sm:p-6">
-                <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.24em] text-accent">{metric.label}</p>
-                <p className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">{metric.value}</p>
-                <p className="mt-3 text-sm leading-relaxed text-brand-300 sm:text-base">{metric.detail}</p>
+                <DarkShell className="h-full p-5 sm:p-6">
+                  <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.24em] text-accent">{metric.label}</p>
+                  <p className="text-3xl font-semibold tracking-tight text-white sm:text-4xl">{metric.value}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-brand-300 sm:text-base">{metric.detail}</p>
                 </DarkShell>
               </div>
             ))}
@@ -468,18 +468,18 @@ export default function Portfolio() {
               {deliverySteps.map((item) => (
                 <div key={item.step}>
                   <DarkShell className="p-5 sm:p-6">
-                  <div className="grid gap-4 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-start">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-sm font-bold text-accent">
-                      {item.step}
+                    <div className="grid gap-4 md:grid-cols-[auto_minmax(0,1fr)_auto] md:items-start">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.05] text-sm font-bold text-accent">
+                        {item.step}
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">{item.title}</h3>
+                        <p className="mt-2 text-sm leading-relaxed text-brand-300 sm:text-base">{item.detail}</p>
+                      </div>
+                      <div className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">
+                        {item.artifact}
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-xl font-semibold tracking-tight text-white sm:text-2xl">{item.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed text-brand-300 sm:text-base">{item.detail}</p>
-                    </div>
-                    <div className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-2 text-[10px] font-bold uppercase tracking-[0.22em] text-brand-300">
-                      {item.artifact}
-                    </div>
-                  </div>
                   </DarkShell>
                 </div>
               ))}
