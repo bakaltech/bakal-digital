@@ -39,6 +39,22 @@ function Shell({ children, className = '' }: { children: React.ReactNode; classN
   );
 }
 
+function SectionBlock({
+  children,
+  className = '',
+  id,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  id?: string;
+}) {
+  return (
+    <section id={id} className={`py-12 sm:py-14 lg:py-16 ${className}`}>
+      {children}
+    </section>
+  );
+}
+
 function SectionIntro({
   eyebrow,
   title,
@@ -49,10 +65,10 @@ function SectionIntro({
   text: string;
 }) {
   return (
-    <div className="max-w-3xl">
+    <div className="max-w-2xl">
       <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-accent">{eyebrow}</p>
-      <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-4xl md:text-5xl">{title}</h2>
-      <p className="mt-4 text-base leading-relaxed text-brand-300 sm:text-lg">{text}</p>
+      <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-[2.6rem] md:text-[3.35rem]">{title}</h2>
+      <p className="mt-5 max-w-xl text-base leading-relaxed text-brand-300 sm:text-lg">{text}</p>
     </div>
   );
 }
@@ -100,7 +116,7 @@ function CaseCard({
       <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white">{title}</h3>
       <p className="mt-3 text-sm leading-relaxed text-brand-300 sm:text-base">{description}</p>
 
-      <div className="mt-5 flex flex-col gap-3 sm:flex-row">
+      <div className="mt-6 flex flex-col gap-3 sm:flex-row">
         <Link
           to={`/portfolio/${projectId}`}
           className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-[#1f7dff]"
@@ -153,22 +169,22 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-[#05070c] pb-20 pt-24 text-white sm:pb-24 sm:pt-28">
-      <div className="mx-auto max-w-7xl px-5 sm:px-6 lg:px-8">
-        <section className="relative overflow-hidden pb-18 pt-4 md:pb-24">
+      <div className="mx-auto max-w-[88rem] px-5 sm:px-6 lg:px-8">
+        <section className="relative overflow-hidden pb-12 pt-6 sm:pb-16 lg:pb-20">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(40,90,255,0.12),_transparent_42%)]" />
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:52px_52px] opacity-[0.12]" />
 
-          <div className="relative mx-auto max-w-4xl text-center">
+          <div className="relative mx-auto max-w-5xl text-center">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               <p className="mb-6 text-sm font-semibold uppercase tracking-widest text-accent">Work</p>
-              <h1 className="mx-auto max-w-[12ch] text-4xl font-semibold leading-[0.94] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5.3rem]">
+              <h1 className="mx-auto max-w-[13ch] text-4xl font-semibold leading-[0.96] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5.5rem]">
                 Case studies designed to feel clear, calm, and commercially sharp.
               </h1>
-              <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-brand-300 sm:text-lg md:text-xl">
+              <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-brand-300 sm:text-lg md:text-xl">
                 One flagship launch, a tighter case-study grid, and a cleaner proof layer that makes the work easier to scan on desktop and stronger on mobile.
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -191,14 +207,14 @@ export default function Portfolio() {
         </section>
 
         {featuredProject ? (
-          <section className="mb-20 md:mb-24">
+          <SectionBlock>
             <SectionIntro
               eyebrow="Featured launch"
               title="A real website launch given the weight of a proper flagship case study."
               text="Acengeers now leads the page as the main proof point instead of fighting for attention in a crowded card grid."
             />
 
-            <div className="mt-10 grid gap-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-center">
+            <div className="mt-10 grid gap-6 xl:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] xl:items-start">
               <Shell className="p-6 sm:p-7 md:p-8">
                 <div className="mb-4 flex items-center gap-3">
                   <span className="rounded-full border border-white/12 bg-white/[0.05] px-3 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-accent">
@@ -272,7 +288,7 @@ export default function Portfolio() {
                 </div>
               </Shell>
 
-              <div className="grid gap-4">
+              <div className="grid gap-5">
                 <Shell className="overflow-hidden p-3 sm:p-4">
                   <div className="overflow-hidden rounded-[1.35rem] border border-white/10 bg-[#0d1220]">
                     <AcengeersShowcase activeFeature={0} />
@@ -291,18 +307,18 @@ export default function Portfolio() {
                 </div>
               </div>
             </div>
-          </section>
+          </SectionBlock>
         ) : null}
 
-        <section id="case-studies" className="mb-20 scroll-mt-32 md:mb-24">
-          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_20rem] lg:items-end">
+        <SectionBlock id="case-studies" className="scroll-mt-32">
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,1fr)_22rem] xl:items-end">
             <SectionIntro
               eyebrow="Explore cases"
               title="A tighter grid that feels calmer, more visual, and easier to browse."
               text="The supporting case studies now work as a clean secondary layer instead of competing with the flagship project."
             />
 
-            <div className="space-y-4">
+            <div className="space-y-4 xl:justify-self-end xl:w-full xl:max-w-sm">
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-5">
                   <Search className="h-4 w-4 text-brand-300" />
@@ -334,7 +350,7 @@ export default function Portfolio() {
             </div>
           </div>
 
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-10 grid items-stretch gap-6 md:grid-cols-2 xl:grid-cols-3">
             {supportingProjects.map((project) => (
               <div key={project.id}>
                 <CaseCard
@@ -346,16 +362,16 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
-        </section>
+        </SectionBlock>
 
-        <section id="working-demos" className="mb-20 scroll-mt-32 md:mb-24">
+        <SectionBlock id="working-demos" className="scroll-mt-32">
           <SectionIntro
             eyebrow="Focused demos"
             title="Smaller product slices that still feel structured and premium."
             text="Each demo is presented inside the same visual system so the page stays coherent while still showing product range."
           />
 
-          <div className="mt-10 grid gap-6 lg:grid-cols-2">
+          <div className="mt-10 grid items-stretch gap-6 lg:grid-cols-2">
             {proofDemos.map((demo, idx) => (
               <motion.div
                 key={demo.id}
@@ -409,9 +425,9 @@ export default function Portfolio() {
               </motion.div>
             ))}
           </div>
-        </section>
+        </SectionBlock>
 
-        <section className="mb-20 md:mb-24">
+        <SectionBlock>
           <SectionIntro
             eyebrow="Outcomes"
             title="A cleaner proof layer that keeps business impact visible."
@@ -429,10 +445,10 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
-        </section>
+        </SectionBlock>
 
-        <section className="mb-20 md:mb-24">
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
+        <SectionBlock className="pb-6 sm:pb-8">
+          <div className="grid gap-10 xl:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] xl:items-start">
             <SectionIntro
               eyebrow="Delivery model"
               title="A modular process that stays clear from diagnosis to launch."
@@ -460,7 +476,7 @@ export default function Portfolio() {
               ))}
             </div>
           </div>
-        </section>
+        </SectionBlock>
       </div>
     </div>
   );
