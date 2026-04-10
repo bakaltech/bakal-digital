@@ -1,4 +1,9 @@
 export const projectContext = {
+  acengeers: {
+    audience: 'Service businesses that need to look more credible online, explain their offers clearly, and convert local demand without relying on a generic website template.',
+    pressurePoint: 'The category is crowded with lookalike cleaning sites, so trust, differentiation, and inquiry momentum often collapse before the visitor even reaches the form.',
+    commercialOutcome: 'A more premium first impression, clearer service understanding, and a website that gives prospects enough confidence to request a quote sooner.',
+  },
   'nexus-ai': {
     audience: 'Service businesses and operators handling high inbound volume, fragmented knowledge, and slow first-response handling.',
     pressurePoint: 'Lead intake, support, and internal context are spread across too many tools, so response quality drops as volume grows.',

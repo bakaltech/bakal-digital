@@ -1,12 +1,13 @@
 import React from 'react';
-import { BarChart3, Bot, Database, Globe, ShoppingBag, Workflow } from 'lucide-react';
+import { Globe, BarChart3, Bot, Database, ShoppingBag, Workflow } from 'lucide-react';
 
-type VisualVariant =
+export type VisualVariant =
   | 'ai'
   | 'platform'
   | 'commerce'
   | 'data'
   | 'studio'
+  | 'acengeers'
   | 'nexus-ai'
   | 'lumina-saas'
   | 'velocity-ecommerce'
@@ -26,6 +27,7 @@ const variantConfig: Record<VisualVariant, { icon: React.ElementType; eyebrow: s
   commerce: { icon: ShoppingBag, eyebrow: 'Commerce systems', accent: 'from-amber-300/80 to-orange-500/80', glow: 'bg-orange-400/20', panel: 'from-zinc-950 via-stone-900 to-slate-800' },
   data: { icon: Database, eyebrow: 'Automation and data', accent: 'from-emerald-300/80 to-teal-500/80', glow: 'bg-emerald-400/20', panel: 'from-slate-950 via-slate-900 to-slate-800' },
   studio: { icon: Workflow, eyebrow: 'Studio systems', accent: 'from-sky-400/80 to-indigo-500/80', glow: 'bg-sky-400/20', panel: 'from-slate-950 via-slate-900 to-slate-800' },
+  acengeers: { icon: Globe, eyebrow: 'Service website', accent: 'from-amber-300/80 to-orange-500/80', glow: 'bg-amber-300/25', panel: 'from-[#26170d] via-[#4c2f12] to-[#d97706]' },
   'nexus-ai': { icon: Bot, eyebrow: 'AI ops', accent: 'from-sky-400/80 to-blue-600/80', glow: 'bg-sky-400/20', panel: 'from-slate-950 via-slate-900 to-slate-800' },
   'lumina-saas': { icon: BarChart3, eyebrow: 'Client portal', accent: 'from-fuchsia-300/80 to-indigo-500/80', glow: 'bg-fuchsia-400/20', panel: 'from-[#171a2b] via-[#1c2440] to-[#111827]' },
   'velocity-ecommerce': { icon: ShoppingBag, eyebrow: 'Headless commerce', accent: 'from-amber-300/80 to-orange-500/80', glow: 'bg-orange-400/20', panel: 'from-[#1e1714] via-[#2b2019] to-[#171a1f]' },
@@ -37,7 +39,6 @@ const signalRows = ['Signal routing', 'Decision layer', 'Workflow health'];
 export default function BrandedVisual({ variant, title, compact = false, narrow = false, className = '' }: BrandedVisualProps) {
   const config = variantConfig[variant];
   const Icon = config.icon;
-  const isCondensed = compact || narrow;
   const titleClassName = compact
     ? 'text-lg sm:text-[1.2rem]'
     : narrow
