@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 
-type FilmScene = {
+type BrandFilmScene = {
   id: string;
   eyebrow: string;
   label: string;
@@ -12,13 +12,13 @@ type FilmScene = {
 
 function FilmFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative h-full min-h-[18rem] overflow-hidden rounded-[1.55rem] border border-white/8 bg-[#050505] sm:min-h-[24rem] lg:min-h-[28rem]">
+    <div className="relative h-full min-h-[18rem] overflow-hidden rounded-[1.55rem] border border-white/8 bg-[#040506] sm:min-h-[24rem] lg:min-h-[28rem]">
       <div className="absolute inset-x-0 top-0 z-30 flex h-12 items-center gap-2 border-b border-white/8 bg-black/24 px-4 backdrop-blur-sm">
         <div className="h-2.5 w-2.5 rounded-full bg-white/18" />
         <div className="h-2.5 w-2.5 rounded-full bg-white/18" />
         <div className="h-2.5 w-2.5 rounded-full bg-white/18" />
         <div className="ml-3 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/52">
-          Bakal Digital film
+          Bakal Digital brand film
         </div>
       </div>
       <div className="absolute inset-x-0 top-12 bottom-0">{children}</div>
@@ -26,272 +26,86 @@ function FilmFrame({ children }: { children: React.ReactNode }) {
   );
 }
 
-function BrandIgnitionScene() {
+function WeakLayerScene() {
   return (
-    <div className="relative flex h-full items-center justify-center overflow-hidden bg-[#040507] px-6 py-8 text-center">
+    <div className="relative h-full overflow-hidden bg-[linear-gradient(180deg,#07080b_0%,#040506_100%)]">
       <motion.div
-        className="absolute inset-0 opacity-65"
-        animate={{ backgroundPosition: ['0px 0px', '48px 48px'] }}
-        transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
-        style={{
-          backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
-          backgroundSize: '48px 48px',
-        }}
-      />
-      <motion.div
-        className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(138,180,248,0.16),transparent_32%)]"
-        initial={{ scale: 0.65, opacity: 0 }}
-        animate={{ scale: 1.45, opacity: 1 }}
-        transition={{ duration: 3.2, ease: 'easeOut' }}
-      />
-      <motion.div
-        className="relative z-10"
-        initial={{ scale: 0.9, opacity: 0, filter: 'blur(12px)' }}
-        animate={{ scale: 1, opacity: 1, filter: 'blur(0px)' }}
-        transition={{ duration: 1.25, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <p className="text-[11px] font-semibold uppercase tracking-[0.34em] text-accent">Bakal Digital</p>
-        <h3 className="mt-6 text-[13vw] font-semibold uppercase leading-[0.8] tracking-[-0.08em] text-white sm:text-[10vw]">
-          Systems
-        </h3>
-        <h3 className="text-[13vw] font-semibold uppercase leading-[0.8] tracking-[-0.08em] text-accent sm:text-[10vw]">
-          In Motion
-        </h3>
-      </motion.div>
-    </div>
-  );
-}
-
-function CloseCropScene() {
-  return (
-    <div className="relative h-full overflow-hidden bg-[linear-gradient(180deg,#0a0c11_0%,#050608_100%)]">
-      <motion.div
-        className="absolute left-[8%] top-[14%] h-[58%] w-[34%] rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.03))] shadow-[0_24px_60px_rgba(0,0,0,0.32)] backdrop-blur-sm"
-        initial={{ x: -32, opacity: 0.65, scale: 0.96 }}
-        animate={{ x: 0, opacity: 1, scale: 1 }}
-        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <motion.div
-          className="absolute inset-[10%] rounded-[1.5rem] bg-[radial-gradient(circle_at_top_right,rgba(138,180,248,0.4),transparent_34%),linear-gradient(180deg,#131826_0%,#0f1117_100%)]"
-          animate={{ scale: [1, 1.03, 1], x: [0, 6, 0] }}
-          transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut' }}
-        />
-      </motion.div>
-
-      <motion.div
-        className="absolute right-[12%] top-[18%] h-[24%] w-[24%] rounded-[1.5rem] border border-white/10 bg-white/[0.05] shadow-[0_18px_40px_rgba(0,0,0,0.26)] backdrop-blur-sm"
-        initial={{ y: -18, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-      >
-        <div className="p-4">
-          <div className="h-2 w-14 rounded-full bg-white/20" />
-          <div className="mt-4 h-12 rounded-xl bg-accent/14" />
-          <div className="mt-3 h-2 w-20 rounded-full bg-white/12" />
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="absolute right-[8%] bottom-[14%] h-[38%] w-[40%] rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))] shadow-[0_24px_60px_rgba(0,0,0,0.28)] backdrop-blur-sm"
-        initial={{ x: 36, opacity: 0.65, scale: 0.96 }}
-        animate={{ x: 0, opacity: 1, scale: 1 }}
-        transition={{ delay: 0.12, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div className="grid h-full gap-3 p-4 sm:grid-cols-[0.9fr_1.1fr]">
-          <div className="space-y-3">
-            <div className="h-10 rounded-xl bg-white/[0.06]" />
-            <div className="h-20 rounded-xl bg-white/[0.05]" />
-            <div className="h-14 rounded-xl bg-white/[0.04]" />
-          </div>
-          <div className="space-y-3">
-            <motion.div
-              className="h-24 rounded-[1.2rem] bg-[radial-gradient(circle_at_top_right,rgba(244,138,42,0.32),transparent_42%),linear-gradient(180deg,#161d2b_0%,#10131a_100%)]"
-              animate={{ scale: [1, 1.02, 1] }}
-              transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
-            />
-            <div className="grid grid-cols-3 gap-3">
-              {[1, 2, 3].map((item) => (
-                <motion.div
-                  key={item}
-                  className="h-14 rounded-xl bg-white/[0.05]"
-                  animate={{ y: [0, -5, 0] }}
-                  transition={{ duration: 3 + item * 0.35, repeat: Infinity, ease: 'easeInOut' }}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(138,180,248,0.08),transparent_45%)]"
-        animate={{ opacity: [0.45, 0.7, 0.45] }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
-      />
-    </div>
-  );
-}
-
-function WideRevealScene() {
-  return (
-    <div className="relative flex h-full items-center justify-center overflow-hidden bg-[linear-gradient(180deg,#111318_0%,#08090c_100%)] px-6 py-8">
-      <motion.div
-        className="absolute inset-0 opacity-70"
+        className="absolute inset-0 opacity-55"
         animate={{ backgroundPosition: ['0px 0px', '42px 42px'] }}
-        transition={{ duration: 14, repeat: Infinity, ease: 'linear' }}
+        transition={{ duration: 16, repeat: Infinity, ease: 'linear' }}
         style={{
           backgroundImage:
-            'linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)',
+            'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
           backgroundSize: '42px 42px',
         }}
       />
-      <motion.div
-        className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(138,180,248,0.11),transparent_42%)]"
-        animate={{ scale: [1, 1.06, 1] }}
-        transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut' }}
-      />
 
-      <motion.div
-        className="relative z-10 w-full max-w-5xl overflow-hidden rounded-[2rem] border border-white/10 bg-[#0d0f14] shadow-[0_35px_90px_rgba(0,0,0,0.38)]"
-        initial={{ scale: 0.93, y: 24, opacity: 0.6 }}
-        animate={{ scale: 1, y: 0, opacity: 1 }}
-        transition={{ duration: 1.25, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <div className="flex h-11 items-center gap-2 border-b border-white/8 px-4">
-          <div className="h-2.5 w-2.5 rounded-full bg-white/18" />
-          <div className="h-2.5 w-2.5 rounded-full bg-white/18" />
-          <div className="h-2.5 w-2.5 rounded-full bg-white/18" />
-          <div className="ml-4 h-2.5 w-24 rounded-full bg-accent/28" />
-        </div>
-        <div className="grid gap-4 p-4 sm:grid-cols-[0.9fr_1.1fr] sm:p-5 lg:grid-cols-[0.8fr_1.2fr]">
-          <div className="rounded-[1.4rem] bg-[linear-gradient(180deg,#181c28_0%,#11131a_100%)] p-4 text-white">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-accent">Service layer</p>
-            <h4 className="mt-4 max-w-[8ch] text-3xl font-semibold leading-[0.94] tracking-[-0.05em]">
-              Websites that carry more weight.
-            </h4>
-            <div className="mt-5 flex flex-wrap gap-2">
-              {['Websites', 'Portals', 'SaaS', 'AI systems'].map((item) => (
-                <span key={item} className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-2 text-xs font-semibold text-white/82">
-                  {item}
-                </span>
-              ))}
-            </div>
-          </div>
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(138,180,248,0.08),transparent_44%)]" />
 
-          <div className="grid gap-4">
-            <div className="rounded-[1.4rem] bg-[linear-gradient(180deg,#fff8ef_0%,#eef4ff_100%)] p-4 text-[#111111]">
-              <div className="grid gap-3 sm:grid-cols-[1fr_0.92fr]">
-                <div className="rounded-[1.2rem] bg-[linear-gradient(180deg,#ff992f_0%,#ffb72e_100%)] p-4 text-white">
-                  <p className="max-w-[7ch] text-3xl font-semibold leading-[0.94]">Clear offers. Stronger demand.</p>
-                  <div className="mt-4 flex gap-2">
-                    <div className="h-9 flex-1 rounded-full bg-white/90" />
-                    <div className="h-9 flex-1 rounded-full bg-black/82" />
-                  </div>
-                </div>
-                <div className="grid gap-2">
-                  {[1, 2, 3, 4].map((item) => (
-                    <div key={item} className="h-12 rounded-xl bg-[#111111]/6" />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="rounded-[1.3rem] bg-[#11141b] p-4 text-white">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">Portal reveal</p>
-                <div className="mt-4 h-24 rounded-[1rem] bg-[radial-gradient(circle_at_top_right,rgba(138,180,248,0.34),transparent_42%),linear-gradient(180deg,#1a2230_0%,#11151d_100%)]" />
-              </div>
-              <div className="rounded-[1.3rem] bg-[#11141b] p-4 text-white">
-                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">AI layer</p>
-                <div className="mt-4 flex h-24 items-end gap-2 rounded-[1rem] bg-[#0d1118] p-3">
-                  {[1, 2, 3, 4, 5, 6].map((item) => (
-                    <div key={item} className="w-full rounded-t-sm bg-accent/85" style={{ height: `${20 + item * 10}%` }} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  );
-}
-
-function CollaborationScene() {
-  return (
-    <div className="relative flex h-full items-center justify-center overflow-hidden bg-[linear-gradient(180deg,#59583f_0%,#323327_100%)] px-6 py-8">
-      <motion.div
-        className="absolute inset-0 opacity-18"
-        animate={{ scale: [1, 1.05, 1] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
-        style={{
-          backgroundImage:
-            'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.16), transparent 22%), radial-gradient(circle at 70% 62%, rgba(255,255,255,0.1), transparent 18%)',
-        }}
-      />
-
-      <div className="relative z-10 w-full max-w-5xl">
-        <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="relative z-10 flex h-full items-center justify-center px-6 py-8">
+        <div className="grid w-full max-w-5xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.9 }}
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-white/54">Strategy + Build</p>
-            <h3 className="mt-5 max-w-[9ch] text-4xl font-semibold leading-[0.94] tracking-[-0.06em] text-white sm:text-5xl">
-              Premium outcomes need aligned direction.
+            <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-accent">The weak layer</p>
+            <h3 className="mt-5 max-w-[9ch] text-4xl font-semibold leading-[0.92] tracking-[-0.06em] text-white sm:text-5xl">
+              Weak digital layers slow strong businesses.
             </h3>
           </motion.div>
 
-          <div className="relative h-[20rem] sm:h-[24rem]">
+          <div className="relative h-[18rem] sm:h-[21rem]">
             <motion.div
-              className="absolute left-[6%] top-[10%] h-[58%] w-[34%] rounded-[2.2rem] border border-white/18 bg-white/12 shadow-2xl backdrop-blur-sm"
-              initial={{ opacity: 0, y: 28, rotate: -6 }}
-              animate={{ opacity: 1, y: 0, rotate: -8 }}
-              transition={{ delay: 0.2, type: 'spring', bounce: 0.24 }}
+              className="absolute left-[6%] top-[8%] h-[44%] w-[30%] rounded-[1.5rem] border border-white/10 bg-white/[0.04] shadow-[0_18px_40px_rgba(0,0,0,0.28)]"
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.18, duration: 0.8 }}
             >
-              <div className="h-full w-full rounded-[2rem] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),transparent_28%),linear-gradient(180deg,#6a6a4b_0%,#454536_100%)] p-4">
-                <div className="h-full w-full rounded-[1.6rem] bg-black/8" />
+              <div className="p-4">
+                <div className="h-2 w-16 rounded-full bg-white/18" />
+                <div className="mt-4 h-11 rounded-xl bg-white/[0.05]" />
+                <div className="mt-3 h-11 rounded-xl bg-white/[0.04]" />
+                <motion.div
+                  className="mt-4 h-1.5 w-14 rounded-full bg-accent/55"
+                  animate={{ width: ['10%', '48%', '14%'] }}
+                  transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+                />
               </div>
             </motion.div>
 
             <motion.div
-              className="absolute right-[8%] bottom-[8%] h-[66%] w-[40%] rounded-[2.5rem] border border-white/18 bg-white/10 shadow-2xl backdrop-blur-sm"
-              initial={{ opacity: 0, y: 28, rotate: 5 }}
-              animate={{ opacity: 1, y: 0, rotate: 6 }}
-              transition={{ delay: 0.34, type: 'spring', bounce: 0.24 }}
+              className="absolute right-[8%] top-[14%] h-[28%] w-[22%] rounded-[1.2rem] border border-white/10 bg-white/[0.04] shadow-[0_18px_40px_rgba(0,0,0,0.22)]"
+              initial={{ opacity: 0, y: -18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.32, duration: 0.75 }}
             >
-              <div className="h-full w-full rounded-[2.2rem] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.12),transparent_28%),linear-gradient(180deg,#666649_0%,#3a3a2d_100%)] p-4">
-                <div className="h-full w-full rounded-[1.8rem] bg-black/8" />
+              <div className="p-4">
+                <motion.div
+                  className="h-7 w-7 rounded-full border-2 border-accent/55 border-t-transparent"
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 1.4, repeat: Infinity, ease: 'linear' }}
+                />
               </div>
             </motion.div>
 
             <motion.div
-              className="absolute left-1/2 top-1/2 w-full max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-[1.8rem] border border-white/16 bg-white/10 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.22)] backdrop-blur-md"
-              initial={{ opacity: 0, scale: 0.92 }}
+              className="absolute left-[18%] bottom-[8%] h-[42%] w-[58%] rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.03))] shadow-[0_24px_60px_rgba(0,0,0,0.32)] backdrop-blur-sm"
+              initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.48, duration: 0.75 }}
+              transition={{ delay: 0.28, duration: 1 }}
             >
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white/58">Working session</p>
-                  <p className="mt-2 text-xl font-semibold tracking-[-0.03em] text-white">Closer thinking, cleaner products</p>
+              <div className="grid h-full gap-3 p-4 sm:grid-cols-[1fr_0.9fr]">
+                <div className="space-y-3">
+                  <div className="h-10 rounded-xl bg-white/[0.05]" />
+                  <div className="h-16 rounded-xl bg-white/[0.04]" />
+                  <div className="h-12 rounded-xl bg-white/[0.04]" />
                 </div>
-                <div className="h-10 w-10 rounded-full bg-white/14" />
-              </div>
-              <div className="mt-5 grid gap-3">
-                {['Offer clarity', 'Product structure', 'System decisions'].map((item, index) => (
-                  <motion.div
-                    key={item}
-                    className="rounded-[1rem] border border-white/12 bg-white/8 px-4 py-3"
-                    initial={{ opacity: 0, x: 12 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.6 + index * 0.15 }}
-                  >
-                    <p className="text-sm font-semibold text-white">{item}</p>
-                  </motion.div>
-                ))}
+                <div className="space-y-3">
+                  <div className="h-20 rounded-[1rem] bg-white/[0.05]" />
+                  <div className="h-12 rounded-xl bg-white/[0.04]" />
+                  <div className="h-12 rounded-xl bg-white/[0.04]" />
+                </div>
               </div>
             </motion.div>
           </div>
@@ -301,38 +115,240 @@ function CollaborationScene() {
   );
 }
 
-const filmScenes: FilmScene[] = [
+function CostOfChaosScene() {
+  return (
+    <div className="relative h-full overflow-hidden bg-[linear-gradient(180deg,#0b0c0f_0%,#050608_100%)]">
+      <motion.div
+        className="absolute inset-0 opacity-45"
+        animate={{ backgroundPosition: ['0px 0px', '0px 52px'] }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
+        style={{
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px)',
+          backgroundSize: '100% 52px',
+        }}
+      />
+
+      <div className="relative z-10 flex h-full items-center justify-center px-6 py-8">
+        <div className="w-full max-w-5xl">
+          <motion.div
+            className="mx-auto max-w-3xl text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-accent">The cost of chaos</p>
+            <h3 className="mt-5 text-4xl font-semibold leading-[0.94] tracking-[-0.06em] text-white sm:text-5xl">
+              Manual steps. Fragmented tools. Lost clarity.
+            </h3>
+          </motion.div>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {[
+              'Missed message',
+              'Broken flow',
+              'Spreadsheet error',
+              'Overlapping tasks',
+              'Slow handoff',
+            ].map((item, index) => (
+              <motion.div
+                key={item}
+                className="rounded-[1.35rem] border border-white/10 bg-white/[0.04] p-4 shadow-[0_16px_36px_rgba(0,0,0,0.22)]"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.14 + index * 0.08, duration: 0.7 }}
+              >
+                <div className="h-2 w-12 rounded-full bg-white/18" />
+                <div className="mt-4 h-12 rounded-xl bg-white/[0.05]" />
+                <div className="mt-3 h-12 rounded-xl bg-white/[0.04]" />
+                <p className="mt-4 text-sm font-semibold text-white/76">{item}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RebuildLayerScene() {
+  return (
+    <div className="relative h-full overflow-hidden bg-[linear-gradient(180deg,#f4f4f1_0%,#eceef4_100%)] text-[#111111]">
+      <motion.div
+        className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(138,180,248,0.18),transparent_44%)]"
+        animate={{ scale: [1, 1.05, 1] }}
+        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+      />
+
+      <div className="relative z-10 flex h-full items-center justify-center px-6 py-8">
+        <div className="grid w-full max-w-5xl gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.85 }}
+          >
+            <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-accent">Rebuild the layer</p>
+            <h3 className="mt-5 max-w-[9ch] text-4xl font-semibold leading-[0.94] tracking-[-0.06em] sm:text-5xl">
+              We rebuild the digital layer so the business can scale again.
+            </h3>
+          </motion.div>
+
+          <motion.div
+            className="overflow-hidden rounded-[2rem] border border-black/8 bg-white shadow-[0_28px_70px_rgba(0,0,0,0.12)]"
+            initial={{ scale: 0.95, opacity: 0.7, y: 18 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="flex h-11 items-center gap-2 border-b border-black/8 px-4">
+              <div className="h-2.5 w-2.5 rounded-full bg-black/18" />
+              <div className="h-2.5 w-2.5 rounded-full bg-black/18" />
+              <div className="h-2.5 w-2.5 rounded-full bg-black/18" />
+            </div>
+            <div className="grid gap-4 p-4 sm:grid-cols-[0.88fr_1.12fr] sm:p-5">
+              <div className="space-y-3">
+                <div className="h-10 rounded-xl bg-black/5" />
+                <div className="h-20 rounded-xl bg-black/5" />
+                <div className="h-14 rounded-xl bg-black/5" />
+              </div>
+              <div className="space-y-3">
+                <div className="h-24 rounded-[1.2rem] bg-[radial-gradient(circle_at_top_right,rgba(14,165,233,0.24),transparent_42%),linear-gradient(180deg,#ffffff_0%,#eef4ff_100%)]" />
+                <div className="grid grid-cols-3 gap-3">
+                  {[1, 2, 3].map((item) => (
+                    <motion.div
+                      key={item}
+                      className="h-14 rounded-xl bg-black/5"
+                      animate={{ y: [0, -4, 0] }}
+                      transition={{ duration: 3 + item * 0.35, repeat: Infinity, ease: 'easeInOut' }}
+                    />
+                  ))}
+                </div>
+                <div className="h-14 rounded-xl bg-black/5" />
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function MomentumScene() {
+  return (
+    <div className="relative h-full overflow-hidden bg-[linear-gradient(180deg,#0a0d11_0%,#050608_100%)]">
+      <motion.div
+        className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(138,180,248,0.16),transparent_44%)]"
+        animate={{ opacity: [0.45, 0.72, 0.45] }}
+        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+      />
+
+      <div className="relative z-10 flex h-full items-center justify-center px-6 py-8">
+        <div className="w-full max-w-5xl">
+          <motion.div
+            className="mx-auto max-w-3xl text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85 }}
+          >
+            <p className="text-[11px] font-semibold uppercase tracking-[0.32em] text-accent">When the system works</p>
+            <h3 className="mt-5 text-4xl font-semibold leading-[0.94] tracking-[-0.06em] text-white sm:text-5xl">
+              Clarity. Speed. Confidence.
+            </h3>
+          </motion.div>
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            {[
+              ['Websites', 'Sharper conversion paths'],
+              ['Portals', 'Cleaner internal handling'],
+              ['AI systems', 'Better operations with control'],
+            ].map(([title, text], index) => (
+              <motion.div
+                key={title}
+                className="rounded-[1.45rem] border border-white/10 bg-white/[0.04] p-5 shadow-[0_18px_36px_rgba(0,0,0,0.26)]"
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.14 + index * 0.1, duration: 0.8 }}
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-accent">{title}</p>
+                <div className="mt-4 h-24 rounded-[1rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.03))]" />
+                <p className="mt-4 text-sm font-semibold text-white">{text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CloseScene() {
+  return (
+    <div className="relative flex h-full items-center justify-center overflow-hidden bg-[#040506] px-6 py-8 text-center">
+      <motion.div
+        className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(138,180,248,0.18),transparent_32%)]"
+        initial={{ scale: 0.75, opacity: 0 }}
+        animate={{ scale: 1.4, opacity: 1 }}
+        transition={{ duration: 2.8, ease: 'easeOut' }}
+      />
+
+      <motion.div
+        className="relative z-10"
+        initial={{ opacity: 0, scale: 0.94 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1 }}
+      >
+        <p className="text-[11px] font-semibold uppercase tracking-[0.34em] text-accent">Replace the weak layer</p>
+        <h3 className="mt-6 text-[11vw] font-semibold uppercase leading-[0.84] tracking-[-0.08em] text-white sm:text-[9vw]">
+          Bakal
+          <br />
+          Digital
+        </h3>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <div className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-[#0c111a]">Start your project</div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+const brandFilmScenes: BrandFilmScene[] = [
   {
-    id: 'brand',
-    eyebrow: 'Bakal Digital',
-    label: 'Brand ignition',
-    line: 'Digital systems that feel clear, premium, and built to move.',
-    accent: 'from-[#8ab4f8] via-[#4f7de8] to-[#0b1020]',
-    component: BrandIgnitionScene,
+    id: 'weak',
+    eyebrow: 'Opening',
+    label: 'The weak layer',
+    line: 'Weak digital layers slow strong businesses.',
+    accent: 'from-[#8ab4f8] via-[#223862] to-[#080b12]',
+    component: WeakLayerScene,
   },
   {
-    id: 'crop',
-    eyebrow: 'Cinematic crop',
-    label: 'Closer product details',
-    line: 'Closer crops. Slower movement. Stronger curiosity.',
-    accent: 'from-[#8ab4f8] via-[#203768] to-[#080b12]',
-    component: CloseCropScene,
+    id: 'chaos',
+    eyebrow: 'Rising tension',
+    label: 'The cost of chaos',
+    line: 'Manual steps. Fragmented tools. Lost clarity.',
+    accent: 'from-[#4a5368] via-[#22252d] to-[#090a0d]',
+    component: CostOfChaosScene,
   },
   {
-    id: 'reveal',
-    eyebrow: 'Service reveal',
-    label: 'Website, portal, SaaS, AI',
-    line: 'Wider reveals for the products we actually offer.',
-    accent: 'from-[#f48a2a] via-[#8ab4f8] to-[#141821]',
-    component: WideRevealScene,
+    id: 'rebuild',
+    eyebrow: 'The turn',
+    label: 'Rebuild the layer',
+    line: 'We rebuild the digital layer so the business can scale again.',
+    accent: 'from-[#f48a2a] via-[#8ab4f8] to-[#e9eef9]',
+    component: RebuildLayerScene,
   },
   {
-    id: 'collaboration',
-    eyebrow: 'Collaboration',
-    label: 'Direction + execution',
-    line: 'Strategy, design, and build shaped in one system.',
-    accent: 'from-[#aab79d] via-[#6b6d51] to-[#343527]',
-    component: CollaborationScene,
+    id: 'momentum',
+    eyebrow: 'Momentum returns',
+    label: 'When the system works',
+    line: 'Clarity. Speed. Confidence.',
+    accent: 'from-[#8ab4f8] via-[#365ec9] to-[#0b1020]',
+    component: MomentumScene,
+  },
+  {
+    id: 'close',
+    eyebrow: 'Closing',
+    label: 'Replace the weak layer',
+    line: 'Start your project.',
+    accent: 'from-[#8ab4f8] via-[#27314a] to-[#040506]',
+    component: CloseScene,
   },
 ];
 
@@ -341,13 +357,13 @@ export default function HeroShowreel() {
 
   useEffect(() => {
     const timer = window.setInterval(() => {
-      setActiveScene((current) => (current + 1) % filmScenes.length);
+      setActiveScene((current) => (current + 1) % brandFilmScenes.length);
     }, 6200);
 
     return () => window.clearInterval(timer);
   }, []);
 
-  const scene = filmScenes[activeScene];
+  const scene = brandFilmScenes[activeScene];
   const CurrentScene = scene.component;
 
   return (
@@ -378,7 +394,7 @@ export default function HeroShowreel() {
               <p className="mt-1 text-xs leading-relaxed text-white/54 sm:text-sm">{scene.line}</p>
             </div>
             <div className="flex flex-1 gap-2 lg:max-w-sm">
-              {filmScenes.map((item, index) => (
+              {brandFilmScenes.map((item, index) => (
                 <div key={item.id} className="h-1.5 flex-1 overflow-hidden rounded-full bg-white/10">
                   <motion.div
                     className="h-full rounded-full bg-accent"
