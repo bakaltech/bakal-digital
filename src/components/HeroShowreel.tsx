@@ -3,7 +3,6 @@ import { AnimatePresence, motion } from 'motion/react';
 import { ArrowRight, Bot, LayoutDashboard, Sparkles, Wand2 } from 'lucide-react';
 import BrandedVisual from './BrandedVisual';
 import { projects } from '../data/projects';
-import { projectContext } from '../data/projectContext';
 
 const featuredProject = projects.find((project) => project.id === 'acengeers');
 const conceptProjects = projects.filter((project) => project.id !== 'acengeers').slice(0, 3);
@@ -54,6 +53,15 @@ function FrameLabel({ children }: { children: React.ReactNode }) {
   return <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-accent">{children}</p>;
 }
 
+function PulseDot() {
+  return (
+    <span className="relative flex h-2.5 w-2.5">
+      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/55" />
+      <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent" />
+    </span>
+  );
+}
+
 function ReelFrame({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative h-full min-h-[18rem] overflow-hidden rounded-[1.55rem] border border-white/8 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.06),transparent_28%),linear-gradient(180deg,#121317_0%,#0b0c10_100%)] sm:min-h-[24rem] lg:min-h-[28rem]">
@@ -77,52 +85,101 @@ function IntroScene() {
         <div>
           <FrameLabel>Studio signal</FrameLabel>
           <h3 className="mt-4 max-w-[12ch] text-3xl font-semibold leading-[0.96] tracking-tight text-white sm:text-4xl">
-            Websites, portals, and systems that feel commercially ready.
+            Build work that feels clear, premium, and ready to ship.
           </h3>
-          <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/62 sm:text-base">
-            The showreel is trimmed into a site asset that previews the quality of the work without competing with the page structure.
-          </p>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-white/56 sm:text-base">Short message. Strong frames. Real product energy.</p>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-3">
-          {[
-            ['Website rebuilds', 'Sharper positioning and stronger conversion paths'],
-            ['Internal tools', 'Portals and dashboards shaped around real workflows'],
-            ['AI layers', 'Automation where it improves handling, delivery, and speed'],
-          ].map(([title, text]) => (
+          {['Websites', 'Portals', 'AI systems'].map((title) => (
             <div key={title} className="rounded-[1.35rem] border border-white/8 bg-white/[0.04] p-4">
-              <p className="text-sm font-semibold text-white">{title}</p>
-              <p className="mt-2 text-xs leading-relaxed text-white/54">{text}</p>
+              <div className="flex items-center gap-2 text-white/72">
+                <PulseDot />
+                <p className="text-sm font-semibold text-white">{title}</p>
+              </div>
+              <div className="mt-3 h-1.5 rounded-full bg-white/10">
+                <motion.div
+                  className="h-full rounded-full bg-accent"
+                  initial={{ width: 0 }}
+                  animate={{ width: '100%' }}
+                  transition={{ duration: 1.5, ease: 'easeOut' }}
+                />
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="grid gap-4">
-        <div className="rounded-[1.6rem] border border-white/8 bg-[linear-gradient(135deg,rgba(138,180,248,0.24),rgba(93,142,241,0.08),rgba(18,18,18,0.1))] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.28)]">
-          <div className="flex items-start justify-between gap-5">
-            <div>
-              <FrameLabel>Reel principle</FrameLabel>
-              <p className="mt-3 max-w-[14ch] text-2xl font-semibold leading-tight text-white">
-                Motion should support the sales story, not replace it.
-              </p>
-            </div>
+      <div className="relative grid gap-4">
+        <motion.div
+          className="absolute -right-8 top-3 h-28 w-28 rounded-full bg-accent/18 blur-3xl"
+          animate={{ scale: [1, 1.18, 1], opacity: [0.35, 0.65, 0.35] }}
+          transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <div className="grid h-full gap-4 rounded-[1.6rem] border border-white/8 bg-[linear-gradient(135deg,rgba(138,180,248,0.18),rgba(93,142,241,0.06),rgba(18,18,18,0.12))] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.28)]">
+          <div className="flex items-center justify-between">
+            <FrameLabel>Visual rhythm</FrameLabel>
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.06] text-accent">
               <Sparkles className="h-5 w-5" />
             </div>
           </div>
-        </div>
 
-        <div className="grid gap-4 sm:grid-cols-2">
-          {[
-            ['10-15s loop', 'Fast enough for the homepage'],
-            ['No fake controls', 'Feels like product, not presentation'],
-          ].map(([title, text]) => (
-            <div key={title} className="rounded-[1.4rem] border border-white/8 bg-[#12151d] p-4">
-              <p className="text-sm font-semibold text-white">{title}</p>
-              <p className="mt-2 text-xs leading-relaxed text-white/54">{text}</p>
+          <div className="grid flex-1 gap-4 sm:grid-cols-[1.15fr_0.85fr]">
+            <motion.div
+              className="overflow-hidden rounded-[1.35rem] border border-white/8 bg-[#0e1320] p-4"
+              initial={{ y: 18, opacity: 0.5 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.55 }}
+            >
+              <div className="flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-emerald-400" />
+                <div className="h-2 w-2 rounded-full bg-white/14" />
+                <div className="h-2 w-2 rounded-full bg-white/14" />
+              </div>
+              <div className="mt-4 rounded-[1rem] bg-[linear-gradient(180deg,#111827_0%,#0e172a_100%)] p-4">
+                <div className="grid gap-3 sm:grid-cols-[0.8fr_1.2fr]">
+                  <div className="space-y-3">
+                    <div className="h-10 rounded-xl bg-white/[0.06]" />
+                    <div className="h-20 rounded-xl bg-white/[0.05]" />
+                    <div className="h-24 rounded-xl bg-accent/12" />
+                  </div>
+                  <div className="space-y-3">
+                    <div className="h-20 rounded-[1.1rem] bg-[radial-gradient(circle_at_top_right,rgba(138,180,248,0.42),transparent_45%),linear-gradient(180deg,rgba(255,255,255,0.08),rgba(255,255,255,0.02))]" />
+                    <div className="grid grid-cols-3 gap-3">
+                      {[1, 2, 3].map((item) => (
+                        <motion.div
+                          key={item}
+                          className="h-16 rounded-xl bg-white/[0.06]"
+                          animate={{ y: [0, -4, 0] }}
+                          transition={{ duration: 1.8 + item * 0.15, repeat: Infinity, ease: 'easeInOut' }}
+                        />
+                      ))}
+                    </div>
+                    <div className="h-16 rounded-xl bg-white/[0.05]" />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+
+            <div className="grid gap-4">
+              <motion.div
+                className="rounded-[1.35rem] border border-white/8 bg-[#11141b] p-4"
+                animate={{ y: [0, -6, 0] }}
+                transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/45">Clarity</p>
+                <p className="mt-3 text-lg font-semibold text-white">Show first. Explain second.</p>
+              </motion.div>
+              <motion.div
+                className="rounded-[1.35rem] border border-white/8 bg-[#11141b] p-4"
+                animate={{ y: [0, 6, 0] }}
+                transition={{ duration: 2.8, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-white/45">Motion</p>
+                <p className="mt-3 text-lg font-semibold text-white">Zoom, pulse, and sequence.</p>
+              </motion.div>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </div>
@@ -130,55 +187,110 @@ function IntroScene() {
 }
 
 function LaunchScene() {
-  const context = projectContext.acengeers;
-
   return (
     <div className="grid h-full gap-5 p-5 sm:p-7 lg:grid-cols-[1.02fr_0.98fr] lg:p-8">
-      <div className="overflow-hidden rounded-[1.6rem] border border-white/8 bg-[linear-gradient(135deg,#f58626_0%,#f49a2f_40%,#f7cb4a_100%)] p-6 text-white shadow-[0_20px_70px_rgba(0,0,0,0.22)]">
-        <FrameLabel>Live case study</FrameLabel>
-        <h3 className="mt-4 max-w-[10ch] text-4xl font-semibold leading-[0.95] tracking-tight">
-          Cleaning that feels easy to trust.
-        </h3>
-        <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/88">
-          The launch frame uses the real Acengeers narrative, not placeholder motion. It shows how a weak local-services site becomes a clearer, more premium conversion layer.
-        </p>
-
-        <div className="mt-6 grid gap-3 sm:grid-cols-3">
-          {featuredProject.metricHighlights?.slice(0, 3).map((metric) => (
-            <div key={metric.label} className="rounded-[1.1rem] border border-white/20 bg-white/12 p-3 backdrop-blur-sm">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/68">{metric.label}</p>
-              <p className="mt-2 text-lg font-semibold text-white">{metric.value}</p>
+      <motion.div
+        className="overflow-hidden rounded-[1.6rem] border border-white/8 bg-[linear-gradient(135deg,#f58626_0%,#f49a2f_40%,#f7cb4a_100%)] p-4 text-white shadow-[0_20px_70px_rgba(0,0,0,0.22)] sm:p-5"
+        initial={{ scale: 0.96, opacity: 0.82 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+      >
+        <div className="rounded-[1.4rem] border border-white/18 bg-white/10 p-4 backdrop-blur-sm">
+          <div className="flex items-center justify-between">
+            <FrameLabel>Acengeers launch</FrameLabel>
+            <div className="rounded-full border border-white/22 bg-white/14 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/76">
+              Live
             </div>
-          ))}
-        </div>
+          </div>
 
-        <div className="mt-6 flex flex-wrap gap-3">
-          {['Trust-first homepage', 'Service detail pages', 'Working contact flow'].map((item) => (
-            <div key={item} className="rounded-full border border-white/22 bg-white/12 px-3 py-2 text-xs font-semibold text-white/92">
-              {item}
+          <div className="mt-4 grid gap-4 lg:grid-cols-[0.95fr_1.05fr]">
+            <div className="flex flex-col justify-between">
+              <div>
+                <h3 className="max-w-[8ch] text-4xl font-semibold leading-[0.92] tracking-tight">Cleaning that feels easy to trust.</h3>
+                <p className="mt-4 max-w-sm text-sm leading-relaxed text-white/84">Real launch proof with stronger service framing, clearer trust cues, and a more direct quote path.</p>
+              </div>
+              <div className="mt-6 flex flex-wrap gap-2">
+                {['Trust-first hero', '4 service routes', 'Lead capture'].map((item) => (
+                  <span key={item} className="rounded-full border border-white/22 bg-white/12 px-3 py-2 text-xs font-semibold text-white/92">
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
-          ))}
+
+            <div className="rounded-[1.35rem] bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.07))] p-3">
+              <div className="rounded-[1.15rem] bg-[#fff8ef] p-3 text-[#111111] shadow-[0_18px_40px_rgba(117,54,0,0.14)]">
+                <div className="flex items-center gap-2">
+                  <div className="h-2 w-2 rounded-full bg-[#111111]/18" />
+                  <div className="h-2 w-2 rounded-full bg-[#111111]/18" />
+                  <div className="h-2 w-2 rounded-full bg-[#111111]/18" />
+                  <div className="ml-auto h-2.5 w-16 rounded-full bg-[#f59e0b]" />
+                </div>
+                <div className="mt-4 grid gap-3 sm:grid-cols-[1fr_0.95fr]">
+                  <div className="rounded-[1.1rem] bg-[linear-gradient(180deg,#ff9a30_0%,#ffb72e_100%)] p-4 text-white">
+                    <p className="max-w-[8ch] text-3xl font-semibold leading-[0.95]">Cleaning that feels easy to trust.</p>
+                    <div className="mt-4 flex gap-2">
+                      <div className="h-9 flex-1 rounded-full bg-white/90" />
+                      <div className="h-9 flex-1 rounded-full bg-black/85" />
+                    </div>
+                  </div>
+                  <div className="grid gap-2">
+                    <div className="rounded-[1rem] bg-white p-3 shadow-sm">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-[#111111]/42">Feature panel</p>
+                      <div className="mt-3 grid grid-cols-2 gap-2">
+                        {[1, 2, 3, 4].map((item) => (
+                          <motion.div
+                            key={item}
+                            className="h-14 rounded-xl bg-[#f4f4f4]"
+                            animate={{ scale: [1, 1.04, 1] }}
+                            transition={{ duration: 1.6 + item * 0.12, repeat: Infinity, ease: 'easeInOut' }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                    <div className="rounded-[1rem] bg-white p-3 shadow-sm">
+                      <div className="h-24 rounded-xl bg-[radial-gradient(circle_at_top_right,rgba(14,165,233,0.24),transparent_40%),linear-gradient(180deg,#f5f5f5_0%,#eef4ff_100%)]" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </motion.div>
 
       <div className="grid gap-4">
-        <div className="rounded-[1.45rem] border border-white/8 bg-[#11141b] p-5">
-          <FrameLabel>Pressure point</FrameLabel>
-          <p className="mt-3 text-sm leading-relaxed text-white/62">{context.pressurePoint}</p>
+        <div className="grid gap-4 sm:grid-cols-3">
+          {featuredProject.metricHighlights?.slice(0, 3).map((metric) => (
+            <motion.div
+              key={metric.label}
+              className="rounded-[1.35rem] border border-white/8 bg-[#11141b] p-4"
+              animate={{ y: [0, -4, 0] }}
+              transition={{ duration: 2 + Math.random(), repeat: Infinity, ease: 'easeInOut' }}
+            >
+              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-accent">{metric.label}</p>
+              <p className="mt-3 text-2xl font-semibold text-white">{metric.value}</p>
+            </motion.div>
+          ))}
         </div>
-        <div className="rounded-[1.45rem] border border-white/8 bg-[#11141b] p-5">
-          <FrameLabel>Commercial gain</FrameLabel>
-          <p className="mt-3 text-sm leading-relaxed text-white/62">{context.commercialOutcome}</p>
-        </div>
-        <div className="rounded-[1.45rem] border border-white/8 bg-[#11141b] p-5">
-          <FrameLabel>Build shape</FrameLabel>
-          <div className="mt-3 grid gap-3 sm:grid-cols-3">
-            {featuredProject.features.slice(0, 3).map((feature) => (
-              <div key={feature.title} className="rounded-[1rem] border border-white/8 bg-white/[0.03] p-3">
-                <p className="text-xs font-semibold text-white">{feature.title}</p>
-                <p className="mt-2 text-[11px] leading-relaxed text-white/52">{feature.description}</p>
-              </div>
-            ))}
+        <div className="grid flex-1 gap-4 sm:grid-cols-2">
+          <div className="rounded-[1.45rem] border border-white/8 bg-[#11141b] p-5">
+            <FrameLabel>Message</FrameLabel>
+            <p className="mt-3 max-w-[18ch] text-2xl font-semibold leading-tight text-white">Real launch work. Not just polished screens.</p>
+          </div>
+          <div className="rounded-[1.45rem] border border-white/8 bg-[#11141b] p-5">
+            <FrameLabel>Outcome</FrameLabel>
+            <p className="mt-3 max-w-[18ch] text-2xl font-semibold leading-tight text-white">Clearer trust. Faster understanding. Better inquiry path.</p>
+          </div>
+          <div className="rounded-[1.45rem] border border-white/8 bg-[#11141b] p-5 sm:col-span-2">
+            <FrameLabel>Feature proof</FrameLabel>
+            <div className="mt-4 grid gap-3 sm:grid-cols-3">
+              {featuredProject.features.slice(0, 3).map((feature) => (
+                <div key={feature.title} className="rounded-[1rem] border border-white/8 bg-white/[0.03] p-3">
+                  <p className="text-sm font-semibold text-white">{feature.title}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -193,16 +305,19 @@ function SystemsScene() {
         <div>
           <FrameLabel>Build categories</FrameLabel>
           <h3 className="mt-4 max-w-[12ch] text-3xl font-semibold leading-[0.98] tracking-tight text-white">
-            One layout system, multiple product directions.
+            One system. Multiple build directions.
           </h3>
-          <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/62">
-            The motion asset rotates through the studio offer using the same structure the site uses: fewer patterns, clearer proof, and better scaling as the library grows.
-          </p>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-white/56">Same visual language, different products, cleaner scaling.</p>
         </div>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-3">
           {conceptProjects.map((project) => (
-            <div key={project.id} className="rounded-[1.25rem] border border-white/8 bg-white/[0.03] p-4">
+            <motion.div
+              key={project.id}
+              className="rounded-[1.25rem] border border-white/8 bg-white/[0.03] p-4"
+              whileHover={{ y: -4 }}
+              transition={{ duration: 0.25 }}
+            >
               <div className="flex items-center justify-between gap-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">{project.category}</p>
                 {project.id === 'nexus-ai' ? (
@@ -214,15 +329,21 @@ function SystemsScene() {
                 )}
               </div>
               <p className="mt-4 text-base font-semibold text-white">{project.title}</p>
-              <p className="mt-2 text-xs leading-relaxed text-white/54">{project.solution}</p>
-            </div>
+              <p className="mt-2 text-xs leading-relaxed text-white/54">{project.results}</p>
+            </motion.div>
           ))}
         </div>
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2">
         {conceptProjects.slice(0, 2).map((project) => (
-          <div key={project.id} className="overflow-hidden rounded-[1.45rem] border border-white/8 bg-[#0b0f19]">
+          <motion.div
+            key={project.id}
+            className="overflow-hidden rounded-[1.45rem] border border-white/8 bg-[#0b0f19]"
+            initial={{ scale: 0.98, opacity: 0.75 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.45 }}
+          >
             <div className="aspect-[1.08/1]">
               <BrandedVisual
                 variant={project.id as 'nexus-ai' | 'lumina-saas'}
@@ -234,14 +355,12 @@ function SystemsScene() {
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/44">{project.category}</p>
               <p className="mt-2 text-sm font-semibold text-white">{project.title}</p>
             </div>
-          </div>
+          </motion.div>
         ))}
 
         <div className="rounded-[1.45rem] border border-white/8 bg-[linear-gradient(180deg,rgba(138,180,248,0.12),rgba(18,18,18,0.08))] p-5 sm:col-span-2">
           <FrameLabel>Scaling rule</FrameLabel>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-white/62">
-            This is the key improvement over the original showreel: every scene uses the same visual grammar as the site, so we can add more proofs later without inventing a new layout every time.
-          </p>
+          <p className="mt-3 max-w-[22ch] text-2xl font-semibold leading-tight text-white">More projects can slot in without breaking the layout.</p>
         </div>
       </div>
     </div>
@@ -255,11 +374,9 @@ function ProofScene() {
         <div>
           <FrameLabel>Commercial close</FrameLabel>
           <h3 className="mt-4 max-w-[10ch] text-3xl font-semibold leading-[0.98] tracking-tight text-white">
-            Better proof should create better fit conversations.
+            Proof should point to business change.
           </h3>
-          <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/62">
-            The reel ends where the site ends: on why the build matters to the business, not just what screens were designed.
-          </p>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-white/56">Short message, strong ending, clear next move.</p>
         </div>
 
         <div className="mt-6 grid gap-3">
@@ -284,10 +401,15 @@ function ProofScene() {
             ['AI workflows', 'Use automation where it creates real speed'],
             ['SaaS foundations', 'Build systems that can scale without collapsing'],
           ].map(([title, text]) => (
-            <div key={title} className="rounded-[1.25rem] border border-white/8 bg-[#11141b] p-4">
+            <motion.div
+              key={title}
+              className="rounded-[1.25rem] border border-white/8 bg-[#11141b] p-4"
+              animate={{ scale: [1, 1.02, 1] }}
+              transition={{ duration: 2.3, repeat: Infinity, ease: 'easeInOut' }}
+            >
               <p className="text-sm font-semibold text-white">{title}</p>
               <p className="mt-2 text-xs leading-relaxed text-white/54">{text}</p>
-            </div>
+            </motion.div>
           ))}
         </div>
         <div className="rounded-[1.5rem] border border-white/8 bg-[linear-gradient(135deg,rgba(138,180,248,0.16),rgba(18,18,18,0.02))] p-5">
