@@ -19,13 +19,13 @@ const openChat = () => {
 
 const BrandMark = () => (
   <>
-    <div className="relative w-10 h-10 rounded-[1.1rem] bg-ink flex items-center justify-center transition-transform duration-500 group-hover:rotate-6 group-hover:scale-[1.03] shadow-[0_12px_30px_rgba(0,0,0,0.12)] overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(78,161,255,0.35),_transparent_55%)]" />
-      <span className="relative text-white font-bold text-lg">B</span>
-      <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 rounded-full bg-[#4EA1FF]" />
+    <div className="relative flex h-10 w-10 items-center justify-center rounded-[1rem] border border-white/16 bg-white/[0.03] text-white shadow-[0_12px_28px_rgba(0,0,0,0.22)]">
+      <div className="absolute inset-0 rounded-[1rem] bg-[radial-gradient(circle_at_top_right,_rgba(138,180,248,0.32),_transparent_58%)]" />
+      <span className="relative text-lg font-semibold">B</span>
+      <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-accent" />
     </div>
-    <span className="font-bold text-xl tracking-tight text-ink transition-colors group-hover:text-accent">
-      Bakal <span className="text-brand-400 font-medium">Digital</span>
+    <span className="font-semibold tracking-tight text-white transition-colors group-hover:text-accent sm:text-lg">
+      Bakal <span className="text-white/55">Digital</span>
     </span>
   </>
 );
@@ -79,10 +79,9 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
-  const isHome = location.pathname === '/';
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 24);
+    const onScroll = () => setIsScrolled(window.scrollY > 16);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -100,73 +99,105 @@ const Navbar = () => {
   }, [location.pathname]);
 
   return (
-    <nav className={`fixed inset-x-0 top-0 z-[70] transition-all duration-500 ${isScrolled || !isHome ? 'bg-paper/94 backdrop-blur-xl border-b border-brand-100/40 py-3 md:py-4 shadow-[0_12px_30px_rgba(17,19,21,0.05)]' : 'bg-transparent py-4 md:py-6'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className={`flex items-center justify-between gap-4 rounded-[1.5rem] md:rounded-none px-3 py-2 md:p-0 transition-all duration-500 ${isScrolled || !isHome ? 'bg-white/80 md:bg-transparent border border-brand-100/40 md:border-0 shadow-[0_10px_24px_rgba(17,19,21,0.04)] md:shadow-none' : 'bg-white/78 md:bg-transparent border border-brand-100/40 md:border-0 backdrop-blur md:backdrop-blur-none shadow-[0_8px_18px_rgba(17,19,21,0.03)] md:shadow-none'}`}>
-          <Link to="/" className="flex items-center gap-3 group min-w-0" aria-label="Bakal Digital home">
-            <BrandMark />
-          </Link>
+    <nav className="fixed inset-x-0 top-0 z-[80] px-4 py-4 sm:px-6 lg:px-8">
+      <div
+        className={`mx-auto flex max-w-[88rem] items-center justify-between rounded-[1.6rem] border px-4 py-3 transition-all duration-300 sm:px-5 ${
+          isScrolled
+            ? 'border-white/12 bg-[#141414]/88 shadow-[0_18px_50px_rgba(0,0,0,0.28)] backdrop-blur-2xl'
+            : 'border-white/10 bg-[#141414]/72 backdrop-blur-xl'
+        }`}
+      >
+        <Link to="/" className="group flex min-w-0 items-center gap-3" aria-label="Bakal Digital home">
+          <BrandMark />
+        </Link>
 
-          <div className="hidden md:flex items-center gap-10">
-            {primaryLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                aria-current={location.pathname === link.path ? 'page' : undefined}
-                className={`text-sm font-bold uppercase tracking-widest transition-colors ${location.pathname === link.path ? 'text-accent' : 'text-ink hover:text-accent'}`}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-
-          <div className="hidden md:flex items-center gap-3">
-            <button type="button" onClick={openChat} className="inline-flex items-center gap-2 px-5 py-3 rounded-full border border-brand-100 bg-white/92 text-ink text-sm font-semibold hover:border-accent hover:text-accent transition-colors shadow-[0_10px_20px_rgba(17,19,21,0.04)]">
-              <MessageSquare className="w-4 h-4" />
-              Project Intake
-            </button>
-            <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-ink text-white text-sm font-semibold hover:bg-accent transition-colors shadow-lg">
-              Start a Project
-              <ArrowRight className="w-4 h-4" />
+        <div className="hidden items-center gap-8 md:flex">
+          {primaryLinks.map((link) => (
+            <Link
+              key={link.path}
+              to={link.path}
+              aria-current={location.pathname === link.path ? 'page' : undefined}
+              className={`text-sm font-medium transition-colors ${
+                location.pathname === link.path ? 'text-white' : 'text-white/68 hover:text-white'
+              }`}
+            >
+              {link.name}
             </Link>
-          </div>
+          ))}
+        </div>
 
+        <div className="hidden items-center gap-3 md:flex">
           <button
             type="button"
-            className="md:hidden p-2 rounded-xl text-ink hover:bg-soft transition-colors"
-            aria-label="Toggle menu"
-            aria-expanded={isOpen}
-            aria-controls="mobile-navigation"
-            onClick={() => setIsOpen((value) => !value)}
+            onClick={openChat}
+            className="inline-flex min-h-11 items-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-5 py-2 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            <MessageSquare className="h-4 w-4" />
+            Project intake
           </button>
+          <Link
+            to="/contact"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white/[0.1] px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-accent hover:text-[#101114]"
+          >
+            Get started
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
+
+        <button
+          type="button"
+          className="rounded-xl border border-white/10 bg-white/[0.03] p-2 text-white transition-colors hover:border-white/20 md:hidden"
+          aria-label="Toggle menu"
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setIsOpen((value) => !value)}
+        >
+          {isOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </div>
 
       <AnimatePresence>
         {isOpen && (
           <>
-            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="md:hidden fixed inset-0 top-[72px] bg-paper/70 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
-            <motion.div id="mobile-navigation" initial={{ opacity: 0, y: -24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -24 }} className="md:hidden relative mx-4 mt-3 rounded-[2rem] border border-brand-100/40 bg-paper shadow-[0_25px_80px_rgba(17,19,21,0.08)] overflow-hidden">
-              <div className="px-5 py-6 flex flex-col gap-5">
-                <p className="text-[11px] font-bold uppercase tracking-[0.28em] text-accent">Navigate</p>
-                {primaryLinks.map((link, index) => (
-                  <Link key={link.path} to={link.path} className="flex items-center justify-between gap-4 text-xl font-semibold text-ink hover:text-accent transition-colors">
-                    <div className="flex items-center gap-4">
-                      <span className="text-[11px] text-accent uppercase tracking-[0.3em]">0{index + 1}</span>
-                      {link.name}
-                    </div>
-                    <ArrowRight className="w-4 h-4" />
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 top-[88px] bg-black/50 backdrop-blur-sm md:hidden"
+              onClick={() => setIsOpen(false)}
+            />
+            <motion.div
+              id="mobile-navigation"
+              initial={{ opacity: 0, y: -18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -18 }}
+              className="relative mx-4 mt-3 overflow-hidden rounded-[1.8rem] border border-white/12 bg-[#171717] shadow-[0_30px_80px_rgba(0,0,0,0.35)] md:hidden"
+            >
+              <div className="grid gap-5 px-5 py-6">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-accent">Navigate</p>
+                {primaryLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    to={link.path}
+                    className="flex items-center justify-between gap-4 text-lg font-semibold text-white/84 transition-colors hover:text-white"
+                  >
+                    {link.name}
+                    <ArrowRight className="h-4 w-4" />
                   </Link>
                 ))}
-
-                <div className="grid gap-3 pt-5 border-t border-brand-100/40">
-                  <button type="button" onClick={() => { setIsOpen(false); openChat(); }} className="w-full px-6 py-4 rounded-2xl border border-brand-100 bg-white text-ink font-semibold">
-                    Open Project Intake
+                <div className="grid gap-3 border-t border-white/10 pt-5">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsOpen(false);
+                      openChat();
+                    }}
+                    className="w-full rounded-2xl border border-white/12 bg-white/[0.04] px-5 py-3 font-semibold text-white"
+                  >
+                    Open project intake
                   </button>
-                  <Link to="/contact" className="w-full px-6 py-4 rounded-2xl bg-ink text-white font-semibold text-center">
-                    Start a Project
+                  <Link to="/contact" className="w-full rounded-2xl bg-white/10 px-5 py-3 text-center font-semibold text-white">
+                    Get started
                   </Link>
                 </div>
               </div>
@@ -180,47 +211,64 @@ const Navbar = () => {
 
 const Footer = () => {
   return (
-    <footer className="bg-paper border-t border-brand-100/20 pt-20 md:pt-24 pb-12 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-[32rem] h-[32rem] bg-accent/5 blur-[120px] rounded-full translate-x-1/3 -translate-y-1/3 pointer-events-none" />
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-[1.45fr_0.8fr_1fr] gap-10 md:gap-12">
+    <footer className="border-t border-white/8 bg-[#121212] pb-12 pt-20">
+      <div className="mx-auto max-w-[88rem] px-6 lg:px-8">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.75fr_1fr] lg:gap-12">
           <div>
-            <div className="inline-flex items-center gap-3 mb-5"><BrandMark /></div>
-            <p className="text-brand-400 text-base md:text-lg leading-relaxed max-w-xl">
-              Bakal Digital helps startups and growing businesses replace generic tools with AI-powered products, stronger websites, custom software, and operational systems built to scale cleanly.
+            <div className="mb-5 inline-flex items-center gap-3">
+              <BrandMark />
+            </div>
+            <p className="max-w-xl text-base leading-relaxed text-white/62 md:text-lg">
+              Bakal Digital helps teams replace generic tools with stronger digital products, cleaner workflow systems, and more credible customer-facing software.
             </p>
-            <div className="mt-5 inline-flex flex-wrap items-center gap-2 rounded-full border border-brand-100/50 bg-soft px-4 py-2">
-              <span className="text-[10px] font-bold uppercase tracking-[0.24em] text-accent">Built for</span>
-              <span className="text-sm text-brand-400">Founders, operators, and growing teams across SaaS, commerce, and services.</span>
+            <div className="mt-5 inline-flex flex-wrap items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">Built for</span>
+              <span className="text-sm text-white/58">Founders, operators, and growing teams across SaaS, commerce, and services.</span>
             </div>
           </div>
+
           <div>
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-accent mb-5">Navigate</p>
+            <p className="mb-5 text-sm font-semibold uppercase tracking-[0.22em] text-accent">Navigate</p>
             <div className="grid gap-3">
-              {primaryLinks.map((link) => (<Link key={link.path} to={link.path} className="text-brand-400 hover:text-ink transition-colors">{link.name}</Link>))}
-              <Link to="/privacy" className="text-brand-400 hover:text-ink transition-colors">Privacy Policy</Link>
-              <Link to="/terms" className="text-brand-400 hover:text-ink transition-colors">Terms of Service</Link>
+              {primaryLinks.map((link) => (
+                <Link key={link.path} to={link.path} className="text-white/62 transition-colors hover:text-white">
+                  {link.name}
+                </Link>
+              ))}
+              <Link to="/privacy" className="text-white/62 transition-colors hover:text-white">Privacy Policy</Link>
+              <Link to="/terms" className="text-white/62 transition-colors hover:text-white">Terms of Service</Link>
             </div>
           </div>
-          <div className="rounded-[2rem] bg-soft border border-brand-100/50 p-6 md:p-8 shadow-[0_20px_50px_rgba(17,19,21,0.05)]">
-            <p className="text-sm font-bold uppercase tracking-[0.25em] text-accent mb-4">Start Here</p>
-            <h3 className="text-2xl font-semibold text-ink tracking-tight mb-3">Need a better system than the one you have now?</h3>
-            <p className="text-brand-400 leading-relaxed mb-6">Use the project intake if the scope still needs shaping, or start a direct inquiry if you already know what needs to be built or improved.</p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <button type="button" onClick={openChat} className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-white border border-brand-100 text-ink font-semibold hover:border-accent hover:text-accent transition-colors">
-                <MessageSquare className="w-4 h-4" />
-                Open Project Intake
+
+          <div className="panel-dark p-6 sm:p-7">
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.22em] text-accent">Start here</p>
+            <h3 className="text-2xl font-semibold tracking-tight text-white">Need a better system than the one you have now?</h3>
+            <p className="mt-3 leading-relaxed text-white/62">
+              Use the project intake if the scope still needs shaping, or start a direct inquiry if you already know what needs to be improved.
+            </p>
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+              <button
+                type="button"
+                onClick={openChat}
+                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.04] px-5 py-3 font-semibold text-white transition-colors hover:border-accent hover:text-accent"
+              >
+                <MessageSquare className="h-4 w-4" />
+                Open project intake
               </button>
-              <Link to="/contact" className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-ink text-white font-semibold hover:bg-accent transition-colors">
-                Start a Project
-                <ArrowRight className="w-4 h-4" />
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-white/[0.1] px-5 py-3 font-semibold text-white transition-colors hover:bg-accent hover:text-[#101114]"
+              >
+                Get started
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
           </div>
         </div>
-        <div className="mt-12 md:mt-14 pt-6 border-t border-brand-100/20 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-brand-400 text-center md:text-left">
+
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/8 pt-6 text-center text-sm text-white/45 md:flex-row md:text-left">
           <p>&copy; {new Date().getFullYear()} Bakal Digital. All rights reserved.</p>
-          <p className="uppercase tracking-[0.25em] text-[11px]">AI-powered products, websites, software, and systems for startups and growing teams</p>
+          <p className="uppercase tracking-[0.22em] text-[11px]">AI-powered products, websites, software, and systems for growing teams</p>
         </div>
       </div>
     </footer>
@@ -305,20 +353,19 @@ function SeoManager() {
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
-  const isHome = location.pathname === '/';
 
   return (
-    <div className="min-h-screen flex flex-col font-sans bg-paper">
+    <div className="min-h-screen bg-paper font-sans text-brand-500">
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[120] focus:rounded-full focus:bg-ink focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[120] focus:rounded-full focus:bg-accent focus:px-4 focus:py-3 focus:text-sm focus:font-semibold focus:text-[#101114]"
       >
         Skip to main content
       </a>
       <SeoManager />
       <ScrollToTop />
       <Navbar />
-      <main id="main-content" className={`flex-1 ${isHome ? '' : 'pt-[78px] md:pt-20'}`}>{children}</main>
+      <main id="main-content" className="flex-1 pt-[88px] sm:pt-[92px]">{children}</main>
       <Footer />
       <CookieConsent />
     </div>
