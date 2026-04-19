@@ -56,7 +56,7 @@ function FrameLabel({ children }: { children: React.ReactNode }) {
 
 function ReelFrame({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative h-full overflow-hidden rounded-[1.55rem] border border-white/8 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.06),transparent_28%),linear-gradient(180deg,#121317_0%,#0b0c10_100%)]">
+    <div className="relative h-full min-h-[18rem] overflow-hidden rounded-[1.55rem] border border-white/8 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.06),transparent_28%),linear-gradient(180deg,#121317_0%,#0b0c10_100%)] sm:min-h-[24rem] lg:min-h-[28rem]">
       <div className="absolute inset-x-0 top-0 flex h-12 items-center gap-2 border-b border-white/8 bg-black/28 px-4 backdrop-blur-sm">
         <div className="h-2.5 w-2.5 rounded-full bg-white/18" />
         <div className="h-2.5 w-2.5 rounded-full bg-white/18" />
@@ -328,7 +328,7 @@ export default function HeroShowreel() {
   const CurrentScene = sceneComponents[scene.id];
 
   return (
-    <div className="relative">
+    <div className="relative h-full min-h-[18rem] sm:min-h-[24rem] lg:min-h-[28rem]">
       <div className={`pointer-events-none absolute inset-x-[12%] top-8 h-28 rounded-full bg-gradient-to-r ${scene.accent} opacity-55 blur-[80px] transition-all duration-700`} />
       <ReelFrame>
         <AnimatePresence mode="wait">
