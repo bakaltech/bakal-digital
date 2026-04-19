@@ -4,6 +4,13 @@ import { ArrowRight, CheckCircle2, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import BrandedVisual from '../components/BrandedVisual';
 import AcengeersShowcase from '../components/AcengeersShowcase';
+import {
+  DarkPanel,
+  PageContainer,
+  PageSection,
+  SectionHeader,
+  SoftPanel,
+} from '../components/PageScaffold';
 import { projects } from '../data/projects';
 import { projectContext, type ProjectContextId } from '../data/projectContext';
 import { impactMetrics, deliverySteps } from '../data/proof';
@@ -11,34 +18,6 @@ import { services } from '../data/services';
 
 function openChat(query?: string) {
   window.dispatchEvent(new CustomEvent('open-chat', query ? { detail: { query } } : undefined));
-}
-
-function SectionBlock({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <section className={`py-14 sm:py-18 lg:py-24 ${className}`}>{children}</section>;
-}
-
-function SectionIntro({
-  eyebrow,
-  title,
-  text,
-}: {
-  eyebrow: string;
-  title: string;
-  text: string;
-}) {
-  return (
-    <div className="max-w-3xl">
-      <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-accent">{eyebrow}</p>
-      <h2 className="text-3xl font-semibold leading-[1.02] tracking-tight text-white sm:text-[2.6rem] md:text-[3.35rem]">
-        {title}
-      </h2>
-      <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/64 sm:text-lg">{text}</p>
-    </div>
-  );
-}
-
-function DarkCard({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <div className={`panel-dark ${className}`}>{children}</div>;
 }
 
 export default function Home() {
@@ -56,29 +35,29 @@ export default function Home() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.02),transparent_28%),radial-gradient(circle_at_center,_rgba(138,180,248,0.08),transparent_45%)]" />
         <div className="absolute inset-x-0 top-0 h-px bg-white/8" />
 
-        <div className="relative mx-auto max-w-[88rem] px-6 lg:px-8">
-          <div className="mx-auto max-w-5xl text-center">
+        <PageContainer className="relative">
+          <div className="mx-auto max-w-4xl text-center">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
               <p className="mb-5 text-sm font-semibold uppercase tracking-[0.24em] text-accent">Bakal Digital</p>
-              <h1 className="mx-auto max-w-[11ch] text-balance text-5xl font-semibold leading-[0.92] tracking-tight text-white sm:text-7xl lg:text-[5.8rem]">
+              <h1 className="mx-auto max-w-[11ch] text-balance text-5xl font-semibold leading-[0.92] tracking-tight text-white sm:text-7xl lg:text-[5.35rem]">
                 From weak digital layers to scalable software systems.
               </h1>
-              <p className="mx-auto mt-6 max-w-4xl text-balance text-lg leading-relaxed text-white/52 sm:text-[1.75rem]">
+              <p className="mx-auto mt-6 max-w-3xl text-balance text-lg leading-relaxed text-white/52 sm:text-[1.45rem]">
                 We design and build websites, portals, SaaS foundations, automation systems, and AI workflows that map to how the business actually sells, operates, and delivers.
               </p>
             </motion.div>
           </div>
 
           <div className="mt-10 sm:mt-12">
-            <DarkCard className="overflow-hidden p-3 sm:p-4">
-              <div className="overflow-hidden rounded-[1.5rem] bg-black min-h-[18rem] sm:min-h-[26rem] lg:min-h-[32rem]">
+            <DarkPanel className="overflow-hidden p-3 sm:p-4">
+              <div className="overflow-hidden rounded-[1.5rem] bg-black min-h-[18rem] sm:min-h-[24rem] lg:min-h-[28rem]">
                 <AcengeersShowcase activeFeature={0} />
               </div>
-            </DarkCard>
+            </DarkPanel>
           </div>
 
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -98,12 +77,12 @@ export default function Home() {
               Open project intake
             </button>
           </div>
-        </div>
+        </PageContainer>
       </section>
 
-      <SectionBlock className="bg-[#151515]">
-        <div className="mx-auto max-w-[88rem] px-6 lg:px-8">
-          <SectionIntro
+      <PageSection className="bg-[#151515]">
+        <PageContainer>
+          <SectionHeader
             eyebrow="Offer shapes"
             title="A smaller set of build types, presented in one repeatable grid."
             text="The homepage should explain the service model quickly, without turning into a long stack of unrelated section designs."
@@ -118,7 +97,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.55, delay: idx * 0.05 }}
               >
-                <DarkCard className="flex h-full flex-col p-5 sm:p-6">
+                <DarkPanel className="flex h-full flex-col p-5 sm:p-6">
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-white/72">
                       {service.icon}
@@ -131,10 +110,10 @@ export default function Home() {
                   <h3 className="mt-6 max-w-[14ch] text-2xl font-semibold tracking-tight text-white">{service.offerTitle}</h3>
                   <p className="mt-4 text-sm leading-relaxed text-white/62 sm:text-base">{service.homepageSummary}</p>
 
-                  <div className="mt-6 rounded-[1.2rem] border border-white/10 bg-white/[0.03] p-4">
+                  <SoftPanel className="mt-6 p-4">
                     <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-accent">Outcome</p>
                     <p className="mt-2 text-sm leading-relaxed text-white/74">{service.outcomes[0]}</p>
-                  </div>
+                  </SoftPanel>
 
                   <Link
                     to={`/services/${service.id}`}
@@ -143,17 +122,17 @@ export default function Home() {
                     {service.ctaLabel}
                     <ArrowRight className="h-3.5 w-3.5" />
                   </Link>
-                </DarkCard>
+                </DarkPanel>
               </motion.div>
             ))}
           </div>
-        </div>
-      </SectionBlock>
+        </PageContainer>
+      </PageSection>
 
-      <SectionBlock className="bg-grid-dark-soft border-y border-white/6">
-        <div className="mx-auto max-w-[88rem] px-6 lg:px-8">
-          <div className="grid gap-8 xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] xl:items-start">
-            <SectionIntro
+      <PageSection className="bg-grid-dark-soft border-y border-white/6">
+        <PageContainer>
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,0.74fr)_minmax(0,1.26fr)] xl:items-start">
+            <SectionHeader
               eyebrow="Proof by example"
               title="The problem, build direction, and business gain should all be visible at a glance."
               text="This section compresses the commercial reasoning into a fast-scanning format instead of asking the visitor to decode long paragraphs."
@@ -165,7 +144,7 @@ export default function Home() {
 
                 return (
                   <div key={project.id}>
-                    <DarkCard className="p-5 sm:p-6">
+                    <DarkPanel className="p-5 sm:p-6">
                       <div className="flex flex-wrap items-center gap-3">
                         <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">
                           {project.status === 'launch' ? 'Live launch' : project.category}
@@ -175,18 +154,18 @@ export default function Home() {
 
                       <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white">{project.title}</h3>
                       <div className="mt-4 grid gap-4 xl:grid-cols-3">
-                        <div className="panel-dark-soft p-4">
+                        <SoftPanel className="p-4">
                           <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-accent">Problem</p>
                           <p className="mt-2 text-sm leading-relaxed text-white/62">{context.pressurePoint}</p>
-                        </div>
-                        <div className="panel-dark-soft p-4">
+                        </SoftPanel>
+                        <SoftPanel className="p-4">
                           <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-accent">Build</p>
                           <p className="mt-2 text-sm leading-relaxed text-white/62">{project.solution}</p>
-                        </div>
-                        <div className="panel-dark-soft p-4">
+                        </SoftPanel>
+                        <SoftPanel className="p-4">
                           <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-accent">Gain</p>
                           <p className="mt-2 text-sm leading-relaxed text-white/62">{context.commercialOutcome}</p>
-                        </div>
+                        </SoftPanel>
                       </div>
                       <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                         <Link
@@ -204,19 +183,19 @@ export default function Home() {
                           Ask about this
                         </button>
                       </div>
-                    </DarkCard>
+                    </DarkPanel>
                   </div>
                 );
               })}
             </div>
           </div>
-        </div>
-      </SectionBlock>
+        </PageContainer>
+      </PageSection>
 
-      <SectionBlock className="bg-[#151515]">
-        <div className="mx-auto max-w-[88rem] px-6 lg:px-8">
-          <div className="grid gap-8 xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] xl:items-end">
-            <SectionIntro
+      <PageSection className="bg-[#151515]">
+        <PageContainer>
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,0.74fr)_minmax(0,1.26fr)] xl:items-end">
+            <SectionHeader
               eyebrow="Selected work"
               title="A cleaner case-study grid that can scale without changing the layout language."
               text="The grid uses one shell, one spacing rhythm, and one card anatomy so the work library can grow without becoming chaotic."
@@ -235,7 +214,7 @@ export default function Home() {
           <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {[featuredLaunch, ...showcaseProjects.slice(0, 3)].map((project) => (
               <div key={project.id}>
-                <DarkCard className="flex h-full flex-col overflow-hidden">
+                <DarkPanel className="flex h-full flex-col overflow-hidden">
                   <div className="aspect-[1.18/1] overflow-hidden border-b border-white/10 bg-[#0e1220]">
                     {project.id === 'acengeers' ? (
                       <div className="h-full bg-black">
@@ -261,17 +240,17 @@ export default function Home() {
                       <ArrowRight className="h-3.5 w-3.5" />
                     </Link>
                   </div>
-                </DarkCard>
+                </DarkPanel>
               </div>
             ))}
           </div>
-        </div>
-      </SectionBlock>
+        </PageContainer>
+      </PageSection>
 
-      <SectionBlock className="bg-grid-dark-soft border-y border-white/6">
-        <div className="mx-auto max-w-[88rem] px-6 lg:px-8">
-          <div className="grid gap-8 xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] xl:items-start">
-            <SectionIntro
+      <PageSection className="bg-grid-dark-soft border-y border-white/6">
+        <PageContainer>
+          <div className="grid gap-8 xl:grid-cols-[minmax(0,0.74fr)_minmax(0,1.26fr)] xl:items-start">
+            <SectionHeader
               eyebrow="Delivery standard"
               title="The delivery model should feel as deliberate as the interface itself."
               text="This closes the page with the practical standards behind the work: what changes, how the delivery runs, and why the engagement stays reliable."
@@ -281,16 +260,16 @@ export default function Home() {
               <div className="grid gap-4 sm:grid-cols-2">
                 {impactMetrics.map((metric) => (
                   <div key={metric.label}>
-                    <DarkCard className="p-5 sm:p-6">
+                    <DarkPanel className="p-5 sm:p-6">
                       <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">{metric.label}</p>
                       <p className="mt-3 text-3xl font-semibold tracking-tight text-white">{metric.value}</p>
                       <p className="mt-3 text-sm leading-relaxed text-white/62">{metric.detail}</p>
-                    </DarkCard>
+                    </DarkPanel>
                   </div>
                 ))}
               </div>
 
-              <DarkCard className="p-5 sm:p-6">
+              <DarkPanel className="p-5 sm:p-6">
                 <div className="grid gap-4">
                   {deliverySteps.map((step) => (
                     <div
@@ -310,15 +289,15 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-              </DarkCard>
+              </DarkPanel>
             </div>
           </div>
-        </div>
-      </SectionBlock>
+        </PageContainer>
+      </PageSection>
 
       <section className="bg-[#121212] py-16 sm:py-20 lg:py-24 text-white">
-        <div className="mx-auto max-w-[88rem] px-6 lg:px-8">
-          <DarkCard className="p-6 sm:p-8 lg:p-10">
+        <PageContainer>
+          <DarkPanel className="p-6 sm:p-8 lg:p-10">
             <div className="grid gap-8 xl:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] xl:items-center">
               <div>
                 <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-accent">Start here</p>
@@ -338,9 +317,11 @@ export default function Home() {
                     'AI-assisted workflow design',
                     'Automation and ops cleanup',
                   ].map((item) => (
-                    <div key={item} className="panel-dark-soft flex items-start gap-3 p-4">
-                      <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
-                      <p className="text-sm leading-relaxed text-white/74">{item}</p>
+                    <div key={item}>
+                      <SoftPanel className="flex items-start gap-3 p-4">
+                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
+                        <p className="text-sm leading-relaxed text-white/74">{item}</p>
+                      </SoftPanel>
                     </div>
                   ))}
                 </div>
@@ -363,8 +344,8 @@ export default function Home() {
                 </div>
               </div>
             </div>
-          </DarkCard>
-        </div>
+          </DarkPanel>
+        </PageContainer>
       </section>
     </div>
   );

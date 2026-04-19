@@ -13,6 +13,13 @@ import {
   VelocityCommerceDemo,
 } from '../components/ChartDemo';
 import AcengeersShowcase from '../components/AcengeersShowcase';
+import {
+  DarkPanel,
+  PageContainer,
+  PageSection,
+  SectionHeader,
+  SoftPanel,
+} from '../components/PageScaffold';
 
 function DemoPreview({ id }: { id: (typeof proofDemos)[number]['id'] }) {
   switch (id) {
@@ -29,34 +36,6 @@ function DemoPreview({ id }: { id: (typeof proofDemos)[number]['id'] }) {
   }
 }
 
-function SectionBlock({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <section className={`py-14 sm:py-18 lg:py-24 ${className}`}>{children}</section>;
-}
-
-function SectionIntro({
-  eyebrow,
-  title,
-  text,
-}: {
-  eyebrow: string;
-  title: string;
-  text: string;
-}) {
-  return (
-    <div className="max-w-3xl">
-      <p className="mb-4 text-sm font-semibold uppercase tracking-[0.24em] text-accent">{eyebrow}</p>
-      <h2 className="text-3xl font-semibold leading-[1.02] tracking-tight text-white sm:text-[2.7rem] md:text-[3.4rem]">
-        {title}
-      </h2>
-      <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/62 sm:text-lg">{text}</p>
-    </div>
-  );
-}
-
-function Panel({ children, className = '' }: { children: React.ReactNode; className?: string }) {
-  return <div className={`panel-dark ${className}`}>{children}</div>;
-}
-
 function SupportingCard({
   label,
   title,
@@ -67,11 +46,11 @@ function SupportingCard({
   text: string;
 }) {
   return (
-    <div className="panel-dark-soft p-4 sm:p-5">
+    <SoftPanel className="p-4 sm:p-5">
       <p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">{label}</p>
       <h3 className="text-lg font-semibold tracking-tight text-white">{title}</h3>
       <p className="mt-2 text-sm leading-relaxed text-white/62">{text}</p>
-    </div>
+    </SoftPanel>
   );
 }
 
@@ -87,7 +66,7 @@ function LibraryTile({
   description: string;
 }) {
   return (
-    <Panel className="flex h-full flex-col overflow-hidden">
+    <DarkPanel className="flex h-full flex-col overflow-hidden">
       <Link to={`/portfolio/${projectId}`} className="block">
         <div className="aspect-[1.18/1] overflow-hidden border-b border-white/10 bg-[#0d1220]">
           <BrandedVisual variant={projectId as VisualVariant} title={title} className="h-full rounded-none" />
@@ -105,7 +84,7 @@ function LibraryTile({
           <ChevronRight className="h-4 w-4" />
         </Link>
       </div>
-    </Panel>
+    </DarkPanel>
   );
 }
 
@@ -120,11 +99,11 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-paper text-white">
-      <section className="relative overflow-hidden bg-grid-dark pb-14 pt-18 sm:pb-18 sm:pt-24 lg:pb-24 lg:pt-28">
+      <section className="relative overflow-hidden bg-grid-dark pb-12 pt-18 sm:pb-16 sm:pt-24 lg:pb-20 lg:pt-28">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.02),transparent_28%),radial-gradient(circle_at_center,_rgba(138,180,248,0.08),transparent_48%)]" />
         <div className="absolute inset-x-0 top-0 h-px bg-white/8" />
 
-        <div className="relative mx-auto max-w-[88rem] px-6 lg:px-8">
+        <PageContainer className="relative">
           <div className="mx-auto max-w-5xl text-center">
             <motion.div
               initial={{ opacity: 0, y: 24 }}
@@ -143,7 +122,7 @@ export default function Portfolio() {
 
           <div className="mt-12 flex items-center justify-between gap-6">
             <div>
-              <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-[2.7rem]">Explore cases</h2>
+              <h2 className="text-3xl font-semibold tracking-tight text-white sm:text-[2.45rem]">Explore cases</h2>
               <p className="mt-3 text-sm leading-relaxed text-white/42 sm:text-base">Selected launches, interactive demos, and supporting studies.</p>
             </div>
             <div className="hidden min-w-[18rem] rounded-[1.2rem] border border-white/10 bg-white/[0.03] px-5 py-4 md:flex md:items-center md:justify-between">
@@ -151,12 +130,12 @@ export default function Portfolio() {
               <span className="text-white/42">{projects.length + proofDemos.length} items</span>
             </div>
           </div>
-        </div>
+        </PageContainer>
       </section>
 
-      <SectionBlock className="bg-[#151515]">
-        <div className="mx-auto max-w-[88rem] px-6 lg:px-8">
-          <Panel className="overflow-hidden p-5 sm:p-6 lg:p-8">
+      <PageSection className="bg-[#151515]">
+        <PageContainer>
+          <DarkPanel className="overflow-hidden p-5 sm:p-6 lg:p-8">
             <div className="grid gap-6 xl:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] xl:items-center">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.24em] text-accent">Featured launch</p>
@@ -206,13 +185,13 @@ export default function Portfolio() {
                 text={featuredProject.features[0]?.description ?? featuredProject.solution}
               />
             </div>
-          </Panel>
-        </div>
-      </SectionBlock>
+          </DarkPanel>
+        </PageContainer>
+      </PageSection>
 
-      <SectionBlock className="bg-grid-dark-soft border-y border-white/6">
-        <div className="mx-auto max-w-[88rem] px-6 lg:px-8">
-          <Panel className="overflow-hidden p-5 sm:p-6 lg:p-8">
+      <PageSection className="bg-grid-dark-soft border-y border-white/6">
+        <PageContainer>
+          <DarkPanel className="overflow-hidden p-5 sm:p-6 lg:p-8">
             <div className="grid gap-6 xl:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] xl:items-center">
               <div>
                 <p className="text-sm font-semibold uppercase tracking-[0.24em] text-accent">Working demo</p>
@@ -243,14 +222,14 @@ export default function Portfolio() {
                 </div>
               ))}
             </div>
-          </Panel>
-        </div>
-      </SectionBlock>
+          </DarkPanel>
+        </PageContainer>
+      </PageSection>
 
-      <SectionBlock className="bg-[#151515]">
-        <div className="mx-auto max-w-[88rem] px-6 lg:px-8">
+      <PageSection className="bg-[#151515]">
+        <PageContainer>
           <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <SectionIntro
+            <SectionHeader
               eyebrow="Case study library"
               title="A bottom grid that can expand without changing the layout language."
               text="This section follows one card anatomy, one image ratio, and one spacing rhythm so more case studies can be added without redesigning the page."
@@ -272,13 +251,13 @@ export default function Portfolio() {
               </div>
             ))}
           </div>
-        </div>
-      </SectionBlock>
+        </PageContainer>
+      </PageSection>
 
-      <SectionBlock className="bg-grid-dark-soft border-y border-white/6">
-        <div className="mx-auto max-w-[88rem] px-6 lg:px-8">
+      <PageSection className="bg-grid-dark-soft border-y border-white/6">
+        <PageContainer>
           <div className="grid gap-8 xl:grid-cols-[minmax(0,0.78fr)_minmax(0,1.22fr)] xl:items-start">
-            <SectionIntro
+            <SectionHeader
               eyebrow="Delivery standard"
               title="Business impact and delivery discipline belong in one final proof layer."
               text="The page closes with the impact metrics and build process so the work feels operationally credible, not just visually polished."
@@ -288,15 +267,15 @@ export default function Portfolio() {
               <div className="grid gap-4 sm:grid-cols-2">
                 {impactMetrics.map((metric) => (
                   <div key={metric.label}>
-                    <Panel className="p-5 sm:p-6">
+                    <DarkPanel className="p-5 sm:p-6">
                       <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">{metric.label}</p>
                       <p className="mt-3 text-3xl font-semibold tracking-tight text-white">{metric.value}</p>
                       <p className="mt-3 text-sm leading-relaxed text-white/62">{metric.detail}</p>
-                    </Panel>
+                    </DarkPanel>
                   </div>
                 ))}
               </div>
-              <Panel className="p-5 sm:p-6">
+              <DarkPanel className="p-5 sm:p-6">
                 <div className="grid gap-4">
                   {deliverySteps.map((step) => (
                     <div
@@ -316,11 +295,11 @@ export default function Portfolio() {
                     </div>
                   ))}
                 </div>
-              </Panel>
+              </DarkPanel>
             </div>
           </div>
-        </div>
-      </SectionBlock>
+        </PageContainer>
+      </PageSection>
     </div>
   );
 }
