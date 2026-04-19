@@ -382,6 +382,103 @@ function MobileScene() {
   );
 }
 
+function CollaborationScene() {
+  return (
+    <SceneContainer className="bg-[#5a5a40] text-white">
+      <motion.div
+        className="absolute inset-0 opacity-18"
+        initial={{ scale: 1.08 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 8, ease: 'linear' }}
+        style={{
+          backgroundImage:
+            'radial-gradient(circle at 30% 30%, rgba(255,255,255,0.16), transparent 22%), radial-gradient(circle at 70% 60%, rgba(255,255,255,0.1), transparent 18%)',
+        }}
+      />
+
+      <div className="relative z-10 flex h-full w-full flex-col gap-8 px-6 py-8 lg:flex-row lg:items-center lg:justify-between lg:px-10">
+        <div className="flex-1">
+          <motion.p
+            className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/54"
+            initial={{ opacity: 0, x: -18 }}
+            animate={{ opacity: 1, x: 0 }}
+          >
+            05. Collaboration
+          </motion.p>
+          <motion.h3
+            className="mt-5 max-w-[10ch] text-4xl font-semibold leading-[0.94] tracking-[-0.06em] sm:text-5xl"
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15, duration: 0.8 }}
+          >
+            Strategy, design, and build should move together.
+          </motion.h3>
+          <motion.p
+            className="mt-5 max-w-md text-sm leading-relaxed text-white/74 sm:text-base"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.35 }}
+          >
+            The product is better when messaging, interface, systems, and delivery are shaped in the same conversation.
+          </motion.p>
+        </div>
+
+        <div className="relative flex flex-1 items-center justify-center">
+          <motion.div
+            className="absolute left-4 top-10 h-56 w-44 rounded-[2.6rem] border border-white/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.16),rgba(255,255,255,0.06))] shadow-2xl backdrop-blur-sm"
+            initial={{ opacity: 0, y: 40, rotate: -5 }}
+            animate={{ opacity: 1, y: 0, rotate: -8 }}
+            transition={{ delay: 0.3, type: 'spring', bounce: 0.26 }}
+          >
+            <div className="h-full w-full rounded-[2.4rem] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_30%),linear-gradient(180deg,#6c6c4f_0%,#464633_100%)] p-4">
+              <div className="h-full w-full rounded-[2rem] bg-[linear-gradient(180deg,rgba(0,0,0,0.12),rgba(0,0,0,0.04))]" />
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="absolute right-2 bottom-6 h-64 w-48 rounded-[2.8rem] border border-white/18 bg-[linear-gradient(180deg,rgba(255,255,255,0.12),rgba(255,255,255,0.04))] shadow-2xl backdrop-blur-sm"
+            initial={{ opacity: 0, y: 40, rotate: 5 }}
+            animate={{ opacity: 1, y: 0, rotate: 6 }}
+            transition={{ delay: 0.45, type: 'spring', bounce: 0.26 }}
+          >
+            <div className="h-full w-full rounded-[2.5rem] bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.14),transparent_26%),linear-gradient(180deg,#6a6a4b_0%,#3b3b2a_100%)] p-4">
+              <div className="h-full w-full rounded-[2.1rem] bg-[linear-gradient(180deg,rgba(0,0,0,0.12),rgba(0,0,0,0.04))]" />
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="relative z-10 w-full max-w-sm rounded-[1.8rem] border border-white/16 bg-white/10 p-5 shadow-[0_20px_60px_rgba(0,0,0,0.22)] backdrop-blur-md"
+            initial={{ opacity: 0, scale: 0.92 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.6, duration: 0.7 }}
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white/58">Working session</p>
+                <p className="mt-2 text-xl font-semibold tracking-[-0.03em] text-white">From diagnosis to shipped direction</p>
+              </div>
+              <div className="h-10 w-10 rounded-full bg-white/14" />
+            </div>
+            <div className="mt-5 grid gap-3">
+              {['Offer clarity', 'Flow structure', 'System decisions'].map((item, index) => (
+                <motion.div
+                  key={item}
+                  className="rounded-[1rem] border border-white/12 bg-white/8 px-4 py-3"
+                  initial={{ opacity: 0, x: 12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.75 + index * 0.12 }}
+                >
+                  <p className="text-sm font-semibold text-white">{item}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </SceneContainer>
+  );
+}
+
 function OutroScene() {
   return (
     <SceneContainer className="bg-[#050505]">
@@ -467,6 +564,13 @@ const showreelScenes: SceneDef[] = [
     component: MobileScene,
   },
   {
+    id: 'collaboration',
+    label: 'Collaboration layer',
+    eyebrow: 'Strategy + Build',
+    accent: 'from-[#a8b5a0] via-[#6d6f52] to-[#3a3b2c]',
+    component: CollaborationScene,
+  },
+  {
     id: 'outro',
     label: 'Studio close',
     eyebrow: 'Bakal Digital',
@@ -497,7 +601,7 @@ export default function HeroShowreel() {
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActiveScene((current) => (current + 1) % showreelScenes.length);
-    }, 3400);
+    }, 5200);
 
     return () => window.clearInterval(timer);
   }, []);
@@ -538,7 +642,7 @@ export default function HeroShowreel() {
                     className="h-full rounded-full bg-accent"
                     initial={false}
                     animate={{ width: index === activeScene ? '100%' : index < activeScene ? '100%' : '0%' }}
-                    transition={{ duration: index === activeScene ? 3.05 : 0.35, ease: 'linear' }}
+                    transition={{ duration: index === activeScene ? 4.8 : 0.45, ease: 'linear' }}
                   />
                 </div>
               ))}
