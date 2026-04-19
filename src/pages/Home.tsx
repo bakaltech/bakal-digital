@@ -9,6 +9,7 @@ import {
   PageContainer,
   PageSection,
   SectionHeader,
+  SectionStack,
   SoftPanel,
 } from '../components/PageScaffold';
 import { projects } from '../data/projects';
@@ -131,20 +132,22 @@ export default function Home() {
 
       <PageSection className="bg-grid-dark-soft border-y border-white/6">
         <PageContainer>
-          <div className="grid gap-8 xl:grid-cols-[minmax(0,0.74fr)_minmax(0,1.26fr)] xl:items-start">
-            <SectionHeader
-              eyebrow="Proof by example"
-              title="The problem, build direction, and business gain should all be visible at a glance."
-              text="This section compresses the commercial reasoning into a fast-scanning format instead of asking the visitor to decode long paragraphs."
-            />
-
-            <div className="grid gap-4">
+          <SectionStack
+            header={
+              <SectionHeader
+                eyebrow="Proof by example"
+                title="The problem, build direction, and business gain should all be visible at a glance."
+                text="This section compresses the commercial reasoning into a fast-scanning format instead of asking the visitor to decode long paragraphs."
+              />
+            }
+          >
+            <div className="grid gap-4 lg:grid-cols-3">
               {[featuredLaunch, ...showcaseProjects.slice(0, 2)].map((project) => {
                 const context = projectContext[project.id as ProjectContextId];
 
                 return (
                   <div key={project.id}>
-                    <DarkPanel className="p-5 sm:p-6">
+                    <DarkPanel className="flex h-full flex-col p-5 sm:p-6">
                       <div className="flex flex-wrap items-center gap-3">
                         <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">
                           {project.status === 'launch' ? 'Live launch' : project.category}
@@ -153,7 +156,7 @@ export default function Home() {
                       </div>
 
                       <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white">{project.title}</h3>
-                      <div className="mt-4 grid gap-4 xl:grid-cols-3">
+                      <div className="mt-4 grid gap-3">
                         <SoftPanel className="p-4">
                           <p className="text-[9px] font-semibold uppercase tracking-[0.22em] text-accent">Problem</p>
                           <p className="mt-2 text-sm leading-relaxed text-white/62">{context.pressurePoint}</p>
@@ -188,19 +191,21 @@ export default function Home() {
                 );
               })}
             </div>
-          </div>
+          </SectionStack>
         </PageContainer>
       </PageSection>
 
       <PageSection className="bg-[#151515]">
         <PageContainer>
-          <div className="grid gap-8 xl:grid-cols-[minmax(0,0.74fr)_minmax(0,1.26fr)] xl:items-end">
-            <SectionHeader
-              eyebrow="Selected work"
-              title="A cleaner case-study grid that can scale without changing the layout language."
-              text="The grid uses one shell, one spacing rhythm, and one card anatomy so the work library can grow without becoming chaotic."
-            />
-            <div className="xl:justify-self-end">
+          <SectionStack
+            header={
+              <SectionHeader
+                eyebrow="Selected work"
+                title="A cleaner case-study grid that can scale without changing the layout language."
+                text="The grid uses one shell, one spacing rhythm, and one card anatomy so the work library can grow without becoming chaotic."
+              />
+            }
+            aside={
               <Link
                 to="/portfolio"
                 className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/12 bg-white/[0.03] px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-accent hover:text-accent"
@@ -208,56 +213,58 @@ export default function Home() {
                 Explore case studies
                 <ArrowRight className="h-4 w-4" />
               </Link>
+            }
+          >
+            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+              {[featuredLaunch, ...showcaseProjects.slice(0, 3)].map((project) => (
+                <div key={project.id}>
+                  <DarkPanel className="flex h-full flex-col overflow-hidden">
+                    <div className="aspect-[1.18/1] overflow-hidden border-b border-white/10 bg-[#0e1220]">
+                      {project.id === 'acengeers' ? (
+                        <div className="h-full bg-black">
+                          <AcengeersShowcase activeFeature={2} />
+                        </div>
+                      ) : (
+                        <BrandedVisual
+                          variant={project.id as 'nexus-ai' | 'lumina-saas' | 'velocity-ecommerce' | 'orbit-automation'}
+                          title={project.title}
+                          className="h-full rounded-none"
+                        />
+                      )}
+                    </div>
+                    <div className="flex flex-1 flex-col p-5 sm:p-6">
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">{project.category}</p>
+                      <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white">{project.title}</h3>
+                      <p className="mt-3 text-sm leading-relaxed text-white/62 sm:text-base">{project.description}</p>
+                      <Link
+                        to={`/portfolio/${project.id}`}
+                        className="mt-6 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white transition-colors hover:text-accent"
+                      >
+                        Open study
+                        <ArrowRight className="h-3.5 w-3.5" />
+                      </Link>
+                    </div>
+                  </DarkPanel>
+                </div>
+              ))}
             </div>
-          </div>
-
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {[featuredLaunch, ...showcaseProjects.slice(0, 3)].map((project) => (
-              <div key={project.id}>
-                <DarkPanel className="flex h-full flex-col overflow-hidden">
-                  <div className="aspect-[1.18/1] overflow-hidden border-b border-white/10 bg-[#0e1220]">
-                    {project.id === 'acengeers' ? (
-                      <div className="h-full bg-black">
-                        <AcengeersShowcase activeFeature={2} />
-                      </div>
-                    ) : (
-                      <BrandedVisual
-                        variant={project.id as 'nexus-ai' | 'lumina-saas' | 'velocity-ecommerce' | 'orbit-automation'}
-                        title={project.title}
-                        className="h-full rounded-none"
-                      />
-                    )}
-                  </div>
-                  <div className="flex flex-1 flex-col p-5 sm:p-6">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-accent">{project.category}</p>
-                    <h3 className="mt-4 text-2xl font-semibold tracking-tight text-white">{project.title}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-white/62 sm:text-base">{project.description}</p>
-                    <Link
-                      to={`/portfolio/${project.id}`}
-                      className="mt-6 inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-white transition-colors hover:text-accent"
-                    >
-                      Open study
-                      <ArrowRight className="h-3.5 w-3.5" />
-                    </Link>
-                  </div>
-                </DarkPanel>
-              </div>
-            ))}
-          </div>
+          </SectionStack>
         </PageContainer>
       </PageSection>
 
       <PageSection className="bg-grid-dark-soft border-y border-white/6">
         <PageContainer>
-          <div className="grid gap-8 xl:grid-cols-[minmax(0,0.74fr)_minmax(0,1.26fr)] xl:items-start">
-            <SectionHeader
-              eyebrow="Delivery standard"
-              title="The delivery model should feel as deliberate as the interface itself."
-              text="This closes the page with the practical standards behind the work: what changes, how the delivery runs, and why the engagement stays reliable."
-            />
-
-            <div className="grid gap-6">
-              <div className="grid gap-4 sm:grid-cols-2">
+          <SectionStack
+            header={
+              <SectionHeader
+                eyebrow="Delivery standard"
+                title="The delivery model should feel as deliberate as the interface itself."
+                text="This closes the page with the practical standards behind the work: what changes, how the delivery runs, and why the engagement stays reliable."
+              />
+            }
+          >
+            <div className="grid gap-6 xl:grid-cols-[minmax(0,0.7fr)_minmax(0,1.3fr)] xl:items-start">
+              <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-2">
                 {impactMetrics.map((metric) => (
                   <div key={metric.label}>
                     <DarkPanel className="p-5 sm:p-6">
@@ -291,7 +298,7 @@ export default function Home() {
                 </div>
               </DarkPanel>
             </div>
-          </div>
+          </SectionStack>
         </PageContainer>
       </PageSection>
 

@@ -17,7 +17,7 @@ export function PageSection({
   children: React.ReactNode;
   className?: string;
 }) {
-  return <section className={`py-12 sm:py-14 lg:py-18 ${className}`}>{children}</section>;
+  return <section className={`py-10 sm:py-12 lg:py-16 ${className}`}>{children}</section>;
 }
 
 export function SectionHeader({
@@ -38,6 +38,28 @@ export function SectionHeader({
         {title}
       </h2>
       <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/62 sm:text-lg">{text}</p>
+    </div>
+  );
+}
+
+export function SectionStack({
+  header,
+  aside,
+  children,
+  className = '',
+}: {
+  header: React.ReactNode;
+  aside?: React.ReactNode;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={className}>
+      <div className="flex flex-col gap-5 border-b border-white/8 pb-8 lg:flex-row lg:items-end lg:justify-between">
+        <div className="min-w-0 flex-1">{header}</div>
+        {aside ? <div className="shrink-0 lg:max-w-md">{aside}</div> : null}
+      </div>
+      <div className="pt-8">{children}</div>
     </div>
   );
 }
