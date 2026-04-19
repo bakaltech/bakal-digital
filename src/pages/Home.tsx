@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import BrandedVisual from '../components/BrandedVisual';
 import AcengeersShowcase from '../components/AcengeersShowcase';
+import HeroShowreel from '../components/HeroShowreel';
 import {
   DarkPanel,
   PageContainer,
@@ -56,7 +57,7 @@ export default function Home() {
           <div className="mt-10 sm:mt-12">
             <DarkPanel className="overflow-hidden p-3 sm:p-4">
               <div className="overflow-hidden rounded-[1.5rem] bg-black min-h-[18rem] sm:min-h-[24rem] lg:min-h-[28rem]">
-                <AcengeersShowcase activeFeature={0} />
+                <HeroShowreel />
               </div>
             </DarkPanel>
           </div>
